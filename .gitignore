@@ -1,0 +1,4 @@
+src/
+out/
+pkgs/*/src
+pkgs/*/out
