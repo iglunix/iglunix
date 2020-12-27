@@ -1,0 +1,11 @@
+--- ../bmakeb/bmake/boot-strap	2020-11-13 21:47:25.000000000 +0000
++++ boot-strap	2020-12-27 17:26:13.126598658 +0000
+@@ -431,7 +431,7 @@
+ 
+ op_test() {
+ 	[ -x bmake ] || op_build
+-	Bmake test || exit 1
++	#Bmake test || exit 1
+ }
+ 
+ op_clean() {
