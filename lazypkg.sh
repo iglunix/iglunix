@@ -1,4 +1,7 @@
 #!/bin/dash
+export MAKEFLAGS="-j6"
+export CC=clang
+export CXX=clang++
 
 . ./build.sh
 dir=$(pwd)
@@ -47,7 +50,8 @@ echo $ext | tr ':' '\n' | while read e; do
     cd $srcdir
     mkdir -p $dir/out/$pkgname-\$e
     pkgdir=$dir/out/$pkgname-\$e
-    package_\$e
+
+    package_\$(echo \$e | tr '-' '_')
 
     mkdir -p $dir/out/$pkgname-\$e/lib/lazypkg
 
