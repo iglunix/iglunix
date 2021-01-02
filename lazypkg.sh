@@ -1,4 +1,4 @@
-#!/bin/dash
+#!/bin/sh
 export MAKEFLAGS="-j6"
 export CC=clang
 export CXX=clang++
@@ -42,7 +42,7 @@ cd $dir/out/$pkgname/
 find * >> $dir/out/$pkgname/lib/lazypkg/$pkgname
 
 cd $dir/out/$pkgname
-tar -cJf ../$pkgname.$pkgver.tar.xz *
+tar -cf ../$pkgname.$pkgver.tar.xz *
 
 echo $ext | tr ':' '\n' | while read e; do
 	echo \$e
@@ -75,10 +75,10 @@ EOF
 	find * >> $dir/out/$pkgname-\$e/lib/lazypkg/$pkgname-\$e
 
     cd $dir/out/$pkgname-\$e
-    tar -cJf ../$pkgname-\$e.$pkgver.tar.xz *
+    tar -cf ../$pkgname-\$e.$pkgver.tar.xz *
 
 done
 
 
-" | fakeroot sh
+" | sh
 cd $dir
