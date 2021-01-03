@@ -1,7 +1,7 @@
 #!/bin/sh
 usage() {
 	echo $(basename "$0"): ERROR: "$@" 1>&2
-	echo usage: $(basename "$0") '([-i]|[-u]) [-o root]
+	echo usage: $(basename "$0") '([-i]|[-u]|[-f]|[-l]) [-o root]
 		[pkg.tar]' 1>&2
 	exit 1
 }
@@ -14,13 +14,21 @@ tar_fail() {
 stat_fail() {
 	echo "Not a valid package"
 	echo "Missing package meta file"
+	exit 1
 }
 
-i= u= f= o=
+find_fail() {
+	echo "Package not installed"
+	exit 1
+}
+
+i= u= l= f= o=
 
 case "$1" in
 	-i) i=1;;
 	-u) u=1;;
+	-l) l=1;;
+	-f) f=1;;
 	*) usage "bad argument $i";;
 esac
 shift
@@ -43,4 +51,10 @@ if [ "$i" = "1" ]; then
 	stat /tmp/lazybox/$1/lib/lazypkg/ >/dev/null || stat_fail
 	tar -xf $1 -C /
 	rm -r /tmp/lazybox/$1
+elif [ "$f" = "1" ]; then
+	stat /lib/lazypkg/$1 > /dev/null || find_fail
+	sed -n '/\[fs\]/,$p' /lib/lazypkg/$1 | grep -v "\[fs\]"
+elif [ "$l" = "1" ]; then
+	stat /lib/lazypkg/$1 > /dev/null || find_fail
+	sed -n '/\[license\]/,/\[fs\]/{/\[license\]\|\[fs\]/!p}' /lib/lazypkg/$1
 fi
