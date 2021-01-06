@@ -10,13 +10,18 @@ fetch() {
 
 build() {
 	cd $pkgname-$pkgver
-	./configure --prefix=/ --enable-btyacc
+	./configure \
+		--prefix=/ \
+		--program-prefix=b \
+		--enable-btyacc
 	make
 }
 
 package() {
 	cd $pkgname-$pkgver
 	make install DESTDIR=$pkgdir
+	cd $pkgdir/bin
+	ln -s byacc yacc
 	rm -r $pkgdir/share
 }
 
