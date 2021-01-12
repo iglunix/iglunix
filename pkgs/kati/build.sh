@@ -1,23 +1,24 @@
-pkgver=0.0.0
+pkgver=master
 pkgname=kati
 pkgrel=1
 
 fetch() {
-	git clone --depth=1 "https://github.com/google/kati"
+	curl -L "https://github.com/google/kati/archive/master.tar.gz" -o $pkgname-$pkgver.tar.gz
+	tar -xf $pkgname-$pkgver.tar.gz
 }
 
 build() {
-	cd $pkgname
-	ckati
+	cd $pkgname-$pkgver
+	gmake
 }
 
 package() {
-	cd $pkgname
-	install -d $pkgdir/bin
-	install -Dm755 ./ckati $pkgdir/bin/
+	cd $pkgname-$pkgver
+	install -d $pkgdir/usr/bin
+	install -Dm755 ./ckati $pkgdir/usr/bin/
 }
 
 license() {
-	cd $pkgname
+	cd $pkgname-$pkgver
 	cat LICENSE
 }

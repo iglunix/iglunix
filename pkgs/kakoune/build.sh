@@ -18,19 +18,19 @@ build() {
 package() {
 	cd $pkgname-$pkgver
 	cd src
-	ckati install DESTDIR=$pkgdir PREFIX=/
-	rm -r $pkgdir/share/doc
-	rm -r $pkgdir/share/man
-	rm -r $pkgdir/libexec
+	ckati install DESTDIR=$pkgdir PREFIX=/usr
+	rm -r $pkgdir/usr/share/doc
+	rm -r $pkgdir/usr/share/man
+	rm -r $pkgdir/usr/libexec
 }
 
 package_doc() {
 	cd $pkgname-$pkgver
 	cd src
-	ckati install DESTDIR=$pkgdir PREFIX=/
-	rm -r $pkgdir/share/kak
-	rm -r $pkgdir/libexec
-	rm -r $pkgdir/bin
+	ckati install DESTDIR=$pkgdir PREFIX=/usr
+	rm -r $pkgdir/usr/share/kak
+	rm -r $pkgdir/usr/libexec
+	rm -r $pkgdir/usr/bin
 }
 
 license() {

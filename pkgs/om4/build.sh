@@ -17,16 +17,14 @@ build() {
 
 package() {
 	cd $pkgname-$pkgver
-	install -d $pkgdir/bin
-	install -Dm4755 om4 $pkgdir/bin
-	cd $pkgdir/bin
-	ln -s om4 m4
+	install -d $pkgdir/usr/bin
+	install -Dm4755 om4 $pkgdir/usr/bin
+	ln -sr $pkgdir/usr/bin/om4 $pkgdir/usr/bin/m4
 }
 
 package_doc() {
-	cd $pkgname-$pkgver
-	install -d $pkgdir/share/man/
-	install -d $pkgdir/share/man/man1
+    	cd $pkgname-$pkgver
+	install -d $pkgdir/usr/share/man/man1
 	install -Dm644 m4.1 $pkgdir/share/man/man1
 }
 

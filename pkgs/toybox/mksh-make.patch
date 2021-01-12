@@ -1,0 +1,14 @@
+diff --git a/scripts/make.sh b/scripts/make.sh
+index 5b2d5d81..2c5e4b93 100755
+--- a/scripts/make.sh
++++ b/scripts/make.sh
+@@ -106,8 +106,7 @@ genbuildsh()
+   echo '$BUILD $FILES $LINK'
+ }
+ 
+-if ! cmp -s <(genbuildsh 2>/dev/null | head -n 6 ; echo LINK="'"$LDOPTIMIZE $LDFLAGS) \
+-          <(head -n 7 generated/build.sh 2>/dev/null | $SED '7s/ -o .*//')
++if [ "$(genbuildsh 2>/dev/null | head -n 6 ; echo LINK="'"$LDOPTIMIZE $LDFLAGS)" != "$(head -n 7 generated/build.sh 2>/dev/null | $SED '7s/ -o .*//')" ]
+ then
+   echo -n "Library probe"
+ 

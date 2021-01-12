@@ -15,28 +15,28 @@ build() {
 
 package() {
 	cd $pkgname-$pkgver
-	ckati install DESTDIR=$pkgdir PREFIX=/
-	rm -r $pkgdir/share
-	rm $pkgdir/lib/*.a
-	rm -r $pkgdir/include
-	rm -r $pkgdir/lib/pkgconfig
+	ckati install DESTDIR=$pkgdir PREFIX=/usr
+	rm -r $pkgdir/usr/share
+	rm $pkgdir/usr/lib/*.a
+	rm -r $pkgdir/usr/include
+	rm -r $pkgdir/usr/lib/pkgconfig
 }
 
 package_doc() {
 	cd $pkgname-$pkgver
-	ckati install DESTDIR=$pkgdir PREFIX=/
-	rm -r $pkgdir/bin
-	rm -r $pkgdir/lib
-	rm -r $pkgdir/include
+	ckati install DESTDIR=$pkgdir PREFIX=/usr
+	rm -r $pkgdir/usr/bin
+	rm -r $pkgdir/usr/lib
+	rm -r $pkgdir/usr/include
 }
 
 package_dev() {
 	cd $pkgname-$pkgver
-	ckati install DESTDIR=$pkgdir PREFIX=/
-	rm $pkgdir/lib/*.so
-	rm -r $pkgdir/include
-	rm -r $pkgdir/share
-	rm -r $pkgdir/bin
+	ckati install DESTDIR=$pkgdir PREFIX=/usr
+	rm $pkgdir/usr/lib/*.so
+	rm -r $pkgdir/usr/include
+	rm -r $pkgdir/usr/share
+	rm -r $pkgdir/usr/bin
 }
 
 license() {

@@ -9,25 +9,27 @@ fetch() {
 	mv $pkgname $pkgname-$pkgver
 	cd $pkgname-$pkgver
 	patch ./boot-strap < ../../no-test.patch
+	patch ./install-sh < ../../install.patch
 }
 
 build() {
 	cd $pkgname-$pkgver
-	./configure --prefix=/
+	./configure --prefix=/usr
 	sh ./make-bootstrap.sh
 }
 
 package() {
 	cd $pkgname-$pkgver
 	./bmake -m ./mk install DESTDIR=$pkgdir
-	rm -r $pkgdir/share/man
+	ln -sr $pkgdir/usr/bin/bmake $pkgdir/usr/bin/make
+	rm -r $pkgdir/usr/share/man
 }
 
 package_doc() {
 	cd $pkgname-$pkgver
 	./bmake -m ./mk install DESTDIR=$pkgdir
-	rm -r $pkgdir/bin
-	rm -r $pkgdir/share/mk
+	rm -r $pkgdir/usr/bin
+	rm -r $pkgdir/usr/share/mk
 }
 
 license() {

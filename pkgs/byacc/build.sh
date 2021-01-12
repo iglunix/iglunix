@@ -11,7 +11,7 @@ fetch() {
 build() {
 	cd $pkgname-$pkgver
 	./configure \
-		--prefix=/ \
+		--prefix=/usr \
 		--program-prefix=b \
 		--enable-btyacc
 	make
@@ -20,15 +20,14 @@ build() {
 package() {
 	cd $pkgname-$pkgver
 	make install DESTDIR=$pkgdir
-	cd $pkgdir/bin
-	ln -s byacc yacc
-	rm -r $pkgdir/share
+	ln -sr $pkgdir/usr/bin/byacc $pkgdir/usr/bin/yacc
+	rm -r $pkgdir/usr/share
 }
 
 package_doc() {
 	cd $pkgname-$pkgver
 	make install DESTDIR=$pkgdir
-	rm -r $pkgdir/bin
+	rm -r $pkgdir/usr/bin
 }
 
 license() {

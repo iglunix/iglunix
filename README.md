@@ -39,6 +39,6 @@ __**NO LIB64 or LIB32**__
  |--/lib
  |--<arch>-linux-musl => .
  |--aarch64-linux-musl
- 
+
 /var
 ```

@@ -48,13 +48,13 @@ if [ "$i" = "1" ]; then
 	echo "Installing $1"
 	mkdir -p /tmp/lazybox/$1 || exit 1
 	tar -xf $1 -C /tmp/lazybox/$1 || tar_fail
-	stat /tmp/lazybox/$1/lib/lazypkg/ >/dev/null || stat_fail
+	stat /tmp/lazybox/$1/usr/share/lazypkg/ >/dev/null || stat_fail
 	tar -xf $1 -C /
 	rm -r /tmp/lazybox/$1
 elif [ "$f" = "1" ]; then
-	stat /lib/lazypkg/$1 > /dev/null || find_fail
-	sed -n '/\[fs\]/,$p' /lib/lazypkg/$1 | grep -v "\[fs\]"
+	stat /usr/share/lazypkg/$1 > /dev/null || find_fail
+	sed -n '/\[fs\]/,$p' /usr/share/lazypkg/$1 | grep -v "\[fs\]"
 elif [ "$l" = "1" ]; then
-	stat /lib/lazypkg/$1 > /dev/null || find_fail
-	sed -n '/\[license\]/,/\[fs\]/{/\[license\]\|\[fs\]/!p}' /lib/lazypkg/$1
+	stat /usr/share/lazypkg/$1 > /dev/null || find_fail
+	sed -n '/\[license\]/,/\[fs\]/{/\[license\]\|\[fs\]/!p}' /usr/share/lazypkg/$1
 fi
