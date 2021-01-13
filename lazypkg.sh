@@ -6,11 +6,17 @@ export CXX=clang++
 . ./build.sh
 dir=$(pwd)
 stat out > /dev/null && rm -rf out
-mkdir -p src
-cd src
-srcdir=$(pwd)
+mkdir out
 
-fetch
+function do_fetch() {
+	mkdir -p src
+	cd src
+	srcdir=$(pwd) fetch
+}
+
+stat src > /dev/null 2>/dev/null || do_fetch
+srcdir=$(pwd)/src
+
 cd $srcdir
 
 build

@@ -13,23 +13,23 @@ fetch() {
 
 build() {
 	cd $pkgname-$pkgver
-	./configure --prefix=/
+	./configure --prefix=/usr
 	gmake
 }
 
 package() {
 	cd $pkgname-$pkgver
-	install -d $pkgdir/bin
-	install -Dm4755 doas $pkgdir/bin
+	install -d $pkgdir/usr/bin
+	install -Dm4755 doas $pkgdir/usr/bin
 }
 
 package_doc() {
 	cd $pkgname-$pkgver
-	install -d $pkgdir/share/man/
-	install -d $pkgdir/share/man/man1
-	install -d $pkgdir/share/man/man5
-	install -Dm644 doas.1 $pkgdir/share/man/man1
-	install -Dm644 doas.conf.5 $pkgdir/share/man/man5
+	install -d $pkgdir/usr/share/man/
+	install -d $pkgdir/usr/share/man/man1
+	install -d $pkgdir/usr/share/man/man5
+	install -Dm644 doas.1 $pkgdir/usr/share/man/man1
+	install -Dm644 doas.conf.5 $pkgdir/usr/share/man/man5
 }
 
 license() {

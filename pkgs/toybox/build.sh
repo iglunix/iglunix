@@ -20,9 +20,10 @@ package() {
 	install -d $pkgdir/bin
 	install -Dm755 ./toybox $pkgdir/bin/
 	ln -sr $pkgdir/bin/toybox $pkgdir/bin/ln
+	ln -sr $pkgdir/bin/toybox $pkgdir/bin/uname
 	install -d $pkgdir/usr/bin
-	cd $pkgdir/usr/bin
 	ln -sr $pkgdir/bin/toybox $pkgdir/usr/bin/install
+	ln -sr $pkgdir/bin/toybox $pkgdir/usr/bin/lspci
 }
 
 license() {
