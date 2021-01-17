@@ -1,4 +1,4 @@
-pkgver=1.2.1
+pkgver=1.2.2
 pkgname=musl
 bad="gmake"
 ext="dev"
@@ -11,7 +11,7 @@ fetch() {
 build() {
 	cd $pkgname-$pkgver
 	./configure \
-		--prefix=/ \
+		--prefix=/usr \
 		--enable-wrapper=no
 	gmake
 }
@@ -19,21 +19,17 @@ build() {
 package() {
 	cd $pkgname-$pkgver
 	gmake install DESTDIR=$pkgdir
-	rm -r $pkgdir/include
-	rm $pkgdir/lib/*.a
-	rm $pkgdir/lib/*.o
+	mv $pkgdir/usr/lib/libc.so $pkgdir/lib
+	ln -sr $pkgdir/lib/libc.so $pkgdir/lib/ld-musl-x86_64.so.1
+	rm -r $pkgdir/usr
 	install -d $pkgdir/usr/bin
-	cd $pkgdir/usr/bin
-	ln -s ../../lib/ld-musl*.so.? ldd
+	ln -sr $pkgdir/lib/ld-musl*.so? $pkgdir/usr/bin/ldd 
 }
 
 package_dev() {
 	cd $pkgname-$pkgver
 	gmake install DESTDIR=$pkgdir
-	rm $pkgdir/lib/*.so
-	rm $pkgdir/lib/*.so.?
-	install -d $pkgdir/usr/
-	mv $pkgdir/* $pkgdir/usr/
+	rm $pkgdir/usr/lib/*.so
 }
 
 license() {

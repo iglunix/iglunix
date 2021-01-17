@@ -19,8 +19,12 @@ package() {
 	cd $pkgname-$pkgver
 	install -d $pkgdir
 	cp -r ./_install/* $pkgdir
+	chmod 4755 $pkgdir/bin/busybox
+	rm $pkgdir/linuxrc
 	rm $pkgdir/bin/ln
+	rm $pkgdir/bin/uname
 	rm $pkgdir/usr/bin/install
+	rm $pkgdir/usr/bin/lspci
 }
 
 license() {
