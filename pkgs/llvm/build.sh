@@ -1,7 +1,7 @@
 pkgver=11.0.0
 pkgname=llvm
 bad=""
-ext="libunwind:libunwind-dev:libcxx:libcxx-dev"
+ext="dev"
 
 fetch() {
 	curl -L "https://github.com/llvm/llvm-project/releases/download/llvmorg-11.0.0/llvm-project-11.0.0.tar.xz" -o $pkgname-$pkgver.tar.gz
@@ -96,36 +96,14 @@ package() {
 	cd $pkgname-$pkgver
 	cd build
 	DESTDIR=$pkgdir samu install
-	rm $pkgdir/lib/*.a
-	rm $pkgdir/lib/libunwind.*
-	rm -r $pkgdir/lib/cmake
+	ln -sr $pkgdir/usr/bin/clang $pkgdir/usr/bin/cc
+	ln -sr $pkgdir/usr/bin/clang++ $pkgdir/usr/bin/c++
 }
 
-package_libunwind() {
-	cd $pkgname-$pkgver
-	cd build
-	DESTDIR=$pkgdir samu install-unwind
-	rm $pkgdir/lib/*.a
+package_dev() {
+	echo "No... Shut"
 }
 
-package_libunwind_dev() {
-	cd $pkgname-$pkgver
-	cd build
-	DESTDIR=$pkgdir samu install-unwind
-	rm $pkgdir/lib/*.so
-}
-
-package_libcxx() {
-	cd $pkgname-$pkgver
-	cd build
-	DESTDIR=$pkgdir samu install-libcxx
-}
-
-package_libcxx_dev() {
-	cd $pkgname-$pkgver
-	cd build
-	DESTDIR=$pkgdir samu install-libcxx
-}
 license() {
 	cd $pkgname-$pkgver
 	cat */LICENSE.TXT
