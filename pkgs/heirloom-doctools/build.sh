@@ -13,6 +13,7 @@ fetch() {
 
 build() {
 	cd $pkgname-$pkgver
+	./configure
 	gmake
 }
 
