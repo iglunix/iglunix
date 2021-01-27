@@ -1,6 +1,7 @@
-pkgver=5.10.7
+pkgver=5.10.10
 pkgname=linux
 pkgrel=1
+ext="dev"
 
 fetch() {
 	curl "https://k1ss.org/wiki/kernel/patches/kernel-no-perl.patch" -o kernel-no-perl.patch
@@ -25,6 +26,11 @@ package() {
 	install -d $pkgdir/boot
 	gmake CC=cc CXX=c++ HOSTCC=cc HOSTCXX=c++ YACC=yacc LLVM_IAS=1 INSTALL_PATH=$pkgdir/boot install
 	gmake CC=cc CXX=c++ HOSTCC=cc HOSTCXX=c++ YACC=yacc LLVM_IAS=1 INSTALL_MOD_PATH=$pkgdir/ modules_install
+}
+
+package_dev() {
+	cd $pkgname-$pkgver
+	gmake CC=cc CXX=c++ HOSTCC=cc HOSTCXX=c++ YACC=yacc LLVM_IAS=1 INSTALL_HDR_PATH=$pkgdir/usr headers_install
 }
 
 license() {
