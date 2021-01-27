@@ -7,7 +7,7 @@ fetch() {
 	tar -xf $pkgname-$pkgver.tar.gz
 	mkdir $pkgname-$pkgver/build
 	cp ../byacc-out-mid-build.patch .
-	cd ../LICENSE .
+	cp ../LICENSE .
 }
 
 build() {
@@ -46,8 +46,11 @@ build() {
 		-Dbuild-tests=false
 
 	samu
-	patch -p1 < ../../byacc-out-mid-build.patch
-	samu
+
+#	NEEDED IF NOT USING A PATCHED BYACC
+#	===================================
+#	patch -p1 < ../../byacc-out-mid-build.patch
+#	samu
 }
 
 package() {

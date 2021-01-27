@@ -1,4 +1,4 @@
-pkgver=20200910
+pkgver=20210109
 pkgname=byacc
 bad=""
 ext="doc"
@@ -6,6 +6,7 @@ ext="doc"
 fetch() {
 	curl https://invisible-island.net/datafiles/release/byacc.tar.gz -o $pkgname-$pkgver.tar.gz
 	tar -xf $pkgname-$pkgver.tar.gz
+	cp ../reader-mesa.patch .
 }
 
 build() {
@@ -14,6 +15,7 @@ build() {
 		--prefix=/usr \
 		--program-prefix=b \
 		--enable-btyacc
+	patch -p1 < ../reader-mesa.patch
 	make
 }
 
