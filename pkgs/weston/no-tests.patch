@@ -1,0 +1,11 @@
+--- a/meson.build
++++ b/meson.build
+@@ -163,7 +163,7 @@
+ subdir('pipewire')
+ subdir('clients')
+ subdir('wcap')
+-subdir('tests')
++#subdir('tests')
+ subdir('data')
+ subdir('man')
+ 
