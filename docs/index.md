@@ -33,7 +33,7 @@ From here one needs to build the first package, `mksh` which will
 allow one to rebuild `toybox` and `busybox`.
 
 Clone this git repo into `$LBROOT/root/lazybox` and then chroot to `$LBROOT`
-```
+```sh
 cd /root/lazybox
 
 cd pkgs/mksh
