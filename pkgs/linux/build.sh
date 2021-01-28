@@ -1,4 +1,4 @@
-pkgver=5.10.10
+pkgver=5.10.11
 pkgname=linux
 pkgrel=1
 ext="dev"
