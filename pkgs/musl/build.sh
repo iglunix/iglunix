@@ -19,10 +19,7 @@ build() {
 package() {
 	cd $pkgname-$pkgver
 	gmake install DESTDIR=$pkgdir
-	mv $pkgdir/usr/lib/libc.so $pkgdir/lib
-	ln -sr $pkgdir/lib/libc.so $pkgdir/lib/ld-musl-x86_64.so.1
-	rm -r $pkgdir/usr
-	install -d $pkgdir/usr/bin
+	rm -r $pkgdir/usr/include
 	ln -sr $pkgdir/lib/ld-musl*.so? $pkgdir/usr/bin/ldd 
 }
 
