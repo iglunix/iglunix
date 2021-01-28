@@ -10,3 +10,4 @@ All build scripts are 0BSD Licensed.
  - FreeBSD libc? Standalone build how? (rly need LLVM libc)
  - Init system ( paralel shit and dependencies )
  - QEMU for multiarch
+ - Lots of work on package manager still required
