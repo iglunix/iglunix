@@ -1,12 +1,12 @@
-pkgver=11.0.0
+pkgver=11.0.1
 pkgname=llvm
 bad=""
 ext="dev"
 
 fetch() {
-	curl -L "https://github.com/llvm/llvm-project/releases/download/llvmorg-11.0.0/llvm-project-11.0.0.tar.xz" -o $pkgname-$pkgver.tar.gz
+	curl -L "https://github.com/llvm/llvm-project/releases/download/llvmorg-11.0.1/llvm-project-11.0.1.src.tar.xz" -o $pkgname-$pkgver.tar.gz
 	tar -xf $pkgname-$pkgver.tar.gz
-	mv llvm-project-$pkgver $pkgname-$pkgver
+	mv llvm-project-$pkgver.src $pkgname-$pkgver
 }
 
 build() {
@@ -22,9 +22,9 @@ build() {
                 -DCMAKE_BUILD_TYPE=Release \
                 -DLLVM_VERSION_SUFFIX="" \
                 -DLLVM_APPEND_VC_REV=OFF \
-                -DLLVM_ENABLE_PROJECTS="libunwind;libcxxabi;libcxx;compiler-rt;llvm;lld;clang" \
+                -DLLVM_ENABLE_PROJECTS="libunwind;libcxxabi;libcxx;compiler-rt;llvm;lld;clang;lldb" \
                 -DLLVM_ENABLE_LLD=ON \
-                -DLLVM_TARGETS_TO_BUILD="X86" \
+                -DLLVM_TARGETS_TO_BUILD="all" \
                 -DLLVM_INSTALL_BINUTILS_SYMLINKS=ON \
                 -DLLVM_INSTALL_CCTOOLS_SYMLINKS=ON \
                 -DLLVM_INCLUDE_EXAMPLES=OFF \
