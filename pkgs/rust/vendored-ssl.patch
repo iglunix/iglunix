@@ -1,0 +1,54 @@
+--- vendor/openssl-sys/Cargo.toml
++++ ../../rust-1.49.0/vendor/openssl-sys/Cargo.toml
+@@ -33,12 +33,11 @@
+
+ [build-dependencies.openssl-src]
+ version = "111.0.1"
+-optional = true
+
+ [build-dependencies.pkg-config]
+ version = "0.3.9"
+
+ [features]
+-vendored = ["openssl-src"]
++vendored = []
+ [target."cfg(target_env = \"msvc\")".build-dependencies.vcpkg]
+ version = "0.2.8"
+Only in ../../rust-1.49.0/vendor/openssl-sys: Cargo.toml.1
+--- vendor/openssl-sys/build/main.rs
++++ ../../rust-1.49.0/vendor/openssl-sys/build/main.rs
+@@ -2,7 +2,6 @@
+
+ extern crate autocfg;
+ extern crate cc;
+-#[cfg(feature = "vendored")]
+ extern crate openssl_src;
+ extern crate pkg_config;
+ #[cfg(target_env = "msvc")]
+@@ -16,7 +15,6 @@
+ mod cfgs;
+
+ mod find_normal;
+-#[cfg(feature = "vendored")]
+ mod find_vendored;
+
+ enum Version {
+@@ -44,15 +42,14 @@
+ }
+
+ fn find_openssl(target: &str) -> (PathBuf, PathBuf) {
+-    #[cfg(feature = "vendored")]
+     {
+         // vendor if the feature is present, unless
+         // OPENSSL_NO_VENDOR exists and isn't `0`
+-        if env("OPENSSL_NO_VENDOR").map_or(true, |s| s == "0") {
++        //if env("OPENSSL_NO_VENDOR").map_or(true, |s| s == "0") {
+             return find_vendored::get_openssl(target);
+-        }
++        //}
+     }
+-    find_normal::get_openssl(target)
++    //find_normal::get_openssl(target)
+ }
+
+ fn main() {
