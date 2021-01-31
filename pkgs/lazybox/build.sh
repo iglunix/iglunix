@@ -19,13 +19,13 @@ build() {
 
 package() {
 	cd $pkgname-$pkgver
-	install -d $pkgdir/bin
+	install -d $pkgdir/usr/sbin
 	install -Dm755 lazy.sh $pkgdir/usr/sbin/lazy
 }
 
 package_dev() {
 	cd $pkgname-$pkgver
-	install -d $pkgdir/bin
+	install -d $pkgdir/usr/bin
 	install -Dm755 lazypkg.sh $pkgdir/usr/bin/lazypkg
 }
 

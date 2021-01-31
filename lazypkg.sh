@@ -1,5 +1,6 @@
 #!/bin/sh
 export MAKEFLAGS="-j6"
+export RUSTFLAGS="-C target-feature=-crt-static"
 export CC=clang
 export CXX=clang++
 
