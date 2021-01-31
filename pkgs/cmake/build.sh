@@ -13,9 +13,9 @@ build() {
 	cd $pkgname-$pkgver
 	./bootstrap \
 		--prefix=/usr \
-		--mandir=/share/man \
-		--datadir=/share/$pkgname \
-		--docdir=/share/doc/$pkgname \
+		--mandir=/usr/share/man \
+		--datadir=/usr/share/$pkgname \
+		--docdir=/usr/share/doc/$pkgname \
 		--generator=Ninja \
 		--no-system-libs
 

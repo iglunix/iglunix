@@ -1,5 +1,6 @@
 pkgver=59c
 pkgname=mksh
+deps="musl"
 bad=""
 ext="doc"
 

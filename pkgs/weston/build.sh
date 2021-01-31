@@ -19,7 +19,7 @@ build() {
 		-Dimage-jpeg=false \
 		-Dimage-webp=false \
 		-Dlauncher-logind=false \
-		-Dweston-launch=false \
+		-Dweston-launch=true \
 		-Dbackend-drm-screencast-vaapi=false \
 		-Dbackend-rdp=false \
 		-Dbackend-x11=false \

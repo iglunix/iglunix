@@ -7,7 +7,10 @@ fetch() {
 	tar -xf $pkgname-$pkgver.tar.gz
 	mkdir $pkgname-$pkgver/build
 	cp ../byacc-out-mid-build.patch .
+	cp ../alpine-tls.patch .
 	cp ../LICENSE .
+	cd $pkgname-$pkgver
+	patch -p1 < ../alpine-tls.patch
 }
 
 build() {
@@ -16,10 +19,10 @@ build() {
 	meson .. \
 		--prefix=/usr \
 		--buildtype=release \
-		-Dplatforms= \
+		-Dplatforms=wayland \
 		-Ddri3=true \
 		-Ddri-drivers=i915,i965 \
-		-Dgallium-drivers= \
+		-Dgallium-drivers=iris \
 		-Dgallium-vdpau=false \
 		-Dgallium-xvmc=false \
 		-Dgallium-omx=disabled \

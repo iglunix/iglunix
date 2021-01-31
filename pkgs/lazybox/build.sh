@@ -1,6 +1,7 @@
 pkgver=main
 pkgname=lazybox
 pkgrel=1
+deps="busybox:toybox"
 bad=""
 ext="dev"
 

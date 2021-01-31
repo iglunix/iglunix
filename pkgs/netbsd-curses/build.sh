@@ -1,10 +1,11 @@
 pkgver=0.3.1
 pkgname=netbsd-curses
 bad=""
+deps="musl"
 ext="doc:dev"
 
 fetch() {
-	curl -L https://github.com/sabotage-linux/netbsd-curses/archive/v$pkgver.tar.gz -o $pkgname-$pkgver.tar.gz
+	curl -L http://github.com/sabotage-linux/netbsd-curses/archive/v$pkgver.tar.gz -o $pkgname-$pkgver.tar.gz
 	tar -xf $pkgname-$pkgver.tar.gz
 }
 
@@ -34,7 +35,6 @@ package_dev() {
 	cd $pkgname-$pkgver
 	ckati install DESTDIR=$pkgdir PREFIX=/usr
 	rm $pkgdir/usr/lib/*.so
-	rm -r $pkgdir/usr/include
 	rm -r $pkgdir/usr/share
 	rm -r $pkgdir/usr/bin
 }

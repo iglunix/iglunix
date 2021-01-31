@@ -3,7 +3,7 @@ pkgname=kati
 pkgrel=1
 
 fetch() {
-	curl -L "https://github.com/google/kati/archive/master.tar.gz" -o $pkgname-$pkgver.tar.gz
+	curl -LL "https://github.com/google/kati/archive/master.tar.gz" -o $pkgname-$pkgver.tar.gz
 	tar -xf $pkgname-$pkgver.tar.gz
 }
 

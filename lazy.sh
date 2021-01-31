@@ -119,6 +119,7 @@ elif [ "$iu" = "1" ]; then
 	done
 
 	echo $OFILES
+	echo $NFILES
 
 elif [ "$i" = "1" ]; then
 	bname_we=$(basename "$1")

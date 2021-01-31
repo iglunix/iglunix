@@ -1,8 +1,8 @@
-pkgname=
-pkgver=
+pkgname=wayland
+pkgver=1.19.0
 
 fetch() {
-	curl "" -o $pkgname-$pkgver.tar.xz
+	curl "https://wayland.freedesktop.org/releases/wayland-1.19.0.tar.xz" -o $pkgname-$pkgver.tar.xz
 	tar -xf $pkgname-$pkgver.tar.xz
 	mkdir $pkgname-$pkgver/build
 }
@@ -10,10 +10,10 @@ fetch() {
 build() {
 	cd $pkgname-$pkgver
 	cd build
-	cmake -G Ninja ../ \
-		-DCMAKE_BUILD_TYPE=Release \
-		-DCMAKE_INSTALL_PREFIX=/usr \
-		-DCMAKE_INSTALL_LIBDIR=lib
+	meson .. \
+		--buildtype=release \
+		--prefix=/usr \
+		-Ddocumentation=false
 	samu
 }
 
@@ -25,6 +25,5 @@ package() {
 
 license() {
 	cd $pkgname-$pkgver
-	cat LICENSE
-#	cat COPYING
+	cat COPYING
 }

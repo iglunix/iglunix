@@ -1,11 +1,12 @@
 pkgver=builtin-terminal-ui
 pkgname=kakoune
 pkgrel=1
+deps="musl:llvm"
 bad=""
 ext="doc"
 
 fetch() {
-	curl -L "https://github.com/mawww/kakoune/archive/builtin-terminal-ui.tar.gz" -o $pkgname-$pkgver.tar.xz
+	curl "https://github.com/mawww/kakoune/archive/builtin-terminal-ui.tar.gz" -o $pkgname-$pkgver.tar.xz
 	tar -xf $pkgname-$pkgver.tar.xz
 }
 

@@ -31,7 +31,15 @@ package() {
 	rm -r $pkgdir/usr/lib/pkgconfig
 }
 
-package_doc() {
+package_dev() {
+	cd $pkgname-$pkgver
+	cd build
+	DESTDIR=$pkgdir samu install
+	rm -r $pkgdir/etc
+	rm -r $pkgdir/usr/share
+	rm -r $pkgdir/usr/bin
+	rm $pkgdir/usr/lib/*.so
+	rm $pkgdir/usr/lib/*.so.*
 	samu
 }
 

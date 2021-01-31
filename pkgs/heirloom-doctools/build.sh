@@ -1,6 +1,7 @@
 pkgver=master
 pkgname=heirloom-doctools
 pkgrel=1
+deps="musl"
 bad="gmake"
 ext="doc"
 

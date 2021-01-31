@@ -13,7 +13,7 @@ build() {
     	cd $pkgname-$pkgver
 	./configure \
 		--prefix=/usr \
-		--with-system-ffi=false \
+		--with-system-ffi=true \
 		ax_cv_c_float_words_bigendian=no
 	make
 }

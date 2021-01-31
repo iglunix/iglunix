@@ -1,5 +1,6 @@
 pkgname=less
 pkgver=563
+deps="musl:netbsd-curses"
 ext="doc"
 
 fetch() {

@@ -24,10 +24,13 @@ package() {
 	rm -r $pkgdir/usr/share
 }
 
-package_doc() {
+package_dev() {
 	cd $pkgname-$pkgver
 	make install DESTDIR=$pkgdir
 	rm -r $pkgdir/usr/bin
+	rm $pkgdir/usr/lib/*.so
+	rm $pkgdir/usr/lib/*.so.*
+	rm -r $pkgdir/usr/share
 }
 
 license() {

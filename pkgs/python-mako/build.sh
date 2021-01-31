@@ -1,12 +1,13 @@
-pkgver=0.56.2
-pkgname=meson
+pkgver=1.1.4
+pkgname=python-mako
 deps=python
 bad=""
 ext="doc"
 
 fetch() {
-	curl -L "https://github.com/mesonbuild/meson/releases/download/$pkgver/meson-$pkgver.tar.gz" -o $pkgname-$pkgver.tar.gz
+	curl -L "https://pypi.io/packages/source/M/Mako/Mako-$pkgver.tar.gz" -o $pkgname-$pkgver.tar.gz
 	tar -xf $pkgname-$pkgver.tar.gz
+	mv Mako-$pkgver $pkgname-$pkgver
 }
 
 build() {
@@ -25,5 +26,5 @@ package_doc() {
 
 license() {
 	cd $pkgname-$pkgver
-	cat COPYING
+	cat LICENSE
 }

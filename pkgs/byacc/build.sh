@@ -1,5 +1,6 @@
 pkgver=20210109
 pkgname=byacc
+deps="musl"
 bad=""
 ext="doc"
 

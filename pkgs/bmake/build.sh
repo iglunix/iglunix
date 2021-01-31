@@ -1,10 +1,10 @@
-pkgver=20201212
+pkgver=20210110
 pkgname=bmake
-bad=""
+bad="musl"
 ext="doc"
 
 fetch() {
-	curl http://www.crufty.net/ftp/pub/sjg/bmake-20201212.tar.gz -o $pkgname-$pkgver.tar.gz
+	curl http://www.crufty.net/ftp/pub/sjg/bmake-$pkgver.tar.gz -o $pkgname-$pkgver.tar.gz
 	tar -xf $pkgname-$pkgver.tar.gz
 	mv $pkgname $pkgname-$pkgver
 	cd $pkgname-$pkgver
@@ -14,7 +14,7 @@ fetch() {
 
 build() {
 	cd $pkgname-$pkgver
-	./configure --prefix=/usr
+	./configure --prefix=/usr --with-default-sys-path=/usr/share/mk
 	sh ./make-bootstrap.sh
 }
 

@@ -4,23 +4,16 @@ pkgver=
 fetch() {
 	curl "" -o $pkgname-$pkgver.tar.xz
 	tar -xf $pkgname-$pkgver.tar.xz
-	mkdir $pkgname-$pkgver/build
 }
 
 build() {
 	cd $pkgname-$pkgver
-	cd build
-	cmake -G Ninja ../ \
-		-DCMAKE_BUILD_TYPE=Release \
-		-DCMAKE_INSTALL_PREFIX=/usr \
-		-DCMAKE_INSTALL_LIBDIR=lib
-	samu
+	cargo build --release --locked --all-features
 }
 
 package() {
 	cd $pkgname-$pkgver
-	cd build
-	DESTDIR=$pkgdir samu install
+	install -Dm 755 target/release/${pkgname} -t "${pkgdir}/usr/bin"
 }
 
 license() {

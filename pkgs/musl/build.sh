@@ -1,11 +1,13 @@
 pkgver=1.2.2
 pkgname=musl
+deps=""
 bad="gmake"
 ext="dev"
 
 fetch() {
 	curl "https://musl.libc.org/releases/$pkgname-$pkgver.tar.gz" -o $pkgname-$pkgver.tar.gz
 	tar -xf $pkgname-$pkgver.tar.gz
+	cd $pkgname-$pkgver
 }
 
 build() {

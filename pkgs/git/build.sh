@@ -1,11 +1,12 @@
 pkgver=2.30.0
 pkgname=git
 pkgrel=1
+deps="musl:zlib:curl:dropbear"
 bad="gmake"
 ext="doc"
 
 fetch() {
-	curl -L "https://mirrors.edge.kernel.org/pub/software/scm/git/git-2.30.0.tar.xz" -o $pkgname-$pkgver.tar.xz
+	curl "https://mirrors.edge.kernel.org/pub/software/scm/git/git-2.30.0.tar.xz" -o $pkgname-$pkgver.tar.xz
 	tar -xf $pkgname-$pkgver.tar.xz
 }
 

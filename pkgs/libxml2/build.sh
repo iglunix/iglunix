@@ -11,17 +11,17 @@ fetch() {
 build() {
 	cd $pkgname-$pkgver
 	./configure --prefix=/usr --without-python
-	make
+	gmake
 }
 
 package() {
 	cd $pkgname-$pkgver
-	make install DESTDIR=$pkgdir
+	gmake install DESTDIR=$pkgdir
 }
 
 package_dev() {
 	cd $pkgname-$pkgver
-	make install DESTDIR=$pkgdir
+	gmake install DESTDIR=$pkgdir
 }
 
 license() {

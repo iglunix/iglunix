@@ -97,6 +97,8 @@ package() {
 	cd build
 	DESTDIR=$pkgdir samu install
 	ln -sr $pkgdir/usr/bin/clang $pkgdir/usr/bin/cc
+	ln -sr $pkgdir/usr/bin/clang $pkgdir/usr/bin/c89
+	ln -sr $pkgdir/usr/bin/clang $pkgdir/usr/bin/c99
 	ln -sr $pkgdir/usr/bin/clang++ $pkgdir/usr/bin/c++
 }
 

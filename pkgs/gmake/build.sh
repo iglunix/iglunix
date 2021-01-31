@@ -1,6 +1,7 @@
 pkgver=4.3
 pkgname=gmake
 pkgrel=1
+deps="musl"
 bad="gmake"
 ext="doc:dev"
 

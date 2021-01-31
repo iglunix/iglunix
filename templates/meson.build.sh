@@ -10,10 +10,10 @@ fetch() {
 build() {
 	cd $pkgname-$pkgver
 	cd build
-	cmake -G Ninja ../ \
-		-DCMAKE_BUILD_TYPE=Release \
-		-DCMAKE_INSTALL_PREFIX=/usr \
-		-DCMAKE_INSTALL_LIBDIR=lib
+	meson .. \
+		--buildtype=release \
+		--prefix=/usr \
+		--libexecdir=lib
 	samu
 }
 

@@ -30,8 +30,14 @@ package() {
 	rm -r $pkgdir/usr/lib/cmake
 }
 
-package_doc() {
-	samu
+package_dev() {
+	cd $pkgname-$pkgver
+	cd build
+	DESTDIR=$pkgdir samu install
+	rm -r $pkgdir/usr/share
+	rm -r $pkgdir/usr/bin
+	rm $pkgdir/usr/lib/*.so
+	rm $pkgdir/usr/lib/*.so.*
 }
 
 license() {

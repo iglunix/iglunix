@@ -10,7 +10,7 @@ fetch() {
 
 build() {
 	cd $pkgname-$pkgver
-	meson build -Dintel=false --prefix /usr
+	meson build --prefix /usr
 	samu -C build
 }
 
