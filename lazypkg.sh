@@ -14,8 +14,8 @@ function do_fetch() {
 	srcdir=$(pwd) fetch
 }
 
-stat src > /dev/null 2>/dev/null || do_fetch
 srcdir=$(pwd)/src
+stat src > /dev/null 2>/dev/null || do_fetch
 
 cd $srcdir
 
@@ -34,6 +34,7 @@ cat > $dir/out/$pkgname/usr/share/lazypkg/$pkgname << EOF
 [pkg]
 name=$pkgname
 ver=$pkgver
+deps=$deps
 
 [license]
 EOF
@@ -66,6 +67,7 @@ echo $ext | tr ':' '\n' | while read e; do
 [pkg]
 name=$pkgname-\$e
 ver=$pkgver
+deps=$pkgname
 
 [license]
 EOF
