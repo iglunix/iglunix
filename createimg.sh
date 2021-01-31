@@ -1,3 +1,5 @@
+#!/bin/sh
+
 cat > fdiskscript << EOF
 o
 n

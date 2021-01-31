@@ -21,15 +21,15 @@ tar -xf pkgs/llvm/out/llvm.11.0.1.tar.xz -C ./isoroot
 tar -xf pkgs/cmake/out/cmake.3.19.2.tar.xz -C ./isoroot
 tar -xf pkgs/samurai/out/samurai.1.2.tar.xz -C ./isoroot
 tar -xf pkgs/byacc/out/byacc.20210109.tar.xz -C ./isoroot
-tar -xf pkgs/bmake/out/bmake.20201212.tar.xz -C ./isoroot
+tar -xf pkgs/bmake/out/bmake.20210110.tar.xz -C ./isoroot
 tar -xf pkgs/flex/out/flex.2.6.4.tar.xz -C ./isoroot
-tar -xf pkgs/libressl/out/*.tar.xz -C ./isoroot
-tar -xf pkgs/curl/out/*.tar.xz -C ./isoroot
-tar -xf pkgs/git/out/*.tar.xz -C ./isoroot
-tar -xf pkgs/expat/out/*.tar.xz -C ./isoroot
-tar -xf pkgs/zlib/out/*.tar.xz -C ./isoroot
-tar -xf pkgs/mksh/out/*.tar.xz -C ./isoroot
-tar -xf pkgs/netbsd-curses/out/*.tar.xz -C ./isoroot
+tar -xf pkgs/libressl/out/libressl.3.3.1.tar.xz -C ./isoroot
+tar -xf pkgs/curl/out/curl.7.74.0.tar.xz -C ./isoroot
+tar -xf pkgs/git/out/git.2.30.0.tar.xz -C ./isoroot
+tar -xf pkgs/expat/out/expat.2.2.10.tar.xz -C ./isoroot
+tar -xf pkgs/zlib/out/zlib.1.2.11.tar.xz -C ./isoroot
+tar -xf pkgs/mksh/out/mksh.59c.tar.xz -C ./isoroot
+tar -xf pkgs/netbsd-curses/out/netbsd-curses.0.3.1.tar.xz -C ./isoroot
 
 
 cat >isoroot/init << EOF
