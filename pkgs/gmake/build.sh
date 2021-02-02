@@ -17,26 +17,26 @@ build() {
 		--prefix=/usr \
 		--program-prefix=g \
 		--disable-nls
-	gmake
+	make
 }
 
 package() {
 	cd $pkgname-$pkgver
-	gmake install DESTDIR=$pkgdir
+	./make install DESTDIR=$pkgdir
 	rm -r $pkgdir/usr/share
 	rm -r $pkgdir/usr/include
 }
 
 package_doc() {
 	cd $pkgname-$pkgver
-	gmake install DESDIR=$pkgdir
+	./make install DESDIR=$pkgdir
 	rm -r $pkgdir/usr/bin
 	rm -r $pkgdir/usr/share/info
 	rm -r $pkgdir/usr/include
 }
 package_dev() {
 	cd $pkgname-$pkgver
-	gmake install DESTDIR=$pkgdir
+	./make install DESTDIR=$pkgdir
 	rm -r $pkgdir/usr/bin
 	rm -r $pkgdir/usr/share
 }
