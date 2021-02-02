@@ -1,4 +1,4 @@
-pkgver=5.10.11
+pkgver=5.10.12
 pkgname=linux
 pkgrel=1
 ext="dev"
@@ -31,7 +31,14 @@ package() {
 
 package_dev() {
 	cd $pkgname-$pkgver
-	gmake CC=cc CXX=c++ HOSTCC=cc HOSTCXX=c++ YACC=yacc LLVM_IAS=1 INSTALL_HDR_PATH=$pkgdir/usr headers_install
+	if stat /usr/bin/rsync 2>/dev/null /dev/null; then
+		gmake CC=cc CXX=c++ HOSTCC=cc HOSTCXX=c++ YACC=yacc LLVM_IAS=1 INSTALL_HDR_PATH=$pkgdir/usr headers_install
+	else
+		gmake CC=cc CXX=c++ HOSTCC=cc HOSTCXX=c++ YACC=yacc LLVM_IAS=1 headers
+		find -name '.*' -exec rm {} \;
+		rm usr/include/Makefile
+		cp -r usr/include $pkgdir/usr
+	fi
 }
 
 license() {
