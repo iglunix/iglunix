@@ -1,8 +1,14 @@
 #!/bin/sh
-export MAKEFLAGS="-j6"
+export JOBS="16"
+
 export RUSTFLAGS="-C target-feature=-crt-static"
 export CC=clang
 export CXX=clang++
+
+stat /etc/lazypkg.conf > /dev/null 2> /dev/null && . /etc/lazypkg.conf
+
+export SAMUFLAGS=-j$JOBS
+export MAKEFLAGS=-j$JOBS
 
 . ./build.sh
 dir=$(pwd)
@@ -52,6 +58,7 @@ find * >> $dir/out/$pkgname/usr/share/lazypkg/$pkgname
 
 cd $dir/out/$pkgname
 tar -cf ../$pkgname.$pkgver.tar.xz *
+if [ $ext ]; then
 
 echo $ext | tr ':' '\n' | while read e; do
 	echo \$e
@@ -88,6 +95,8 @@ EOF
     tar -cf ../$pkgname-\$e.$pkgver.tar.xz *
 
 done
+
+fi
 
 
 " | sh
