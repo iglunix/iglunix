@@ -7,6 +7,7 @@ pkgrel=1
 fetch() {
 	curl "https://busybox.net/downloads/busybox-1.33.0.tar.bz2" -o $pkgname-$pkgver.tar.gz
 	tar -xf $pkgname-$pkgver.tar.gz
+	cp ../man.sh .
 }
 
 build() {
@@ -21,6 +22,9 @@ package() {
 	install -d $pkgdir
 	cp -r ./_install/* $pkgdir
 	chmod 4755 $pkgdir/bin/busybox
+
+	install -d $pkgdir/etc/profile.d
+	install -Dm755 ../man.sh $pkgdir/etc/profile.d
 
 	install -Dm755 ./examples/udhcp/simple.script $pkgdir/usr/share/udhcpc/default.script
 	
