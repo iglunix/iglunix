@@ -18,7 +18,6 @@ build() {
 	cd build
 	meson .. \
 		--prefix=/usr \
-		--buildtype=release \
 		-Dplatforms=wayland \
 		-Ddri3=true \
 		-Ddri-drivers=i915,i965 \

@@ -23,9 +23,10 @@ find_fail() {
 }
 
 continue_interactive() {
-	read -p "Do you wish to proceed?: " yn
+	printf '%s' "Do you wish to proceed?: "
+	read yn
 	case $yn in
-		[Yy]* ) break;;
+		[Yy]* ) echo "Proceeding";;
 		[Nn]* ) exit;;
 		* ) exit;;
 	esac
@@ -113,6 +114,7 @@ elif [ "$iu" = "1" ]; then
     			case $(stat -c "%F" /$file) in
         			directory) rmdir 2>/dev/null /$file;;
         			"regular file") rm /$file;;
+        			"symbolic link") rm /$file;;
         			*) break;;
     			esac
     		fi
@@ -153,7 +155,8 @@ elif [ "$u" = "1" ]; then
     		case $(stat -c "%F" /$file) in
         		directory) rmdir 2>/dev/null /$file;;
         		"regular file") rm /$file;;
-        		*) break;;
+        		"symbolic link") rm /$file;;
+        		*) echo "can't remove $file";;
     		esac
     	done
 fi

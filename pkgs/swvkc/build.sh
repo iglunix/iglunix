@@ -11,7 +11,7 @@ build() {
 	cd $pkgname-$pkgver
 	cd build
 	meson .. \
-		--buildtype=release \
+		--buildtype=debug \
 		--prefix=/usr
 	samu
 }

@@ -68,6 +68,7 @@ package() {
 	rm $pkgdir/bin/sleep
 	rm $pkgdir/bin/stat
 	rm $pkgdir/bin/su
+	rm $pkgdir/bin/sh
 	rm $pkgdir/bin/sync
 	rm $pkgdir/bin/touch
 	rm $pkgdir/bin/true

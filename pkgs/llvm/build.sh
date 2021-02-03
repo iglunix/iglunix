@@ -14,8 +14,6 @@ build() {
 	mkdir -p build
 	cd build
         cmake -G Ninja -Wno-dev \
-                -DCMAKE_C_COMPILER=clang \
-                -DCMAKE_CXX_COMPILER=clang++ \
                 -DCMAKE_C_COMPILER_TARGET=x86_64-musl-linux-musl \
                 -DCMAKE_CXX_COMPILER_TARGET=x86_64-musl-linux-musl \
                 -DCMAKE_INSTALL_PREFIX=/usr \
@@ -89,7 +87,7 @@ build() {
                 -DENABLE_EXPERIMENTAL_NEW_PASS_MANAGER=TRUE \
                 ../llvm
 
-	samu
+	samu -j$JOBS
 }
 
 package() {

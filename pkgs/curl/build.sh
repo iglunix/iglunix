@@ -38,6 +38,7 @@ package_dev() {
 	rm -r $pkgdir/usr/bin
 	rm $pkgdir/usr/lib/*.so
 	rm $pkgdir/usr/lib/*.so.*
+	env
 }
 
 license() {
