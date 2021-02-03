@@ -13,7 +13,7 @@ build() {
 
 package() {
 	cd $pkgname-$pkgver
-	ckati install DESTDIR=$pkgdir PREFIX=/usr
+	ckati install DESTDIR=$pkgdir prefix=/usr
 }
 
 license() {
