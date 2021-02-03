@@ -8,6 +8,7 @@ ext="dev"
 fetch() {
 	mkdir $pkgname-$pkgver
 	cp ../profile.sh .
+	cp ../motd .
 	cd $pkgname-$pkgver
 	cp ../../../../lazy*.sh .
 	cp ../../../../LICENSE .
@@ -22,6 +23,7 @@ package() {
 	cd $pkgname-$pkgver
 	install -d $pkgdir/etc/
 	install -Dm644 ../profile.sh $pkgdir/etc/profile
+	install -Dm644 ../motd $pkgdir/etc/
 	install -d $pkgdir/usr/sbin
 	install -Dm755 lazy.sh $pkgdir/usr/sbin/lazy
 }
