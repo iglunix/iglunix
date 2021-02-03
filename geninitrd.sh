@@ -1,8 +1,9 @@
-#!/bin/sh
+#!/bin/mksh
 #
 # Creates an ISO from the following built packages.
-# Linux, Musl, Toybox, Busybox, LLVM, CMake, Samurai,BYacc, Flex, BMake,
-# LibreSSL, Curl, Git, Expat, Zlib, NetBSD-Curses
+#   mksh bmake gmake libressl cmake curl rsync linux flex
+#   byacc om4 zlib samurai libffi python ca-certificates
+#   zlib expat gettext-tiny git kati netbsd-curses kakoune
 #
 # This should be enough to completely rebuild LazyBox from Source
 #
@@ -11,25 +12,20 @@
 mkdir isoroot
 mkdir isoout
 
-tar -xf pkgs/linux/out/linux.5.10.11.tar.xz -C ./isoroot
-tar -xf pkgs/linux/out/linux-dev.5.10.11.tar.xz -C ./isoroot
-tar -xf pkgs/musl/out/musl.1.2.2.tar.xz -C ./isoroot
-tar -xf pkgs/musl/out/musl-dev.1.2.2.tar.xz -C ./isoroot
-tar -xf pkgs/toybox/out/toybox.0.8.4.tar.xz -C ./isoroot
-tar -xf pkgs/busybox/out/busybox.1.33.0.tar.xz -C ./isoroot
-tar -xf pkgs/llvm/out/llvm.11.0.1.tar.xz -C ./isoroot
-tar -xf pkgs/cmake/out/cmake.3.19.2.tar.xz -C ./isoroot
-tar -xf pkgs/samurai/out/samurai.1.2.tar.xz -C ./isoroot
-tar -xf pkgs/byacc/out/byacc.20210109.tar.xz -C ./isoroot
-tar -xf pkgs/bmake/out/bmake.20210110.tar.xz -C ./isoroot
-tar -xf pkgs/flex/out/flex.2.6.4.tar.xz -C ./isoroot
-tar -xf pkgs/libressl/out/libressl.3.3.1.tar.xz -C ./isoroot
-tar -xf pkgs/curl/out/curl.7.74.0.tar.xz -C ./isoroot
-tar -xf pkgs/git/out/git.2.30.0.tar.xz -C ./isoroot
-tar -xf pkgs/expat/out/expat.2.2.10.tar.xz -C ./isoroot
-tar -xf pkgs/zlib/out/zlib.1.2.11.tar.xz -C ./isoroot
-tar -xf pkgs/mksh/out/mksh.59c.tar.xz -C ./isoroot
-tar -xf pkgs/netbsd-curses/out/netbsd-curses.0.3.1.tar.xz -C ./isoroot
+cp_iso_packages (){
+	#NOTE: this will assume that there always is a '*-dev'/'*-doc' package,\n this is not true.
+	# That's why the errors are shown to some one who cares.
+	for pkg in ${packages[@]}
+	do
+		echo "Going to copy: $pkg to isoroot"
+		tar -xf pkgs/${pkg}/out/${pkg}.*.tar.xz -C ./isoroot
+		tar -xf pkgs/${pkg}/out/${pkg}-dev.*.tar.xz -C ./isoroot 2> /dev/null
+		tar -xf pkgs/${pkg}/out/${pkg}-doc.*.tar.xz -C ./isoroot 2> /dev/null
+	done
+}
+
+packages=(mksh bmake gmake libressl cmake curl rsync linux flex byacc om4 zlib samurai libffi python ca-certificates zlib expat gettext-tiny git kati netbsd-curses kakoune)
+cp_iso_packages
 
 
 cat >isoroot/init << EOF
