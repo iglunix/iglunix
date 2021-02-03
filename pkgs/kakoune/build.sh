@@ -6,7 +6,7 @@ bad=""
 ext="doc"
 
 fetch() {
-	curl "https://github.com/mawww/kakoune/archive/builtin-terminal-ui.tar.gz" -o $pkgname-$pkgver.tar.xz
+	curl -L "https://github.com/mawww/kakoune/archive/builtin-terminal-ui.tar.gz" -o $pkgname-$pkgver.tar.xz
 	tar -xf $pkgname-$pkgver.tar.xz
 }
 
