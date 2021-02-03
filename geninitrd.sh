@@ -4,6 +4,7 @@
 #   mksh bmake gmake libressl cmake curl rsync linux flex
 #   byacc om4 zlib samurai libffi python ca-certificates
 #   zlib expat gettext-tiny git kati netbsd-curses kakoune
+#   lazybox
 #
 # This should be enough to completely rebuild LazyBox from Source
 #
@@ -24,7 +25,7 @@ cp_iso_packages (){
 	done
 }
 
-packages=(mksh bmake gmake libressl cmake curl rsync linux flex byacc om4 zlib samurai libffi python ca-certificates zlib expat gettext-tiny git kati netbsd-curses kakoune)
+packages=(mksh bmake gmake libressl cmake curl rsync linux flex byacc om4 zlib samurai libffi python ca-certificates zlib expat gettext-tiny git kati netbsd-curses kakoune lazybox)
 cp_iso_packages
 
 
