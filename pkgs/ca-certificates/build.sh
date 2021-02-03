@@ -1,6 +1,7 @@
 pkgname=ca-certificates
 pkgver=202200601
 pkgrel=2
+ext=doc
 
 fetch(){
         curl http://ftp.debian.org/debian/pool/main/c/ca-certificates/ca-certificates_20200601~deb10u2.tar.xz -o $pkgname-$pkgver.tar.gz
@@ -41,6 +42,12 @@ package() {
 	
 	cat "$pkgdir"/usr/share/ca-certificates/mozilla/*.crt > $pkgdir/etc/ssl/cert.pem
 	chmod +x "$pkgdir"/etc/ca-certificates/update.d/certhash
+}
+
+package_doc() {
+	cd $pkgname-$pkgver
+	install -d $pkgdir/usr/share/man/man8
+	install -Dm644 ./sbin/update-ca-certificates.8 $pkgdir/usr/share/man/man8
 }
 
 license() {
