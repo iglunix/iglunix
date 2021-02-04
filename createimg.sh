@@ -1,7 +1,7 @@
 #!/bin/sh
 
 dd if=../tiny-linux-bootloader/disk of=lazybox.img
-
+exit
 TOTAL=`stat -c %s lazybox.img`
 
 SECTOR=$(($TOTAL / 512))
