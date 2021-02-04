@@ -5,20 +5,21 @@ fetch() {
 	curl -L "https://github.com/owenson/tiny-linux-bootloader/archive/master.tar.gz" -o $pkgname-$pkgver.tar.xz
 	tar -xf $pkgname-$pkgver.tar.xz
 	cd $pkgname-$pkgver
-	patch build.sh /lazybox/patches/tiny-linux-bootloader-build 
+	patch -p1 < ../../build.patch
 }
 
 package() {
 	cd $pkgname-$pkgver
 	mkdir /tiny-linux-bootloader
 	CURR_DIR=$(pwd)
-	cd /lazybox
+
+	cd ./../../../../
 	./geninitrd.sh
-	
+
 	cd $CURR_DIR
 	./build.sh
-	
-	cd /lazybox
+
+	cd ./../../../../
 	./createimg.sh
 }
 
