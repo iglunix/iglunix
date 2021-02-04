@@ -1,5 +1,5 @@
---- vendor/openssl-sys/Cargo.toml
-+++ ../../rust-1.49.0/vendor/openssl-sys/Cargo.toml
+--- a/vendor/openssl-sys/Cargo.toml
++++ b/vendor/openssl-sys/Cargo.toml
 @@ -33,12 +33,11 @@
 
  [build-dependencies.openssl-src]
@@ -15,8 +15,8 @@
  [target."cfg(target_env = \"msvc\")".build-dependencies.vcpkg]
  version = "0.2.8"
 Only in ../../rust-1.49.0/vendor/openssl-sys: Cargo.toml.1
---- vendor/openssl-sys/build/main.rs
-+++ ../../rust-1.49.0/vendor/openssl-sys/build/main.rs
+--- a/vendor/openssl-sys/build/main.rs
++++ b/vendor/openssl-sys/build/main.rs
 @@ -2,7 +2,6 @@
 
  extern crate autocfg;
@@ -52,3 +52,14 @@ Only in ../../rust-1.49.0/vendor/openssl-sys: Cargo.toml.1
  }
 
  fn main() {
+--- a/vendor/openssl-src/src/lib.rs
++++ b/vendor/openssl-src/src/lib.rs
+@@ -58,7 +58,7 @@
+         {
+             Command::new("gmake")
+         } else {
+-            Command::new("make")
++            Command::new("gmake")
+         }
+     }
+ 
