@@ -24,6 +24,7 @@ _clear_vendor_checksums() {
 
 fetch() {
 	curl "https://static.rust-lang.org/dist/rustc-$pkgver-src.tar.gz" -o $pkgname-$pkgver.tar.xz
+#	curl "https://static.rust-lang.org/dist/rustc-nightly-src.tar.gz" -o $pkgname-
 	tar -xf $pkgname-$pkgver.tar.xz
 
 	mv rustc-$pkgver-src $pkgname-$pkgver
@@ -42,6 +43,7 @@ fetch() {
 	_clear_vendor_checksums openssl-src
 	rm -rf src/llvm-project/
 
+	cd ..
 	ln -s /usr/bin/gmake make
 }
 
@@ -78,7 +80,9 @@ build() {
 		--set="target.x86_64-unknown-linux-musl.cc=cc" \
 		--set="target.x86_64-unknown-linux-musl.cxx=c++" \
 		--set="target.x86_64-unknown-linux-musl.ar=ar" \
-		--set="target.x86_64-unknown-linux-musl.linker=cc"
+		--set="target.x86_64-unknown-linux-musl.linker=cc" \
+		--set="build.rustc=/root/lazybox/diskroot/usr/bin/rustc" \
+		--set="build.cargo=/root/lazybox/diskroot/usr/bin/cargo"
 
 	sed 's/#deny-warnings = .*/deny-warnings = false/' -i config.toml
 	sed 's|deny(warnings,|deny(|' -i src/bootstrap/lib.rs

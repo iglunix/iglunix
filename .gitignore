@@ -5,4 +5,5 @@ pkgs/*/out
 isoroot
 isoout
 fdiskscript
+diskroot
 *.img

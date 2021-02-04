@@ -1,5 +1,6 @@
 pkgname=mesa
 pkgver=build-byacc
+deps="musl:wayland:wayland-protocols:llvm:zlib:expat:libffi:libdrm"
 ext=dev
 
 fetch() {
