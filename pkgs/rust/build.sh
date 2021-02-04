@@ -16,6 +16,7 @@
 
 pkgname=rust
 pkgver=1.49.0
+pkgver=nightly
 
 
 _clear_vendor_checksums() {
@@ -80,9 +81,7 @@ build() {
 		--set="target.x86_64-unknown-linux-musl.cc=cc" \
 		--set="target.x86_64-unknown-linux-musl.cxx=c++" \
 		--set="target.x86_64-unknown-linux-musl.ar=ar" \
-		--set="target.x86_64-unknown-linux-musl.linker=cc" \
-		--set="build.rustc=/root/lazybox/diskroot/usr/bin/rustc" \
-		--set="build.cargo=/root/lazybox/diskroot/usr/bin/cargo"
+		--set="target.x86_64-unknown-linux-musl.linker=cc"
 
 	sed 's/#deny-warnings = .*/deny-warnings = false/' -i config.toml
 	sed 's|deny(warnings,|deny(|' -i src/bootstrap/lib.rs
@@ -97,6 +96,6 @@ package() {
 
 license() {
 	cd $pkgname-$pkgver
-	cat LICENSE
+	cat LICENSE-MIT
 #	cat COPYING
 }

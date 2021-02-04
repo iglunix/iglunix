@@ -1,11 +1,11 @@
-pkgver=0.3.1
+pkgver=master
 pkgname=netbsd-curses
 bad=""
 deps="musl"
 ext="doc:dev"
 
 fetch() {
-	curl -L http://github.com/sabotage-linux/netbsd-curses/archive/v$pkgver.tar.gz -o $pkgname-$pkgver.tar.gz
+	curl -L "https://github.com/sabotage-linux/netbsd-curses/archive/master.tar.gz" -o $pkgname-$pkgver.tar.gz
 	tar -xf $pkgname-$pkgver.tar.gz
 }
 
