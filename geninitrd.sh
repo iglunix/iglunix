@@ -4,7 +4,7 @@
 #   mksh bmake gmake libressl cmake curl rsync linux flex
 #   byacc om4 zlib samurai libffi python ca-certificates
 #   zlib expat gettext-tiny git kati netbsd-curses kakoune
-#   lazybox
+#   lazybox llvm musl
 #
 # This should be enough to completely rebuild LazyBox from Source
 #
