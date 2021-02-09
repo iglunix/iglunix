@@ -1,11 +1,11 @@
 #!/bin/sh
-export JOBS="16"
+export JOBS="64"
 
 export RUSTFLAGS="-C target-feature=-crt-static"
 export CC=clang
 export CXX=clang++
 
-stat /etc/lazypkg.conf > /dev/null 2> /dev/null || . /etc/lazypkg.conf
+stat /etc/lazypkg.conf > /dev/null 2> /dev/null && . /etc/lazypkg.conf
 
 export SAMUFLAGS=-j$JOBS
 export MAKEFLAGS=-j$JOBS
