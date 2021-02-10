@@ -38,7 +38,7 @@ build() {
                 -DLLVM_LINK_LLVM_DYLIB=ON \
                 -DLLVM_OPTIMIZED_TABLEGEN=ON \
                 -DLLVM_INCLUDE_BENCHMARKS=OFF \
-                -DLLVM_INCLUDE_DOCS=OFF \
+                -DLLVM_INCLUDE_DOCS=ON \
                 -DLLVM_TOOL_LLVM_ITANIUM_DEMANGLE_FUZZER_BUILD=OFF \
                 -DLLVM_TOOL_LLVM_MC_ASSEMBLE_FUZZER_BUILD=OFF \
                 -DLLVM_TOOL_LLVM_MC_DISASSEMBLE_FUZZER_BUILD=OFF \
@@ -73,7 +73,7 @@ build() {
                 -DCLANG_DEFAULT_CXX_STDLIB='libc++' \
                 -DCLANG_DEFAULT_RTLIB=compiler-rt \
                 -DCLANG_DEFAULT_UNWINDLIB=libunwind \
-                -DCLANG_VENDOR="LazyBox" \
+                -DCLANG_VENDOR="Iglunix" \
                 -DCLANG_ENABLE_STATIC_ANALYZER=OFF \
                 -DCLANG_ENABLE_ARCMT=OFF \
                 -DCLANG_LINK_CLANG_DYLIB=OFF \
