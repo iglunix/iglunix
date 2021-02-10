@@ -1,9 +1,12 @@
 #!/bin/sh
 export JOBS="64"
 
-export RUSTFLAGS="-C target-feature=-crt-static"
+export RUSTFLAGS="-C target-cpu=native"
 export CC=clang
 export CXX=clang++
+
+export CFLAGS="-march=native"
+export CXXFLAGS="-march=native"
 
 stat /etc/iglupkg.conf > /dev/null 2> /dev/null && . /etc/iglupkg.conf
 
