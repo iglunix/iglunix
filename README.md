@@ -1,4 +1,4 @@
-# lazybox
+# Iglunix
 Unix like software distribution with no GNU components
 
 All build scripts are 0BSD Licensed.

@@ -1,4 +1,4 @@
-# Lazybox Linux
+# Iglunix Linux
 
 
 ## Building
@@ -32,24 +32,24 @@ One needs to cross compile GNU Make and place it in `/usr/bin/gmake`
 From here one needs to build the first package, `mksh` which will
 allow one to rebuild `toybox` and `busybox`.
 
-Clone this git repo into `$LBROOT/root/lazybox` and then chroot to `$LBROOT`
+Clone this git repo into `$LBROOT/root/iglunix` and then chroot to `$LBROOT`
 ```sh
-cd /root/lazybox
+cd /root/iglunix
 
 cd pkgs/mksh
-../../lazypkg.sh
+../../iglupkg.sh
 tar -xf out/mksh*.tar.xz -C /
 
 cd ../..
 
 cd pkgs/bmake
-../../lazypkg.sh
+../../iglupkg.sh
 tar -xf out/bmake*.tar.xz -C /
 
 cd ../..
 
 cd pkgs/gmake
-../../lazypkg.sh
+../../iglupkg.sh
 tar-xf out/gmake*.tar.xz -C /
 
 cd ../../

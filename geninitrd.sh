@@ -4,9 +4,9 @@
 #   mksh bmake gmake libressl cmake curl rsync linux flex
 #   byacc om4 zlib samurai libffi python ca-certificates
 #   zlib expat gettext-tiny git kati netbsd-curses kakoune
-#   lazybox llvm musl
+#   iglunix llvm musl
 #
-# This should be enough to completely rebuild LazyBox from Source
+# This should be enough to completely rebuild Iglunix from Source
 #
 
 # Create the root fs dir
@@ -27,11 +27,11 @@ cp_packages (){
 	done
 }
 
-#packages=(musl mksh bmake gmake libressl cmake curl rsync linux flex byacc om4 zlib samurai libffi python ca-certificates zlib expat gettext-tiny git kati netbsd-curses kakoune lazybox)
-packages=(musl linux mksh busybox toybox lazybox)
+#packages=(musl mksh bmake gmake libressl cmake curl rsync linux flex byacc om4 zlib samurai libffi python ca-certificates zlib expat gettext-tiny git kati netbsd-curses kakoune iglunix)
+packages=(musl linux mksh busybox toybox iglunix)
 cp_packages ./isoroot
 
-#packages=(musl mksh busybox toybox llvm bmake gmake libressl cmake curl rsync linux flex byacc om4 zlib samurai libffi python ca-certificates zlib expat gettext-tiny git kati netbsd-curses kakoune lazybox rust less heirloom-doctools file pci-ids)
+#packages=(musl mksh busybox toybox llvm bmake gmake libressl cmake curl rsync linux flex byacc om4 zlib samurai libffi python ca-certificates zlib expat gettext-tiny git kati netbsd-curses kakoune iglunix rust less heirloom-doctools file pci-ids)
 #cp_packages ./diskroot
 
 cat >isoroot/init << EOF
@@ -58,7 +58,7 @@ exec /bin/sh
 
 mkdir /mnt
 
-# while not mount $(blkid -L LAZYBOX_BS_MEDIA) /mnt; do
+# while not mount $(blkid -L IGLUNIX_BS_MEDIA) /mnt; do
 # 	echo "Failed to mount boot disk"
 # 	echo "Retrying"
 # 	sleep 0.5
@@ -131,10 +131,10 @@ cp boot/vmlinuz ../isoout/vmlinuz
 
 exit
 
-dd if=/dev/zero of=lazybox.img count=524288
-fdisk lazybox.img
+dd if=/dev/zero of=iglunix.img count=524288
+fdisk iglunix.img
 
-#losetup -o 32256 /dev/loop0 lazybox.img
+#losetup -o 32256 /dev/loop0 iglunix.img
 mount /dev/loop0 ./isoroot
 rm -r isoroot/*
 cp -r isoout/* isoroot
