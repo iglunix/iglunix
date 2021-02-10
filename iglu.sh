@@ -69,8 +69,8 @@ do
 done
 
 if [ "$d" = "1" ]; then
-	stat /usr/share/lazypkg/$1 > /dev/null 2> /dev/null || find_fail
-	grep deps /usr/share/lazypkg/$1 | tr '=' '\n' | grep -v deps | tr ':' '\n'
+	stat /usr/share/iglupkg/$1 > /dev/null 2> /dev/null || find_fail
+	grep deps /usr/share/iglupkg/$1 | tr '=' '\n' | grep -v deps | tr ':' '\n'
 
 elif [ "$iu" = "1" ]; then
 	# Setup names
@@ -78,31 +78,31 @@ elif [ "$iu" = "1" ]; then
 	bname=$(echo "$bname_we" |  cut -f 1 -d '.')
 
 	# locate installed package
-	stat /usr/share/lazypkg/$bname > /dev/null 2> /dev/null || find_fail
+	stat /usr/share/iglupkg/$bname > /dev/null 2> /dev/null || find_fail
 
 	echo "Upgrading $bname_we"
 	continue_interactive
 
 	# Extract new package and verify
-	mkdir -p /tmp/lazybox/$bname_we || exit 1
-	tar -xf $1 -C /tmp/lazybox/$bname_we || tar_fail
-	stat /tmp/lazybox/$bname_we/usr/share/lazypkg/$bname >/dev/null || stat_fail
+	mkdir -p /tmp/iglunix/$bname_we || exit 1
+	tar -xf $1 -C /tmp/iglunix/$bname_we || tar_fail
+	stat /tmp/iglunix/$bname_we/usr/share/iglupkg/$bname >/dev/null || stat_fail
 
 	# Check deps
-	deps=$(grep deps /tmp/lazybox/$bname_we/usr/share/lazypkg/$bname | tr '=' '\n' | grep -v deps | tr ':' '\n')
+	deps=$(grep deps /tmp/iglunix/$bname_we/usr/share/iglupkg/$bname | tr '=' '\n' | grep -v deps | tr ':' '\n')
 	for dep in $deps; do
-		stat /usr/share/lazypkg/$dep > /dev/null 2> /dev/null || dep_not_found $dep
+		stat /usr/share/iglupkg/$dep > /dev/null 2> /dev/null || dep_not_found $dep
     	done
 
 	# Grab a list of old files and new files to install
-	OFILES=$(sed -n '/\[fs\]/,$p' /usr/share/lazypkg/$bname |
+	OFILES=$(sed -n '/\[fs\]/,$p' /usr/share/iglupkg/$bname |
 		grep -v "\[fs\]" | awk '{print length, $0}' | sort -rn | cut -d " " -f2-)
-	NFILES=$(sed -n '/\[fs\]/,$p' /tmp/lazybox/$bname_we/usr/share/lazypkg/$bname |
+	NFILES=$(sed -n '/\[fs\]/,$p' /tmp/iglunix/$bname_we/usr/share/iglupkg/$bname |
 		grep -v "\[fs\]" | awk '{print length, $0}' | sort -rn | cut -d " " -f2-)
 
 	# Extract tar
 	tar -xf $1 -C /
-	rm -r /tmp/lazybox/$bname_we
+	rm -r /tmp/iglunix/$bname_we
 
 
 	# Remove old files (don't know if this works yet)
@@ -126,27 +126,27 @@ elif [ "$iu" = "1" ]; then
 elif [ "$i" = "1" ]; then
 	bname_we=$(basename "$1")
 	bname=$(echo "$bname_we" |  cut -f 1 -d '.')
-	stat /usr/share/lazypkg/$bname > /dev/null 2> /dev/null && already_exists
+	stat /usr/share/iglupkg/$bname > /dev/null 2> /dev/null && already_exists
 	echo "Installing $bname_we"
 	continue_interactive
-	mkdir -p /tmp/lazybox/$bname_we || exit 1
-	tar -xf $1 -C /tmp/lazybox/$bname_we || tar_fail
-	stat /tmp/lazybox/$bname_we/usr/share/lazypkg/$bname >/dev/null || stat_fail
-	deps=$(grep deps /tmp/lazybox/$bname_we/usr/share/lazypkg/$bname | tr '=' '\n' | grep -v deps | tr ':' '\n')
+	mkdir -p /tmp/iglunix/$bname_we || exit 1
+	tar -xf $1 -C /tmp/iglunix/$bname_we || tar_fail
+	stat /tmp/iglunix/$bname_we/usr/share/iglupkg/$bname >/dev/null || stat_fail
+	deps=$(grep deps /tmp/iglunix/$bname_we/usr/share/iglupkg/$bname | tr '=' '\n' | grep -v deps | tr ':' '\n')
 	for dep in $deps; do
-		stat /usr/share/lazypkg/$dep > /dev/null 2> /dev/null || dep_not_found $dep
+		stat /usr/share/iglupkg/$dep > /dev/null 2> /dev/null || dep_not_found $dep
     	done
 	tar -xf $1 -C /
-	rm -r /tmp/lazybox/$bname_we
+	rm -r /tmp/iglunix/$bname_we
 elif [ "$f" = "1" ]; then
-	stat /usr/share/lazypkg/$1 > /dev/null 2> /dev/null || find_fail
-	sed -n '/\[fs\]/,$p' /usr/share/lazypkg/$1 | grep -v "\[fs\]"
+	stat /usr/share/iglupkg/$1 > /dev/null 2> /dev/null || find_fail
+	sed -n '/\[fs\]/,$p' /usr/share/iglupkg/$1 | grep -v "\[fs\]"
 elif [ "$l" = "1" ]; then
-	stat /usr/share/lazypkg/$1 > /dev/null 2> /dev/null || find_fail
-	sed -n '/\[license\]/,/\[fs\]/{/\[license\]\|\[fs\]/!p}' /usr/share/lazypkg/$1
+	stat /usr/share/iglupkg/$1 > /dev/null 2> /dev/null || find_fail
+	sed -n '/\[license\]/,/\[fs\]/{/\[license\]\|\[fs\]/!p}' /usr/share/iglupkg/$1
 elif [ "$u" = "1" ]; then
-	stat /usr/share/lazypkg/$1 > /dev/null 2> /dev/null || find_fail
-	FILES=$(sed -n '/\[fs\]/,$p' /usr/share/lazypkg/$1 | grep -v "\[fs\]" | awk '{print length, $0}' | sort -rn | cut -d " " -f2-)
+	stat /usr/share/iglupkg/$1 > /dev/null 2> /dev/null || find_fail
+	FILES=$(sed -n '/\[fs\]/,$p' /usr/share/iglupkg/$1 | grep -v "\[fs\]" | awk '{print length, $0}' | sort -rn | cut -d " " -f2-)
 
 	echo "Uninstalling $1"
 	continue_interactive

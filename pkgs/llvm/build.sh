@@ -73,7 +73,7 @@ build() {
                 -DCLANG_DEFAULT_CXX_STDLIB='libc++' \
                 -DCLANG_DEFAULT_RTLIB=compiler-rt \
                 -DCLANG_DEFAULT_UNWINDLIB=libunwind \
-                -DCLANG_VENDOR="LazyBox" \
+                -DCLANG_VENDOR="Iglunix" \
                 -DCLANG_ENABLE_STATIC_ANALYZER=OFF \
                 -DCLANG_ENABLE_ARCMT=OFF \
                 -DCLANG_LINK_CLANG_DYLIB=OFF \

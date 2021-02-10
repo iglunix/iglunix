@@ -8,8 +8,8 @@
 -KERN="./barebones"
 -RD="./big.init"
 +OUTPUT="/tiny-linux-bootloader/disk"
-+KERN="/lazybox/isoout/vmlinuz"
-+RD="/lazybox/isoout/initramfs.img"
++KERN="/iglunix/isoout/vmlinuz"
++RD="/iglunix/isoout/initramfs.img"
  
  #size of kern + ramdisk
  K_SZ=`stat -c %s $KERN`

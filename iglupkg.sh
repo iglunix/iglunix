@@ -35,9 +35,9 @@ mkdir -p $dir/out/$pkgname
 pkgdir=$dir/out/$pkgname package
 
 
-mkdir -p $dir/out/$pkgname/usr/share/lazypkg
+mkdir -p $dir/out/$pkgname/usr/share/iglupkg
 
-cat > $dir/out/$pkgname/usr/share/lazypkg/$pkgname << EOF
+cat > $dir/out/$pkgname/usr/share/iglupkg/$pkgname << EOF
 [pkg]
 name=$pkgname
 ver=$pkgver
@@ -46,15 +46,15 @@ deps=$deps
 [license]
 EOF
 
-chmod 644 $dir/out/$pkgname/usr/share/lazypkg/$pkgname
+chmod 644 $dir/out/$pkgname/usr/share/iglupkg/$pkgname
 cd $srcdir
-license >> $dir/out/$pkgname/usr/share/lazypkg/$pkgname
+license >> $dir/out/$pkgname/usr/share/iglupkg/$pkgname
 
-echo >> $dir/out/$pkgname/usr/share/lazypkg/$pkgname
-echo [fs] >> $dir/out/$pkgname/usr/share/lazypkg/$pkgname
+echo >> $dir/out/$pkgname/usr/share/iglupkg/$pkgname
+echo [fs] >> $dir/out/$pkgname/usr/share/iglupkg/$pkgname
 
 cd $dir/out/$pkgname/
-find * >> $dir/out/$pkgname/usr/share/lazypkg/$pkgname
+find * >> $dir/out/$pkgname/usr/share/iglupkg/$pkgname
 
 cd $dir/out/$pkgname
 tar -cf ../$pkgname.$pkgver.tar.xz *
@@ -69,9 +69,9 @@ echo $ext | tr ':' '\n' | while read e; do
 
     package_\$(echo \$e | tr '-' '_')
 
-    mkdir -p $dir/out/$pkgname-\$e/usr/share/lazypkg
+    mkdir -p $dir/out/$pkgname-\$e/usr/share/iglupkg
 
-    cat > $dir/out/$pkgname-\$e/usr/share/lazypkg/$pkgname-\$e << EOF
+    cat > $dir/out/$pkgname-\$e/usr/share/iglupkg/$pkgname-\$e << EOF
 [pkg]
 name=$pkgname-\$e
 ver=$pkgver
@@ -80,16 +80,16 @@ deps=$pkgname
 [license]
 EOF
 
-    chmod 644 $dir/out/$pkgname-\$e/usr/share/lazypkg/$pkgname-\$e
+    chmod 644 $dir/out/$pkgname-\$e/usr/share/iglupkg/$pkgname-\$e
     cd $srcdir
-    license >> $dir/out/$pkgname-\$e/usr/share/lazypkg/$pkgname-\$e
+    license >> $dir/out/$pkgname-\$e/usr/share/iglupkg/$pkgname-\$e
 
-    echo >> $dir/out/$pkgname-\$e/usr/share/lazypkg/$pkgname-\$e
-    echo [fs] >> $dir/out/$pkgname-\$e/usr/share/lazypkg/$pkgname-\$e
+    echo >> $dir/out/$pkgname-\$e/usr/share/iglupkg/$pkgname-\$e
+    echo [fs] >> $dir/out/$pkgname-\$e/usr/share/iglupkg/$pkgname-\$e
 
     cd $dir/out/$pkgname-\$e
 
-    find * >> $dir/out/$pkgname-\$e/usr/share/lazypkg/$pkgname-\$e
+    find * >> $dir/out/$pkgname-\$e/usr/share/iglupkg/$pkgname-\$e
 
     cd $dir/out/$pkgname-\$e
     tar -cf ../$pkgname-\$e.$pkgver.tar.xz *
