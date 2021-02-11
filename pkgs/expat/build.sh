@@ -5,7 +5,7 @@ ext="dev"
 
 fetch() {
 	pkgver_r=$(echo $pkgver | tr '.' '_')
-	curl -L https://github.com/libexpat/libexpat/releases/download/R_2_2_10/$pkgname-$pkgver.tar.xz -o $pkgname-$pkgver.tar.gz
+	curl -L https://github.com/libexpat/libexpat/releases/download/R_$pkgver_r/$pkgname-$pkgver.tar.xz -o $pkgname-$pkgver.tar.gz
 	tar -xf $pkgname-$pkgver.tar.gz
 }
 
