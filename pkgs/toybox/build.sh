@@ -12,8 +12,8 @@ fetch() {
 
 build() {
 	cd $pkgname-$pkgver
-	gmake defconfig
-	gmake
+	CPUS=1 gmake defconfig
+	CPUS=1 gmake
 }
 
 package() {
