@@ -14,8 +14,8 @@ build() {
 
 package() {
 	cd $pkgname-$pkgver
-	install -d $pkgdir/bin
-	install -Dm755 ./samu $pkgdir/bin/
+	install -d $pkgdir/usr/bin
+	install -Dm755 ./samu $pkgdir/usr/bin/
 }
 
 license() {
