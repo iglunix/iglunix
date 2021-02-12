@@ -1,5 +1,5 @@
 #!/bin/sh
-export JOBS="64"
+export JOBS="$(nproc)"
 
 export RUSTFLAGS="-C target-cpu=native"
 export CC=clang
