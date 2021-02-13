@@ -11,6 +11,8 @@ fetch() {
 
 package() {
 	cd $pkgname-$pkgver
+
+	rm -rf /tiny-linux-bootloader
 	mkdir /tiny-linux-bootloader
 	CURR_DIR=$(pwd)
 
