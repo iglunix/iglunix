@@ -6,6 +6,7 @@ fetch() {
 	tar -xf $pkgname-$pkgver.tar.xz
 	cd $pkgname-$pkgver
 	patch -p1 < ../../build.patch
+        patch -p1 < ../../bsect.patch
 }
 
 package() {
