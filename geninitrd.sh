@@ -10,10 +10,11 @@
 #
 
 # Create the root fs dir
+
+rm -rf isoout isoroot
 mkdir isoroot
 mkdir isoout
 
-mkdir diskroot
 
 cp_packages (){
 	#NOTE: this will assume that there always is a '*-dev'/'*-doc' package,\n this is not true.
@@ -32,7 +33,7 @@ packages=(musl linux mksh busybox toybox iglunix)
 cp_packages ./isoroot
 
 #packages=(musl mksh busybox toybox llvm bmake gmake libressl cmake curl rsync linux flex byacc om4 zlib samurai libffi python ca-certificates zlib expat gettext-tiny git kati netbsd-curses kakoune iglunix rust less heirloom-doctools file pci-ids)
-#cp_packages ./diskroot
+#cp_packages ./isoroot
 
 cat >isoroot/init << EOF
 #!/bin/sh
@@ -114,6 +115,8 @@ chmod +x isoroot/sbin/init
 # chmod +x isoroot/etc/init.d/rcS
 
 # cp /etc/inittab isoroot/etc/
+
+cp /etc/hostname ./isoroot/hostname
 
 cd isoroot
 find . | cpio -ov | gzip -9 >../isoout/initramfs.img
