@@ -11,29 +11,21 @@
 
 # Create the root fs dir
 
+echo "geninitrd.sh"
+
+source build_utils
+
 rm -rf isoout isoroot
 mkdir isoroot
 mkdir isoout
 
 
-cp_packages (){
-	#NOTE: this will assume that there always is a '*-dev'/'*-doc' package,\n this is not true.
-	# That's why the errors are shown to some one who cares.
-	for pkg in ${packages[@]}
-	do
-		echo "Going to copy: $pkg to $1"
-		tar -xf pkgs/${pkg}/out/${pkg}.*.tar.xz -C $1
-		tar -xf pkgs/${pkg}/out/${pkg}-dev.*.tar.xz -C $1 2> /dev/null
-		tar -xf pkgs/${pkg}/out/${pkg}-doc.*.tar.xz -C $1 2> /dev/null
-	done
-}
+# This should be a minimal number of packages, if we want fast boot times.
+# The remaining packages are in createimg.sh
 
 #packages=(musl mksh bmake gmake libressl cmake curl rsync linux flex byacc om4 zlib samurai libffi python ca-certificates zlib expat gettext-tiny git kati netbsd-curses kakoune iglunix)
 packages=(musl linux mksh busybox toybox iglunix)
 cp_packages ./isoroot
-
-#packages=(musl mksh busybox toybox llvm bmake gmake libressl cmake curl rsync linux flex byacc om4 zlib samurai libffi python ca-certificates zlib expat gettext-tiny git kati netbsd-curses kakoune iglunix rust less heirloom-doctools file pci-ids)
-#cp_packages ./isoroot
 
 cat >isoroot/init << EOF
 #!/bin/sh
@@ -41,7 +33,7 @@ exec /sbin/init
 EOF
 
 rm isoroot/sbin/init
-cat >isoroot/sbin/init << EOF
+cat >isoroot/sbin/init << 'EOF'
 #!/bin/sh
 
 export PATH=/usr/sbin:/usr/bin:/sbin:/bin
@@ -55,17 +47,17 @@ mount -t tmpfs tmpfs /tmp
 busybox mdev -s
 busybox mdev -d
 
-exec /bin/sh
-
 mkdir /mnt
 
-# while not mount $(blkid -L IGLUNIX_BS_MEDIA) /mnt; do
-# 	echo "Failed to mount boot disk"
-# 	echo "Retrying"
-# 	sleep 0.5
-# done
+while ! mount $(findfs LABEL=__IGLUNIX_ROOT) /mnt; do
+  echo "Failed to mount boot disk"
+  echo "Retrying"
+  sleep 0.5
+done
 
-exec switch_root /mnt
+
+echo "Starting switch_root"
+exec switch_root /mnt /bin/sh
 
 EOF
 
