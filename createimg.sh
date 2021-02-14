@@ -34,18 +34,22 @@ LOOPBACK=$(losetup -o ${PARTITION_START2} -s -f iglunix.img)
 echo "LOOPBACK: ${LOOPBACK}"
 mke2fs -t ext4 -L "__IGLUNIX_ROOT" ${LOOPBACK}
 
-umount /mnt/__IGLUNIX_ROOT
-rm -rf /mnt/__IGLUNIX_ROOT
+ROOT=/mnt/__IGLUNIX_ROOT
+umount ${ROOT}
+rm -rf ${ROOT}
 
-mkdir -p /mnt/__IGLUNIX_ROOT
-mount ${LOOPBACK} /mnt/__IGLUNIX_ROOT
+mkdir -p ${ROOT}
+mount ${LOOPBACK} ${ROOT}
 
-packages=(musl mksh bmake gmake libressl cmake curl rsync flex byacc om4 zlib samurai libffi python ca-certificates zlib expat gettext-tiny git kati netbsd-curses kakoune iglunix rust toybox busybox less file pci-ids e2fsprogs)
-cp_packages /mnt/__IGLUNIX_ROOT
+packages=(musl mksh bmake gmake libressl cmake curl rsync flex byacc om4 zlib samurai libffi python ca-certificates zlib expat gettext-tiny git kati netbsd-curses kakoune iglunix rust toybox busybox less file pci-ids e2fsprogs linux-pam kbd)
+cp_packages ${ROOT}
+
+echo "Using the host keymap"
+cp /etc/vconsole.conf ${ROOT}/etc/vconsole.conf 
 
 echo "Unmounting & closing loopback"
 
-umount /mnt/__IGLUNIX_ROOT
+umount ${ROOT}
 
 losetup -d ${LOOPBACK}
 exit
