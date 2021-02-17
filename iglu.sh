@@ -1,9 +1,32 @@
 #!/bin/sh
+
+
+
+HELP="
+	-h     This help window
+	--help alias to \`-h\`
+ 
+ 	-i     install
+	-u     uninstall
+	-l     outputs the license
+	-f     lists installed files
+	-d     list dependencies
+	-iu    install update or install upgrade
+	-ui    alias to \`-iu\`
+
+NOT IMPLEMENTED:
+	-o     root"
+
+
+
 usage() {
-	echo $(basename "$0"): ERROR: "$@" 1>&2
-	echo usage: $(basename "$0") '([-i]|[-u]|[-f]|[-l]) [-o root]
-		[pkg.tar]' 1>&2
+	echo usage: $(basename "$0") printf "${HELP}" 1>&2
 	exit 1
+}
+
+error_usage() {
+	echo $(basename "$0"): ERROR: "$@" 1>&2
+	usage
 }
 
 tar_fail() {
@@ -45,6 +68,9 @@ dep_not_found() {
 
 i= u= l= f= o= d= iu=
 
+
+
+# Handle commandline arguments.
 case "$1" in
 	-i) i=1;;
 	-u) u=1;;
@@ -53,7 +79,11 @@ case "$1" in
 	-d) d=1;;
 	-iu) iu=1;;
 	-ui) iu=1;;
-	*) usage "bad argument $i";;
+	
+	-h)      usage;;
+	--help)  usage;;
+
+	*) error_usage "bad argument $i";;
 esac
 shift
 
