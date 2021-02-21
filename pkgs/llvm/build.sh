@@ -1,10 +1,10 @@
-pkgver=11.0.1
+pkgver=11.1.0
 pkgname=llvm
 bad=""
 ext="dev"
 
 fetch() {
-	curl -L "https://github.com/llvm/llvm-project/releases/download/llvmorg-11.0.1/llvm-project-11.0.1.src.tar.xz" -o $pkgname-$pkgver.tar.gz
+	curl -L "https://github.com/llvm/llvm-project/releases/download/llvmorg-11.1.0/llvm-project-11.1.0.src.tar.xz" -o $pkgname-$pkgver.tar.gz
 	tar -xf $pkgname-$pkgver.tar.gz
 	mv llvm-project-$pkgver.src $pkgname-$pkgver
 }
@@ -80,7 +80,7 @@ build() {
                 -DCOMPILER_RT_USE_BUILTINS_LIBRARY=ON \
                 -DCOMPILER_RT_DEFAULT_TARGET_ONLY=OFF \
                 -DCOMPILER_RT_INCLUDE_TESTS=OFF \
-                -DCOMPILER_RT_BUILD_SANITIZERS=OFF \
+                -DCOMPILER_RT_BUILD_SANITIZERS=ON \
                 -DCOMPILER_RT_BUILD_XRAY=OFF \
                 -DCOMPILER_RT_INCLUDE_TESTS=OFF \
                 -DCOMPILER_RT_BUILD_LIBFUZZER=OFF \
