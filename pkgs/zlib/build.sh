@@ -35,5 +35,5 @@ package_dev() {
 
 license() {
 	cd $pkgname-$pkgver
-	cat LICENSE
+	grep -A 24 '^  Copyright' zlib.h
 }
