@@ -1,4 +1,4 @@
-pkgver=20210110
+pkgver=20210206
 pkgname=bmake
 bad="musl"
 ext="doc"
