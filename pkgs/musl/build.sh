@@ -23,7 +23,7 @@ package() {
 	gmake install DESTDIR=$pkgdir
 	rm -r $pkgdir/usr/include
 	install -d $pkgdir/usr/bin
-	ln -sr $pkgdir/lib/ld-musl*.so? $pkgdir/usr/bin/ldd 
+	ln -sr $pkgdir/lib/ld-musl-x86_64.so.1 $pkgdir/usr/bin/ldd
 }
 
 package_dev() {
