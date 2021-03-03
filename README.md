@@ -4,6 +4,8 @@ Unix like software distribution with no GNU components
 All build scripts are 0BSD Licensed.
 
 
+For the build system see https://github.com/iglunix/iglunix-autobuild
+
 ## TODO
  - LLVM (Work out how to split packages)
  - FreeBSD Kernel (bootloader?, syslinux should support it)
