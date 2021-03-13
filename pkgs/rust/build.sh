@@ -15,7 +15,6 @@
 # OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
 pkgname=rust
-pkgver=1.49.0
 pkgver=nightly
 
 
@@ -36,7 +35,10 @@ fetch() {
 	patch -p1 < ../abyss-libunwind.patch
 	patch -p1 < ../abyss-libz.patch
 	patch -p1 < ../vendored-ssl.patch
+#	patch -p1 < ../openbsd-libressl.patch
 	patch -p1 < ../alpine-crt.patch
+	patch -p1 < ../libexec.patch
+	patch -p1 < ../llvm_crt.patch
 
 	sed -i /LD_LIBRARY_PATH/d src/bootstrap/bootstrap.py
 	_clear_vendor_checksums libc
@@ -56,13 +58,13 @@ build() {
 		--host="x86_64-unknown-linux-musl" \
 		--target="x86_64-unknown-linux-musl" \
 		--prefix="/usr" \
-		--release-channel="stable" \
+		--release-channel="nightly" \
 		--enable-local-rust \
 		--local-rust-root="/usr" \
 		--llvm-root="/usr" \
 		--disable-docs \
 		--enable-extended \
-		--tools="cargo" \
+		--tools="cargo,rls,rustfmt" \
 		--enable-vendor \
 		--enable-locked-deps \
 		--enable-llvm-link-shared \
