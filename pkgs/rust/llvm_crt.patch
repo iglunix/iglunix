@@ -1,4 +1,4 @@
---- src/bootstrap/compile.rs.1
+--- src/bootstrap/compile.rs
 +++ src/bootstrap/compile.rs
 @@ -197,12 +197,6 @@
                  DependencyType::TargetSelfContained,
@@ -13,7 +13,7 @@
      } else if target.ends_with("-wasi") {
          let srcdir = builder
              .wasi_root(target)
---- compiler/rustc_target/src/spec/crt_objects.rs.1
+--- compiler/rustc_target/src/spec/crt_objects.rs
 +++ compiler/rustc_target/src/spec/crt_objects.rs
 @@ -64,24 +64,17 @@
  
