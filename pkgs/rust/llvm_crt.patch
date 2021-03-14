@@ -1,17 +1,21 @@
---- a/src/bootstrap/compile.rs
-+++ b/src/bootstrap/compile.rs
-@@ -197,7 +197,7 @@
+--- src/bootstrap/compile.rs.1
++++ src/bootstrap/compile.rs
+@@ -197,12 +197,6 @@
                  DependencyType::TargetSelfContained,
              );
          }
 -        for &obj in &["crtbegin.o", "crtbeginS.o", "crtend.o", "crtendS.o"] {
-+        for &obj in &["clang_rt.crtbegin-x86_64.o", "clang_rt.crtend-x86_64.o"] {
-             let src = compiler_file(builder, builder.cc(target), target, obj);
-             let target = libdir_self_contained.join(obj);
-             builder.copy(&src, &target);
---- a/compiler/rustc_target/src/spec/crt_objects.rs
-+++ a/compiler/rustc_target/src/spec/crt_objects.rs
-@@ -64,12 +64,12 @@
+-            let src = compiler_file(builder, builder.cc(target), target, obj);
+-            let target = libdir_self_contained.join(obj);
+-            builder.copy(&src, &target);
+-            target_deps.push((target, DependencyType::TargetSelfContained));
+-        }
+     } else if target.ends_with("-wasi") {
+         let srcdir = builder
+             .wasi_root(target)
+--- compiler/rustc_target/src/spec/crt_objects.rs.1
++++ compiler/rustc_target/src/spec/crt_objects.rs
+@@ -64,24 +64,17 @@
  
  pub(super) fn pre_musl_fallback() -> CrtObjects {
      new(&[
@@ -21,12 +25,25 @@
 -        (LinkOutputKind::StaticPicExe, &["rcrt1.o", "crti.o", "crtbeginS.o"]),
 -        (LinkOutputKind::DynamicDylib, &["crti.o", "crtbeginS.o"]),
 -        (LinkOutputKind::StaticDylib, &["crti.o", "crtbeginS.o"]),
-+        (LinkOutputKind::DynamicNoPicExe, &["crt1.o", "crti.o", "clang_rt.crtbegin-x86_64.o"]),
-+        (LinkOutputKind::DynamicPicExe, &["Scrt1.o", "crti.o", "clang_rt.crtbegin-x86_64.o"]),
-+        (LinkOutputKind::StaticNoPicExe, &["crt1.o", "crti.o", "clang_rt.crtbegin-x86_64.o"]),
-+        (LinkOutputKind::StaticPicExe, &["rcrt1.o", "crti.o", "clang_rt.crtbegin-x86_64.o"]),
-+        (LinkOutputKind::DynamicDylib, &["crti.o", "clang_rt.crtbegin-x86_64.o"]),
-+        (LinkOutputKind::StaticDylib, &["crti.o", "clang_rt.crtbegin-x86_64.o"]),
++        (LinkOutputKind::DynamicNoPicExe, &["crt1.o", "crti.o"]),
++        (LinkOutputKind::DynamicPicExe, &["Scrt1.o", "crti.o"]),
++        (LinkOutputKind::StaticNoPicExe, &["crt1.o", "crti.o"]),
++        (LinkOutputKind::StaticPicExe, &["rcrt1.o", "crti.o"]),
++        (LinkOutputKind::DynamicDylib, &["crti.o"]),
++        (LinkOutputKind::StaticDylib, &["crti.o"]),
      ])
  }
  
+ pub(super) fn post_musl_fallback() -> CrtObjects {
+-    new(&[
+-        (LinkOutputKind::DynamicNoPicExe, &["crtend.o", "crtn.o"]),
+-        (LinkOutputKind::DynamicPicExe, &["crtendS.o", "crtn.o"]),
+-        (LinkOutputKind::StaticNoPicExe, &["crtend.o", "crtn.o"]),
+-        (LinkOutputKind::StaticPicExe, &["crtendS.o", "crtn.o"]),
+-        (LinkOutputKind::DynamicDylib, &["crtendS.o", "crtn.o"]),
+-        (LinkOutputKind::StaticDylib, &["crtendS.o", "crtn.o"]),
+-    ])
++    all("crtn.o")
+ }
+ 
+ pub(super) fn pre_mingw_fallback() -> CrtObjects {
