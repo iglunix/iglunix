@@ -43,6 +43,11 @@ mount ${LOOPBACK} ${ROOT}
 packages=(musl mksh bmake gmake libressl cmake curl rsync flex byacc om4 zlib samurai libffi python ca-certificates zlib expat gettext-tiny git kati netbsd-curses kakoune iglunix rust toybox busybox less file pci-ids e2fsprogs linux-pam kbd)
 cp_packages ${ROOT}
 
+echo "Copying misc files to ${ROOT}"
+mkdir ${ROOT}/etc/
+cp ./pkgs/tiny-linux-bootloader/fstab ${ROOT}/etc/fstab
+cp /etc/hostname ${ROOT}/hostname
+
 echo "Using the host keymap"
 cp /etc/vconsole.conf ${ROOT}/etc/vconsole.conf 
 
