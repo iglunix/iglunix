@@ -1,0 +1,5 @@
+information about the filesystems.
+# See fstab(5) for details.
+
+# <file system> <dir> <type> <options> <dump> <pass>
+/dev/sda1 / ext4 rw,relatime    0 1
