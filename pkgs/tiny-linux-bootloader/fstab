@@ -1,4 +1,4 @@
-information about the filesystems.
+# information about the filesystems.
 # See fstab(5) for details.
 
 # <file system> <dir> <type> <options> <dump> <pass>
