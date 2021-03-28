@@ -19,11 +19,11 @@ ls -al iglunix.img  -h
 dd if=/dev/zero bs=1 count=0 seek=1G of=iglunix.img
 ls -al iglunix.img  -h
 
-echo "o
-n
+echo "n
 p
 1
 ${PARTITION_START}
+
 w
 " | fdisk iglunix.img
 
@@ -40,8 +40,13 @@ rm -rf ${ROOT}
 mkdir -p ${ROOT}
 mount ${LOOPBACK} ${ROOT}
 
-packages=(musl mksh bmake gmake libressl cmake curl rsync flex byacc om4 zlib samurai libffi python ca-certificates zlib expat gettext-tiny git kati netbsd-curses kakoune iglunix rust toybox busybox less file pci-ids e2fsprogs linux-pam kbd)
+packages=(musl mksh bmake gmake libressl cmake curl rsync flex byacc om4 zlib samurai libffi python ca-certificates zlib expat gettext-tiny git kati netbsd-curses kakoune iglunix rust toybox busybox less file pci-ids e2fsprogs util-linux linux-pam kbd)
 cp_packages ${ROOT}
+
+echo "Copying misc files to ${ROOT}"
+mkdir ${ROOT}/etc/
+cp ./pkgs/tiny-linux-bootloader/fstab ${ROOT}/etc/fstab
+cp /etc/hostname ${ROOT}/hostname
 
 echo "Using the host keymap"
 cp /etc/vconsole.conf ${ROOT}/etc/vconsole.conf 

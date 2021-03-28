@@ -4,7 +4,7 @@ pkgrel=1
 ext="dev"
 
 fetch() {
-	curl "https://github.com/kisslinux/website/blob/master/site/dist/kernel-no-perl.patch" -o kernel-no-perl.patch
+	curl "https://raw.githubusercontent.com/kisslinux/website/master/site/dist/kernel-no-perl.patch" -o kernel-no-perl.patch
 	curl "https://cdn.kernel.org/pub/linux/kernel/v5.x/$pkgname-$pkgver.tar.xz" -o $pkgname-$pkgver.tar.xz
 	tar -xf $pkgname-$pkgver.tar.xz
 	cd $pkgname-$pkgver
