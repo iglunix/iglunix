@@ -24,6 +24,7 @@ n
 p
 1
 ${PARTITION_START}
+
 w
 " | fdisk iglunix.img
 
