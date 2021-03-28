@@ -19,8 +19,7 @@ ls -al iglunix.img  -h
 dd if=/dev/zero bs=1 count=0 seek=1G of=iglunix.img
 ls -al iglunix.img  -h
 
-echo "o
-n
+echo "n
 p
 1
 ${PARTITION_START}
