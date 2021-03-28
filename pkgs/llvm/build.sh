@@ -20,7 +20,7 @@ build() {
                 -DCMAKE_BUILD_TYPE=Release \
                 -DLLVM_VERSION_SUFFIX="" \
                 -DLLVM_APPEND_VC_REV=OFF \
-                -DLLVM_ENABLE_PROJECTS="libunwind;libcxxabi;libcxx;compiler-rt;llvm;lld;clang;lldb" \
+                -DLLVM_ENABLE_PROJECTS="libunwind;libcxxabi;libcxx;compiler-rt;llvm;lld;clang;clang-tools-extra;lldb" \
                 -DLLVM_ENABLE_LLD=ON \
                 -DLLVM_TARGETS_TO_BUILD="all" \
                 -DLLVM_INSTALL_BINUTILS_SYMLINKS=ON \
@@ -80,7 +80,7 @@ build() {
                 -DCOMPILER_RT_USE_BUILTINS_LIBRARY=ON \
                 -DCOMPILER_RT_DEFAULT_TARGET_ONLY=OFF \
                 -DCOMPILER_RT_INCLUDE_TESTS=OFF \
-                -DCOMPILER_RT_BUILD_SANITIZERS=ON \
+                -DCOMPILER_RT_BUILD_SANITIZERS=OFF \
                 -DCOMPILER_RT_BUILD_XRAY=OFF \
                 -DCOMPILER_RT_INCLUDE_TESTS=OFF \
                 -DCOMPILER_RT_BUILD_LIBFUZZER=OFF \
