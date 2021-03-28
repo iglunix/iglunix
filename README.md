@@ -6,6 +6,9 @@ All build scripts are 0BSD Licensed.
 
 For the build system see https://github.com/iglunix/iglunix-autobuild
 
+## Discord
+[link](https://discord.gg/NKB9qD2bMx)
+
 ## TODO
  - LLVM (Work out how to split packages)
  - FreeBSD Kernel (bootloader?, syslinux should support it)
