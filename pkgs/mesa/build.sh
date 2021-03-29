@@ -51,6 +51,7 @@ build() {
 	samu
 
 #	NEEDED IF NOT USING A PATCHED BYACC
+#	OR BYACC >= 20210328
 #	===================================
 #	patch -p1 < ../../byacc-out-mid-build.patch
 #	samu
