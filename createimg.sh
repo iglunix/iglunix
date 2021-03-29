@@ -43,8 +43,9 @@ mount ${LOOPBACK} ${ROOT}
 packages=(musl mksh bmake gmake libressl cmake curl rsync flex byacc om4 zlib samurai libffi python ca-certificates zlib expat gettext-tiny git kati netbsd-curses kakoune iglunix rust toybox busybox less file pci-ids e2fsprogs util-linux linux-pam kbd)
 cp_packages ${ROOT}
 
-echo "Copying misc files to ${ROOT}"
+echo "Copying misc files & creating misc dirs for live-usb"
 mkdir ${ROOT}/etc/
+mkdir ${ROOT}/root/
 cp ./pkgs/tiny-linux-bootloader/fstab ${ROOT}/etc/fstab
 cp /etc/hostname ${ROOT}/hostname
 
