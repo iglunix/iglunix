@@ -1,0 +1,12 @@
+--- a/main.go
++++ b/main.go
+@@ -100,7 +100,8 @@
+ 		parser.FencedCode |
+ 		parser.Autolink |
+ 		parser.Strikethrough |
+-		parser.SpaceHeadings
++		parser.SpaceHeadings |
++		parser.Footnotes
+ 
+ 	var renderer markdown.Renderer
+ 	if latex {
