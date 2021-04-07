@@ -58,7 +58,7 @@ mkdir ${ROOT}/root/
 cp ./pkgs/tiny-linux-bootloader/fstab ${ROOT}/etc/fstab
 cp /etc/hostname ${ROOT}/etc/hostname
 cp /etc/passwd  ${ROOT}/etc/passwd
-touch /etc/shadow
+touch ${ROOT}/etc/shadow
 
 echo "Using the host keymap"
 cp /etc/vconsole.conf ${ROOT}/etc/vconsole.conf 
