@@ -16,7 +16,7 @@ echo "PARTITION_START=${PARTITION_START}"
 
 #create room for a  partition
 ls -al iglunix.img  -h
-dd if=/dev/zero bs=1 count=0 seek=1G of=iglunix.img
+dd if=/dev/zero bs=1 count=0 seek=2G of=iglunix.img
 ls -al iglunix.img  -h
 
 echo "n
@@ -44,7 +44,7 @@ rm -rf ${ROOT}
 mkdir -p ${ROOT}
 mount ${LOOPBACK} ${ROOT}
 
-packages=(musl mksh bmake gmake libressl cmake curl rsync flex byacc om4 zlib samurai libffi python ca-certificates zlib expat gettext-tiny git kati netbsd-curses kakoune iglunix rust toybox busybox less file pci-ids e2fsprogs util-linux linux-pam kbd)
+packages=(musl mksh bmake gmake llvm libressl cmake curl rsync flex byacc om4 zlib samurai libffi python ca-certificates zlib expat gettext-tiny git kati netbsd-curses kakoune iglunix rust toybox busybox less file pci-ids e2fsprogs util-linux linux-pam kbd)
 cp_packages ${ROOT}
 
 echo "Copying misc files & creating misc dirs for live-usb"
