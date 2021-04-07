@@ -48,10 +48,17 @@ packages=(musl mksh bmake gmake libressl cmake curl rsync flex byacc om4 zlib sa
 cp_packages ${ROOT}
 
 echo "Copying misc files & creating misc dirs for live-usb"
+mkdir ${ROOT}/proc/
+mkdir ${ROOT}/dev/
+mkdir ${ROOT}/tmp/
+mkdir ${ROOT}/sys/
+
 mkdir ${ROOT}/etc/
 mkdir ${ROOT}/root/
 cp ./pkgs/tiny-linux-bootloader/fstab ${ROOT}/etc/fstab
-cp /etc/hostname ${ROOT}/hostname
+cp /etc/hostname ${ROOT}/etc/hostname
+cp /etc/passwd  ${ROOT}/etc/passwd
+touch /etc/shadow
 
 echo "Using the host keymap"
 cp /etc/vconsole.conf ${ROOT}/etc/vconsole.conf 
