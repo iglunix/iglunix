@@ -30,7 +30,11 @@ w
 PARTITION_START2=$((${PARTITION_START} * 512))
 echo "PARTITION_START2: ${PARTITION_START2}"
 LOOPBACK=$(losetup -o ${PARTITION_START2} -s -f iglunix.img)
-echo "LOOPBACK: ${LOOPBACK}"
+echo "loopback interface: ${LOOPBACK}"
+
+#ERROR IF NO LOOPBACK
+[ -z "$LOOPBACK" ] && echo "loopback creation failed!" && exit -1
+
 mke2fs -t ext4 -L "__IGLUNIX_ROOT" ${LOOPBACK}
 
 ROOT=/mnt/__IGLUNIX_ROOT
@@ -51,6 +55,8 @@ cp /etc/hostname ${ROOT}/hostname
 
 echo "Using the host keymap"
 cp /etc/vconsole.conf ${ROOT}/etc/vconsole.conf 
+#TODO: this is a systemd file,
+#      use udev/kbd
 
 echo "Unmounting & closing loopback"
 
