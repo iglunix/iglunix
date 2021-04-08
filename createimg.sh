@@ -47,6 +47,9 @@ mount ${LOOPBACK} ${ROOT}
 packages=(musl mksh bmake gmake llvm libressl cmake curl rsync flex byacc om4 zlib samurai libffi python ca-certificates zlib expat gettext-tiny git kati netbsd-curses kakoune iglunix rust toybox busybox less file pci-ids e2fsprogs util-linux linux-pam kbd)
 cp_packages ${ROOT}
 
+echo "Linked ld.lld (from llvm) to ld"
+ln -s /usr/bin/ld.lld /usr/bin/ld
+
 echo "Copying misc files & creating misc dirs for live-usb"
 mkdir ${ROOT}/proc/
 mkdir ${ROOT}/dev/
