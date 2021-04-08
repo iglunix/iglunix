@@ -1,5 +1,6 @@
 pkgname=wayland
 pkgver=1.19.0
+deps="libxml2"
 
 fetch() {
 	curl "https://wayland.freedesktop.org/releases/wayland-1.19.0.tar.xz" -o $pkgname-$pkgver.tar.xz
