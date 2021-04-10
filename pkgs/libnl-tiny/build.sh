@@ -2,18 +2,30 @@ pkgname=libnl-tiny
 pkgver=master
 
 fetch() {
-	curl -L "https://github.com/sabotage-linux/libnl-tiny/archive/refs/heads/master.tar.gz" -o $pkgname-$pkgver.tar.xz
+	curl "https://git.openwrt.org/?p=project/libnl-tiny.git;a=snapshot;h=HEAD;sf=tgz" -o $pkgname-$pkgver.tar.xz
 	tar -xf $pkgname-$pkgver.tar.xz
+	cp ../cmake-no-extra-errs.patch .
+	mv $pkgname-HEAD-* $pkgname-$pkgver
+	mkdir $pkgname-$pkgver/build
+	cd $pkgname-$pkgver
+	patch -p1 < ../cmake-no-extra-errs.patch
 }
 
 build() {
 	cd $pkgname-$pkgver
-	ckati prefix=/usr CC=cc
+	cd build
+	cmake -G Ninja ../ \
+		-DCMAKE_BUILD_TYPE=Release \
+		-DCMAKE_INSTALL_PREFIX=/usr \
+		-DCMAKE_INSTALL_LIBDIR=lib
+	samu
 }
 
 package() {
 	cd $pkgname-$pkgver
-	ckati install prefix=/usr DESTDIR=$pkgdir CC=cc
+	cd build
+	DESTDIR=$pkgdir samu install
+	ln -sr $pkgdir/usr/lib/pkgconfig/libnl-tiny.pc $pkgdir/usr/lib/pkgconfig/libnl-3.0.pc
 }
 
 license() {
