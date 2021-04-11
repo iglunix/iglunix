@@ -8,6 +8,15 @@ fetch() {
 }
 
 build() {
+	#############################################################################
+	# This software is unlikely to be secure in the way that we are building it #
+	#                                                                           #
+	#                           USE AT YOUR OWN RISK!                           #
+	#                                                                           #
+	#############################################################################
+
+
+
 	cd $pkgname-$pkgver
 	cd $pkgname
 	cp ../../config .config
