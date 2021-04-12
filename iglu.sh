@@ -13,6 +13,12 @@ HELP="
 	-d     list dependencies
 	-iu    install update or install upgrade
 	-ui    alias to \`-iu\`
+	-b     build
+        -bi    build and install the current package
+
+These needs iglunix-dev (iglupkg) installed
+	-biu   build and install update the current package
+	-bui   alias to \`-iu\`
 
 NOT IMPLEMENTED:
 	-o     root"
@@ -66,7 +72,14 @@ dep_not_found() {
 	exit 1
 }
 
-i= u= l= f= o= d= iu=
+iglupkg_check() {
+	if ! command -v iglupkg > /dev/null 2>&1; then
+		echo "iglupkg from iglunix-dev needs to be installed"
+		exit 1
+	fi
+}
+
+b= bi= i= u= l= f= o= d= iu=
 
 
 
@@ -79,7 +92,11 @@ case "$1" in
 	-d) d=1;;
 	-iu) iu=1;;
 	-ui) iu=1;;
-	
+	-b)  b=1;;
+	-bi) bi=1;;
+	-biu) biu=1;;
+	-bui) biu=1;;
+
 	-h)      usage;;
 	--help)  usage;;
 
@@ -99,10 +116,12 @@ do
 done
 
 if [ "$d" = "1" ]; then
+#LIST DEPS
 	stat /usr/share/iglupkg/$1 > /dev/null 2> /dev/null || find_fail
 	grep deps /usr/share/iglupkg/$1 | tr '=' '\n' | grep -v deps | tr ':' '\n'
 
 elif [ "$iu" = "1" ]; then
+#INSTALL & UPDATE
 	# Setup names
 	bname_we=$(basename "$1")
 	bname=$(echo "$bname_we" |  cut -f 1 -d '.')
@@ -154,6 +173,7 @@ elif [ "$iu" = "1" ]; then
 	echo $NFILES
 
 elif [ "$i" = "1" ]; then
+#INSTALL
 	bname_we=$(basename "$1")
 	bname=$(echo "$bname_we" |  cut -f 1 -d '.')
 	stat /usr/share/iglupkg/$bname > /dev/null 2> /dev/null && already_exists
@@ -169,12 +189,17 @@ elif [ "$i" = "1" ]; then
 	tar -xf $1 -C /
 	rm -r /tmp/iglunix/$bname_we
 elif [ "$f" = "1" ]; then
+#LIST INSTALLED FILES
 	stat /usr/share/iglupkg/$1 > /dev/null 2> /dev/null || find_fail
 	sed -n '/\[fs\]/,$p' /usr/share/iglupkg/$1 | grep -v "\[fs\]"
+
 elif [ "$l" = "1" ]; then
+#LICENSE
 	stat /usr/share/iglupkg/$1 > /dev/null 2> /dev/null || find_fail
 	sed -n '/\[license\]/,/\[fs\]/{/\[license\]\|\[fs\]/!p}' /usr/share/iglupkg/$1
+
 elif [ "$u" = "1" ]; then
+#UNINSTALL
 	stat /usr/share/iglupkg/$1 > /dev/null 2> /dev/null || find_fail
 	FILES=$(sed -n '/\[fs\]/,$p' /usr/share/iglupkg/$1 | grep -v "\[fs\]" | awk '{print length, $0}' | sort -rn | cut -d " " -f2-)
 
@@ -189,4 +214,26 @@ elif [ "$u" = "1" ]; then
         		*) echo "can't remove $file";;
     		esac
     	done
+elif [ "$b" = "1" ]; then
+#BUILD
+	iglupkg_check
+	iglupkg || exit 1
+
+elif [ "$bi" = "1" ]; then
+#BUILD INSTALL
+	iglupkg_check
+	iglupkg || exit 1
+	cd out/
+	for pkg in *.tar.xz; do
+		iglu -i "$pkg"
+	done
+
+elif [ "$biu" = "1" ]; then
+#BUILD INSTALL UPDATE
+	iglupkg_check
+	iglupkg || exit 1
+	cd out/
+	for pkg in *.tar.xz; do
+		iglu -iu "$pkg"
+	done
 fi
