@@ -13,10 +13,11 @@ HELP="
 	-d     list dependencies
 	-iu    install update or install upgrade
 	-ui    alias to \`-iu\`
-	-b     build
-        -bi    build and install the current package
+
 
 These needs iglunix-dev (iglupkg) installed
+	-b     build
+        -bi    build and install the current package
 	-biu   build and install update the current package
 	-bui   alias to \`-iu\`
 
