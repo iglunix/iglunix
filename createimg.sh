@@ -16,7 +16,7 @@ echo "PARTITION_START=${PARTITION_START}"
 
 #create room for a  partition
 ls -al iglunix.img  -h
-dd if=/dev/zero bs=1 count=0 seek=2G of=iglunix.img
+dd if=/dev/zero bs=1 count=0 seek=20G of=iglunix.img
 ls -al iglunix.img  -h
 
 echo "n
@@ -67,6 +67,11 @@ echo "Using the host keymap"
 cp /etc/vconsole.conf ${ROOT}/etc/vconsole.conf 
 #TODO: this is a systemd file,
 #      use udev/kbd
+
+echo "Copying init.d files& inittab"
+mkdir ${ROOT}/etc/init.d/
+cp -r /iglunix/init/init.d ${ROOT}/etc/
+cp /iglunix/init/inittab ${ROOT}/etc/
 
 echo "Unmounting & closing loopback"
 

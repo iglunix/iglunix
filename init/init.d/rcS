@@ -1,0 +1,29 @@
+#!/bin/sh
+
+mount -t proc proc /proc
+mount -t sysfs sysfs /sys
+mount -t tmpfs tmpfs /tmp
+
+echo 0 > /proc/sys/kernel/printk
+
+ln -s /proc/self/fs/0 /dev/stdin
+ln -s /proc/self/fs/1 /dev/stdout
+ln -s /proc/self/fs/2 /dev/stderr
+
+mkdir -p /dev/pts
+mount -t devpts devpts /dev/pts
+
+hostname -F /etc/hostname
+
+mdev -s
+mdev -d
+
+mount -a
+
+/etc/init.d/net
+/etc/init.d/sshd
+
+#See https://github.com/landley/toybox/issues/111
+echo 0 9999999 > /proc/sys/net/ipv4/ping_group_range
+
+/bin/sh

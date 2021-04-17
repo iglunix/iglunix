@@ -57,7 +57,8 @@ done
 
 
 echo "Starting switch_root"
-exec switch_root /mnt /bin/sh
+#exec switch_root /mnt /etc/init.d/rcS
+exec switch_root /mnt /sbin/init
 
 EOF
 
