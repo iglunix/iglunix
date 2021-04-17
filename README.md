@@ -1,13 +1,13 @@
-# Iglunix
+# [Iglunix](https://iglunix.xyz/)
 Unix like software distribution with no GNU components
 
 All build scripts are 0BSD Licensed.
 
 
-For the build system see https://github.com/iglunix/iglunix-autobuild
+To create an ISO from a non-iglunix OS please see https://github.com/iglunix/iglunix-autobuild
 
 ## Discord
-[link](https://discord.gg/NKB9qD2bMx)
+Join us at [link](https://discord.gg/NKB9qD2bMx)
 
 ## TODO
  - WebKit - Need to port WebKit somehow since no browers will build for this
