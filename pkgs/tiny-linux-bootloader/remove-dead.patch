@@ -1,0 +1,11 @@
+--- a/bsect.asm
++++ b/bsect.asm
+@@ -135,7 +135,7 @@
+ .loop:
+     cmp edx, 127*512
+     jl loader.part_2
+-    jz loader.finish
++;    jz loader.finish
+ 
+     mov ax, 127 ;count
+     xor bx, bx ; offset
