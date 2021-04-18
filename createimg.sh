@@ -56,6 +56,7 @@ mkdir ${ROOT}/dev/
 mkdir ${ROOT}/tmp/
 mkdir ${ROOT}/sys/
 
+mkdir ${ROOT}/mnt/
 mkdir ${ROOT}/etc/
 mkdir ${ROOT}/root/
 cp ./pkgs/tiny-linux-bootloader/fstab ${ROOT}/etc/fstab
