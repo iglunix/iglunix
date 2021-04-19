@@ -15,7 +15,7 @@
 # OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
 pkgname=rust
-pkgver=nightly
+pkgver=beta
 
 
 _clear_vendor_checksums() {
@@ -24,10 +24,22 @@ _clear_vendor_checksums() {
 
 fetch() {
 	curl "https://static.rust-lang.org/dist/rustc-$pkgver-src.tar.gz" -o $pkgname-$pkgver.tar.xz
+#	curl -L "https://github.com/sfackler/rust-openssl/archive/master.tar.gz" -o rust-openssl.tar.gz
 #	curl "https://static.rust-lang.org/dist/rustc-nightly-src.tar.gz" -o $pkgname-
 	tar -xf $pkgname-$pkgver.tar.xz
 
 	mv rustc-$pkgver-src $pkgname-$pkgver
+
+#	tar -xf rust-openssl.tar.gz
+
+#	cp rust-$pkgver/vendor/openssl/.cargo-checksum.json rust-openssl-master/openssl/
+#	cp rust-$pkgver/vendor/openssl-sys/.cargo-checksum.json rust-openssl-master/openssl-sys/
+
+#	rm -r rust-$pkgver/vendor/openssl-sys
+#	rm -r rust-$pkgver/vendor/openssl
+##	cp -r rust-openssl-master/openssl rust-$pkgver/vendor/openssl
+#	cp -r rust-openssl-master/openssl-sys rust-$pkgver/vendor/openssl-sys
+	
 	cp ../*.patch .
 	cd $pkgname-$pkgver
 	patch -p1 < ../alpine-move-py.patch
@@ -44,6 +56,7 @@ fetch() {
 	_clear_vendor_checksums libc
 	_clear_vendor_checksums openssl-sys
 	_clear_vendor_checksums openssl-src
+	_clear_vendor_checksums openssl
 	rm -rf src/llvm-project/
 
 	cd ..
@@ -52,22 +65,21 @@ fetch() {
 
 build() {
 	cd $pkgname-$pkgver
-
+#		--llvm-root="/usr" \
+#		--enable-llvm-link-shared \
 	OPENSSL_LIB_DIR=/usr/lib/ ./configure \
 		--build="x86_64-unknown-linux-musl" \
 		--host="x86_64-unknown-linux-musl" \
 		--target="x86_64-unknown-linux-musl" \
 		--prefix="/usr" \
-		--release-channel="nightly" \
+		--release-channel="beta" \
 		--enable-local-rust \
 		--local-rust-root="/usr" \
-		--llvm-root="/usr" \
 		--disable-docs \
 		--enable-extended \
-		--tools="cargo,rls,rustfmt" \
+		--tools="cargo,rls,rustfmt,src" \
 		--enable-vendor \
 		--enable-locked-deps \
-		--enable-llvm-link-shared \
 		--enable-option-checking \
 		--python="python" \
 		--set="rust.musl-root=/usr" \
