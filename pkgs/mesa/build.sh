@@ -1,6 +1,6 @@
 pkgname=mesa
 pkgver=build-byacc
-deps="musl:wayland:wayland-protocols:llvm:zlib:expat:libffi:libdrm"
+deps="musl:wayland:wayland-protocols:llvm:zlib:expat:libffi:libdrm:python-mako"
 ext=dev
 
 fetch() {

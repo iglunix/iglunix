@@ -1,5 +1,6 @@
 pkgver=2.4.103
 pkgname=libdrm
+dep="libpciaccess"
 bad=""
 ext="dev"
 

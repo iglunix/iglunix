@@ -1,11 +1,11 @@
-pkgver=3.3.1
+pkgver=3.3.2
 pkgname=libressl
 pkgrel=1
 bad=""
 ext="doc:dev"
 
 fetch() {
-	curl -L "https://ftp.openbsd.org/pub/OpenBSD/LibreSSL/libressl-3.3.1.tar.gz" -o $pkgname-$pkgver.tar.gz
+	curl -L "https://ftp.openbsd.org/pub/OpenBSD/LibreSSL/libressl-$pkgver.tar.gz" -o $pkgname-$pkgver.tar.gz
 	tar -xf $pkgname-$pkgver.tar.gz
 }
 

@@ -1,9 +1,8 @@
-pkgname=swc
+pkgname=smu
 pkgver=master
-deps="wld:pixman"
 
 fetch() {
-	curl -L "https://github.com/michaelforney/swc/archive/refs/heads/master.tar.gz" -o $pkgname-$pkgver.tar.xz
+	curl -L "https://github.com/Gottox/smu/archive/refs/heads/master.tar.gz" -o $pkgname-$pkgver.tar.xz
 	tar -xf $pkgname-$pkgver.tar.xz
 	cp ../config.mk .
 }
@@ -11,16 +10,15 @@ fetch() {
 build() {
 	cd $pkgname-$pkgver
 	cp ../config.mk .
-	
-	gmake PREFIX=/usr CC=cc
 }
 
 package() {
 	cd $pkgname-$pkgver
-	gmake install DESTDIR=$pkgdir PREFIX=/usr
+	make install DESTDIR=$pkgdir
 }
 
 license() {
 	cd $pkgname-$pkgver
 	cat LICENSE
+#	cat COPYING
 }

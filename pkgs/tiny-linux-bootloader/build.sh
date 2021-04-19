@@ -7,6 +7,7 @@ fetch() {
 	cd $pkgname-$pkgver
 	patch -p1 < ../../build.patch
         patch -p1 < ../../bsect.patch
+        patch -p1 < ../../remove-dead.patch
 }
 
 package() {

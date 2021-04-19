@@ -1,12 +1,15 @@
-pkgver=11.1.0
+pkgver=12.0.0
 pkgname=llvm
 bad=""
 ext="dev"
 
 fetch() {
-	curl -L "https://github.com/llvm/llvm-project/releases/download/llvmorg-11.1.0/llvm-project-11.1.0.src.tar.xz" -o $pkgname-$pkgver.tar.gz
+	curl -L "https://github.com/llvm/llvm-project/releases/download/llvmorg-$pkgver/llvm-project-$pkgver.src.tar.xz" -o $pkgname-$pkgver.tar.gz
 	tar -xf $pkgname-$pkgver.tar.gz
 	mv llvm-project-$pkgver.src $pkgname-$pkgver
+
+	cp -n ../default.llvm.conf /etc/iglupkg/llvm.conf
+	[ ../default/llvm.conf -nt /etc/iglupkg/llvm.conf ] && echo "WARNING: the default config file is newer than your config file." done
 }
 
 build() {
@@ -82,6 +85,7 @@ build() {
                 -DCOMPILER_RT_INCLUDE_TESTS=OFF \
                 -DCOMPILER_RT_BUILD_SANITIZERS=OFF \
                 -DCOMPILER_RT_BUILD_XRAY=OFF \
+                -DCOMPILER_RT_BUILD_MEMPROF=OFF \
                 -DCOMPILER_RT_INCLUDE_TESTS=OFF \
                 -DCOMPILER_RT_BUILD_LIBFUZZER=OFF \
                 -DENABLE_EXPERIMENTAL_NEW_PASS_MANAGER=TRUE \
