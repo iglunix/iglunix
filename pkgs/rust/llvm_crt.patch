@@ -1,5 +1,5 @@
---- src/bootstrap/compile.rs
-+++ src/bootstrap/compile.rs
+--- a/src/bootstrap/compile.rs
++++ b/src/bootstrap/compile.rs
 @@ -197,12 +197,6 @@
                  DependencyType::TargetSelfContained,
              );
@@ -13,8 +13,8 @@
      } else if target.ends_with("-wasi") {
          let srcdir = builder
              .wasi_root(target)
---- compiler/rustc_target/src/spec/crt_objects.rs
-+++ compiler/rustc_target/src/spec/crt_objects.rs
+--- a/compiler/rustc_target/src/spec/crt_objects.rs
++++ b/compiler/rustc_target/src/spec/crt_objects.rs
 @@ -64,24 +64,17 @@
  
  pub(super) fn pre_musl_fallback() -> CrtObjects {
