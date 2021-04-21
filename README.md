@@ -15,6 +15,6 @@ Join us at [link](https://discord.gg/NKB9qD2bMx)
  - LLVM (Work out how to split packages)
  - FreeBSD Kernel (bootloader?, syslinux should support it)
  - FreeBSD libc? Standalone build how? (rly need LLVM libc)
- - Init system ( paralel shit and dependencies )
+ - Init system ( paralel stuff and dependencies )
  - QEMU for multiarch
  - Lots of work on package manager still required
