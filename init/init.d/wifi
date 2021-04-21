@@ -1,0 +1,3 @@
+#!/bin/sh
+
+wpa_supplicant -B -i wlan0 -D nl80211 -c /etc/wpa_supplicant.conf
