@@ -24,9 +24,11 @@ _clear_vendor_checksums() {
 
 fetch() {
 	curl "https://static.rust-lang.org/dist/rustc-$pkgver-src.tar.gz" -o $pkgname-$pkgver.tar.xz
+	curl -L "https://github.com/sfackler/rust-openssl/archive/refs/tags/openssl-v0.10.34.tar.gz" -o rust-openssl.tar.gz
 #	curl -L "https://github.com/sfackler/rust-openssl/archive/master.tar.gz" -o rust-openssl.tar.gz
 #	curl "https://static.rust-lang.org/dist/rustc-nightly-src.tar.gz" -o $pkgname-
 	tar -xf $pkgname-$pkgver.tar.xz
+	tar -xf rust-openssl.tar.gz
 
 	mv rustc-$pkgver-src $pkgname-$pkgver
 
@@ -46,17 +48,25 @@ fetch() {
 	patch -p1 < ../abyss-install-template-shebang.patch
 	patch -p1 < ../abyss-libunwind.patch
 	patch -p1 < ../abyss-libz.patch
-	patch -p1 < ../vendored-ssl.patch
+#	patch -p1 < ../vendored-ssl.patch
 #	patch -p1 < ../openbsd-libressl.patch
 	patch -p1 < ../alpine-crt.patch
 	patch -p1 < ../libexec.patch
 	patch -p1 < ../llvm_crt.patch
+	patch -p1 < ../unfreeze.patch
 
 	sed -i /LD_LIBRARY_PATH/d src/bootstrap/bootstrap.py
 	_clear_vendor_checksums libc
 	_clear_vendor_checksums openssl-sys
 	_clear_vendor_checksums openssl-src
 	_clear_vendor_checksums openssl
+
+	cp -r ../rust-openssl-openssl-v0.10.34/openssl/ vendor/
+	cp -r ../rust-openssl-openssl-v0.10.34/openssl-sys/ vendor/
+	sed vendor/openssl/Cargo.toml -i -e 's/0.10.34/0.10.30/g'
+	sed vendor/openssl/Cargo.toml -i -e 's/0.9.62/0.9.58/g'
+	sed vendor/openssl-sys/Cargo.toml -i -e 's/0.9.62/0.9.58/g'
+	
 	rm -rf src/llvm-project/
 
 	cd ..
@@ -65,8 +75,7 @@ fetch() {
 
 build() {
 	cd $pkgname-$pkgver
-#		--llvm-root="/usr" \
-#		--enable-llvm-link-shared \
+
 	OPENSSL_LIB_DIR=/usr/lib/ ./configure \
 		--build="x86_64-unknown-linux-musl" \
 		--host="x86_64-unknown-linux-musl" \
@@ -79,11 +88,13 @@ build() {
 		--enable-extended \
 		--tools="cargo,rls,rustfmt,src" \
 		--enable-vendor \
-		--enable-locked-deps \
+		--disable-locked-deps \
 		--enable-option-checking \
 		--python="python" \
-		--set="rust.musl-root=/usr" \
+		--llvm-root="/usr" \
+		--enable-llvm-link-shared \
 		--set="target.x86_64-unknown-linux-musl.llvm-config=/usr/bin/llvm-config" \
+		--set="rust.musl-root=/usr" \
 		--set="target.x86_64-unknown-linux-musl.musl-root=/usr" \
 		--set="target.x86_64-unknown-linux-musl.crt-static=false" \
 		--set="target.x86_64-unknown-linux-musl.cc=cc" \
