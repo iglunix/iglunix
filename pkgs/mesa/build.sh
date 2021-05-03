@@ -1,10 +1,10 @@
 pkgname=mesa
-pkgver=build-byacc
+pkgver=21.1.0-rc3
 deps="musl:wayland:wayland-protocols:llvm:zlib:expat:libffi:libdrm:python-mako"
 ext=dev
 
 fetch() {
-	curl "https://gitlab.freedesktop.org/Ella-0/mesa/-/archive/build/byacc/mesa-build-byacc.tar.gz" -o $pkgname-$pkgver.tar.gz
+	curl "https://archive.mesa3d.org/$pkgname-$pkgver.tar.xz" -o $pkgname-$pkgver.tar.gz
 	tar -xf $pkgname-$pkgver.tar.gz
 	mkdir $pkgname-$pkgver/build
 	cp ../byacc-out-mid-build.patch .
@@ -51,7 +51,7 @@ build() {
 	samu
 
 #	NEEDED IF NOT USING A PATCHED BYACC
-#	OR BYACC < 20210328
+#	OR BYACC >= 20210328
 #	===================================
 #	patch -p1 < ../../byacc-out-mid-build.patch
 #	samu
