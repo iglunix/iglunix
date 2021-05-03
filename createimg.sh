@@ -44,7 +44,7 @@ rm -rf ${ROOT}
 mkdir -p ${ROOT}
 mount ${LOOPBACK} ${ROOT}
 
-packages=(musl mksh bmake gmake llvm libressl cmake curl rsync flex byacc om4 zlib samurai libffi python ca-certificates zlib expat gettext-tiny git kati netbsd-curses kakoune iglunix rust toybox busybox less file pci-ids e2fsprogs util-linux linux-pam kbd)
+packages=(musl mksh bmake gmake llvm libressl cmake curl rsync flex byacc om4 zlib samurai libffi python ca-certificates zlib expat gettext-tiny git kati netbsd-curses kakoune iglunix rust toybox busybox less file pci-ids e2fsprogs linux util-linux linux-pam kbd)
 cp_packages ${ROOT}
 
 echo "Linked ld.lld (from llvm) to ld"
