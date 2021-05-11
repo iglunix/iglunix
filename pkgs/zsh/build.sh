@@ -1,9 +1,11 @@
 pkgname=zsh
 pkgver=5.8
+ext=doc
 
 fetch() {
 	curl "https://www.zsh.org/pub/zsh-$pkgver.tar.xz" -o $pkgname-$pkgver.tar.xz
 	tar -xf $pkgname-$pkgver.tar.xz
+	cp ../zprofile.zsh .
 }
 
 build() {
@@ -13,12 +15,20 @@ build() {
 		--build=x86_64-unknown-linux-musl \
 		--host=x86_64-unknown-linux-musl
 
-	gmake
+	make
 }
 
 package() {
 	cd $pkgname-$pkgver
-	gmake install DESTDIR=$pkgdir
+	make install DESTDIR=$pkgdir
+	install -d /etc
+	install -Dm644 ../zprofile.zsh $pkgdir/etc/zprofile
+	rm -rf $pkgdir/usr/share/man
+}
+
+package_doc() {
+	cd $pkgname-$pkgver
+	make install.man DESTDIR=$pkgdir
 }
 
 license() {
