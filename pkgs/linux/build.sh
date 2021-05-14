@@ -1,4 +1,4 @@
-pkgver=5.11.15
+pkgver=5.12.3
 pkgname=linux
 pkgrel=1
 ext="dev"
@@ -8,17 +8,21 @@ fetch() {
 	curl "https://cdn.kernel.org/pub/linux/kernel/v5.x/$pkgname-$pkgver.tar.xz" -o $pkgname-$pkgver.tar.xz
 	tar -xf $pkgname-$pkgver.tar.xz
 	cd $pkgname-$pkgver
+
+	# use Alpine's kernel config so we don't have to maintain one
+	curl "https://git.alpinelinux.org/aports/plain/testing/linux-edge/config-edge.x86_64" -o .config
 	patch -p1 < ../kernel-no-perl.patch
 	patch -p1 < ../../kernel-byacc.patch
-	cp ../../x86_64.config .config
 }
 
 build() {
 	cd $pkgname-$pkgver
-	#gmake CC=cc CXX=c++ HOSTCC=cc HOSTCXX=c++ YACC=yacc LLVM_IAS=1 defconfig
-	gmake CC=cc CXX=c++ HOSTCC=cc HOSTCXX=c++ LEX=lex YACC=yacc LLVM_IAS=1 oldconfig
-	gmake CC=cc CXX=c++ HOSTCC=cc HOSTCXX=c++ LEX=lex YACC=yacc LLVM_IAS=1 menuconfig
-	cp .config ../../x86_64.config.new
+	# gmake CC=cc CXX=c++ HOSTCC=cc HOSTCXX=c++ YACC=yacc LLVM_IAS=1 defconfig
+	gmake CC=cc CXX=c++ HOSTCC=cc HOSTCXX=c++ LEX=lex YACC=yacc LLVM_IAS=1 olddefconfig
+	# gmake CC=cc CXX=c++ HOSTCC=cc HOSTCXX=c++ LEX=lex YACC=yacc LLVM_IAS=1 menuconfig
+	# cp .config ../../x86_64.config.new
+	sed -i 's/CONFIG_UNWINDER_ORC=y/# CONFIG_UNWINDER_ORC is not set/g' .config
+	sed -i 's/# CONFIG_UNWINDER_FRAME_POINTER is not set/CONFIG_UNWINDER_FRAME_POINTER=y/g' .config
 	gmake CC=cc CXX=c++ HOSTCC=cc HOSTCXX=c++ LEX=lex YACC=yacc LLVM_IAS=1
 }
 
