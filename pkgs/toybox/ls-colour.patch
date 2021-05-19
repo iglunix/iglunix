@@ -1,0 +1,15 @@
+--- a/toys/posix/ls.c
++++ b/toys/posix/ls.c
+@@ -513,9 +513,11 @@
+     if (!FLAG(show_control_chars)) toys.optflags |= FLAG_b;
+     if (FLAG(l)||FLAG(o)||FLAG(n)||FLAG(g)) toys.optflags |= FLAG_1;
+     else if (!(FLAG(1)||FLAG(x)||FLAG(m))) toys.optflags |= FLAG_C;
++    if (TT.color && !strcmp(TT.color, "never")) toys.optflags ^= FLAG_color;
++    else toys.optflags |= FLAG_color;
+   } else {
+     if (!FLAG(m)) toys.optflags |= FLAG_1;
+-    if (TT.color) toys.optflags ^= FLAG_color;
++    if (TT.color && strcmp(TT.color, "always")) toys.optflags ^= FLAG_color;
+   }
+ 
+   TT.screen_width = 80;

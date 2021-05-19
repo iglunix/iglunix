@@ -1,4 +1,4 @@
-pkgver=0.8.4
+pkgver=0.8.5
 pkgname=toybox
 pkgrel=1
 deps="musl:pci-ids"
@@ -7,6 +7,7 @@ fetch() {
 	curl "http://www.landley.net/toybox/downloads/$pkgname-$pkgver.tar.gz" -o $pkgname-$pkgver.tar.gz
 	tar -xf $pkgname-$pkgver.tar.gz
 	cd $pkgname-$pkgver
+	patch -p1 < ../../ls-colour.patch
 	patch -p1 < ../../mksh-make.patch
 }
 
