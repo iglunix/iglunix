@@ -1,12 +1,12 @@
 #!/bin/sh
 export JOBS="$(nproc)"
 
-export RUSTFLAGS="-C target-cpu=native"
+#export RUSTFLAGS="-C target-cpu=native"
 export CC=clang
 export CXX=clang++
 
-export CFLAGS="-march=native"
-export CXXFLAGS="-march=native"
+#export CFLAGS="-march=native"
+#export CXXFLAGS="-march=native"
 
 stat /etc/iglupkg.conf > /dev/null 2> /dev/null && . /etc/iglupkg.conf
 
@@ -26,6 +26,9 @@ function do_fetch() {
 
 srcdir=$(pwd)/src
 stat src > /dev/null 2>/dev/null || do_fetch
+stat src > /dev/null 2>/dev/null && echo '=========================================='
+stat src > /dev/null 2>/dev/null && echo 'Warning: `./src/` found: not running fetch'
+stat src > /dev/null 2>/dev/null && echo '=========================================='
 
 cd $srcdir
 
@@ -60,7 +63,7 @@ cd $dir/out/$pkgname/
 find * >> $dir/out/$pkgname/usr/share/iglupkg/$pkgname
 
 cd $dir/out/$pkgname
-tar -cf ../$pkgname.$pkgver.tar.xz *
+tar -I zstd -cf ../$pkgname.$pkgver.tar.zst *
 if [ $ext ]; then
 
 echo $ext | tr ':' '\n' | while read e; do
@@ -95,7 +98,7 @@ EOF
     find * >> $dir/out/$pkgname-\$e/usr/share/iglupkg/$pkgname-\$e
 
     cd $dir/out/$pkgname-\$e
-    tar -cf ../$pkgname-\$e.$pkgver.tar.xz *
+    tar -I zstd -cf ../$pkgname-\$e.$pkgver.tar.zst *
 
 done
 

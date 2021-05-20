@@ -78,6 +78,7 @@ package() {
 	rm $pkgdir/bin/true
 	rm $pkgdir/bin/umount
 	rm $pkgdir/bin/usleep
+	rm $pkgdir/bin/tar
 
 	rm $pkgdir/sbin/blockdev
 	rm $pkgdir/sbin/freeramdisk

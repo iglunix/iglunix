@@ -29,7 +29,8 @@ package() {
 	gmake PREFIX=$pkgdir install
 
 	rm $pkgdir/usr/bin/clear
-	rm $pkgdir/usr/bin/tar
+	rm $pkgdir/usr/bin/reset
+#	rm $pkgdir/usr/bin/tar
 }
 
 license() {
