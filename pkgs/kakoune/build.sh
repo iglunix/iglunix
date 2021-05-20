@@ -12,13 +12,11 @@ fetch() {
 
 build() {
 	cd $pkgname-$pkgver
-	cd src
 	ckati
 }
 
 package() {
 	cd $pkgname-$pkgver
-	cd src
 	ckati install DESTDIR=$pkgdir PREFIX=/usr
 	rm -r $pkgdir/usr/share/doc
 	rm -r $pkgdir/usr/share/man
@@ -27,7 +25,6 @@ package() {
 
 package_doc() {
 	cd $pkgname-$pkgver
-	cd src
 	ckati install DESTDIR=$pkgdir PREFIX=/usr
 	rm -r $pkgdir/usr/share/kak
 	rm -r $pkgdir/usr/libexec
