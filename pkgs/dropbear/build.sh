@@ -4,7 +4,7 @@ bad=gmake
 ext=doc
 
 fetch() {
-	curl "https://matt.ucc.asn.au/dropbear/releases/dropbear-2020.81.tar.bz2" -o $pkgname-$pkgver.tar.bz2
+	curl "https://matt.ucc.asn.au/dropbear/releases/dropbear-$pkgver.tar.bz2" -o $pkgname-$pkgver.tar.bz2
 	tar -xf $pkgname-$pkgver.tar.bz2
 }
 
