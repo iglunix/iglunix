@@ -1,11 +1,11 @@
-pkgver=1.33.0
+pkgver=1.33.1
 pkgname=busybox
 bad=gmake
 deps="musl"
 pkgrel=1
 
 fetch() {
-	curl "https://busybox.net/downloads/busybox-1.33.0.tar.bz2" -o $pkgname-$pkgver.tar.gz
+	curl "https://busybox.net/downloads/busybox-$pkgver.tar.bz2" -o $pkgname-$pkgver.tar.gz
 	tar -xf $pkgname-$pkgver.tar.gz
 	cp ../man.sh .
 }
