@@ -1,0 +1,49 @@
+.TH IGLU "8" "May 2021" "iglu" "System Administration"
+.SH NAME
+iglu: \- manual page for iglu
+.SH DESCRIPTION
+usage: iglu [\-biu|\-l|\-f|\-d|\-h] [target]
+.TP
+\fB\-h\fR
+Simple Help
+.HP
+\fB\-\-help\fR alias to `\-h`
+.TP
+\fB\-i\fR
+install
+.TP
+\fB\-u\fR
+uninstall
+.TP
+\fB\-l\fR
+outputs the license
+.TP
+\fB\-f\fR
+lists installed files
+.TP
+\fB\-d\fR
+list dependencies
+.TP
+\fB\-iu\fR
+install update or install upgrade
+.TP
+\fB\-ui\fR
+alias to `\-iu`
+.PP
+These needs iglunix\-dev (iglupkg) installed
+.TP
+\fB\-b\fR
+build
+.TP
+\fB\-bi\fR
+build and install the current package
+.TP
+\fB\-biu\fR
+build and install update the current package
+.TP
+\fB\-bui\fR
+alias to `\-iu`
+.SS "NOT IMPLEMENTED:"
+.TP
+\fB\-o\fR <dir>
+install to alternative root
