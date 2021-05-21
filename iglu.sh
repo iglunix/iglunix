@@ -27,7 +27,7 @@ NOT IMPLEMENTED:
 
 
 usage() {
-	echo usage: $(basename "$0") printf "${HELP}" 1>&2
+	echo usage: $(basename "$0") '[-biu|-l|-f|-d|-h]' '[target]' "${HELP}" 1>&2
 	exit 1
 }
 
@@ -135,7 +135,7 @@ elif [ "$iu" = "1" ]; then
 
 	# Extract new package and verify
 	mkdir -p /tmp/iglunix/$bname_we || exit 1
-	tar -xf $1 -C /tmp/iglunix/$bname_we || tar_fail
+	tar -I zstd -xf $1 -C /tmp/iglunix/$bname_we || tar_fail
 	stat /tmp/iglunix/$bname_we/usr/share/iglupkg/$bname >/dev/null || stat_fail
 
 	# Check deps
@@ -151,7 +151,7 @@ elif [ "$iu" = "1" ]; then
 		grep -v "\[fs\]" | awk '{print length, $0}' | sort -rn | cut -d " " -f2-)
 
 	# Extract tar
-	tar -xf $1 -C /
+	tar -I zstd -xf $1 -C /
 	rm -r /tmp/iglunix/$bname_we
 
 
@@ -181,13 +181,13 @@ elif [ "$i" = "1" ]; then
 	echo "Installing $bname_we"
 	continue_interactive
 	mkdir -p /tmp/iglunix/$bname_we || exit 1
-	tar -xf $1 -C /tmp/iglunix/$bname_we || tar_fail
+	tar -I zstd -xf $1 -C /tmp/iglunix/$bname_we || tar_fail
 	stat /tmp/iglunix/$bname_we/usr/share/iglupkg/$bname >/dev/null || stat_fail
 	deps=$(grep deps /tmp/iglunix/$bname_we/usr/share/iglupkg/$bname | tr '=' '\n' | grep -v deps | tr ':' '\n')
 	for dep in $deps; do
 		stat /usr/share/iglupkg/$dep > /dev/null 2> /dev/null || dep_not_found $dep
     	done
-	tar -xf $1 -C /
+	tar -I zstd -xf $1 -C /
 	rm -r /tmp/iglunix/$bname_we
 elif [ "$f" = "1" ]; then
 #LIST INSTALLED FILES
