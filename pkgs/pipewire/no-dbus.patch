@@ -63,3 +63,22 @@
  
  pipewire_module_protocol_simple = shared_library('pipewire-module-protocol-simple',
    [ 'module-protocol-simple.c' ],
+--- a/spa/plugins/support/meson.build
++++ b/spa/plugins/support/meson.build
+@@ -32,6 +32,7 @@
+ 		        install_dir : spa_plugindir / 'support')
+ endif
+ 
++if dbus_dep.found()
+ spa_dbus_sources = ['dbus.c']
+ 
+ spa_dbus_lib = shared_library('spa-dbus',
+@@ -40,7 +41,7 @@
+ 			dependencies : [dbus_dep, ],
+ 			install : true,
+ 		        install_dir : spa_plugindir / 'support')
+-
++endif
+ 
+ if systemd_dep.found()
+   spa_journal_sources = ['journal.c']

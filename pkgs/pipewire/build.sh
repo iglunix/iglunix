@@ -19,13 +19,12 @@ build() {
 		--prefix=/usr \
 		--libexecdir=lib \
 		-Dbluez5=disabled \
-		-Dspa-plugins=disabled \
 		-Dlibcamera=disabled \
 		-Dexamples=disabled \
 		-Dgstreamer=disabled \
-		-Dlibpulse=disabled
-
-
+		-Dlibpulse=disabled \
+		-Dmedia-session=enabled \
+		-Dpw-cat=enabled
 	samu
 }
 
