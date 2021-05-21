@@ -5,6 +5,7 @@ fetch() {
 	curl -L "https://github.com/LightningCreations/lc-make/archive/refs/heads/main.tar.gz" -o $pkgname-$pkgver.tar.xz
 	tar -xf $pkgname-$pkgver.tar.xz
 	cd $pkgname-$pkgver
+	mkdir .cargo
 	cargo vendor > .cargo/config
 }
 
