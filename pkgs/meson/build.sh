@@ -1,4 +1,4 @@
-pkgver=0.56.2
+pkgver=0.58.0
 pkgname=meson
 deps=python
 bad=""
@@ -7,6 +7,9 @@ ext="doc"
 fetch() {
 	curl -L "https://github.com/mesonbuild/meson/releases/download/$pkgver/meson-$pkgver.tar.gz" -o $pkgname-$pkgver.tar.gz
 	tar -xf $pkgname-$pkgver.tar.gz
+	cp ../not-darwin.patch .
+	cd $pkgname-$pkgver
+	patch -p1 < ../not-darwin.patch
 }
 
 build() {
