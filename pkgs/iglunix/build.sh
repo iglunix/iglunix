@@ -3,7 +3,7 @@ pkgname=iglunix
 pkgrel=1
 deps="busybox:toybox"
 bad=""
-ext="dev"
+ext="dev:doc"
 
 fetch() {
 	mkdir $pkgname-$pkgver
@@ -11,6 +11,7 @@ fetch() {
 	cp ../motd .
 	cd $pkgname-$pkgver
 	cp ../../../../iglu*.sh .
+	cp ../../../../iglu.8 .
 	cp ../../../../LICENSE .
 }
 
@@ -32,6 +33,12 @@ package_dev() {
 	cd $pkgname-$pkgver
 	install -d $pkgdir/usr/bin
 	install -Dm755 iglupkg.sh $pkgdir/usr/bin/iglupkg
+}
+
+package_doc() {
+	cd $pkgname-$pkgver
+	install -d $pkgdir/usr/share/man/man8
+	install -Dm644 iglu.8 $pkgdir/usr/share/man/man8
 }
 
 license() {
