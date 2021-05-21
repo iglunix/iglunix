@@ -7,13 +7,14 @@ ext="dev"
 fetch() {
 	curl "https://musl.libc.org/releases/$pkgname-$pkgver.tar.gz" -o $pkgname-$pkgver.tar.gz
 	tar -xf $pkgname-$pkgver.tar.gz
-	cd $pkgname-$pkgver
 }
 
 build() {
 	cd $pkgname-$pkgver
 	./configure \
 		--prefix=/usr \
+		--build=x86_64-unknown-linux-musl \
+		--host=x86_64-unknown-linux-musl \
 		--enable-wrapper=no
 	gmake
 }
