@@ -1,10 +1,10 @@
 pkgname=python
-pkgver=3.9.1
+pkgver=3.9.5
 bad=""
 ext="doc"
 
 fetch() {
-	curl "https://www.python.org/ftp/python/3.9.1/Python-3.9.1.tar.xz" -o $pkgname-$pkgver.tar.xz
+	curl "https://www.python.org/ftp/python/$pkgver/Python-$pkgver.tar.xz" -o $pkgname-$pkgver.tar.xz
 	tar -xf $pkgname-$pkgver.tar.xz
 	mv Python-$pkgver $pkgname-$pkgver
 }
@@ -13,6 +13,8 @@ build() {
     	cd $pkgname-$pkgver
 	./configure \
 		--prefix=/usr \
+		--build=x86_64-unknown-linux-musl \
+		--host=x86_64-unknown-linux-musl \
 		--with-system-ffi=true \
 		ax_cv_c_float_words_bigendian=no
 	make
