@@ -1,8 +1,8 @@
 pkgname=zstd
-pkgver=1.4.9
+pkgver=1.5.0
 
 fetch() {
-	curl -L "https://github.com/facebook/zstd/releases/download/v1.4.9/zstd-1.4.9.tar.gz" -o $pkgname-$pkgver.tar.xz
+	curl -L "https://github.com/facebook/zstd/releases/download/v$pkgver/zstd-$pkgver.tar.gz" -o $pkgname-$pkgver.tar.xz
 	tar -xf $pkgname-$pkgver.tar.xz
 }
 
