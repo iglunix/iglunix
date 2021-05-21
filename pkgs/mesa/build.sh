@@ -1,5 +1,5 @@
 pkgname=mesa
-pkgver=21.1.0-rc3
+pkgver=21.1.1
 deps="musl:wayland:wayland-protocols:llvm:zlib:expat:libffi:libdrm:python-mako"
 ext=dev
 
@@ -20,8 +20,8 @@ build() {
 	meson .. \
 		--prefix=/usr \
 		-Dplatforms=wayland \
-		-Ddri3=true \
 		-Ddri-drivers=i915,i965 \
+		-Ddri3=true \
 		-Dgallium-drivers=iris \
 		-Dgallium-vdpau=false \
 		-Dgallium-xvmc=false \
@@ -46,7 +46,8 @@ build() {
 		-Dvalgrind=false \
 		-Dlibunwind=false \
 		-Dlmsensors=false \
-		-Dbuild-tests=false
+		-Dbuild-tests=false \
+		-Duse-elf-tls=false
 
 	samu
 
