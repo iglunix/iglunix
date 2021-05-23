@@ -10,6 +10,11 @@ fetch() {
 	cd $pkgname-$pkgver
 	patch -p1 < ../byacc-syntax.patch
 
+	echo "###############################"
+	echo "#           WARNING           #"
+	echo "# THIS IS PROBABLY NOT SECURE #"
+	echo "###############################"
+
 }
 
 build() {
