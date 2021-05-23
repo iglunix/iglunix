@@ -12,6 +12,7 @@ fetch() {
 }
 
 build() {
+	export pkgdir=$(pwd)/sysroot
 	cd llvm-$pkgver
 	cd build-compiler-rt
 	cmake -G Ninja ../compiler-rt \
@@ -39,23 +40,21 @@ build() {
 		-DLIBCXX_HAS_MUSL_LIBC=ON \
 		-DLLVM_CONFIG_PATH=/usr/bin/llvm-config
 
-	DESTDIR=$(pwd)/../../sysroot samu install
+	DESTDIR=$pkgdir samu install
 	cd ../..
 
 	cd musl-1.2.2
-	CFLAGS='--sysroot=$(pwd)/../sysroot/usr/aarch64-linux-musl/ --target=aarch64-unknown-linux-musl' AR=ar LIBCC=$(pwd)/../sysroot/usr/aarch64-linux-musl/lib/linux/libclang_rt.builtins-aarch64.a ./configure \
+	CFLAGS="--sysroot=$pkgdir/usr/aarch64-linux-musl/ --target=aarch64-unknown-linux-musl" AR=ar LIBCC=$pkgdir/usr/aarch64-linux-musl/lib/linux/libclang_rt.builtins-aarch64.a ./configure \
 		--prefix=/usr/aarch64-linux-musl \
 		--target=aarch64-unknown-linux-musl \
 		--enable-wrappers=no
 
 	gmake
-	gmake install DESTDIR=$(pwd)/../sysroot/
+	gmake install DESTDIR=$pkgdir
 }
 
 package() {
-	cd $pkgname-$pkgver
-	cd build-compiler-rt
-	DESTDIR=$pkgdir samu install
+	mv sysroot/* $pkgdir
 }
 
 license() {
