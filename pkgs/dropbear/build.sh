@@ -15,12 +15,12 @@ build() {
 		--build=x86_64-unknown-linux-musl \
 		--host=x86_64-unknown-linux-musl
 
-	gmake
+	gmake PROGRAMS='dropbear dbclient dropbearkey dropbearconvert scp'
 }
 
 package() {
 	cd $pkgname-$pkgver
-	gmake install DESTDIR=$pkgdir
+	gmake install DESTDIR=$pkgdir PROGRAMS='dropbear dbclient dropbearkey dropbearconvert scp'
 	ln -sr $pkgdir/usr/sbin/dropbear $pkgdir/usr/sbin/sshd
 	ln -sr $pkgdir/usr/bin/dbclient $pkgdir/usr/bin/ssh
 	rm -r $pkgdir/usr/share
@@ -28,7 +28,7 @@ package() {
 
 package_doc() {
 	cd $pkgname-$pkgver
-	gmake install DESTDIR=$pkgdir
+	gmake install DESTDIR=$pkgdir PROGRAMS='dropbear dbclient dropbearkey dropbearconvert scp'
 	rm -r $pkgdir/usr/bin
 	rm -r $pkgdir/usr/sbin
 }
