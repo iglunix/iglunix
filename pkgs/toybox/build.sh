@@ -28,8 +28,12 @@ package() {
 #	ln -sr $pkgdir/bin/toybox $pkgdir/usr/bin/lspci
 	gmake PREFIX=$pkgdir install
 
+	# Provided by NetBSD Curses
 	rm $pkgdir/usr/bin/clear
 	rm $pkgdir/usr/bin/reset
+
+	# LLVM Provides this
+	rm $pkgdir/usr/bin/readelf
 #	rm $pkgdir/usr/bin/tar
 }
 

@@ -4,7 +4,7 @@ echo "Createimg.sh"
 
 rm iglunix.img
 
-dd if=../tiny-linux-bootloader/disk of=iglunix.img
+dd if=/tiny-linux-bootloader/disk of=iglunix.img
 
 source build_utils
 
@@ -16,7 +16,7 @@ echo "PARTITION_START=${PARTITION_START}"
 
 #create room for a  partition
 ls -al iglunix.img  -h
-dd if=/dev/zero bs=1 count=0 seek=20G of=iglunix.img
+dd if=/dev/zero bs=1 count=0 seek=2560M of=iglunix.img
 ls -al iglunix.img  -h
 
 echo "n
@@ -44,11 +44,11 @@ rm -rf ${ROOT}
 mkdir -p ${ROOT}
 mount ${LOOPBACK} ${ROOT}
 
-packages=(musl mksh bmake gmake llvm libressl cmake curl rsync flex byacc om4 zlib samurai libffi python ca-certificates zlib expat gettext-tiny git kati netbsd-curses kakoune iglunix rust toybox busybox less file pci-ids e2fsprogs linux util-linux linux-pam kbd)
+packages=(musl mksh bmake gmake llvm libressl heirloom-doctools cmake curl rsync flex byacc om4 zlib samurai libffi python ca-certificates zlib expat gettext-tiny git kati netbsd-curses kakoune iglunix rust toybox busybox less file pci-ids e2fsprogs util-linux linux-pam kbd)
 cp_packages ${ROOT}
 
 echo "Linked ld.lld (from llvm) to ld"
-ln -s /usr/bin/ld.lld /usr/bin/ld
+ln -s ${ROOT}/usr/bin/ld.lld ${ROOT}/usr/bin/ld
 
 echo "Copying misc files & creating misc dirs for live-usb"
 mkdir ${ROOT}/proc/
@@ -60,8 +60,9 @@ mkdir ${ROOT}/mnt/
 mkdir ${ROOT}/etc/
 mkdir ${ROOT}/root/
 cp ./pkgs/tiny-linux-bootloader/fstab ${ROOT}/etc/fstab
-cp /etc/hostname ${ROOT}/etc/hostname
-cp /etc/passwd  ${ROOT}/etc/passwd
+cp ./etc/hostname ${ROOT}/etc/hostname
+cp ./etc/passwd  ${ROOT}/etc/passwd
+cp ./etc/group  ${ROOT}/etc/group
 touch ${ROOT}/etc/shadow
 
 echo "Using the host keymap"
@@ -71,14 +72,16 @@ cp /etc/vconsole.conf ${ROOT}/etc/vconsole.conf
 
 echo "Copying init.d files& inittab"
 mkdir ${ROOT}/etc/init.d/
-cp -r /iglunix/init/init.d ${ROOT}/etc/
-cp /iglunix/init/inittab ${ROOT}/etc/
+cp -r ./init/init.d ${ROOT}/etc/
+cp ./init/inittab ${ROOT}/etc/
 
 echo "Unmounting & closing loopback"
 
-umount ${ROOT}
+#umount ${ROOT}
 
-losetup -d ${LOOPBACK}
+#losetup -d ${LOOPBACK}
+
+#zstd iglunix.img --ultra -22 -T
 exit
 
 # losetup -o 32256 /dev/loop0 iglunix.img
