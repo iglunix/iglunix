@@ -164,6 +164,7 @@ elif [ "$iu" = "1" ]; then
     			case $(stat -c "%F" /$file) in
         			directory) rmdir 2>/dev/null /$file;;
         			"regular file") rm /$file;;
+        			"regular empty file") rm /$file;;
         			"symbolic link") rm /$file;;
         			*) break;;
     			esac
@@ -211,8 +212,9 @@ elif [ "$u" = "1" ]; then
     		case $(stat -c "%F" /$file) in
         		directory) rmdir 2>/dev/null /$file;;
         		"regular file") rm /$file;;
+        		"regular empty file") rm /$file;;
         		"symbolic link") rm /$file;;
-        		*) echo "can't remove $file";;
+        		*) echo "can't remove /$file";;
     		esac
     	done
 elif [ "$b" = "1" ]; then
