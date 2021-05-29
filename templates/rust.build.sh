@@ -1,9 +1,16 @@
 pkgname=
 pkgver=
 
+_clear_vendor_checksums() {
+	sed -i 's/\("files":{\)[^}]*/\1/' vendor/$1/.cargo-checksum.json
+}
+
 fetch() {
 	curl "" -o $pkgname-$pkgver.tar.xz
 	tar -xf $pkgname-$pkgver.tar.xz
+	cd $pkgname-$pkgver
+	mkdir -p .cargo
+	cargo vendor > .cargo/config
 }
 
 build() {
@@ -13,7 +20,7 @@ build() {
 
 package() {
 	cd $pkgname-$pkgver
-	install -Dm 755 target/release/${pkgname} -t "${pkgdir}/usr/bin"
+	install -Dm755 target/release/$pkgname $pkgdir/usr/bin/$pkgname
 }
 
 license() {
