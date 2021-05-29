@@ -1,10 +1,13 @@
 pkgname=zig
-pkgver=0.7.1
+pkgver=master
 
 fetch() {
-	curl -L "https://ziglang.org/download/$pkgver/zig-$pkgver.tar.xz" -o $pkgname-$pkgver.tar.xz
-	tar -xf $pkgname-$pkgver.tar.xz
+	curl -L "https://github.com/ziglang/zig/archive/refs/heads/master.tar.gz" -o $pkgname-$pkgver.tar.gz
+	tar -xf $pkgname-$pkgver.tar.gz
 	mkdir $pkgname-$pkgver/build
+	cp ../llvm-req-arch.patch .
+	cd $pkgname-$pkgver
+	patch -p1 < ../llvm-req-arch.patch
 }
 
 build() {
@@ -21,6 +24,13 @@ package() {
 	cd $pkgname-$pkgver
 	cd build
 	DESTDIR=$pkgdir samu install
+	rm -rf $pkgdir/usr/lib/zig/libc/glibc
+	rm -rf $pkgdir/usr/lib/zig/libc/mingw
+	rm -rf $pkgdir/usr/lib/zig/libc/wasi
+
+	rm -rf $pkgdir/usr/lib/zig/libc/include/*gnu*
+	rm -rf $pkgdir/usr/lib/zig/libc/include/*glibc*
+	rm -rf $pkgdir/usr/lib/zig/libc/include/*windows*
 }
 
 license() {
