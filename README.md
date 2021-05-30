@@ -27,10 +27,15 @@ I have found no easy way of building libc on Darwin platforms as on yet.
 Because of this I haven't got far at all porting Iglunix to Darwin
 based systems such as MacOS and PureDarwin.
 
+## Web Browsers
+Iglunix doesn't currently have any working web browsers yet however we do have
+a WIP WebKit port (WPM or WebKit Platform for Minimal systems). Currently
+WebKit builds with all our work and we're currently working on exposing an API
+to use it. JavaScriptCore API works perfectly and example programs run with no
+issue.
+
 ## TODO
- - WebKit - Need to port WebKit somehow since no browers will build for this
- - Wayland Compositors - No Wayland compositors currently work perfectly. I think this is because of the lack of udev or lack of logind
+ - Wayland Compositors - Velox works fine for now
  - LLVM (Work out how to split packages)
- - Init system (parallel stuff and dependencies)
- - QEMU for multiarch
- - Lots of work on package manager still required
+ - Init system (currently we're just leaving this up to the user)
+ - QEMU for multiarch (need lots of work on glibr to get this to build)
