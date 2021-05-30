@@ -1,6 +1,23 @@
 --- a/main.go
 +++ b/main.go
-@@ -100,7 +100,8 @@
+@@ -17,7 +17,7 @@
+ 
+ func main() {
+ 	var page, toc, xhtml, latex, smartypants, latexdashes, fractions bool
+-	var css, cpuprofile string
++	var css, cpuprofile, head string
+ 	var repeat int
+ 	flag.BoolVar(&page, "page", false,
+ 		"Generate a standalone HTML page (implies -latex=false)")
+@@ -39,6 +39,7 @@
+ 		"Write cpu profile to a file")
+ 	flag.IntVar(&repeat, "repeat", 1,
+ 		"Process the input multiple times (for benchmarking)")
++	flag.StringVar(&head, "head", "", "Add extra stuff to header")
+ 	flag.Usage = func() {
+ 		fmt.Fprintf(os.Stderr, "Markdown Processor "+
+ 			"\nAvailable at http://github.com/gomarkdown/markdown/cmd/mdtohtml\n\n"+
+@@ -100,7 +101,8 @@
  		parser.FencedCode |
  		parser.Autolink |
  		parser.Strikethrough |
@@ -10,3 +27,11 @@
  
  	var renderer markdown.Renderer
  	if latex {
+@@ -133,6 +135,7 @@
+ 			Flags: htmlFlags,
+ 			Title: title,
+ 			CSS:   css,
++			Head: []byte(head),
+ 		}
+ 		renderer = html.NewRenderer(params)
+ 	}
