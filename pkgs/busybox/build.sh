@@ -7,7 +7,7 @@ pkgrel=1
 fetch() {
 	curl "https://busybox.net/downloads/busybox-$pkgver.tar.bz2" -o $pkgname-$pkgver.tar.gz
 	tar -xf $pkgname-$pkgver.tar.gz
-	cp ../man.sh .
+	# cp ../man.sh .
 }
 
 build() {
@@ -24,7 +24,7 @@ package() {
 	chmod 4755 $pkgdir/bin/busybox
 
 	install -d $pkgdir/etc/profile.d
-	install -Dm755 ../man.sh $pkgdir/etc/profile.d
+	# install -Dm755 ../man.sh $pkgdir/etc/profile.d
 
 	install -Dm755 ./examples/udhcp/simple.script $pkgdir/usr/share/udhcpc/default.script
 	
@@ -188,6 +188,8 @@ package() {
 
 	rm $pkgdir/usr/sbin/chroot
 	rm $pkgdir/usr/sbin/fsfreeze
+
+	rm $pkgdir/usr/bin/man
 }
 
 license() {
