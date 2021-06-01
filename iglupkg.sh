@@ -11,7 +11,6 @@ export CXX=clang++
 stat /etc/iglupkg.conf > /dev/null 2> /dev/null && . /etc/iglupkg.conf
 
 export SAMUFLAGS=-j$JOBS
-export MAKEFLAGS=-j$JOBS
 
 . ./build.sh
 dir=$(pwd)
@@ -32,7 +31,7 @@ stat src > /dev/null 2>/dev/null && echo '======================================
 
 cd $srcdir
 
-build
+MAKEFLAGS=-j$JOBS build
 cd $srcdir
 
 echo "
