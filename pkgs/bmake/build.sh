@@ -1,4 +1,4 @@
-pkgver=20210206
+pkgver=20210420
 pkgname=bmake
 bad="musl"
 ext="doc"
@@ -27,9 +27,7 @@ package() {
 
 package_doc() {
 	cd $pkgname-$pkgver
-	./bmake -m ./mk install DESTDIR=$pkgdir
-	rm -r $pkgdir/usr/bin
-	rm -r $pkgdir/usr/share/mk
+	install -Dm644 ./bmake.1 $pkgdir/usr/share/man/man1/bmake.1
 }
 
 license() {
