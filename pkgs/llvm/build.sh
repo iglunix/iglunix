@@ -8,6 +8,9 @@ fetch() {
 	tar -xf $pkgname-$pkgver.tar.gz
 	mv llvm-project-$pkgver.src $pkgname-$pkgver
 
+	# fixes relaxation
+	curl "https://reviews.llvm.org/file/data/fwstsxaybgq26x5dtdbg/PHID-FILE-pptlyffhoud7h2kme6qo/D100835.diff" | patch -p0
+
 	cp -n ../default.llvm.conf /etc/iglupkg/llvm.conf
 	[ ../default/llvm.conf -nt /etc/iglupkg/llvm.conf ] && echo "WARNING: the default config file is newer than your config file." done
 }
