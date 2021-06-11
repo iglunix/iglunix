@@ -13,8 +13,8 @@ build() {
 	cd $pkgname-$pkgver
 	./configure \
 		--prefix=/usr \
-		--build=x86_64-unknown-linux-musl \
-		--host=x86_64-unknown-linux-musl \
+		--build=$(uname -m)-unknown-linux-musl \
+		--host=$(uname -m)-unknown-linux-musl \
 		--enable-wrapper=no
 	gmake
 }
@@ -24,7 +24,7 @@ package() {
 	gmake install DESTDIR=$pkgdir
 	rm -r $pkgdir/usr/include
 	install -d $pkgdir/usr/bin
-	ln -sr $pkgdir/lib/ld-musl-x86_64.so.1 $pkgdir/usr/bin/ldd
+	ln -sr $pkgdir/lib/ld-musl-$(uname -m).so.1 $pkgdir/usr/bin/ldd
 }
 
 package_dev() {
