@@ -4,6 +4,10 @@ export JOBS="$(nproc)"
 #export RUSTFLAGS="-C target-cpu=native"
 export CC=clang
 export CXX=clang++
+export ARCH=$(uname -m)
+export KERN=linux
+export ABI=musl
+export TRIPLE=$ARCH-unknown-$KERN-$ABI
 
 #export CFLAGS="-march=native"
 #export CXXFLAGS="-march=native"
