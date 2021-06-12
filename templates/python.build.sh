@@ -1,4 +1,4 @@
-pkgname=
+pkgname=python-
 pkgver=
 
 fetch() {
@@ -8,17 +8,12 @@ fetch() {
 
 build() {
 	cd $pkgname-$pkgver
-	./configure \
-		--prefix=/usr \
-		--build=$TRIPLE \
-		--host=$TRIPLE
-
-	make
+	python setup.py build
 }
 
 package() {
 	cd $pkgname-$pkgver
-	make install DESTDIR=$pkgdir
+	python setup.py install --root=$pkgdir --skip-build
 }
 
 license() {
