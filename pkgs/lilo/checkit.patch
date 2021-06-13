@@ -1,0 +1,10 @@
+--- Makefile
++++ Makefile
+@@ -88,7 +88,6 @@
+ #
+ test: test.img
+ test.img:
+-	./checkit
+ 	echo Tested >test.img	
+ 
+ #
