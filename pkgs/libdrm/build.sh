@@ -1,11 +1,11 @@
-pkgver=2.4.103
+pkgver=2.4.106
 pkgname=libdrm
 dep="libpciaccess"
 bad=""
 ext="dev"
 
 fetch() {
-	curl -L "https://dri.freedesktop.org/libdrm/libdrm-2.4.103.tar.xz" -o $pkgname-$pkgver.tar.gz
+	curl -L "https://dri.freedesktop.org/libdrm/libdrm-$pkgver.tar.xz" -o $pkgname-$pkgver.tar.gz
 	tar -xf $pkgname-$pkgver.tar.gz
 }
 
