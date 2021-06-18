@@ -14,15 +14,36 @@ fetch() {
 	patch -p1 < ../alpine-tls.patch
 }
 
+_dri_drivers=""
+_gallium_drivers=""
+_vulkan_drivers=""
+case $ARCH in
+	x86_64)
+		_dri_drivers="i915,i965,nouveau"
+		_gallium_drivers="iris"
+		_vulkan_drivers="intel"
+		;;
+
+	aarch64)
+		_dri_drivers=""
+		_gallium_drivers="vc4,v3d"
+		_vulkan_drivers="broadcom"
+		;;
+esac
+
 build() {
 	cd $pkgname-$pkgver
 	cd build
+	echo "dri drivers: "$_dri_drivers
+	echo "gallium drivers: "$_gallium_drivers
+	echo "vulkan drivers: "$_vulkan_drivers
+
 	meson .. \
 		--prefix=/usr \
 		-Dplatforms=wayland \
-		-Ddri-drivers=i915,i965,nouveau \
+		-Ddri-drivers=$_dri_drivers \
 		-Ddri3=true \
-		-Dgallium-drivers=iris \
+		-Dgallium-drivers=$_gallium_drivers \
 		-Dgallium-vdpau=false \
 		-Dgallium-xvmc=false \
 		-Dgallium-omx=disabled \
@@ -30,7 +51,7 @@ build() {
 		-Dgallium-xz=false \
 		-Dgallium-nine=false \
 		-Dgallium-opencl=disabled \
-		-Dvulkan-drivers=intel \
+		-Dvulkan-drivers=$_vulkan_drivers \
 		-Dvulkan-overlay-layer=true \
 		-Dvulkan-device-select-layer=true \
 		-Dshared-glapi=enabled \
