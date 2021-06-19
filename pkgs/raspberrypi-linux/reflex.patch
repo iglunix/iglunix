@@ -1,0 +1,60 @@
+--- a/scripts/kconfig/lexer.l
++++ b/scripts/kconfig/lexer.l
+@@ -3,9 +3,10 @@
+  * Copyright (C) 2002 Roman Zippel <zippel@linux-m68k.org>
+  */
+ %option nostdinit noyywrap never-interactive full ecs
+-%option 8bit nodefault yylineno
++%option 8bit nodefault
+ %x ASSIGN_VAL HELP STRING
+ %{
++int yylineno = 0;
+ 
+ #include <assert.h>
+ #include <limits.h>
+--- a/scripts/dtc/dtc-lexer.l
++++ b/scripts/dtc/dtc-lexer.l
+@@ -3,7 +3,7 @@
+  * (C) Copyright David Gibson <dwg@au1.ibm.com>, IBM Corporation.  2005.
+  */
+ 
+-%option noyywrap nounput noinput never-interactive
++%option noyywrap nounput noinput never-interactive stack
+ 
+ %x BYTESTRING
+ %x PROPNODENAME
+@@ -270,7 +270,8 @@
+ 
+ 	yyin = current_srcfile->f;
+ 
+-	yypush_buffer_state(yy_create_buffer(yyin, YY_BUF_SIZE));
++//	yypush_buffer_state(yy_create_buffer(yyin, YY_BUF_SIZE));
++	yy_push_state(yy_create_buffer(yyin, YY_BUF_SIZE));
+ }
+ 
+ 
+@@ -279,7 +280,8 @@
+ 	if (srcfile_pop() == 0)
+ 		return false;
+ 
+-	yypop_buffer_state();
++//	yypop_buffer_state();
++	yy_pop_state();
+ 	yyin = current_srcfile->f;
+ 
+ 	return true;
+--- a/scripts/genksyms/genksyms.c
++++ b/scripts/genksyms/genksyms.c
+@@ -822,10 +822,10 @@
+ 		}
+ 	{
+ 		extern int yydebug;
+-		extern int yy_flex_debug;
++		/* extern int yy_flex_debug; */
+ 
+ 		yydebug = (flag_debug > 1);
+-		yy_flex_debug = (flag_debug > 2);
++		/* yy_flex_debug = (flag_debug > 2); */
+ 
+ 		debugfile = stderr;
+ 		/* setlinebuf(debugfile); */
