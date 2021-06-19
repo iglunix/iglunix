@@ -1,4 +1,4 @@
-pkgver=5.12.3
+pkgver=5.12.10
 pkgname=linux
 pkgrel=1
 ext="dev"
@@ -10,20 +10,21 @@ fetch() {
 	cd $pkgname-$pkgver
 
 	# use Alpine's kernel config so we don't have to maintain one
-	curl "https://git.alpinelinux.org/aports/plain/testing/linux-edge/config-edge.x86_64" -o .config
+	curl "https://git.alpinelinux.org/aports/plain/testing/linux-edge/config-edge.$(uname -m)" -o .config
 	patch -p1 < ../kernel-no-perl.patch
 	patch -p1 < ../../kernel-byacc.patch
+	patch -p1 < ../../reflex.patch
 }
 
 build() {
 	cd $pkgname-$pkgver
 	# gmake CC=cc CXX=c++ HOSTCC=cc HOSTCXX=c++ YACC=yacc LLVM_IAS=1 defconfig
-	gmake CC=cc CXX=c++ HOSTCC=cc HOSTCXX=c++ LEX=lex YACC=yacc LLVM_IAS=1 olddefconfig
+	gmake CC=cc CXX=c++ HOSTCC=cc HOSTCXX=c++ LEX=reflex YACC=yacc LLVM_IAS=1 olddefconfig
 	# gmake CC=cc CXX=c++ HOSTCC=cc HOSTCXX=c++ LEX=lex YACC=yacc LLVM_IAS=1 menuconfig
-	# cp .config ../../x86_64.config.new
+	# cp .config ../../$(uname -m).config.new
 	sed -i 's/CONFIG_UNWINDER_ORC=y/# CONFIG_UNWINDER_ORC is not set/g' .config
 	sed -i 's/# CONFIG_UNWINDER_FRAME_POINTER is not set/CONFIG_UNWINDER_FRAME_POINTER=y/g' .config
-	gmake CC=cc CXX=c++ HOSTCC=cc HOSTCXX=c++ LEX=lex YACC=yacc LLVM_IAS=1
+	gmake CC=cc CXX=c++ HOSTCC=cc HOSTCXX=c++ LEX=reflex YACC=yacc LLVM_IAS=1
 }
 
 package() {
