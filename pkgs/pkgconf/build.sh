@@ -1,10 +1,10 @@
-pkgver=1.1.0
+pkgver=1.7.4
 pkgname=pkgconf
 bad=""
 ext="doc"
 
 fetch() {
-	curl https://distfiles.dereferenced.org/pkgconf/pkgconf-1.1.0.tar.xz -o $pkgname-$pkgver.tar.xz
+	curl https://distfiles.dereferenced.org/pkgconf/pkgconf-$pkgver.tar.xz -o $pkgname-$pkgver.tar.xz
 	tar -xf $pkgname-$pkgver.tar.xz
 }
 
