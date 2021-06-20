@@ -31,7 +31,7 @@ build() {
 
 package() {
 	cd $pkgname-$pkgver
-	zig build --prefix $pkgdir/usr install
+	DESTDIR=$pkgdir zig build --prefix /usr install
 }
 
 license() {
