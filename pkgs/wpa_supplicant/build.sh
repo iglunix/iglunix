@@ -15,13 +15,11 @@ build() {
 	#                                                                           #
 	#############################################################################
 
-
-
 	cd $pkgname-$pkgver
 	cd $pkgname
 	cp ../../config .config
 	
-	gmake
+	CFLAGS='-D_GNU_SOURCE -DCONFIG_LIBNL20 -DCONFIG_LIBNL20 -DLIBNL1_COMPAT -I/usr/include/libnl-tiny' gmake CONFIG_LIBNL_TINY=y
 }
 
 package() {
@@ -33,5 +31,5 @@ package() {
 license() {
 	cd $pkgname-$pkgver
 	cat LICENSE
-#	cat COPYING
+	cat COPYING
 }
