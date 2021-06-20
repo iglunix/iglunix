@@ -32,6 +32,8 @@ build() {
 package() {
 	cd $pkgname-$pkgver
 	DESTDIR=$pkgdir zig build --prefix /usr install
+	# Igluinx has alacritty packaged
+	sed -i 's/foot/alacritty/g' $pkgdir/etc/river/init
 }
 
 license() {
