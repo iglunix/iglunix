@@ -18,7 +18,5 @@ package() {
 }
 
 license() {
-	cd $pkgname-$pkgver
-	cat LICENSE
-#	cat COPYING
+	curl "https://www.gnu.org/licenses/old-licenses/lgpl-2.1.txt"
 }
