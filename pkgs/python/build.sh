@@ -13,8 +13,8 @@ build() {
     	cd $pkgname-$pkgver
 	./configure \
 		--prefix=/usr \
-		--build=x86_64-unknown-linux-musl \
-		--host=x86_64-unknown-linux-musl \
+		--build=$TARGET \
+		--host=$TARGET \
 		--with-system-ffi=true \
 		ax_cv_c_float_words_bigendian=no
 	make
