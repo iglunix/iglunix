@@ -10,8 +10,8 @@ build() {
 	cd $pkgname-$pkgver
 	./configure \
 		--prefix=/usr \
-		--build=$TRIPLE \
-		--host=$TRIPLE
+		--build=$(echo $TRIPLE | sed 's/musl/gnu/g') \
+		--host=$(echo $TRIPLE | sed 's/musl/gnu/g')
 
 	make
 }
