@@ -26,12 +26,12 @@ fetch() {
 
 build() {
 	cd $pkgname-$pkgver
-	zig build --prefix /usr
+	zig build -Drelease-safe --prefix /usr
 }
 
 package() {
 	cd $pkgname-$pkgver
-	DESTDIR=$pkgdir zig build --prefix /usr install
+	DESTDIR=$pkgdir zig build -Drelease-safe --prefix /usr install
 	# Igluinx has alacritty packaged
 	sed -i 's/foot/alacritty/g' $pkgdir/etc/river/init
 }
