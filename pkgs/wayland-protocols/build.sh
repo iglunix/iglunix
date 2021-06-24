@@ -1,9 +1,9 @@
 pkgname=wayland-protocols
-pkgver=1.20
+pkgver=1.21
 deps="pkgconf:wayland"
 
 fetch() {
-	curl "https://wayland.freedesktop.org/releases/wayland-protocols-1.20.tar.xz" -o $pkgname-$pkgver.tar.xz
+	curl "https://wayland.freedesktop.org/releases/wayland-protocols-$pkgver.tar.xz" -o $pkgname-$pkgver.tar.xz
 	tar -xf $pkgname-$pkgver.tar.xz
 }
 
