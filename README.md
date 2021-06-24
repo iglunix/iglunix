@@ -17,10 +17,8 @@ However, I haven't been successful at building the required parts of the base
 system.
 
 ### OpenBSD
-OpenBSD's build system is much easier to work with that FreeBSD's (we can just
-cd to the required directories, run make and install required files). However,
-I wasn't successful on getting upstream clang to build working binaries so
-the system can't be self hosting at the moment.
+Iglunix has been tested to work on OpenBSD. (don't forget to symlink `libc.so`
+otherwise the toolchain breaks).
 
 ### Darwin
 I have found no easy way of building libc on Darwin platforms as on yet.
