@@ -1,8 +1,8 @@
 pkgname=zig
-pkgver=master
+pkgver=0.8.0
 
 fetch() {
-	curl -L "https://github.com/ziglang/zig/archive/refs/heads/master.tar.gz" -o $pkgname-$pkgver.tar.gz
+	curl "https://ziglang.org/download/$pkgver/zig-$pkgver.tar.xz" -o $pkgname-$pkgver.tar.gz
 	tar -xf $pkgname-$pkgver.tar.gz
 	mkdir $pkgname-$pkgver/build
 	cp ../llvm-req-arch.patch .
