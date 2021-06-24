@@ -23,7 +23,9 @@ build() {
 package() {
 	cd $pkgname-$pkgver
 	install -d $pkgdir/boot
+	cp arch/arm64/boot/Image $pkgdir/boot/kernel8.img
 	gmake ARCH=arm64 CC=cc HOSTCC=cc LEX=reflex YACC=yacc LLVM=1 LLVM_IAS=1 INSTALL_PATH=$pkgdir/boot install
+	gmake ARCH=arm64 CC=cc HOSTCC=cc LEX=reflex YACC=yacc LLVM=1 LLVM_IAS=1 INSTALL_DTBS_PATH=$pkgdir/boot dtbs_install
 	gmake ARCH=arm64 CC=cc HOSTCC=cc LEX=reflex YACC=yacc LLVM=1 LLVM_IAS=1 INSTALL_MOD_PATH=$pkgdir/ modules_install
 }
 
