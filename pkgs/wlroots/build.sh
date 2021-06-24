@@ -1,9 +1,9 @@
 pkgname=wlroots
-pkgver=0.12.0
+pkgver=0.13.0
 ext="dev"
 
 fetch() {
-	curl -L "https://github.com/swaywm/wlroots/releases/download/0.12.0/wlroots-0.12.0.tar.gz" -o $pkgname-$pkgver.tar.xz
+	curl -L "https://github.com/swaywm/wlroots/releases/download/$pkgver/wlroots-$pkgver.tar.gz" -o $pkgname-$pkgver.tar.xz
 	tar -xf $pkgname-$pkgver.tar.xz
 	mkdir $pkgname-$pkgver/build
 }
