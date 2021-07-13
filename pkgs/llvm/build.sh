@@ -1,4 +1,4 @@
-pkgver=12.0.0
+pkgver=12.0.1
 pkgname=llvm
 bad=""
 ext="dev"
@@ -20,8 +20,8 @@ build() {
 	mkdir -p build
 	cd build
         cmake -G Ninja -Wno-dev \
-                -DCMAKE_C_COMPILER_TARGET=x86_64-musl-linux-musl \
-                -DCMAKE_CXX_COMPILER_TARGET=x86_64-musl-linux-musl \
+                -DCMAKE_C_COMPILER_TARGET=$TRIPLE \
+                -DCMAKE_CXX_COMPILER_TARGET=$TRIPLE \
                 -DCMAKE_INSTALL_PREFIX=/usr \
                 -DCMAKE_BUILD_TYPE=Release \
                 -DLLVM_VERSION_SUFFIX="" \
@@ -36,8 +36,8 @@ build() {
                 -DLLVM_ENABLE_LTO=OFF \
                 -DLLVM_INCLUDE_GO_TESTS=OFF \
                 -DLLVM_INCLUDE_TESTS=OFF \
-                -DLLVM_HOST_TRIPLE=x86_64-unknown-linux-musl \
-                -DLLVM_DEFAULT_TARGET_TRIPLE=x86_64-unknown-linux-musl \
+                -DLLVM_HOST_TRIPLE=$TRIPLE \
+                -DLLVM_DEFAULT_TARGET_TRIPLE=$TRIPLE \
                 -DLLVM_ENABLE_LIBXML2=OFF \
                 -DLLVM_ENABLE_ZLIB=OFF\
                 -DLLVM_BUILD_LLVM_DYLIB=ON \
