@@ -1,0 +1,95 @@
+diff --git a/Makefile b/Makefile
+index 1b36943..c6e0407 100644
+--- a/Makefile
++++ b/Makefile
+@@ -8,7 +8,7 @@ CPPFLAGS = -g -Imimalloc/include -pthread -std=c++20 \
+            -DGIT_HASH=\"$(GIT_HASH)\" \
+ 	   $(EXTRA_CPPFLAGS)
+ LDFLAGS += $(EXTRA_LDFLAGS) -rdynamic
+-LIBS = -Wl,-as-needed -lcrypto -pthread -lz -lxxhash -ldl -lm
++LIBS = -Wl,-as-needed -lcrypto -pthread -lz -lxxhash -lexecinfo -ldl -lm
+ OBJS = main.o object_file.o input_sections.o output_chunks.o \
+        mapfile.o perf.o linker_script.o archive_file.o output_file.o \
+        subprocess.o gc_sections.o icf.o symbols.o cmdline.o filepath.o \
+diff --git a/mold.h b/mold.h
+index 550545c..8bab9b9 100644
+--- a/mold.h
++++ b/mold.h
+@@ -27,6 +27,7 @@
+ #include <tbb/task_group.h>
+ #include <unistd.h>
+ #include <unordered_set>
++#include <unordered_map>
+ #include <vector>
+ #include <xxh3.h>
+ 
+@@ -41,6 +42,9 @@ typedef int32_t i32;
+ typedef int64_t i64;
+ 
+ static constexpr i32 SECTOR_SIZE = 512;
++#ifdef PAGE_SIZE
++#undef PAGE_SIZE
++#endif
+ static constexpr i32 PAGE_SIZE = 4096;
+ static constexpr i32 SHA256_SIZE = 32;
+ 
+@@ -2198,7 +2202,7 @@ InputFile<E>::get_string(Context<E> &ctx, const ElfShdr<E> &shdr) {
+   u8 *end = begin + shdr.sh_size;
+   if (mb->data(ctx) + mb->size() < end)
+     Fatal(ctx) << *this << ": shdr corrupted";
+-  return {(char *)begin, (char *)end};
++  return {(char *)begin, (size_t)(end-begin)};
+ }
+ 
+ template <typename E>
+diff --git a/oneTBB/include/oneapi/tbb/detail/_config.h b/oneTBB/include/oneapi/tbb/detail/_config.h
+index 27a3dd7..bb422b0 100644
+--- a/oneTBB/include/oneapi/tbb/detail/_config.h
++++ b/oneTBB/include/oneapi/tbb/detail/_config.h
+@@ -257,7 +257,7 @@
+     #define __TBB_CPP20_COMPARISONS_PRESENT __TBB_CPP20_PRESENT
+ #endif
+ 
+-#define __TBB_RESUMABLE_TASKS                           (!__TBB_WIN8UI_SUPPORT && !__ANDROID__)
++#define __TBB_RESUMABLE_TASKS                           (!__TBB_WIN8UI_SUPPORT && __GLIBC__)
+ 
+ /* This macro marks incomplete code or comments describing ideas which are considered for the future.
+  * See also for plain comment with TODO and FIXME marks for small improvement opportunities.
+diff --git a/oneTBB/src/tbbmalloc_proxy/proxy.cpp b/oneTBB/src/tbbmalloc_proxy/proxy.cpp
+index b286e51..8057708 100644
+--- a/oneTBB/src/tbbmalloc_proxy/proxy.cpp
++++ b/oneTBB/src/tbbmalloc_proxy/proxy.cpp
+@@ -24,7 +24,8 @@
+ // of aligned_alloc as required by new C++ standard, this makes it hard to
+ // redefine aligned_alloc here. However, running on systems with new libc
+ // version, it still needs it to be redefined, thus tricking system headers
+-#if defined(__GLIBC_PREREQ) && !__GLIBC_PREREQ(2, 16) && _GLIBCXX_HAVE_ALIGNED_ALLOC
++#if defined(__GLIBC_PREREQ)
++#if !__GLIBC_PREREQ(2, 16) && _GLIBCXX_HAVE_ALIGNED_ALLOC
+ // tell <cstdlib> that there is no aligned_alloc
+ #undef _GLIBCXX_HAVE_ALIGNED_ALLOC
+ // trick <stdlib.h> to define another symbol instead
+@@ -33,6 +34,7 @@
+ #include <cstdlib>
+ #undef aligned_alloc
+ #endif // defined(__GLIBC_PREREQ)&&!__GLIBC_PREREQ(2, 16)&&_GLIBCXX_HAVE_ALIGNED_ALLOC
++#endif // defined(__GLIBC_PREREQ)
+ #endif // __linux__ && !__ANDROID__
+ 
+ #include "proxy.h"
+@@ -256,6 +258,7 @@ int mallopt(int /*param*/, int /*value*/) __THROW
+     return 1;
+ }
+ 
++#ifdef __GLIBC__
+ struct mallinfo mallinfo() __THROW
+ {
+     struct mallinfo m;
+@@ -263,6 +266,7 @@ struct mallinfo mallinfo() __THROW
+ 
+     return m;
+ }
++#endif
+ 
+ #if __ANDROID__
+ // Android doesn't have malloc_usable_size, provide it to be compatible
