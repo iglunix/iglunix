@@ -1,8 +1,8 @@
 pkgname=swvkc
-pkgver=gpu-dev-option
+pkgver=master
 
 fetch() {
-	curl -L "https://github.com/Ella-0/swvkc/archive/gpu-dev-option.tar.gz" -o $pkgname-$pkgver.tar.gz
+	curl -L "https://github.com/st3r4g/swvkc/archive/master.tar.gz" -o $pkgname-$pkgver.tar.gz
 	tar -xf $pkgname-$pkgver.tar.gz
 	mkdir $pkgname-$pkgver/build
 }
