@@ -26,7 +26,7 @@ case $ARCH in
 
 	aarch64)
 		_dri_drivers=""
-		_gallium_drivers="vc4,v3d"
+		_gallium_drivers="vc4,v3d,zink"
 		_vulkan_drivers="broadcom"
 		;;
 esac
