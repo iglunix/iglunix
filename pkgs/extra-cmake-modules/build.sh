@@ -1,8 +1,9 @@
 pkgname=extra-cmake-modules
-pkgver=5.82.0
+_ver_maj_min=5.82
+pkgver=$_ver_maj_min.0
 
 fetch() {
-	curl -L "https://download.kde.org/stable/frameworks/5.81/extra-cmake-modules-5.81.0.tar.xz" -o $pkgname-$pkgver.tar.xz
+	curl -L "https://download.kde.org/stable/frameworks/$_ver_maj_min/extra-cmake-modules-$pkgver.tar.xz" -o $pkgname-$pkgver.tar.xz
 	tar -xf $pkgname-$pkgver.tar.xz
 	mkdir $pkgname-$pkgver/build
 }
