@@ -1,6 +1,6 @@
 pkgname=mesa
 pkgver=21.1.2
-deps="musl:wayland:wayland-protocols:llvm:zlib:expat:libffi:libdrm:python-mako"
+deps="musl:wayland:wayland-protocols:llvm:zlib-ng:expat:libffi:libdrm:python-mako"
 ext=dev
 
 fetch() {
