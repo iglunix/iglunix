@@ -1,7 +1,7 @@
 pkgver=2.32.0
 pkgname=git
 pkgrel=1
-deps="musl:zlib:curl:dropbear"
+deps="musl:zlib-ng:curl:dropbear"
 bad="gmake"
 ext="doc"
 
