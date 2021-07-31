@@ -1,0 +1,27 @@
+
+
+cp_packages (){
+	#IMPORTANT: must be run from the folder where the iglunix repo is.
+	#NOTE: this will assume that there always is a '*-dev'/'*-doc' package,\n this is not true.
+	# That's why the errors are shown to some one who cares.
+
+	echo "Hello this is build-utils"
+
+
+	for pkg in ${packages[@]}
+	do
+		if [ ! -d pkgs/${pkg}/out ]; then
+			echo "NOTE: ${pkg} was not yet build, building it now"
+			cd pkgs/${pkg}/
+			../../iglupkg.sh
+			cd ../..
+		fi
+
+		echo "Going to copy: $pkg to $1"
+		tar -xf pkgs/${pkg}/out/${pkg}.*.tar.zst -I zstd     -C $1
+		tar -xf pkgs/${pkg}/out/${pkg}-dev.*.tar.zst -I zstd -C $1 2> /dev/null
+		tar -xf pkgs/${pkg}/out/${pkg}-doc.*.tar.zst -I zstd -C $1 2> /dev/null
+
+	done
+}
+
