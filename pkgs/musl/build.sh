@@ -24,6 +24,12 @@ package() {
 	gmake install DESTDIR=$pkgdir
 	rm -r $pkgdir/usr/include
 	install -d $pkgdir/usr/bin
+
+	rm $pkgdir/lib/ld-musl-$(uname -m).so.1
+	mv $pkgdir/usr/lib/libc.so $pkgdir/lib/ld-musl-$(uname -m).so.1
+
+	ln -sr $pkgdir/lib/ld-musl-$(uname -m).so.1 $pkgdir/usr/lib/libc.so
+
 	ln -sr $pkgdir/lib/ld-musl-$(uname -m).so.1 $pkgdir/usr/bin/ldd
 }
 
@@ -31,6 +37,7 @@ package_dev() {
 	cd $pkgname-$pkgver
 	gmake install DESTDIR=$pkgdir
 	rm $pkgdir/usr/lib/*.so
+	rm -rf $pkgdir/lib
 }
 
 license() {
