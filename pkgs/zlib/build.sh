@@ -9,6 +9,11 @@ fetch() {
 }
 
 build() {
+    echo "============="
+    echo " DEPRECATED: "
+    echo " USE ZLIB-NG "
+    echo "============="
+
 	cd $pkgname-$pkgver
 	./configure \
 		--prefix=/usr
