@@ -17,6 +17,7 @@ build() {
 		-Dglib=disabled \
 		-Dgobject=disabled \
 		-Dicu=enabled
+
 	samu
 }
 
