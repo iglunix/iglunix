@@ -44,6 +44,7 @@ build() {
 package() {
 	cd $pkgname-$pkgver
 	make install DESTDIR=$pkgdir
+	rm -rf $pkgdir/usr/share/man
 }
 
 license() {
