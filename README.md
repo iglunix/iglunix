@@ -32,8 +32,6 @@ WebKit builds with all our work and we're currently working on exposing an API
 to use it. JavaScriptCore API works perfectly and example programs run with no
 issue.
 
-## TODO
- - Wayland Compositors - Velox works fine for now
+## TODO (lots more TODO items in the Discord)
  - LLVM (Work out how to split packages)
- - Init system (currently we're just leaving this up to the user)
  - QEMU for multiarch (need lots of work on glibr to get this to build)
