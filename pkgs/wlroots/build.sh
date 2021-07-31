@@ -1,5 +1,5 @@
 pkgname=wlroots
-pkgver=0.13.0
+pkgver=0.14.0
 ext="dev"
 
 fetch() {
