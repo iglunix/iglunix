@@ -8,6 +8,10 @@ fetch() {
 }
 
 build() {
+    echo "================="
+    echo "   DEPRECATED:   "
+    echo " USE TOYBOX FILE "
+    echo "================="
 	cd $pkgname-$pkgver
 	./configure \
 		--prefix=/usr \
