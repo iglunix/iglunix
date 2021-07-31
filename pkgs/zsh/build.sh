@@ -12,8 +12,8 @@ build() {
 	cd $pkgname-$pkgver
 	./configure \
 		--prefix=/usr \
-		--build=x86_64-unknown-linux-musl \
-		--host=x86_64-unknown-linux-musl
+		--build=$TRIPLE \
+		--host=$TRIPLE
 
 	make
 }
