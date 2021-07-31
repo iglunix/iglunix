@@ -2,15 +2,14 @@ diff --git a/library/unwind/build.rs b/library/unwind/build.rs
 index 24bcd40c..51777664 100644
 --- a/library/unwind/build.rs
 +++ b/library/unwind/build.rs
-@@ -14,7 +14,7 @@ fn main() {
+@@ -19,7 +19,7 @@
      } else if target.contains("linux") {
          // linking for Linux is handled in lib.rs
          if target.contains("musl") {
 -            llvm_libunwind::compile();
 +            println!("cargo:rustc-link-lib=unwind");
-         }
-     } else if target.contains("freebsd") {
-         println!("cargo:rustc-link-lib=gcc_s");
+         } else if target.contains("android") {
+             let build = cc::Build::new();
 diff --git a/library/unwind/src/lib.rs b/library/unwind/src/lib.rs
 index dbdefa47..dca1897b 100644
 --- a/library/unwind/src/lib.rs
@@ -36,3 +35,4 @@ diff -Naur rustc-1.48.0-src.orig/src/bootstrap/dist.rs rustc-1.48.0-src/src/boot
              &[
                  // not needed and contains symlinks which rustup currently
                  // chokes on when unpacking.
+

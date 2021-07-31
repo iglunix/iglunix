@@ -1,18 +1,14 @@
 --- a/src/bootstrap/compile.rs
 +++ b/src/bootstrap/compile.rs
-@@ -197,12 +197,6 @@
-                 DependencyType::TargetSelfContained,
-             );
-         }
--        for &obj in &["crtbegin.o", "crtbeginS.o", "crtend.o", "crtendS.o"] {
--            let src = compiler_file(builder, builder.cc(target), target, obj);
--            let target = libdir_self_contained.join(obj);
--            builder.copy(&src, &target);
--            target_deps.push((target, DependencyType::TargetSelfContained));
--        }
-     } else if target.ends_with("-wasi") {
-         let srcdir = builder
-             .wasi_root(target)
+@@ -185,7 +185,7 @@
+     // to using gcc from a glibc-targeting toolchain for linking.
+     // To do that we have to distribute musl startup objects as a part of Rust toolchain
+     // and link with them manually in the self-contained mode.
+-    if target.contains("musl") {
++    if false {
+         let srcdir = builder.musl_libdir(target).unwrap_or_else(|| {
+             panic!("Target {:?} does not have a \"musl-libdir\" key", target.triple)
+         });
 --- a/compiler/rustc_target/src/spec/crt_objects.rs
 +++ b/compiler/rustc_target/src/spec/crt_objects.rs
 @@ -64,24 +64,17 @@

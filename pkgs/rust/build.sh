@@ -17,43 +17,29 @@
 pkgname=rust
 pkgver=beta
 
-
 _clear_vendor_checksums() {
 	sed -i 's/\("files":{\)[^}]*/\1/' vendor/$1/.cargo-checksum.json
 }
 
+# export RUSTROOT="/usr"
+export RUSTROOT="/usr/src/rust-bootstrap/build/rust-root"
+
 fetch() {
 	curl "https://static.rust-lang.org/dist/rustc-$pkgver-src.tar.gz" -o $pkgname-$pkgver.tar.xz
-	curl -L "https://github.com/sfackler/rust-openssl/archive/refs/tags/openssl-v0.10.34.tar.gz" -o rust-openssl.tar.gz
-#	curl -L "https://github.com/sfackler/rust-openssl/archive/master.tar.gz" -o rust-openssl.tar.gz
-#	curl "https://static.rust-lang.org/dist/rustc-nightly-src.tar.gz" -o $pkgname-
 	tar -xf $pkgname-$pkgver.tar.xz
-	tar -xf rust-openssl.tar.gz
 
 	mv rustc-$pkgver-src $pkgname-$pkgver
 
-#	tar -xf rust-openssl.tar.gz
 
-#	cp rust-$pkgver/vendor/openssl/.cargo-checksum.json rust-openssl-master/openssl/
-#	cp rust-$pkgver/vendor/openssl-sys/.cargo-checksum.json rust-openssl-master/openssl-sys/
-
-#	rm -r rust-$pkgver/vendor/openssl-sys
-#	rm -r rust-$pkgver/vendor/openssl
-##	cp -r rust-openssl-master/openssl rust-$pkgver/vendor/openssl
-#	cp -r rust-openssl-master/openssl-sys rust-$pkgver/vendor/openssl-sys
-	
 	cp ../*.patch .
 	cd $pkgname-$pkgver
 	patch -p1 < ../alpine-move-py.patch
 	patch -p1 < ../abyss-install-template-shebang.patch
-	patch -p1 < ../abyss-libunwind.patch
-	patch -p1 < ../abyss-libz.patch
-#	patch -p1 < ../vendored-ssl.patch
-#	patch -p1 < ../openbsd-libressl.patch
 	patch -p1 < ../alpine-crt.patch
 	patch -p1 < ../libexec.patch
 	patch -p1 < ../llvm_crt.patch
 	patch -p1 < ../unfreeze.patch
+	patch -p1 < ../libresslssl.patch
 
 	sed -i /LD_LIBRARY_PATH/d src/bootstrap/bootstrap.py
 	_clear_vendor_checksums libc
@@ -61,12 +47,6 @@ fetch() {
 	_clear_vendor_checksums openssl-src
 	_clear_vendor_checksums openssl
 
-	cp -r ../rust-openssl-openssl-v0.10.34/openssl/ vendor/
-	cp -r ../rust-openssl-openssl-v0.10.34/openssl-sys/ vendor/
-	sed vendor/openssl/Cargo.toml -i -e 's/0.10.34/0.10.30/g'
-	sed vendor/openssl/Cargo.toml -i -e 's/0.9.62/0.9.58/g'
-	sed vendor/openssl-sys/Cargo.toml -i -e 's/0.9.62/0.9.58/g'
-	
 	rm -rf src/llvm-project/
 
 	cd ..
@@ -77,13 +57,14 @@ build() {
 	cd $pkgname-$pkgver
 
 	OPENSSL_LIB_DIR=/usr/lib/ ./configure \
-		--build="x86_64-unknown-linux-musl" \
-		--host="x86_64-unknown-linux-musl" \
-		--target="x86_64-unknown-linux-musl" \
+		--build="$TRIPLE" \
+		--host="$TRIPLE" \
+		--target="$TRIPLE" \
 		--prefix="/usr" \
+		--musl-root="/usr" \
 		--release-channel="beta" \
 		--enable-local-rust \
-		--local-rust-root="/usr" \
+		--local-rust-root=$RUSTROOT \
 		--disable-docs \
 		--enable-extended \
 		--tools="cargo,rls,rustfmt,src" \
@@ -92,26 +73,26 @@ build() {
 		--enable-option-checking \
 		--python="python" \
 		--llvm-root="/usr" \
+		--llvm-libunwind="system" \
 		--enable-llvm-link-shared \
-		--set="target.x86_64-unknown-linux-musl.llvm-config=/usr/bin/llvm-config" \
+		--set="target.$TRIPLE.llvm-config=/usr/bin/llvm-config" \
 		--set="rust.musl-root=/usr" \
-		--set="target.x86_64-unknown-linux-musl.musl-root=/usr" \
-		--set="target.x86_64-unknown-linux-musl.crt-static=false" \
-		--set="target.x86_64-unknown-linux-musl.cc=cc" \
-		--set="target.x86_64-unknown-linux-musl.cxx=c++" \
-		--set="target.x86_64-unknown-linux-musl.ar=ar" \
-		--set="target.x86_64-unknown-linux-musl.linker=cc" \
-		--set="target.x86_64-unknown-linux-musl.musl-root=/usr" \
-		--set="target.x86_64-unknown-linux-musl.crt-static=false" \
-		--set="target.x86_64-unknown-linux-musl.cc=cc" \
-		--set="target.x86_64-unknown-linux-musl.cxx=c++" \
-		--set="target.x86_64-unknown-linux-musl.ar=ar" \
-		--set="target.x86_64-unknown-linux-musl.linker=cc"
+		--set="target.$TRIPLE.musl-root=/usr" \
+		--set="target.$TRIPLE.crt-static=false" \
+		--set="target.$TRIPLE.cc=cc" \
+		--set="target.$TRIPLE.cxx=c++" \
+		--set="target.$TRIPLE.ar=ar" \
+		--set="target.$TRIPLE.linker=cc" \
+		--set="target.$TRIPLE.crt-static=false" \
+		--set="target.$TRIPLE.cc=cc" \
+		--set="target.$TRIPLE.cxx=c++" \
+		--set="target.$TRIPLE.ar=ar" \
+		--set="target.$TRIPLE.linker=cc"
 
 	sed 's/#deny-warnings = .*/deny-warnings = false/' -i config.toml
-	sed 's|deny(warnings,|deny(|' -i src/bootstrap/lib.rs
+#	sed 's|deny(warnings,|deny(|' -i src/bootstrap/lib.rs
 
-	PATH=$(pwd)"/..:$PATH" ./x.py build
+	./x.py build
 }
 
 package() {
