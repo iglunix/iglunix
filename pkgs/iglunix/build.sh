@@ -10,8 +10,8 @@ fetch() {
 	cp ../profile.sh .
 	cp ../motd .
 	cd $pkgname-$pkgver
-	cp ../../../../iglu*.sh .
-	cp ../../../../iglu.8 .
+	cp ../../../../scripts/iglu*.sh .
+	cp ../../../../man/iglu.8 .
 	cp ../../../../LICENSE .
 }
 
