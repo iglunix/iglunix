@@ -5,7 +5,7 @@ REPO_MAJOR=$(echo $REPO_VER | tr '.' ' ' | awk '{ print $1; }')
 REPO_MINOR=$(echo $REPO_VER | tr '.' ' ' | awk '{ print $2; }')
 REPO_MICRO=$(echo $REPO_VER | tr '.' ' ' | awk '{ print $3; }')
 
-LOCAL_VER=$(cat pkgs/$1/build.sh | grep 'pkgver=' | tr '=' ' ' | awk '{ print $2; }')
+LOCAL_VER=$(cat */$1/build.sh | grep 'pkgver=' | tr '=' ' ' | awk '{ print $2; }')
 
 LOCAL_MAJOR=$(echo $LOCAL_VER | tr '.' ' ' | awk '{ print $1; }')
 LOCAL_MINOR=$(echo $LOCAL_VER | tr '.' ' ' | awk '{ print $2; }')
