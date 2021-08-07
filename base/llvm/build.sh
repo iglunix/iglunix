@@ -9,6 +9,7 @@ fetch() {
 	mv llvm-project-$pkgver.src $pkgname-$pkgver
 
 	# fixes relaxation
+	cd $pkgname-$pkgver
 	patch -p1 < ../../riscv-relax.patch
 
 	cp -n ../default.llvm.conf /etc/iglupkg/llvm.conf
