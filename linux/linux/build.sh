@@ -1,4 +1,4 @@
-pkgver=5.12.10
+pkgver=5.13.8
 pkgname=linux
 pkgrel=1
 ext="dev"
@@ -10,7 +10,7 @@ fetch() {
 	cd $pkgname-$pkgver
 
 	# use Alpine's kernel config so we don't have to maintain one
-	curl "https://git.alpinelinux.org/aports/plain/testing/linux-edge/config-edge.$(uname -m)" -o .config
+	curl "https://git.alpinelinux.org/aports/plain/community/linux-edge/config-edge.$(uname -m)" -o .config
 	patch -p1 < ../kernel-no-perl.patch
 	patch -p1 < ../../kernel-byacc.patch
 	patch -p1 < ../../reflex.patch
