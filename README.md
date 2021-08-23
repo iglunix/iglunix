@@ -3,8 +3,16 @@ Unix like software distribution with no GNU components
 
 All build scripts are 0BSD Licensed.
 
-
 To create an ISO from a non-iglunix OS please see https://github.com/iglunix/iglunix-autobuild
+
+## Is this GNU/Linux
+No, GNU currently contributes roughly 10 MiB of code in the base system whilst,
+LLVM and Linux both contribute aproximately 1 GiB each. Instead we suggest that
+one should refer to Igluinx running on the Linux kernel as LLVM/Musl/Linux.
+LLVM and Linux because they are the two largest packages and make up the
+majority of the base system, and Musl to be explicit about the C library,
+target triple and to differentiate it from any system using LLVM's libc
+(which will may very well likely use in the future).
 
 ## Discord
 Join us at [link](https://discord.gg/NKB9qD2bMx)
@@ -26,11 +34,36 @@ Because of this I haven't got far at all porting Iglunix to Darwin
 based systems such as MacOS and PureDarwin.
 
 ## Web Browsers
-Iglunix doesn't currently have any working web browsers yet however we do have
-a WIP WebKit port (WPM or WebKit Platform for Minimal systems). Currently
-WebKit builds with all our work and we're currently working on exposing an API
-to use it. JavaScriptCore API works perfectly and example programs run with no
-issue.
+Iglunix currently has qtwebengine running (with sandboxing broken on atleast
+aarch64). This does require 3 extra GNU dependencies ontop of GNU Make:
+`gperf`, `gm4`, `bison`. This also requires dbus however it is only needed
+at build time and for this reason we are working on a stub implementation.
+
+## Replacements LUT
+
+standard tool | iglunix tool     | use
+-----------------------------------
+glibc         | musl               | libc
+glibc         | libexecinfo        | backtrace functions
+libstdc++     | libc++             | C++ standard library
+libgcc        | libunwind          | stack unwinding
+libgcc        | complier-rt        | compiler builtins
+flex          | reflex             | POSIX lex
+bison         | byacc              | POSIX yacc
+coreutils     | toybox+busybox     | POSIX utilities
+gcc           | clang              | C++ compiler
+zlib          | zlib-ng            | compression library
+gmake         | bmake, others      | POSIX Make implementation
+ninja         | samurai            | Ninja build implementation
+GNU M4        | OpenBSD M4         | POSIX M4 implementation
+ncurses       | netbsd-curses      | X/Open Curses implementation
+bash          | mksh               | Shell
+Linux PAM     | Open PAM           | Pluggable Authentication Modules
+sudo          | doas               | privalidge esculation
+openssl       | libressl (for now) | TLS
+pkg-config    | pkgconf            | package configuration tool
+
+
 
 ## TODO (lots more TODO items in the Discord)
  - LLVM (Work out how to split packages)
