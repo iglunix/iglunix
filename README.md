@@ -41,27 +41,27 @@ at build time and for this reason we are working on a stub implementation.
 
 ## Replacements LUT
 
-standard tool | iglunix tool     | use
------------------------------------
-glibc         | musl               | libc
-glibc         | libexecinfo        | backtrace functions
-libstdc++     | libc++             | C++ standard library
-libgcc        | libunwind          | stack unwinding
-libgcc        | complier-rt        | compiler builtins
-flex          | reflex             | POSIX lex
-bison         | byacc              | POSIX yacc
-coreutils     | toybox+busybox     | POSIX utilities
-gcc           | clang              | C++ compiler
-zlib          | zlib-ng            | compression library
-gmake         | bmake, others      | POSIX Make implementation
-ninja         | samurai            | Ninja build implementation
-GNU M4        | OpenBSD M4         | POSIX M4 implementation
-ncurses       | netbsd-curses      | X/Open Curses implementation
-bash          | mksh               | Shell
-Linux PAM     | Open PAM           | Pluggable Authentication Modules
-sudo          | doas               | privalidge esculation
-openssl       | libressl (for now) | TLS
-pkg-config    | pkgconf            | package configuration tool
+|standard tool | iglunix tool       | use                              |
+|--------------|--------------------|----------------------------------|
+|glibc         | musl               | libc                             |
+|glibc         | libexecinfo        | backtrace functions              |
+|libstdc++     | libc++             | C++ standard library             |
+|libgcc        | libunwind          | stack unwinding                  |
+|libgcc        | complier-rt        | compiler builtins                |
+|flex          | reflex             | POSIX lex                        |
+|bison         | byacc              | POSIX yacc                       |
+|coreutils     | toybox+busybox     | POSIX utilities                  |
+|gcc           | clang              | C++ compiler                     |
+|zlib          | zlib-ng            | compression library              |
+|gmake         | bmake, others      | POSIX Make implementation        |
+|ninja         | samurai            | Ninja build implementation       |
+|GNU M4        | OpenBSD M4         | POSIX M4 implementation          |
+|ncurses       | netbsd-curses      | X/Open Curses implementation     |
+|bash          | mksh               | Shell                            |
+|Linux PAM     | Open PAM           | Pluggable Authentication Modules |
+|sudo          | doas               | privalidge esculation            |
+|openssl       | libressl (for now) | TLS                              |
+|pkg-config    | pkgconf            | package configuration tool       |
 
 
 
