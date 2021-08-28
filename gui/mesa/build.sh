@@ -1,5 +1,5 @@
 pkgname=mesa
-pkgver=21.1.2
+pkgver=21.2.1
 deps="musl:wayland:wayland-protocols:llvm:zlib-ng:expat:libffi:libdrm:python-mako"
 ext=dev
 
@@ -60,7 +60,7 @@ build() {
 		-Dopengl=true \
 		-Dgbm=true \
 		-Dglx=disabled \
-		-Dglvnd=false \
+		-Dglvnd=true \
 		-Degl=true \
 		-Dllvm=true \
 		-Dshared-llvm=true \
