@@ -1,6 +1,8 @@
 pkgver=2.2.10
 pkgname=expat
 bad=""
+mkdeps="bmake"
+deps=""
 ext="dev"
 
 fetch() {

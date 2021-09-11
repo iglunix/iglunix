@@ -1,6 +1,7 @@
 pkgver=20210420
 pkgname=bmake
-bad="musl"
+mkdeps=""
+deps=""
 ext="doc"
 
 fetch() {

@@ -1,5 +1,5 @@
 pkgname=libepoxy
-pkgver=1.5.8
+pkgver=1.5.9
 
 fetch() {
 	curl -L "https://github.com/anholt/libepoxy/releases/download/$pkgver/libepoxy-$pkgver.tar.xz" -o $pkgname-$pkgver.tar.xz

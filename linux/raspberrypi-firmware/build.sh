@@ -1,5 +1,5 @@
 pkgname=raspberrypi-firmware
-pkgver=20210527
+pkgver=20210805
 
 fetch() {
 	curl -L "https://github.com/raspberrypi/firmware/archive/refs/tags/1.$pkgver.tar.gz" -o $pkgname-$pkgver.tar.xz

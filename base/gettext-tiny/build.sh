@@ -1,5 +1,7 @@
 pkgname=gettext-tiny
 pkgver=master
+mkdeps="kati"
+deps=""
 
 fetch() {
 	curl -L "https://github.com/sabotage-linux/gettext-tiny/archive/master.tar.gz" -o $pkgname-$pkgver.tar.gz

@@ -1,8 +1,8 @@
-pkgname=libass
-pkgver=0.15.0
+pkgname=ImageMagick
+pkgver=7.1.0
 
 fetch() {
-	curl -L "https://github.com/libass/libass/releases/download/0.15.0/libass-0.15.0.tar.xz" -o $pkgname-$pkgver.tar.xz
+	curl "https://download.imagemagick.org/ImageMagick/download/ImageMagick.tar.gz" -o $pkgname-$pkgver.tar.xz
 	tar -xf $pkgname-$pkgver.tar.xz
 }
 
@@ -11,8 +11,7 @@ build() {
 	./configure \
 		--prefix=/usr \
 		--build=$TRIPLE \
-		--host=$TRIPLE \
-		--disable-asm
+		--host=$TRIPLE
 
 	make
 }
@@ -24,5 +23,6 @@ package() {
 
 license() {
 	cd $pkgname-$pkgver
-	cat COPYING
+	cat LICENSE
+#	cat COPYING
 }

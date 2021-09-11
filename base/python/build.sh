@@ -1,5 +1,5 @@
 pkgname=python
-pkgver=3.9.5
+pkgver=3.9.6
 bad=""
 ext="doc"
 
@@ -16,6 +16,7 @@ build() {
 		--build=$TARGET \
 		--host=$TARGET \
 		--with-system-ffi=true \
+		--with-ssl-default-suites=openssl \
 		ax_cv_c_float_words_bigendian=no
 	make
 }

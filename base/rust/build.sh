@@ -21,8 +21,8 @@ _clear_vendor_checksums() {
 	sed -i 's/\("files":{\)[^}]*/\1/' vendor/$1/.cargo-checksum.json
 }
 
-export RUSTROOT="/usr"
-# export RUSTROOT="/usr/src/rust-bootstrap/build/rust-root"
+# export RUSTROOT="/usr"
+export RUSTROOT="/usr/src/rust-bootstrap/build/rust-root"
 
 fetch() {
 	curl "https://static.rust-lang.org/dist/rustc-$pkgver-src.tar.gz" -o $pkgname-$pkgver.tar.xz

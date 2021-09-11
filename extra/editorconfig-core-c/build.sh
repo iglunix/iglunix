@@ -1,8 +1,8 @@
-pkgname=glfw
-pkgver=3.3.4
+pkgname=editorconfig-core-c
+pkgver=0.12.5
 
 fetch() {
-	curl -L "https://github.com/glfw/glfw/archive/refs/tags/3.3.4.tar.gz" -o $pkgname-$pkgver.tar.xz
+	curl -L "https://github.com/editorconfig/editorconfig-core-c/archive/refs/tags/v$pkgver.tar.gz" -o $pkgname-$pkgver.tar.xz
 	tar -xf $pkgname-$pkgver.tar.xz
 	mkdir $pkgname-$pkgver/build
 }
@@ -13,11 +13,7 @@ build() {
 	cmake -G Ninja ../ \
 		-DCMAKE_BUILD_TYPE=Release \
 		-DCMAKE_INSTALL_PREFIX=/usr \
-		-DCMAKE_INSTALL_LIBDIR=lib \
-		-DGLFW_USE_WAYLAND=1 \
-		-DGLFW_BUILD_DOCS=0 \
-		-DGLFW_BUILD_EXAMPLES=1 \
-		-DBUILD_SHARED_LIBS=ON
+		-DCMAKE_INSTALL_LIBDIR=lib
 	samu
 }
 

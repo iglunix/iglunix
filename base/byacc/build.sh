@@ -1,6 +1,7 @@
-pkgver=20210328
+pkgver=20210802
 pkgname=byacc
-deps="musl"
+deps=""
+mkdeps="bmake"
 bad=""
 ext="doc"
 

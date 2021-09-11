@@ -1,5 +1,5 @@
 pkgname=ncspot
-pkgver=0.7.3
+pkgver=0.8.1
 
 _clear_vendor_checksums() {
     	sed -i 's/\("files":{\)[^}]*/\1/' vendor/$1/.cargo-checksum.json

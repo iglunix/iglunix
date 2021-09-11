@@ -1,10 +1,12 @@
 pkgname=mesa
-pkgver=21.2.1
+#pkgver=21.2.1
+pkgver=v3dv-vk-ext-vertex-attribute-divisor
 deps="musl:wayland:wayland-protocols:llvm:zlib-ng:expat:libffi:libdrm:python-mako"
 ext=dev
 
 fetch() {
 	curl "https://archive.mesa3d.org/$pkgname-$pkgver.tar.xz" -o $pkgname-$pkgver.tar.gz
+	curl "https://gitlab.freedesktop.org/Ella-0/mesa/-/archive/v3dv-vk-ext-vertex-attribute-divisor/mesa-v3dv-vk-ext-vertex-attribute-divisor.tar.gz" -o $pkgname-$pkgver.tar.gz
 	tar -xf $pkgname-$pkgver.tar.gz
 	mkdir $pkgname-$pkgver/build
 	cp ../byacc-out-mid-build.patch .

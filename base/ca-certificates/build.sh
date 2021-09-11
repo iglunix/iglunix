@@ -2,13 +2,16 @@ pkgname=ca-certificates
 pkgver=202200601
 pkgrel=2
 ext=doc
+mkdeps="gmake"
+deps="libressl"
+bad="gmake"
 
 fetch(){
         curl http://ftp.debian.org/debian/pool/main/c/ca-certificates/ca-certificates_20200601~deb10u2.tar.xz -o $pkgname-$pkgver.tar.gz
         tar -xf $pkgname-$pkgver.tar.gz
         mv work $pkgname-$pkgver
         cd $pkgname-$pkgver
-        patch -p1 < ../../libressl-update-rehash.patch
+        #patch -p1 < ../../libressl-update-rehash.patch
 }
 
 

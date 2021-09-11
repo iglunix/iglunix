@@ -2,7 +2,7 @@ pkgname=ffmpeg
 pkgver=4.4
 
 fetch() {
-	curl "https://ffmpeg.org/releases/ffmpeg-4.3.2.tar.xz" -o $pkgname-$pkgver.tar.xz
+	curl "https://ffmpeg.org/releases/ffmpeg-$pkgver.tar.xz" -o $pkgname-$pkgver.tar.xz
 	tar -xf $pkgname-$pkgver.tar.xz
 }
 

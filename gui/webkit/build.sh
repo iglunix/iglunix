@@ -1,8 +1,8 @@
-pkgname=glfw
-pkgver=3.3.4
+pkgname=webkit
+pkgver=master
 
 fetch() {
-	curl -L "https://github.com/glfw/glfw/archive/refs/tags/3.3.4.tar.gz" -o $pkgname-$pkgver.tar.xz
+	curl -L "https://github.com/iglunix/WebKit/archive/refs/heads/$pkgver.tar.gz" -o $pkgname-$pkgver.tar.xz
 	tar -xf $pkgname-$pkgver.tar.xz
 	mkdir $pkgname-$pkgver/build
 }
@@ -14,10 +14,7 @@ build() {
 		-DCMAKE_BUILD_TYPE=Release \
 		-DCMAKE_INSTALL_PREFIX=/usr \
 		-DCMAKE_INSTALL_LIBDIR=lib \
-		-DGLFW_USE_WAYLAND=1 \
-		-DGLFW_BUILD_DOCS=0 \
-		-DGLFW_BUILD_EXAMPLES=1 \
-		-DBUILD_SHARED_LIBS=ON
+		-DPORT=JSCOnly
 	samu
 }
 

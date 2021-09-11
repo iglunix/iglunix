@@ -2,6 +2,8 @@ pkgver=7.77.0
 pkg_ver=$(echo $pkgver | tr '.' '_')
 pkgname=curl
 pkgrel=1
+mkdeps="samu:cmake"
+deps="openssl"
 bad=""
 ext="doc:dev"
 

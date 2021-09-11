@@ -1,6 +1,8 @@
 pkgver=3.19.2
 pkgname=cmake
 pkgrel=1
+mkdeps="samu"
+deps=""
 bad=""
 ext=""
 
@@ -13,9 +15,9 @@ build() {
 	cd $pkgname-$pkgver
 	./bootstrap \
 		--prefix=/usr \
-		--mandir=/usr/share/man \
-		--datadir=/usr/share/$pkgname \
-		--docdir=/usr/share/doc/$pkgname \
+		--mandir=/share/man \
+		--datadir=/share/$pkgname \
+		--docdir=/share/doc/$pkgname \
 		--generator=Ninja \
 		--no-system-libs
 
