@@ -60,7 +60,6 @@ at build time and for this reason we are working on a stub implementation.
 |bash          | mksh               | Shell                            |
 |Linux PAM     | Open PAM           | Pluggable Authentication Modules |
 |sudo          | doas               | privalidge esculation            |
-|openssl       | libressl (for now) | TLS                              |
 |pkg-config    | pkgconf            | package configuration tool       |
 
 
