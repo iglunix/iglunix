@@ -10,7 +10,7 @@ fetch() {
 
 build() {
 	cd $pkgname-$pkgver
-	gmake limine-bios bin/limine-install CC="clang" TOOLCHAIN="llvm" TOOLCHAIN_CC="clang" TOOLCHAIN_LD="ld.lld"
+	gmake limine-bios bin/limine-install CC="clang" TOOLCHAIN="llvm" TOOLCHAIN_CC="clang" TOOLCHAIN_LD="ld.lld" -j1
 }
 
 package() {
