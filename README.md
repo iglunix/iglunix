@@ -48,7 +48,6 @@ at build time and for this reason we are working on a stub implementation.
 |libstdc++     | libc++             | C++ standard library             |
 |libgcc        | libunwind          | stack unwinding                  |
 |libgcc        | complier-rt        | compiler builtins                |
-|flex          | reflex             | POSIX lex                        |
 |bison         | byacc              | POSIX yacc                       |
 |coreutils     | toybox+busybox     | POSIX utilities                  |
 |gcc           | clang              | C++ compiler                     |
