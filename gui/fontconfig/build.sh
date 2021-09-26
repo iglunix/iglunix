@@ -1,20 +1,27 @@
 pkgname=fontconfig
-pkgver=2.13.93
+pkgver=2.13.94
 
 fetch() {
-	curl "https://www.freedesktop.org/software/fontconfig/release/fontconfig-2.13.93.tar.gz" -o $pkgname-$pkgver.tar.xz
+	curl "https://www.freedesktop.org/software/fontconfig/release/$pkgname-$pkgver.tar.gz" -o $pkgname-$pkgver.tar.xz
 	tar -xf $pkgname-$pkgver.tar.xz
 	cp ../fcobjshash.h $pkgname-$pkgver/src
 	mkdir $pkgname-$pkgver/build
+	cd $pkgname-$pkgver
+	sed -i 's/fcobjshash\.h/fcjunk.h/' src/meson.build
+	sed -i "s/find_program(\'gperf/find_program(\'true/" meson.build
 }
 
 build() {
 	cd $pkgname-$pkgver
+	
 	cd build
 	meson .. \
 		--buildtype=release \
 		--prefix=/usr \
-		--libexecdir=lib
+		--libexecdir=lib \
+		-Ddocs=disabled \
+		-Dnls=disabled \
+		-Dtests=disabled
 	samu
 }
 
