@@ -60,6 +60,7 @@ at build time and for this reason we are working on a stub implementation.
 |Linux PAM     | Open PAM           | Pluggable Authentication Modules |
 |sudo          | doas               | privalidge esculation            |
 |pkg-config    | pkgconf            | package configuration tool       |
+|e2fsprogs     | make_ext4fs        | Make an ext4 file system         |
 
 
 
