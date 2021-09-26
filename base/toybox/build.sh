@@ -9,6 +9,7 @@ fetch() {
 	cd $pkgname-$pkgver
 	patch -p1 < ../../ls-colour.patch
 	patch -p1 < ../../mksh-make.patch
+	patch -p1 < ../../xxd-i.patch
 }
 
 build() {
