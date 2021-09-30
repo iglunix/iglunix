@@ -1,0 +1,11 @@
+--- autoconf-2.13/autoheader.sh
++++ old/autoheader.sh
+@@ -122,7 +122,7 @@
+ # Extract assignments of SYMS, TYPES, FUNCS, HEADERS, and LIBS from the
+ # modified autoconf processing of the input file.  The sed hair is
+ # necessary to win for multi-line macro invocations.
+-eval "`$M4 -I$AC_MACRODIR $use_localdir $r autoheader.m4$f $infile |
++eval "`$M4 -g -D__gnu__ -I$AC_MACRODIR $use_localdir autoheader.m4 $infile |
+        sed -n -e '
+ 		: again
+ 		/^@@@.*@@@$/s/^@@@\(.*\)@@@$/\1/p
