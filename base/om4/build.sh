@@ -8,6 +8,8 @@ ext="doc"
 fetch() {
 	curl -L "https://github.com/ibara/m4/releases/download/om4-6.7/om4-6.7.tar.gz" -o $pkgname-$pkgver.tar.xz
 	tar -xf $pkgname-$pkgver.tar.xz
+	cd $pkgname-$pkgver
+	patch -p1 < ../../m4-hand-written-lexer.patch
 }
 
 build() {
