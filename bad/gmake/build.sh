@@ -6,7 +6,7 @@ bad="gmake"
 ext="doc:dev"
 
 fetch() {
-	curl "https://ftp.gnu.org/gnu/make/make-4.3.tar.gz" -o $pkgname-$pkgver.tar.gz
+	curl "https://ftp.gnu.org/gnu/make/make-$pkgver.tar.gz" -o $pkgname-$pkgver.tar.gz
 	tar -xf $pkgname-$pkgver.tar.gz
 	mv make-$pkgver $pkgname-$pkgver
 }
@@ -14,7 +14,7 @@ fetch() {
 build() {
 	cd $pkgname-$pkgver
 	./configure \
-		--prefix=/usr \
+		--prefix=/usr/bad/gmake \
 		--program-prefix=g \
 		--disable-nls
 	make
@@ -23,22 +23,22 @@ build() {
 package() {
 	cd $pkgname-$pkgver
 	./make install DESTDIR=$pkgdir
-	rm -r $pkgdir/usr/share
-	rm -r $pkgdir/usr/include
+	rm -r $pkgdir/usr/bad/gmake/share
+	rm -r $pkgdir/usr/bad/gmake/include
 }
 
 package_doc() {
 	cd $pkgname-$pkgver
 	./make install DESDIR=$pkgdir
-	rm -r $pkgdir/usr/bin
-	rm -r $pkgdir/usr/share/info
-	rm -r $pkgdir/usr/include
+	rm -r $pkgdir/usr/bad/gmake/bin
+	rm -r $pkgdir/usr/bad/gmake/share/info
+	rm -r $pkgdir/usr/bad/gmake/include
 }
 package_dev() {
 	cd $pkgname-$pkgver
 	./make install DESTDIR=$pkgdir
-	rm -r $pkgdir/usr/bin
-	rm -r $pkgdir/usr/share
+	rm -r $pkgdir/usr/bad/gmake/bin
+	rm -r $pkgdir/usr/bad/gmake/share
 }
 
 license() {

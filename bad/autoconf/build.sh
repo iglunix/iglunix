@@ -13,7 +13,7 @@ fetch() {
 build() {
 	cd $pkgname-$pkgver
 	./configure \
-		--prefix=/usr \
+		--prefix=/usr/bad/autoconf/ \
 		--build=$TRIPLE \
 		--host=$TRIPLE
 
