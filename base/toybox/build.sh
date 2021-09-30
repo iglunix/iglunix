@@ -14,8 +14,8 @@ fetch() {
 
 build() {
 	cd $pkgname-$pkgver
-	CPUS=1 gmake defconfig
-	CPUS=1 gmake
+	CPUS=1 bad --gmake gmake defconfig
+	CPUS=1 bad --gmake gmake
 }
 
 package() {
@@ -27,7 +27,7 @@ package() {
 #	install -d $pkgdir/usr/bin
 #	ln -sr $pkgdir/bin/toybox $pkgdir/usr/bin/install
 #	ln -sr $pkgdir/bin/toybox $pkgdir/usr/bin/lspci
-	gmake PREFIX=$pkgdir install
+	bad --gmake gmake PREFIX=$pkgdir install
 
 	# Provided by NetBSD Curses
 	rm $pkgdir/usr/bin/clear

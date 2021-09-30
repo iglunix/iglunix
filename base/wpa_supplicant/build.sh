@@ -25,7 +25,7 @@ build() {
 package() {
 	cd $pkgname-$pkgver
 	cd $pkgname
-	gmake install DESTDIR=$pkgdir BINDIR=/usr/sbin
+	bad --gmake gmake install DESTDIR=$pkgdir BINDIR=/usr/sbin
 }
 
 license() {

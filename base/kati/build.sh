@@ -9,7 +9,7 @@ fetch() {
 
 build() {
 	cd $pkgname-$pkgver
-	gmake
+	bad --gmake gmake
 }
 
 package() {

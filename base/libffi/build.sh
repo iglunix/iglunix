@@ -11,17 +11,17 @@ fetch() {
 build() {
 	cd $pkgname-$pkgver
 	./configure --prefix=/usr
-	gmake
+	bad --gmake gmake
 }
 
 package() {
 	cd $pkgname-$pkgver
-	gmake install DESTDIR=$pkgdir
+	bad --gmake gmake install DESTDIR=$pkgdir
 }
 
 package_dev() {
 	cd $pkgname-$pkgver
-	gmake install DESTDIR=$pkgdir
+	bad --gmake gmake install DESTDIR=$pkgdir
 }
 
 license() {

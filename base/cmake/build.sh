@@ -32,14 +32,14 @@ package() {
 
 package_doc() {
 	cd $pkgname-$pkgver
-	gmake install DESDIR=$pkgdir
+	DESDIR=$pkgdir samu install
 	rm -r $pkgdir/usr/bin
 	rm -r $pkgdir/usr/share/info
 	rm -r $pkgdir/usr/include
 }
 package_dev() {
 	cd $pkgname-$pkgver
-	gmake install DESTDIR=$pkgdir
+	DESTDIR=$pkgdir samu install
 	rm -r $pkgdir/usr/bin
 	rm -r $pkgdir/usr/share
 }

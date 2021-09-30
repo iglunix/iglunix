@@ -9,12 +9,12 @@ fetch() {
 
 build() {
 	cd $pkgname-$pkgver
-	gmake prefix=/usr all CC=cc
+	bad --gmake gmake prefix=/usr all CC=cc
 }
 
 package() {
 	cd $pkgname-$pkgver
-	gmake prefix=/usr DESTDIR=$pkgdir install
+	bad --gmake gmake prefix=/usr DESTDIR=$pkgdir install
 }
 
 license() {
