@@ -7,7 +7,7 @@ To create an ISO from a non-iglunix OS please see https://github.com/iglunix/igl
 
 ## Is this GNU/Linux
 No, GNU currently contributes roughly 10 MiB of code in the base system whilst,
-LLVM and Linux both contribute aproximately 1 GiB each. Instead we suggest that
+LLVM and Linux both contribute approximately 1 GiB each. Instead we suggest that
 one should refer to Igluinx running on the Linux kernel as LLVM/Musl/Linux.
 LLVM and Linux because they are the two largest packages and make up the
 majority of the base system, and Musl to be explicit about the C library,
@@ -34,8 +34,8 @@ Because of this I haven't got far at all porting Iglunix to Darwin
 based systems such as MacOS and PureDarwin.
 
 ## Web Browsers
-Iglunix currently has qtwebengine running (with sandboxing broken on atleast
-aarch64). This does require 3 extra GNU dependencies ontop of GNU Make:
+Iglunix currently has qtwebengine running (with sandboxing broken on at least
+aarch64). This does require 3 extra GNU dependencies on top of GNU Make:
 `gperf`, `gm4`, `bison`. This also requires dbus however it is only needed
 at build time and for this reason we are working on a stub implementation.
 
@@ -44,22 +44,22 @@ at build time and for this reason we are working on a stub implementation.
 |standard tool | iglunix tool       | use                              |
 |--------------|--------------------|----------------------------------|
 |glibc         | musl               | libc                             |
-|glibc         | libexecinfo        | backtrace functions              |
+|glibc         | libexecinfo        | Backtrace functions              |
 |libstdc++     | libc++             | C++ standard library             |
-|libgcc        | libunwind          | stack unwinding                  |
-|libgcc        | complier-rt        | compiler builtins                |
+|libgcc        | libunwind          | Stack unwinding                  |
+|libgcc        | complier-rt        | Compiler builtins                |
 |bison         | byacc              | POSIX yacc                       |
 |coreutils     | toybox+busybox     | POSIX utilities                  |
 |gcc           | clang              | C++ compiler                     |
-|zlib          | zlib-ng            | compression library              |
+|zlib          | zlib-ng            | Compression library              |
 |gmake         | bmake, others      | POSIX Make implementation        |
 |ninja         | samurai            | Ninja build implementation       |
 |GNU M4        | OpenBSD M4         | POSIX M4 implementation          |
 |ncurses       | netbsd-curses      | X/Open Curses implementation     |
 |bash          | mksh               | Shell                            |
 |Linux PAM     | Open PAM           | Pluggable Authentication Modules |
-|sudo          | doas               | privalidge esculation            |
-|pkg-config    | pkgconf            | package configuration tool       |
+|sudo          | doas               | Privilege escalation             |
+|pkg-config    | pkgconf            | Package configuration tool       |
 |e2fsprogs     | make_ext4fs        | Make an ext4 file system         |
 
 
