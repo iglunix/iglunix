@@ -5,6 +5,10 @@ cmd = cc.cmd_array()
 cmd += '--print-libgcc-file-name'
 libgcc = run_command(cmd)
 libgcc = libgcc.stdout().strip()
+
+arch = target_machine.cpu()
+
+
 message('libgcc: ', libgcc)
 
 globbed_sources = run_command(meson.project_source_root() + '/glob.sh', target_machine.cpu_family())
@@ -12,10 +16,9 @@ newline= '''
 '''
 globbed_sources = globbed_sources.stdout().strip().split(newline)
 
+
 globbed_headers = run_command(meson.project_source_root() + '/globbits.sh', target_machine.cpu_family())
 
-newline= '''
-'''
 globbed_headers = globbed_headers.stdout().strip().split(newline)
 
 install_headers(globbed_headers, subdir: 'bits')
@@ -47,6 +50,8 @@ install_headers(
   subdir: 'netinet'
 )
 
+subdir('bits/')
+
 message(globbed_headers)
 
 c_args = [
@@ -69,7 +74,6 @@ ld_args = [
   libgcc
 ]
 
-arch = target_machine.cpu()
 
 inc_dir_flags = [
   '-I'+meson.project_source_root()+'/arch/' + arch,
@@ -88,7 +92,6 @@ inc_dirs = include_directories(
   'include'
 )
 
-subdir('bits/')
 
 ldso_sources = [
   'ldso/dlstart.c',
