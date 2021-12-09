@@ -47,7 +47,7 @@ at build time and for this reason we are working on a stub implementation.
 |glibc         | libexecinfo        | Backtrace functions              |
 |libstdc++     | libc++             | C++ standard library             |
 |libgcc        | libunwind          | Stack unwinding                  |
-|libgcc        | complier-rt        | Compiler builtins                |
+|libgcc        | compiler-rt        | Compiler builtins                |
 |bison         | byacc              | POSIX yacc                       |
 |coreutils     | toybox+busybox     | POSIX utilities                  |
 |gcc           | clang              | C++ compiler                     |
