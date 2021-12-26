@@ -1,8 +1,7 @@
-pkgver=2.4.106
+pkgver=2.4.109
 pkgname=libdrm
 dep="libpciaccess"
 bad=""
-ext="dev"
 
 fetch() {
 	curl -L "https://dri.freedesktop.org/libdrm/libdrm-$pkgver.tar.xz" -o $pkgname-$pkgver.tar.gz
@@ -20,9 +19,8 @@ package() {
 	DESTDIR=$pkgdir samu -C build install
 }
 
-package_dev() {
-	cd $pkgname-$pkgver
-	DESTDIR=$pkgdir samu -C build install
+backup() {
+    return
 }
 
 license() {

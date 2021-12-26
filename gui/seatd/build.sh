@@ -1,5 +1,5 @@
 pkgname=seatd
-pkgver=0.5.0
+pkgver=0.6.3
 
 fetch() {
 	curl "https://git.sr.ht/~kennylevinsen/seatd/archive/$pkgver.tar.gz" -o $pkgname-$pkgver.tar.xz
@@ -23,6 +23,10 @@ package() {
 	cd $pkgname-$pkgver
 	cd build
 	DESTDIR=$pkgdir samu install
+}
+
+backup() {
+    return
 }
 
 license() {

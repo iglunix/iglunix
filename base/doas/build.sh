@@ -13,7 +13,8 @@ fetch() {
 
 build() {
 	cd $pkgname-$pkgver
-	./configure --prefix=/usr
+	./configure --prefix=/usr \
+	--without-pam
 	gmake
 }
 

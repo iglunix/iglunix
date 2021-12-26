@@ -10,6 +10,7 @@ build() {
 	cd $pkgname-$pkgver
 	./configure \
 		--prefix=/usr \
+		--sysconfdir=/etc \
 		--build=$TRIPLE \
 		--host=$TRIPLE
 

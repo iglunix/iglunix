@@ -1,8 +1,8 @@
 pkgname=perl
-pkgver=5.32.1
+pkgver=5.34.0
 
 fetch() {
-	curl "https://www.cpan.org/src/5.0/perl-5.32.1.tar.gz" -o $pkgname-$pkgver.tar.xz
+	curl "https://www.cpan.org/src/5.0/perl-$pkgver.tar.gz" -o $pkgname-$pkgver.tar.xz
 	tar -xf $pkgname-$pkgver.tar.xz
 }
 
@@ -45,6 +45,10 @@ package() {
 	cd $pkgname-$pkgver
 	make install DESTDIR=$pkgdir
 	rm -rf $pkgdir/usr/share/man
+}
+
+backup() {
+    return
 }
 
 license() {

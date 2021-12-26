@@ -1,8 +1,7 @@
-pkgver=0.58.1
+pkgver=0.60.2
 pkgname=meson
 deps=python
 bad=""
-ext="doc"
 
 fetch() {
 	curl -L "https://github.com/mesonbuild/meson/releases/download/$pkgver/meson-$pkgver.tar.gz" -o $pkgname-$pkgver.tar.gz
@@ -22,8 +21,8 @@ package() {
 	python setup.py install --prefix=/usr --root=$pkgdir
 }
 
-package_doc() {
-	echo $pkgdir
+backup() {
+    return
 }
 
 license() {

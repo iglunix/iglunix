@@ -1,15 +1,12 @@
-pkgver=1.20210303-1
+pkgver=1.20211007
 pkgname=raspberrypi-linux
-ext="dev"
 
 fetch() {
-	curl "https://raw.githubusercontent.com/kisslinux/website/master/site/dist/kernel-no-perl.patch" -o kernel-no-perl.patch
-	curl -L "https://github.com/raspberrypi/linux/archive/refs/tags/raspberrypi-kernel_$pkgver.tar.gz" -o $pkgname-$pkgver.tar.gz
+	curl -L "https://github.com/raspberrypi/linux/archive/refs/tags/$pkgver.tar.gz" -o $pkgname-$pkgver.tar.gz
 	tar -xf $pkgname-$pkgver.tar.gz
 	mv linux-raspberrypi-kernel_$pkgver $pkgname-$pkgver
 	cd $pkgname-$pkgver
 
-	patch -p1 < ../kernel-no-perl.patch
 	patch -p1 < ../../kernel-byacc.patch
 	# patch -p1 < ../../reflex.patch
 }
@@ -30,18 +27,21 @@ package() {
 
 	mv $pkgdir/boot/broadcom/* $pkgdir/boot/
 	rmdir $pkgdir/boot/broadcom
-}
 
-package_dev() {
-	cd $pkgname-$pkgver
 	if stat /usr/bin/rsync 2>/dev/null /dev/null; then
+    	echo "using rsync"
 		gmake ARCH=arm64 CC=cc HOSTCC=cc LEX=flex YACC=yacc LLVM=1 LLVM_IAS=1 INSTALL_HDR_PATH=$pkgdir/usr headers_install
 	else
 		gmake ARCH=arm64 CC=cc HOSTCC=cc LEX=flex YACC=yacc LLVM=1 LLVM_IAS=1 headers
 		find -name '.*' -exec rm {} \;
 		rm usr/include/Makefile
-		cp -r usr/include $pkgdir/usr
+		install -d $pkgdir/usr/
+		cp -r usr/include $pkgdir/usr/
 	fi
+}
+
+backup() {
+	return
 }
 
 license() {

@@ -1,5 +1,5 @@
 pkgname=openssh
-pkgver=8.6p1
+pkgver=8.8p1
 
 fetch() {
 	curl "https://cdn.openbsd.org/pub/OpenBSD/OpenSSH/portable/openssh-$pkgver.tar.gz" -o $pkgname-$pkgver.tar.xz
@@ -10,8 +10,8 @@ build() {
 	cd $pkgname-$pkgver
 	./configure \
 		--prefix=/usr \
-		--build=x86_64-unknown-linux-musl \
-		--host=x86_64-unknown-linux-musl \
+		--build=$TRIPLE \
+		--host=$TRIPLE \
 		--libexecdir=/usr/lib
 
 	make
@@ -20,6 +20,10 @@ build() {
 package() {
 	cd $pkgname-$pkgver
 	make install DESTDIR=$pkgdir
+}
+
+backup() {
+    return
 }
 
 license() {

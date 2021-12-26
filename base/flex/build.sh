@@ -19,6 +19,7 @@ build() {
 package() {
 	cd $pkgname-$pkgver
 	make install DESTDIR=$pkgdir
+	ln -sr $pkgdir/usr/bin/flex $pkgdir/usr/bin/lex
 }
 
 license() {

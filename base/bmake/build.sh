@@ -1,8 +1,7 @@
-pkgver=20210420
+pkgver=20211024
 pkgname=bmake
 mkdeps=""
 deps=""
-ext="doc"
 
 fetch() {
 	curl http://www.crufty.net/ftp/pub/sjg/bmake-$pkgver.tar.gz -o $pkgname-$pkgver.tar.gz
@@ -23,12 +22,10 @@ package() {
 	cd $pkgname-$pkgver
 	./bmake -m ./mk install DESTDIR=$pkgdir
 	ln -sr $pkgdir/usr/bin/bmake $pkgdir/usr/bin/make
-	rm -r $pkgdir/usr/share/man
 }
 
-package_doc() {
-	cd $pkgname-$pkgver
-	install -Dm644 ./bmake.1 $pkgdir/usr/share/man/man1/bmake.1
+backup() {
+    return
 }
 
 license() {

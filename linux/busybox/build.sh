@@ -1,4 +1,4 @@
-pkgver=1.34.0
+pkgver=1.34.1
 pkgname=busybox
 bad=gmake
 deps="musl"
@@ -7,14 +7,17 @@ pkgrel=1
 fetch() {
 	curl "https://busybox.net/downloads/busybox-$pkgver.tar.bz2" -o $pkgname-$pkgver.tar.gz
 	tar -xf $pkgname-$pkgver.tar.gz
+	cd $pkgname-$pkgver
+	patch -p1 < ../../clang-fix.patch
+	patch -p1 < ../../modprobe.patch
 	# cp ../man.sh .
 }
 
 build() {
 	cd $pkgname-$pkgver
-	gmake HOSTCC=cc CC=cc CFLAGS=-O0 defconfig
-	gmake HOSTCC=cc CC=cc CFLAGS=-O0
-	gmake HOSTCC=cc CC=cc CFLAGS=-O0 install
+	gmake HOSTCC=cc CC=cc defconfig
+	gmake HOSTCC=cc CC=cc
+	gmake HOSTCC=cc CC=cc install
 }
 
 package() {

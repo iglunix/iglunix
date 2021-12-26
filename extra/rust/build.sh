@@ -33,13 +33,13 @@ fetch() {
 
 	cp ../*.patch .
 	cd $pkgname-$pkgver
-	patch -p1 < ../alpine-move-py.patch
-	patch -p1 < ../abyss-install-template-shebang.patch
+	# patch -p1 < ../alpine-move-py.patch
+	# patch -p1 < ../abyss-install-template-shebang.patch
 	patch -p1 < ../alpine-crt.patch
 	patch -p1 < ../libexec.patch
 	patch -p1 < ../llvm_crt.patch
 	patch -p1 < ../unfreeze.patch
-	patch -p1 < ../libresslssl.patch
+	# patch -p1 < ../libresslssl.patch
 
 	sed -i /LD_LIBRARY_PATH/d src/bootstrap/bootstrap.py
 	_clear_vendor_checksums libc
@@ -53,18 +53,19 @@ fetch() {
 build() {
 	cd $pkgname-$pkgver
 
+    #	--tools="cargo,rls,rustfmt,src" \
 	OPENSSL_LIB_DIR=/usr/lib/ ./configure \
 		--build="$TRIPLE" \
 		--host="$TRIPLE" \
 		--target="$TRIPLE" \
 		--prefix="/usr" \
 		--musl-root="/usr" \
-		--release-channel="beta" \
+		--release-channel="nightly" \
 		--enable-local-rust \
 		--local-rust-root=$RUSTROOT \
 		--disable-docs \
 		--enable-extended \
-		--tools="cargo,rls,rustfmt,src" \
+		--tools="cargo,rustfmt,rls,src" \
 		--enable-vendor \
 		--disable-locked-deps \
 		--enable-option-checking \

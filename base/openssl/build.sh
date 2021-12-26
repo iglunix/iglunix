@@ -21,20 +21,14 @@ build() {
 		no-seed no-weak-ssl-ciphers \
 		-Wa,--noexecstack
 
-	make
+	make CC=cc
 }
 
 package() {
 	cd $pkgname-$pkgver
-	make install_sw DESTDIR=$pkgdir
-	rm -rf $pkgdir/usr/lib/pkgconf
-	rm -rf $pkgdir/usr/include
-}
-
-package_dev() {
-	cd $pkgname-$pkgver
-	make install_sw DESTDIR=$pkgdir
-	rm -rf $pkgdir/usr/bin
+	make install_sw install_ssldir DESTDIR=$pkgdir
+	install -d $pkgdir/usr/sbin
+	install -Dm755 ../../update-ca.sh $pkgdir/usr/sbin/update-ca
 }
 
 license() {

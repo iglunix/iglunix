@@ -187,7 +187,7 @@ elif [ "$i" = "1" ]; then
 	deps=$(grep deps /tmp/iglunix/$bname_we/usr/share/iglupkg/$bname | tr '=' '\n' | grep -v deps | tr ':' '\n')
 	for dep in $deps; do
 		stat /usr/share/iglupkg/$dep > /dev/null 2> /dev/null || dep_not_found $dep
-    	done
+	done
 	tar -I zstd -xf $1 -C /
 	rm -r /tmp/iglunix/$bname_we
 elif [ "$f" = "1" ]; then

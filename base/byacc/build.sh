@@ -1,9 +1,8 @@
-pkgver=20210802
+pkgver=20210808
 pkgname=byacc
 deps=""
 mkdeps="bmake"
 bad=""
-ext="doc"
 
 fetch() {
 	curl https://invisible-island.net/datafiles/release/byacc.tar.gz -o $pkgname-$pkgver.tar.gz
@@ -26,13 +25,10 @@ package() {
 	cd $pkgname-$pkgver
 	make install DESTDIR=$pkgdir
 	ln -sr $pkgdir/usr/bin/byacc $pkgdir/usr/bin/yacc
-	rm -r $pkgdir/usr/share
 }
 
-package_doc() {
-	cd $pkgname-$pkgver
-	make install DESTDIR=$pkgdir
-	rm -r $pkgdir/usr/bin
+backup() {
+
 }
 
 license() {

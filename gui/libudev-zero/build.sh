@@ -1,5 +1,5 @@
 pkgname=libudev-zero
-pkgver=0.5.2
+pkgver=1.0.0
 
 fetch() {
 	curl -L "https://github.com/illiliti/libudev-zero/archive/$pkgver.tar.gz" -o $pkgname-$pkgver.tar.xz
@@ -18,7 +18,10 @@ package() {
 	make install PREFIX=/usr DESTDIR=$pkgdir
 	install -d $pkgdir/usr/sbin
 	install -Dm755 ./contrib/libudev-zero-hotplug-helper $pkgdir/usr/sbin/
-	install -Dm755 ./contrib/helper.sh $pkgdir/usr/sbin/libudev-zero-hotplug-helper.sh
+}
+
+backup() {
+	return
 }
 
 license() {

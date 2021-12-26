@@ -25,13 +25,14 @@ function do_fetch() {
 	mkdir -p src
 	cd src
 	srcdir=$(pwd) fetch
+	touch .fetched
 }
 
 srcdir=$(pwd)/src
-stat src > /dev/null 2>/dev/null || do_fetch
-stat src > /dev/null 2>/dev/null && echo '=========================================='
-stat src > /dev/null 2>/dev/null && echo 'Warning: `./src/` found: not running fetch'
-stat src > /dev/null 2>/dev/null && echo '=========================================='
+stat src/.fetched > /dev/null 2>/dev/null || do_fetch
+stat src/.fetched > /dev/null 2>/dev/null && echo '========================'
+stat src/.fetched > /dev/null 2>/dev/null && echo 'Warning: Already Fetched'
+stat src/.fetched > /dev/null 2>/dev/null && echo '========================'
 
 cd $srcdir
 

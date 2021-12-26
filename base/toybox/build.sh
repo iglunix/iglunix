@@ -1,11 +1,12 @@
-pkgver=0.8.5
+pkgver=0.8.6
 pkgname=toybox
 pkgrel=1
-deps="musl:pci-ids"
+deps="musl"
 
 fetch() {
 	curl "http://www.landley.net/toybox/downloads/$pkgname-$pkgver.tar.gz" -o $pkgname-$pkgver.tar.gz
 	tar -xf $pkgname-$pkgver.tar.gz
+	curl "https://pci-ids.ucw.cz/v2.2/pci.ids" -o pci.ids
 	cd $pkgname-$pkgver
 	patch -p1 < ../../ls-colour.patch
 	patch -p1 < ../../mksh-make.patch
@@ -18,7 +19,14 @@ build() {
 	CPUS=1 bad --gmake gmake
 }
 
+backup() {
+	return
+}
+
 package() {
+	install -d $pkgdir/usr/share/misc
+	install -Dm 644 pci.ids $pkgdir/usr/share/misc
+
 	cd $pkgname-$pkgver
 #	install -d $pkgdir/bin
 #	install -Dm755 ./toybox $pkgdir/bin/

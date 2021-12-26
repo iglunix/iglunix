@@ -1,4 +1,4 @@
-pkgver=12.0.1
+pkgver=13.0.0
 pkgname=llvm
 bad=""
 ext="dev"

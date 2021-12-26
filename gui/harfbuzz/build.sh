@@ -1,8 +1,8 @@
 pkgname=harfbuzz
-pkgver=2.7.4
+pkgver=3.0.0
 
 fetch() {
-	curl -L "https://github.com/harfbuzz/harfbuzz/releases/download/2.7.4/harfbuzz-2.7.4.tar.xz" -o $pkgname-$pkgver.tar.xz
+	curl -L "https://github.com/harfbuzz/harfbuzz/releases/download/$pkgver/harfbuzz-$pkgver.tar.xz" -o $pkgname-$pkgver.tar.xz
 	tar -xf $pkgname-$pkgver.tar.xz
 	mkdir $pkgname-$pkgver/build
 }
@@ -10,7 +10,7 @@ fetch() {
 build() {
 	cd $pkgname-$pkgver
 	cd build
-	meson .. \
+	CFLAGS="$CFLAGS -Wunused-but-set-variable" meson .. \
 		--buildtype=release \
 		--prefix=/usr \
 		--libexecdir=lib \

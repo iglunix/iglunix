@@ -1,9 +1,8 @@
 pkgname=wlroots
-pkgver=0.14.0
-ext="dev"
+pkgver=0.15.0
 
 fetch() {
-	curl -L "https://github.com/swaywm/wlroots/releases/download/$pkgver/wlroots-$pkgver.tar.gz" -o $pkgname-$pkgver.tar.xz
+	curl -L "https://gitlab.freedesktop.org/wlroots/wlroots/-/archive/$pkgver/wlroots-$pkgver.tar.gz" -o $pkgname-$pkgver.tar.xz
 	tar -xf $pkgname-$pkgver.tar.xz
 	mkdir $pkgname-$pkgver/build
 }
@@ -15,7 +14,11 @@ build() {
 		--buildtype=release \
 		--prefix=/usr \
 		--libexecdir=lib \
-		-Dlibseat=enabled
+		-Dxcb-errors=disabled \
+		-Dxwayland=disabled \
+		-Dexamples=false \
+		-Drenderers="['gles2', 'vulkan']" \
+		-Dbackends="['drm', 'libinput']"
 	samu
 }
 
@@ -23,16 +26,10 @@ package() {
 	cd $pkgname-$pkgver
 	cd build
 	DESTDIR=$pkgdir samu install
-	rm -r $pkgdir/usr/include
-	rm -r $pkgdir/usr/lib/pkgconfig
 }
 
-package_dev() {
-	cd $pkgname-$pkgver
-	cd build
-	DESTDIR=$pkgdir samu install
-	rm $pkgdir/usr/lib/*.so
-	rm $pkgdir/usr/lib/*.so.*
+backup() {
+    return
 }
 
 license() {

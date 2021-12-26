@@ -1,4 +1,4 @@
-pkgver=7.77.0
+pkgver=7.79.0
 pkg_ver=$(echo $pkgver | tr '.' '_')
 pkgname=curl
 pkgrel=1
@@ -19,8 +19,7 @@ build() {
 	cmake -G Ninja ../ \
 		-DCMAKE_BUILD_TYPE=Release \
 		-DCMAKE_INSTALL_PREFIX=/usr \
-		-DCMAKE_INSTALL_LIBDIR=lib \
-		-DCURL_CA_BUNDLE=/etc/ssl/certs/ca-certificates.crt
+		-DCMAKE_INSTALL_LIBDIR=lib
 	samu
 }
 

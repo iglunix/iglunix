@@ -1,5 +1,5 @@
 pkgname=python
-pkgver=3.9.6
+pkgver=3.9.7
 bad=""
 ext="doc"
 

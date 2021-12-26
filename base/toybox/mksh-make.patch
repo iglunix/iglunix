@@ -1,5 +1,3 @@
-diff --git a/scripts/make.sh b/scripts/make.sh
-index 5b2d5d81..2c5e4b93 100755
 --- a/scripts/make.sh
 +++ b/scripts/make.sh
 @@ -106,8 +106,7 @@ genbuildsh()
@@ -12,3 +10,25 @@ index 5b2d5d81..2c5e4b93 100755
  then
    echo -n "Library probe"
  
+--- a/scripts/genconfig.sh
++++ b/scripts/genconfig.sh
+@@ -16,7 +16,7 @@ probecc()
+ # Symbol name is first argument, flags second, feed C file to stdin
+ probesymbol()
+ {
+-  probecc "${@:2}" 2>/dev/null && DEFAULT=y || DEFAULT=n
++  probecc $2 2>/dev/null && DEFAULT=y || DEFAULT=n
+   rm a.out 2>/dev/null
+   echo -e "config $1\n\tbool" || exit 1
+   echo -e "\tdefault $DEFAULT\n" || exit 1
+--- a/scripts/make.sh
++++ b/scripts/make.sh
+@@ -15,7 +15,7 @@ if [ ! -z "$ASAN" ]; then
+ fi
+ 
+ # Centos 7 bug workaround, EOL June 30 2024.
+-DASHN=-n; wait -n 2>/dev/null; [ $? -eq 2 ] && unset DASHN
++unset DASHN
+ 
+ export LANG=c
+ export LC_ALL=C

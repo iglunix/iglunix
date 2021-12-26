@@ -1,8 +1,8 @@
 pkgname=vulkan-headers
-pkgver=1.2.182
+pkgver=1.2.196
 
 fetch() {
-	curl -L "https://github.com/KhronosGroup/Vulkan-Headers/archive/v1.2.182.tar.gz" -o $pkgname-$pkgver.tar.xz
+	curl -L "https://github.com/KhronosGroup/Vulkan-Headers/archive/v$pkgver.tar.gz" -o $pkgname-$pkgver.tar.xz
 	tar -xf $pkgname-$pkgver.tar.xz
 	mv Vulkan-Headers-$pkgver $pkgname-$pkgver
 	mkdir $pkgname-$pkgver/build

@@ -1,9 +1,8 @@
 pkgname=wayland
-pkgver=1.19.0
-deps="libxml2"
+pkgver=1.20.0
 
 fetch() {
-	curl "https://wayland.freedesktop.org/releases/wayland-1.19.0.tar.xz" -o $pkgname-$pkgver.tar.xz
+	curl "https://wayland.freedesktop.org/releases/wayland-$pkgver.tar.xz" -o $pkgname-$pkgver.tar.xz
 	tar -xf $pkgname-$pkgver.tar.xz
 	mkdir $pkgname-$pkgver/build
 }
@@ -14,7 +13,11 @@ build() {
 	meson .. \
 		--buildtype=release \
 		--prefix=/usr \
-		-Ddocumentation=false
+		-Dlibraries=true \
+		-Dscanner=true \
+		-Dtests=false \
+		-Ddocumentation=false \
+		-Ddtd_validation=false
 	samu
 }
 
@@ -22,6 +25,10 @@ package() {
 	cd $pkgname-$pkgver
 	cd build
 	DESTDIR=$pkgdir samu install
+}
+
+backup() {
+	return
 }
 
 license() {

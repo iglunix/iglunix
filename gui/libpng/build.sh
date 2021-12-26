@@ -10,6 +10,7 @@ build() {
 	cd $pkgname-$pkgver
 	./configure \
 		--prefix=/usr \
+		--with-zlib-prefix=/usr \
 		--build=$TRIPLE \
 		--host=$TRIPLE
 
@@ -19,6 +20,10 @@ build() {
 package() {
 	cd $pkgname-$pkgver
 	make install DESTDIR=$pkgdir
+}
+
+backup() {
+    return
 }
 
 license() {
