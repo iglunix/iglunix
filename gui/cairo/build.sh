@@ -14,7 +14,7 @@ build() {
 		--buildtype=release \
 		--prefix=/usr \
 		--libexecdir=lib \
-		-Dglib=disabled
+		-Dglib=enabled
 	samu
 }
 
@@ -22,6 +22,10 @@ package() {
 	cd $pkgname-$pkgver
 	cd build
 	DESTDIR=$pkgdir samu install
+}
+
+backup() {
+	return
 }
 
 license() {
