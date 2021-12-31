@@ -21,10 +21,10 @@ _clear_vendor_checksums() {
 	sed -i 's/\("files":{\)[^}]*/\1/' vendor/$1/.cargo-checksum.json
 }
 
-# export RUSTROOT="/usr"
-export RUSTROOT="/usr/src/rust-bootstrap/build/rust-root"
+export RUSTROOT="/usr"
 
 fetch() {
+	return
 	curl "https://static.rust-lang.org/dist/rustc-$pkgver-src.tar.gz" -o $pkgname-$pkgver.tar.xz
 	tar -xf $pkgname-$pkgver.tar.xz
 
@@ -33,26 +33,18 @@ fetch() {
 
 	cp ../*.patch .
 	cd $pkgname-$pkgver
-	# patch -p1 < ../alpine-move-py.patch
-	# patch -p1 < ../abyss-install-template-shebang.patch
 	patch -p1 < ../alpine-crt.patch
 	patch -p1 < ../libexec.patch
-	patch -p1 < ../llvm_crt.patch
-	patch -p1 < ../unfreeze.patch
-	# patch -p1 < ../libresslssl.patch
+	patch -p1 < ../fix-curl.patch
 
 	sed -i /LD_LIBRARY_PATH/d src/bootstrap/bootstrap.py
-	_clear_vendor_checksums libc
-	_clear_vendor_checksums openssl-sys
-	_clear_vendor_checksums openssl-src
-	_clear_vendor_checksums openssl
-
-	cd ..
+	_clear_vendor_checksums curl
+	_clear_vendor_checksums curl-sys
 }
 
 build() {
 	cd $pkgname-$pkgver
-
+	return
     #	--tools="cargo,rls,rustfmt,src" \
 	OPENSSL_LIB_DIR=/usr/lib/ ./configure \
 		--build="$TRIPLE" \
@@ -96,6 +88,10 @@ build() {
 package() {
 	cd $pkgname-$pkgver
 	DESTDIR="$pkgdir" ./x.py install
+}
+
+backup() {
+	return
 }
 
 license() {
