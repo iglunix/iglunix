@@ -32,7 +32,7 @@ build() {
 package() {
 	cd $pkgname-$pkgver
 	DESTDIR=$pkgdir zig build -Drelease-safe --prefix /usr install
-	# Igluinx has alacritty packaged
+	# Iglunix has alacritty packaged
 	sed -i 's/foot/alacritty/g' $pkgdir/etc/river/init
 }
 
