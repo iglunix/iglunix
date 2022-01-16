@@ -34,10 +34,9 @@ Because of this I haven't got far at all porting Iglunix to Darwin
 based systems such as MacOS and PureDarwin.
 
 ## Web Browsers
-Iglunix currently has qtwebengine running (with sandboxing broken on at least
-aarch64). This does require 3 extra GNU dependencies on top of GNU Make:
-`gperf`, `gm4`, `bison`. This also requires dbus however it is only needed
-at build time and for this reason we are working on a stub implementation.
+Iglunix has Firefox ESR packaged requiring 2 extra GNU packages: `gm4` and
+`autoconf`. Iglunix may switch to using a patched version of webkit gtk with
+openssl and maybe ffmpeg replacing gstreamer.
 
 ## Replacements LUT
 
