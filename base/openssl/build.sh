@@ -31,6 +31,10 @@ package() {
 	install -Dm755 ../../update-ca.sh $pkgdir/usr/sbin/update-ca
 }
 
+backup() {
+	return
+}
+
 license() {
 	cd $pkgname-$pkgver
 
