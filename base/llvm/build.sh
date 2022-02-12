@@ -1,4 +1,4 @@
-pkgver=13.0.0
+pkgver=13.0.1
 pkgname=llvm
 bad=""
 ext="dev"
@@ -7,13 +7,6 @@ fetch() {
 	curl -L "https://github.com/llvm/llvm-project/releases/download/llvmorg-$pkgver/llvm-project-$pkgver.src.tar.xz" -o $pkgname-$pkgver.tar.gz
 	tar -xf $pkgname-$pkgver.tar.gz
 	mv llvm-project-$pkgver.src $pkgname-$pkgver
-
-	# fixes relaxation
-	cd $pkgname-$pkgver
-	patch -p1 < ../../riscv-relax.patch
-
-	cp -n ../default.llvm.conf /etc/iglupkg/llvm.conf
-	[ ../default/llvm.conf -nt /etc/iglupkg/llvm.conf ] && echo "WARNING: the default config file is newer than your config file." done
 }
 
 build() {
@@ -84,7 +77,7 @@ build() {
                 -DCLANG_ENABLE_STATIC_ANALYZER=OFF \
                 -DCLANG_ENABLE_ARCMT=OFF \
                 -DCLANG_LINK_CLANG_DYLIB=OFF \
-                -DCOMPILER_RT_USE_BUILTINS_LIBRARY=ON \
+                -DCOMPILER_RT_USE_BUILTINS_LIBRARY=OFF \
                 -DCOMPILER_RT_DEFAULT_TARGET_ONLY=OFF \
                 -DCOMPILER_RT_INCLUDE_TESTS=OFF \
                 -DCOMPILER_RT_BUILD_SANITIZERS=OFF \
@@ -93,6 +86,7 @@ build() {
                 -DCOMPILER_RT_INCLUDE_TESTS=OFF \
                 -DCOMPILER_RT_BUILD_LIBFUZZER=OFF \
                 -DENABLE_EXPERIMENTAL_NEW_PASS_MANAGER=TRUE \
+                -DCAN_TARGET_i386=1 \
                 ../llvm
 
 	samu -j$JOBS
@@ -102,10 +96,15 @@ package() {
 	cd $pkgname-$pkgver
 	cd build
 	DESTDIR=$pkgdir samu install
-	ln -sr $pkgdir/usr/bin/clang $pkgdir/usr/bin/cc
-	ln -sr $pkgdir/usr/bin/clang $pkgdir/usr/bin/c89
-	ln -sr $pkgdir/usr/bin/clang $pkgdir/usr/bin/c99
-	ln -sr $pkgdir/usr/bin/clang++ $pkgdir/usr/bin/c++
+	ln -s clang $pkgdir/usr/bin/cc
+	ln -s clang $pkgdir/usr/bin/c89
+	ln -s clang $pkgdir/usr/bin/c99
+	ln -s clang++ $pkgdir/usr/bin/c++
+	ln -s ld.lld $pkgdir/usr/bin/ld
+}
+
+backup() {
+	return
 }
 
 package_dev() {
