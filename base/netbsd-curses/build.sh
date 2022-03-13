@@ -1,6 +1,6 @@
 pkgver=master
 pkgname=netbsd-curses
-bad=""
+bad="gmake"
 deps="musl"
 ext="doc:dev"
 
@@ -11,32 +11,16 @@ fetch() {
 
 build() {
 	cd $pkgname-$pkgver
-	ckati
+	bad --gmake gmake PREFIX=/usr
 }
 
 package() {
 	cd $pkgname-$pkgver
-	ckati install DESTDIR=$pkgdir PREFIX=/usr
-	rm -r $pkgdir/usr/share
-	rm $pkgdir/usr/lib/*.a
-	rm -r $pkgdir/usr/include
-	rm -r $pkgdir/usr/lib/pkgconfig
+	bad --gmake gmake install DESTDIR=$pkgdir PREFIX=/usr
 }
 
-package_doc() {
-	cd $pkgname-$pkgver
-	ckati install DESTDIR=$pkgdir PREFIX=/usr
-	rm -r $pkgdir/usr/bin
-	rm -r $pkgdir/usr/lib
-	rm -r $pkgdir/usr/include
-}
-
-package_dev() {
-	cd $pkgname-$pkgver
-	ckati install DESTDIR=$pkgdir PREFIX=/usr
-	rm $pkgdir/usr/lib/*.so
-	rm -r $pkgdir/usr/share
-	rm -r $pkgdir/usr/bin
+backup() {
+	return
 }
 
 license() {
