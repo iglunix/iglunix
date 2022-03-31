@@ -1,4 +1,4 @@
-pkgver=13.0.1
+pkgver=14.0.0
 pkgname=llvm
 bad=""
 ext="dev"
@@ -100,7 +100,7 @@ package() {
 	ln -s clang $pkgdir/usr/bin/c89
 	ln -s clang $pkgdir/usr/bin/c99
 	ln -s clang++ $pkgdir/usr/bin/c++
-	ln -s ld.lld $pkgdir/usr/bin/ld
+	ln -s lld $pkgdir/usr/bin/ld
 }
 
 backup() {
