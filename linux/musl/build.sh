@@ -8,49 +8,34 @@ ext="dev"
 fetch() {
 	curl "https://musl.libc.org/releases/$pkgname-$pkgver.tar.gz" -o $pkgname-$pkgver.tar.gz
 	tar -xf $pkgname-$pkgver.tar.gz
+	ln -s /usr/bin/cc $ARCH-linux-musl-cc
 	cd $pkgname-$pkgver
-	cp ../../meson.build .
-	cp ../../glob.sh .
-	cp ../../globbits.sh .
-	cp ../../version_h.sh .
-	cp ../../crt.meson.build crt/meson.build
-	mkdir bits
-	cp ../../bits.meson.build bits/meson.build
-	mkdir build
 }
 
 build() {
 	cd $pkgname-$pkgver
-	cd build
-	meson .. -Dprefix=/usr
 
-	samu
+	if [ -z "$FOR_CROSS" ]; then
+		PREFIX=/usr
+	else
+		PREFIX=/usr/$ARCH-linux-musl
+	fi
+
+
+	CC=$(pwd)/../$ARCH-linux-musl-cc ./configure \
+		--prefix=$PREFIX \
+		--target=$TRIPLE
+
+	bad --gmake gmake
 }
 
 package() {
 	cd $pkgname-$pkgver
-	cd build
-	DESTDIR=$pkgdir samu install
-
-	cd ..
-
-	rm -rf $pkgdir/usr/include
-
-	install -d $pkgdir/usr/bin
-	install -d $pkgdir/lib
-
-	mv $pkgdir/usr/lib/libc.so $pkgdir/lib/ld-musl-$(uname -m).so.1
-	ln -sr $pkgdir/lib/ld-musl-$(uname -m).so.1 $pkgdir/usr/lib/libc.so
-	ln -sr $pkgdir/lib/ld-musl-$(uname -m).so.1 $pkgdir/usr/bin/ldd
+	bad --gmake gmake DESTDIR=$pkgdir install
 }
 
-package_dev() {
-	cd $pkgname-$pkgver
-	cd build
-	DESTDIR=$pkgdir samu install
-
-	rm $pkgdir/usr/lib/*.so
-	rm -rf $pkgdir/lib
+backup() {
+	return
 }
 
 license() {
