@@ -12,14 +12,16 @@ fetch() {
 	cd $pkgname-$pkgver
 }
 
+
+if [ -z "$FOR_CROSS" ]; then
+	PREFIX=/usr
+else
+	PREFIX=$FOR_CROSS_DIR
+fi
+
+
 build() {
 	cd $pkgname-$pkgver
-
-	if [ -z "$FOR_CROSS" ]; then
-		PREFIX=/usr
-	else
-		PREFIX=$FOR_CROSS_DIR
-	fi
 
 
 	CC=$(pwd)/../$ARCH-linux-musl-cc ./configure \
@@ -32,6 +34,9 @@ build() {
 package() {
 	cd $pkgname-$pkgver
 	bad --gmake gmake DESTDIR=$pkgdir install
+	rm $pkgdir/lib/ld-musl-$ARCH.so.1
+	mv $pkgdir/$PREFIX/lib/libc.so $pkgdir/lib/ld-musl-$ARCH.so.1
+	ln -sr $pkgdir/lib/ld-musl-$ARCH.so.1 $pkgdir/$PREFIX/lib/libc.so
 }
 
 backup() {
