@@ -9,15 +9,15 @@ fetch() {
 	tar -xf $pkgname-$pkgver.tar.gz
 	cd $pkgname-$pkgver
 	patch -p1 < ../../clang-fix.patch
-	patch -p1 < ../../modprobe.patch
+	# patch -p1 < ../../modprobe.patch
 	# cp ../man.sh .
 }
 
 build() {
 	cd $pkgname-$pkgver
-	gmake HOSTCC=cc CC=cc defconfig
-	gmake HOSTCC=cc CC=cc
-	gmake HOSTCC=cc CC=cc install
+	bad --gmake gmake HOSTCC=cc CC=cc CFLAGS=-O0 defconfig
+	bad --gmake gmake HOSTCC=cc CC=cc CFLAGS=-O0
+	bad --gmake gmake HOSTCC=cc CC=cc CFLAGS=-O0 install
 }
 
 package() {
@@ -30,7 +30,7 @@ package() {
 	# install -Dm755 ../man.sh $pkgdir/etc/profile.d
 
 	install -Dm755 ./examples/udhcp/simple.script $pkgdir/usr/share/udhcpc/default.script
-	
+
 	rm $pkgdir/linuxrc
 	rm $pkgdir/bin/ln
 	rm $pkgdir/bin/uname
@@ -193,6 +193,10 @@ package() {
 	rm $pkgdir/usr/sbin/fsfreeze
 
 	rm $pkgdir/usr/bin/man
+}
+
+backup() {
+	return
 }
 
 license() {
