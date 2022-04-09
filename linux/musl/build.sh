@@ -18,7 +18,7 @@ build() {
 	if [ -z "$FOR_CROSS" ]; then
 		PREFIX=/usr
 	else
-		PREFIX=/usr/$ARCH-linux-musl
+		PREFIX=$FOR_CROSS_DIR
 	fi
 
 
