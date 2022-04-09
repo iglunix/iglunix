@@ -5,7 +5,7 @@ bad=""
 ext="doc"
 
 fetch() {
-	curl https://www.mirbsd.org/MirOS/dist/mir/mksh/mksh-R59c.tgz -o $pkgname-$pkgver.tar.gz
+	curl http://www.mirbsd.org/MirOS/dist/mir/mksh/mksh-R59c.tgz -o $pkgname-$pkgver.tar.gz
 	tar -xf $pkgname-$pkgver.tar.gz
 }
 
@@ -24,11 +24,8 @@ package() {
 	ln -sr $pkgdir/bin/lksh $pkgdir/bin/sh
 }
 
-package_doc() {
-    	cd $pkgname
-	install -d $pkgdir/usr/share/man/man1
-	install -Dm 644 ./mksh.1 $pkgdir/usr/share/man/man1
-	install -Dm 644 ./lksh.1 $pkgdir/usr/share/man/man1
+backup() {
+	return
 }
 
 license() {
