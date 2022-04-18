@@ -1,4 +1,4 @@
-pkgver=5.17.2
+pkgver=5.17.3
 pkgname=linux
 pkgrel=1
 ext="dev"
