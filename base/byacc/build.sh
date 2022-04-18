@@ -1,12 +1,13 @@
-pkgver=20210808
+pkgver=20220128
 pkgname=byacc
-deps=""
+deps="musl"
 mkdeps="bmake"
 bad=""
+auto_cross
 
 fetch() {
-	curl https://invisible-island.net/datafiles/release/byacc.tar.gz -o $pkgname-$pkgver.tar.gz
-	tar -xf $pkgname-$pkgver.tar.gz
+	curl "ftp://ftp.invisible-island.net/byacc/byacc-$pkgver.tgz" -O
+	tar -xf $pkgname-$pkgver.tgz
 	# Merged upstream; Don't need
 #	cp ../reader-mesa.patch .
 }
@@ -16,7 +17,9 @@ build() {
 	./configure \
 		--prefix=/usr \
 		--program-prefix=b \
-		--enable-btyacc
+		--enable-btyacc \
+		--build=$HOST_TRIPLE \
+		--host=$TRIPLE
 #	patch -p1 < ../reader-mesa.patch
 	make
 }
