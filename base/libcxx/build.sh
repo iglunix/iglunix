@@ -1,4 +1,4 @@
-pkgver=14.0.0
+pkgver=14.0.1
 pkgname=libcxx
 bad=""
 ext="dev"
