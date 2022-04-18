@@ -8,6 +8,7 @@ fetch() {
 
 build() {
 	cd $pkgname-$pkgver
+	[ -z "$WITH_CROSS" ] || export CFLAGS="$CFLAGS --target=$TRIPLE --sysroot=$WITH_CROSS_DIR"
 	make
 }
 
@@ -20,4 +21,8 @@ license() {
 	cd $pkgname-$pkgver
 	cat LICENSE
 #	cat COPYING
+}
+
+backup() {
+	return
 }
