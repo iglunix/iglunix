@@ -8,7 +8,7 @@ fetch() {
 	curl "https://busybox.net/downloads/busybox-$pkgver.tar.bz2" -o $pkgname-$pkgver.tar.gz
 	tar -xf $pkgname-$pkgver.tar.gz
 	cd $pkgname-$pkgver
-	patch -p1 < ../../clang-fix.patch
+	# patch -p1 < ../../clang-fix.patch
 	# patch -p1 < ../../modprobe.patch
 	# cp ../man.sh .
 }
