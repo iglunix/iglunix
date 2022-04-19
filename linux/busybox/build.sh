@@ -15,9 +15,9 @@ fetch() {
 
 build() {
 	cd $pkgname-$pkgver
-	bad --gmake gmake HOSTCC=cc CC=cc CFLAGS=-O0 defconfig
-	bad --gmake gmake HOSTCC=cc CC=cc CFLAGS=-O0
-	bad --gmake gmake HOSTCC=cc CC=cc CFLAGS=-O0 install
+	bad --gmake gmake HOSTCC=$CC CC=$CC CFLAGS=-O0 defconfig
+	bad --gmake gmake HOSTCC=$CC CC=$CC CFLAGS=-O0
+	bad --gmake gmake HOSTCC=$CC CC=$CC CFLAGS=-O0 install
 }
 
 package() {
