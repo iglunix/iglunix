@@ -21,13 +21,13 @@ build() {
 			-DCMAKE_CXX_COMPILER_WORKS=ON \
 			-DCMAKE_SYSTEM_NAME=Linux \
 			-DLLVM_TABLEGEN=$(pwd)/host-build/bin/llvm-tblgen \
-			-DCLANG_TABLEGEN=$(pwd)/host-build/bin/clang-tblgen \
-			-DCMAKE_C_COMPILER=cc \
-			-DCMAKE_CXX_COMPILER=c++"
+			-DCLANG_TABLEGEN=$(pwd)/host-build/bin/clang-tblgen"
 		mkdir -p host-build
 		cd host-build
 		cmake -G Ninja -Wno-dev \
 			-DLLVM_ENABLE_PROJECTS='clang' \
+			-DCMAKE_C_COMPILER=cc \
+			-DCMAKE_CXX_COMPILER=c++ \
 			../llvm
 
 		samu llvm-tblgen clang-tblgen
