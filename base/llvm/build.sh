@@ -16,12 +16,14 @@ build() {
 	cd $pkgname-$pkgver
 
 	if [ ! -z "$WITH_CROSS" ]; then
-		EXTRA_ARGS="-DCMAKE_SYSROOT=/usr/$ARCH-linux-musl \
+		EXTRA_ARGS="-DCMAKE_SYSROOT=$WITH_CROSS_DIR \
 			-DCMAKE_C_COMPILER_WORKS=ON \
 			-DCMAKE_CXX_COMPILER_WORKS=ON \
 			-DCMAKE_SYSTEM_NAME=Linux \
 			-DLLVM_TABLEGEN=$(pwd)/host-build/bin/llvm-tblgen \
-			-DCLANG_TABLEGEN=$(pwd)/host-build/bin/clang-tblgen"
+			-DCLANG_TABLEGEN=$(pwd)/host-build/bin/clang-tblgen \
+			-DCMAKE_C_COMPILER=cc \
+			-DCMAKE_CXX_COMPILER=c++"
 		mkdir -p host-build
 		cd host-build
 		cmake -G Ninja -Wno-dev \
