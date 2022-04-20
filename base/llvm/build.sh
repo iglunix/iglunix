@@ -44,7 +44,7 @@ build() {
 		-DCMAKE_BUILD_TYPE=Release \
 		-DLLVM_VERSION_SUFFIX="" \
 		-DLLVM_APPEND_VC_REV=OFF \
-		-DLLVM_ENABLE_PROJECTS="llvm;lld;clang;lldb;clang-tools-extra" \
+		-DLLVM_ENABLE_PROJECTS="llvm;lld;clang" \
 		-DLLVM_ENABLE_LLD=ON \
 		-DLLVM_TARGETS_TO_BUILD="all" \
 		-DLLVM_INSTALL_BINUTILS_SYMLINKS=ON \
