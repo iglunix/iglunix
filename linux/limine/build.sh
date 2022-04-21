@@ -9,11 +9,12 @@ fetch() {
 
 build() {
 	cd $pkgname-$pkgver
+	export CC=clang
 	bad --gmake ./configure \
 		--build=$HOST_TRIPLE \
 		--host=$TRIPLE \
 		--prefix=/usr
-	bad --gmake gmake TOOLCHAIN=llvm
+	bad --gmake gmake
 }
 
 package() {
