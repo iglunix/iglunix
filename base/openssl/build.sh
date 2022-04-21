@@ -1,6 +1,7 @@
 pkgname=openssl
 pkgver=3.0.0
 ext="dev"
+auto_cross
 
 fetch() {
 	curl "https://www.openssl.org/source/openssl-$pkgver.tar.gz" -o $pkgname-$pkgver.tar.xz
