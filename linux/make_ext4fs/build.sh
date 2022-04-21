@@ -1,5 +1,8 @@
 pkgname=make_ext4fs
 pkgver=main
+mkdeps=toybox:bmake:llvm
+deps=musl:zlib-ng
+auto_cross
 
 fetch() {
 	curl -L "https://github.com/iglunix/make_ext4fs/archive/refs/heads/main.tar.gz" -o $pkgname-$pkgver.tar.gz
@@ -21,4 +24,8 @@ license() {
 	cd $pkgname-$pkgver
 	cat LICENSE
 #	cat COPYING
+}
+
+backup() {
+	return
 }
