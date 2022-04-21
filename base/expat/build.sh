@@ -4,6 +4,7 @@ bad=""
 mkdeps="bmake"
 deps=""
 ext="dev"
+auto_cross
 
 fetch() {
 	pkgver_r=$(echo $pkgver | tr '.' '_')
@@ -14,7 +15,9 @@ fetch() {
 build() {
 	cd $pkgname-$pkgver
 	./configure \
-		--prefix=/usr
+		--prefix=/usr \
+		--build=$HOST_TRIPLE \
+		--host=$TRIPLE
 	make
 }
 
