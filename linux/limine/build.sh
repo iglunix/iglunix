@@ -13,7 +13,7 @@ build() {
 		--build=$HOST_TRIPLE \
 		--host=$TRIPLE \
 		--prefix=/usr
-	bad --gmake gmake
+	bad --gmake gmake CC=clang
 }
 
 package() {
