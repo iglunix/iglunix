@@ -9,10 +9,13 @@ fetch() {
 
 build() {
 	cd $pkgname-$pkgver
+	[ -z "$WITH_CROSS" ] || extra_flags=--disable-bootstrap
+
 	./configure \
 		--prefix=/usr \
 		--build=$HOST_TRIPLE \
-		--host=$TRIPLE
+		--host=$TRIPLE \
+		$extra_flags
 
 	make
 }
