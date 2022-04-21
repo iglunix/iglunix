@@ -14,7 +14,7 @@ fetch() {
 
 build() {
 	cd $pkgname-$pkgver
-	bad --gmake gmake PREFIX=/usr CROSSCOMPILING=1 LDFLAGS_HOST= CFLAGS_HOST=
+	bad --gmake gmake PREFIX=/usr HOSTCC=cc CROSSCOMPILING=1 LDFLAGS_HOST= CFLAGS_HOST=
 }
 
 package() {
