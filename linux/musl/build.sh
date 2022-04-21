@@ -26,7 +26,8 @@ build() {
 
 	CC=$(pwd)/../$ARCH-linux-musl-cc ./configure \
 		--prefix=$PREFIX \
-		--target=$TRIPLE
+		--target=$TRIPLE \
+		--disable-wrapper
 
 	bad --gmake gmake
 }
@@ -37,6 +38,7 @@ package() {
 	rm $pkgdir/lib/ld-musl-$ARCH.so.1
 	mv $pkgdir/$PREFIX/lib/libc.so $pkgdir/lib/ld-musl-$ARCH.so.1
 	ln -sr $pkgdir/lib/ld-musl-$ARCH.so.1 $pkgdir/$PREFIX/lib/libc.so
+	ln -sr $pkgdir/lib/ld-musl-$ARCH.so.1 $pkgdir/$PREFIX/bin/ldd
 }
 
 backup() {
