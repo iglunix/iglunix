@@ -9,7 +9,10 @@ fetch() {
 
 build() {
 	cd $pkgname-$pkgver
-	bad --gmake ./configure --prefix=/usr
+	bad --gmake ./configure \
+		--build=$HOST_TRIPLE \
+		--host=$TRIPLE \
+		--prefix=/usr
 	bad --gmake gmake
 }
 
