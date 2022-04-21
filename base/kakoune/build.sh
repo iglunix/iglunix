@@ -35,3 +35,7 @@ license() {
 	cd $pkgname-$pkgver
 	cat UNLICENSE
 }
+
+backup() {
+	return
+}
