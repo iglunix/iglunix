@@ -10,12 +10,21 @@ fetch() {
 build() {
 	cd $pkgname-$pkgver
 	cd build
+
+	PREFIX=/usr
+
+	[ -z "$WITH_CROSS" ] || cmake_extra_flags="-DCMAKE_CROSSCOMPILING=ON \
+		-DCMAKE_SYSROOT=$WITH_CROSS_DIR \
+		-DCMAKE_C_COMPILER_TARGET=$ARCH-linux-musl"
+	[ -z "$FOR_CROSS" ] || PREFIX=$FOR_CROSS_DIR
+
 	cmake -G Ninja ../ \
 		-DCMAKE_BUILD_TYPE=Release \
-		-DCMAKE_INSTALL_PREFIX=/usr \
+		-DCMAKE_INSTALL_PREFIX=$PREFIX \
 		-DCMAKE_INSTALL_LIBDIR=lib \
-		-DZLIB_COMPAT=ON
-	
+		-DZLIB_COMPAT=ON \
+		$cmake_extra_flags
+
 	samu
 }
 
@@ -28,4 +37,8 @@ package() {
 license() {
 	cd $pkgname-$pkgver
 	cat LICENSE.md
+}
+
+backup() {
+	return
 }
