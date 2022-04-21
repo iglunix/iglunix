@@ -24,23 +24,13 @@ build() {
 package() {
 	cd $pkgname-$pkgver
 	make install DESTDIR=$pkgdir
-	rm $pkgdir/usr/lib/*.a
-	rm $pkgdir/usr/lib/*.la
-	rm -r $pkgdir/usr/include
-	rm -r $pkgdir/usr/lib/pkgconfig
-	rm -r $pkgdir/usr/share
-}
-
-package_dev() {
-	cd $pkgname-$pkgver
-	make install DESTDIR=$pkgdir
-	rm -r $pkgdir/usr/bin
-	rm -r $pkgdir/usr/share
-	rm $pkgdir/usr/lib/*.so
-	rm $pkgdir/usr/lib/*.so.*
 }
 
 license() {
 	cd $pkgname-$pkgver
 	cat COPYING
+}
+
+backup() {
+	return
 }
