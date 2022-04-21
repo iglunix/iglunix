@@ -38,7 +38,8 @@ package() {
 	rm $pkgdir/lib/ld-musl-$ARCH.so.1
 	mv $pkgdir/$PREFIX/lib/libc.so $pkgdir/lib/ld-musl-$ARCH.so.1
 	ln -sr $pkgdir/lib/ld-musl-$ARCH.so.1 $pkgdir/$PREFIX/lib/libc.so
-	ln -sr $pkgdir/lib/ld-musl-$ARCH.so.1 $pkgdir/$PREFIX/bin/ldd
+	[ -z "$FOR_CROSS" ] && install -d $pkgdir/$PREFIX/bin
+	[ -z "$FOR_CROSS" ] && ln -sr $pkgdir/lib/ld-musl-$ARCH.so.1 $pkgdir/$PREFIX/bin/ldd
 }
 
 backup() {
