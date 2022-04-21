@@ -1,5 +1,6 @@
 pkgname=flex
 pkgver=2.6.4
+auto_cross
 
 fetch() {
 	curl -L "https://github.com/westes/flex/releases/download/v2.6.4/flex-$pkgver.tar.gz" -o $pkgname-$pkgver.tar.gz
@@ -10,7 +11,7 @@ build() {
 	cd $pkgname-$pkgver
 	./configure \
 		--prefix=/usr \
-		--build=$TRIPLE \
+		--build=$HOST_TRIPLE \
 		--host=$TRIPLE
 
 	make
@@ -26,4 +27,8 @@ license() {
 	cd $pkgname-$pkgver
 	cat LICENSE
 #	cat COPYING
+}
+
+backup() {
+	return
 }
