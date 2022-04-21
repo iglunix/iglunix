@@ -1,5 +1,6 @@
 pkgname=libelf
 pkgver=0.186
+auto_cross
 
 fetch() {
 	curl -LO "https://sourceware.org/elfutils/ftp/$pkgver/elfutils-$pkgver.tar.bz2"
@@ -8,13 +9,19 @@ fetch() {
 	patch -p1 < ../../musl.patch
 }
 
+if [ -z "$FOR_CROSS" ]; then
+	PREFIX=/usr
+else
+	PREFIX=$FOR_CROSS_DIR
+fi
+
 build() {
 	cd elfutils-$pkgver
-	export CFLAGS="$(CFLAGS) -Wno-error"
+	export CFLAGS="$CFLAGS -Wno-error"
 	./configure \
-		--prefix=/usr \
+		--prefix=$PREFIX \
 		--sysconfdir=/etc \
-		--build=$TRIPLE \
+		--build=$HOST_TRIPLE \
 		--host=$TRIPLE \
 		--disable-symbol-versioning \
 		--disable-debuginfod \
