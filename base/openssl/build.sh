@@ -22,7 +22,7 @@ build() {
 		no-seed no-weak-ssl-ciphers \
 		-Wa,--noexecstack
 
-	make CC=cc
+	make
 }
 
 package() {
