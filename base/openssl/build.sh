@@ -27,7 +27,7 @@ build() {
 
 package() {
 	cd $pkgname-$pkgver
-	make install_sw install_ssldir DESTDIR=$pkgdir
+	make install_sw DESTDIR=$pkgdir
 	install -d $pkgdir/usr/sbin
 	install -Dm755 ../../update-ca.sh $pkgdir/usr/sbin/update-ca
 }
