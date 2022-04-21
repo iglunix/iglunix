@@ -12,12 +12,12 @@ fetch() {
 
 build() {
 	cd $pkgname-$pkgver
-	ckati
+	bad --gmake gmake
 }
 
 package() {
 	cd $pkgname-$pkgver
-	ckati install DESTDIR=$pkgdir PREFIX=/usr
+	bad --gmake gmake install DESTDIR=$pkgdir PREFIX=/usr
 	rm -r $pkgdir/usr/share/doc
 	rm -r $pkgdir/usr/share/man
 	rm -r $pkgdir/usr/libexec
