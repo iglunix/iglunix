@@ -31,7 +31,7 @@ package() {
 }
 
 backup() {
-
+	return
 }
 
 license() {
