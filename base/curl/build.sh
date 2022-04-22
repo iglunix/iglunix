@@ -2,9 +2,10 @@ pkgver=7.81.0
 pkg_ver=$(echo $pkgver | tr '.' '_')
 pkgname=curl
 pkgrel=1
-mkdeps="samu:cmake"
+mkdeps=""
 deps="openssl"
 bad=""
+auto_cross
 
 fetch() {
 	curl -L "https://github.com/curl/curl/releases/download/curl-$pkg_ver/curl-$pkgver.tar.xz" -o $pkgname-$pkgver.tar.gz
@@ -13,20 +14,16 @@ fetch() {
 
 build() {
 	cd $pkgname-$pkgver
-	mkdir build
-	cd build
-	cmake -G Ninja ../ \
-		-DCMAKE_BUILD_TYPE=Release \
-		-DCMAKE_INSTALL_PREFIX=/usr \
-		-DCMAKE_INSTALL_LIBDIR=lib \
-		-DCURL_CA_BUNDLE="/etc/ssl/cert.pem"
-	samu
+	./configure --prefix=/usr \
+		--build=$HOST_TRIPLE \
+		--host=$TRIPLE \
+		--with-openssl
+	make
 }
 
 package() {
 	cd $pkgname-$pkgver
-	cd build
-	DESTDIR=$pkgdir samu install
+	make DESTDIR=$pkgdir install
 }
 
 backup() {
