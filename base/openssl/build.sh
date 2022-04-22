@@ -14,7 +14,7 @@ PREFIX=/usr
 build() {
 	cd $pkgname-$pkgver
 	./Configure \
-		--prefix=$PREFIX \
+		--prefix=/$PREFIX \
 		--openssldir=/etc/ssl \
 		--libdir=lib \
 		linux-generic64 \
