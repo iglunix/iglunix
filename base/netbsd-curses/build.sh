@@ -19,7 +19,7 @@ build() {
 
 package() {
 	cd $pkgname-$pkgver
-	bad --gmake gmake install DESTDIR=$pkgdir PREFIX=/usr
+	bad --gmake gmake install DESTDIR=$pkgdir PREFIX=/usr HOSTCC=cc CROSSCOMPILING=1 LDFLAGS_HOST= CFLAGS_HOST=
 }
 
 backup() {
