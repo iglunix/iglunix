@@ -8,10 +8,13 @@ fetch() {
 	tar -xf $pkgname-$pkgver.tar.xz
 }
 
+PREFIX=/usr
+[ -z "$FOR_CROSS" ] || PREFIX=$FOR_CROSS_DIR
+
 build() {
 	cd $pkgname-$pkgver
 	./Configure \
-		--prefix=/usr \
+		--prefix=$PREFIX \
 		--openssldir=/etc/ssl \
 		--libdir=lib \
 		linux-generic64 \
@@ -28,8 +31,12 @@ build() {
 package() {
 	cd $pkgname-$pkgver
 	make install_sw DESTDIR=$pkgdir
-	install -d $pkgdir/usr/sbin
-	install -Dm755 ../../update-ca.sh $pkgdir/usr/sbin/update-ca
+	if [ -z "$FOR_CROSS" ]; then
+		install -d $pkgdir/usr/sbin
+		install -Dm755 ../../update-ca.sh $pkgdir/usr/sbin/update-ca
+	else
+		rm -rf $pkgdir/$PREFIX/bin
+	fi
 }
 
 backup() {
