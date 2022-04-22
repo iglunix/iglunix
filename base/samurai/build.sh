@@ -1,6 +1,7 @@
 pkgver=1.2
 pkgname=samurai
 pkgrel=1
+auto_cross
 
 fetch() {
 	curl -L "http://github.com/michaelforney/samurai/releases/download/1.2/$pkgname-$pkgver.tar.gz" -o $pkgname-$pkgver.tar.gz
@@ -9,7 +10,7 @@ fetch() {
 
 build() {
 	cd $pkgname-$pkgver
-	samu
+	make LDFLAGS="$LDFLAGS"
 }
 
 package() {
@@ -21,4 +22,8 @@ package() {
 license() {
 	cd $pkgname-$pkgver
 	cat LICENSE
+}
+
+backup() {
+	return
 }
