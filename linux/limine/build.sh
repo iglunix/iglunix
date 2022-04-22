@@ -1,6 +1,7 @@
 pkgname=limine
 pkgver=3.4.1
 mkdeps="nasm:llvm"
+auto_cross
 
 fetch() {
 	curl -L "https://github.com/limine-bootloader/limine/releases/download/v$pkgver/limine-$pkgver.tar.xz" -o $pkgname-$pkgver.tar.xz
@@ -9,7 +10,7 @@ fetch() {
 
 build() {
 	cd $pkgname-$pkgver
-	export CC=clang
+	export LIMINE_CC=clang
 	bad --gmake ./configure \
 		--build=$HOST_TRIPLE \
 		--host=$TRIPLE \
