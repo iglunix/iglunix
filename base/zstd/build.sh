@@ -1,5 +1,6 @@
 pkgname=zstd
-pkgver=1.5.0
+pkgver=1.5.2
+auto_cross
 
 fetch() {
 	curl -L "https://github.com/facebook/zstd/releases/download/v$pkgver/zstd-$pkgver.tar.gz" -o $pkgname-$pkgver.tar.xz
@@ -21,4 +22,8 @@ license() {
 	cd $pkgname-$pkgver
 	cat LICENSE
 #	cat COPYING
+}
+
+backup() {
+	return
 }
