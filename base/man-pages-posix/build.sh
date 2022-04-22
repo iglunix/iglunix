@@ -7,13 +7,16 @@ fetch() {
 }
 
 build() {
-	cd $pkgname-$pkgver
-	make
+	return
 }
 
 package() {
 	cd $pkgname-$pkgver
 	make install DESTDIR=$pkgdir
+}
+
+backup() {
+	return
 }
 
 license() {
