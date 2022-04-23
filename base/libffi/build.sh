@@ -2,6 +2,7 @@ pkgver=3.3
 pkgname=libffi
 bad="gmake"
 ext="dev"
+auto_cross
 
 fetch() {
 	curl -L "https://github.com/libffi/libffi/releases/download/v3.3/libffi-3.3.tar.gz" -o $pkgname-$pkgver.tar.gz
@@ -10,7 +11,9 @@ fetch() {
 
 build() {
 	cd $pkgname-$pkgver
-	./configure --prefix=/usr
+	./configure --prefix=/usr \
+		--build=$HOST_TRIPLE \
+		--host=$TRIPLE
 	bad --gmake gmake
 }
 
