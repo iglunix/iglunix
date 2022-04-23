@@ -2,6 +2,7 @@ pkgname=python
 pkgver=3.9.7
 bad=""
 ext="doc"
+auto_cross
 
 fetch() {
 	curl "https://www.python.org/ftp/python/$pkgver/Python-$pkgver.tar.xz" -o $pkgname-$pkgver.tar.xz
@@ -13,8 +14,8 @@ build() {
     	cd $pkgname-$pkgver
 	./configure \
 		--prefix=/usr \
-		--build=$TARGET \
-		--host=$TARGET \
+		--build=$HOST_TRIPLE \
+		--host=$TRIPLE  \
 		--with-system-ffi=true \
 		--with-ssl-default-suites=openssl \
 		ax_cv_c_float_words_bigendian=no
