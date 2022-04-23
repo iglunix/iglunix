@@ -20,7 +20,8 @@ build() {
 		--with-ssl-default-suites=openssl \
 		ax_cv_c_float_words_bigendian=no \
 		ac_cv_buggy_getaddrinfo=no \
-		ac_cv_file__dev_ptmx=yes
+		ac_cv_file__dev_ptmx=yes \
+		ac_cv_file__dev_ptc=no
 	make
 }
 
