@@ -31,6 +31,7 @@ build() {
 	./scripts/config -m CONFIG_CFG80211
 	./scripts/config -m CONFIG_BT
 	./scripts/config -m CONFIG_IPV6
+	./scripts/config -m CONFIG_MEDIA_SUPPORT
 
 	bad --gmake gmake CC=clang HOSTCC=clang YACC=yacc LLVM=1 LLVM_IAS=1 ARCH=$_arch olddefconfig
 	sed -i 's/CONFIG_UNWINDER_ORC=y/# CONFIG_UNWINDER_ORC is not set/g' .config
