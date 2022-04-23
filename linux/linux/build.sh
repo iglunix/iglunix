@@ -27,17 +27,17 @@ build() {
 	cd $pkgname-$pkgver
 	cp ../.config .
 	bad --gmake gmake CC=clang HOSTCC=clang YACC=yacc LLVM=1 LLVM_IAS=1 ARCH=$_arch mod2yesconfig
-	./scripts/config -m CONFIG_DRM
-	./scripts/config -m CONFIG_SND
-	./scripts/config -m CONFIG_CFG80211
-	./scripts/config -m CONFIG_BT
-	./scripts/config -m CONFIG_IPV6
-	./scripts/config -m CONFIG_MEDIA_SUPPORT
-	./scripts/config -m CONFIG_FIREWIRE
-	./scripts/config -m CONFIG_USB4
-	./scripts/config -m CONFIG_FW_LOADER
+	# ./scripts/config -m CONFIG_DRM
+	# ./scripts/config -m CONFIG_SND
+	# ./scripts/config -m CONFIG_CFG80211
+	# ./scripts/config -m CONFIG_BT
+	# ./scripts/config -m CONFIG_IPV6
+	# ./scripts/config -m CONFIG_MEDIA_SUPPORT
+	# ./scripts/config -m CONFIG_FIREWIRE
+	# ./scripts/config -m CONFIG_USB4
+	# ./scripts/config -m CONFIG_FW_LOADER
 
-	bad --gmake gmake CC=clang HOSTCC=clang YACC=yacc LLVM=1 LLVM_IAS=1 ARCH=$_arch olddefconfig
+	# bad --gmake gmake CC=clang HOSTCC=clang YACC=yacc LLVM=1 LLVM_IAS=1 ARCH=$_arch olddefconfig
 	sed -i 's/CONFIG_UNWINDER_ORC=y/# CONFIG_UNWINDER_ORC is not set/g' .config
 	sed -i 's/# CONFIG_UNWINDER_FRAME_POINTER is not set/CONFIG_UNWINDER_FRAME_POINTER=y/g' .config
 
@@ -53,9 +53,9 @@ package() {
 		install -d $pkgdir/boot
 		bad --gmake gmake CC=cc HOSTCC=cc YACC=yacc LLVM=1 LLVM_IAS=1 ARCH=$_arch INSTALL_PATH=$pkgdir/boot install
 
-		set +e # depmod causes errors
-		bad --gmake gmake CC=cc HOSTCC=cc YACC=yacc LLVM=1 LLVM_IAS=1 ARCH=$_arch INSTALL_MOD_PATH=$pkgdir/ modules_install
-		set -e
+		# set +e # depmod causes errors
+		# bad --gmake gmake CC=cc HOSTCC=cc YACC=yacc LLVM=1 LLVM_IAS=1 ARCH=$_arch INSTALL_MOD_PATH=$pkgdir/ modules_install
+		# set -e
 	fi
 
 	bad --gmake gmake CC=cc HOSTCC=cc YACC=yacc LLVM=1 LLVM_IAS=1 ARCH=$_arch headers
