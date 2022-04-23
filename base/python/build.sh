@@ -1,5 +1,5 @@
 pkgname=python
-pkgver=3.9.7
+pkgver=3.10.4
 bad=""
 ext="doc"
 auto_cross
@@ -25,14 +25,14 @@ build() {
 package() {
     	cd $pkgname-$pkgver
 	make install DESTDIR=$pkgdir
-	rm -r $pkgdir/usr/lib/python3.9/test
-	rm -r $pkgdir/usr/lib/python3.9/ctypes/test
-	rm -r $pkgdir/usr/lib/python3.9/distutils/tests
-	rm -r $pkgdir/usr/lib/python3.9/idlelib/idle_test
-	rm -r $pkgidr/usr/lib/python3.9/lib2to3/tests
-	rm -r $pkgidr/usr/lib/python3.9/sqlite3/test
-	rm -r $pkgdir/usr/lib/python3.9/tkinter/test
-	rm -r $pkgdir/usr/lib/python3.9/unittest/test
+	rm -r $pkgdir/usr/lib/python3.10/test
+	rm -r $pkgdir/usr/lib/python3.10/ctypes/test
+	rm -r $pkgdir/usr/lib/python3.10/distutils/tests
+	rm -r $pkgdir/usr/lib/python3.10/idlelib/idle_test
+	rm -r $pkgidr/usr/lib/python3.10/lib2to3/tests
+	rm -r $pkgidr/usr/lib/python3.10/sqlite3/test
+	rm -r $pkgdir/usr/lib/python3.10/tkinter/test
+	rm -r $pkgdir/usr/lib/python3.10/unittest/test
 	rm -r $pkgdir/usr/share
 	ln -sr $pkgdir/usr/bin/python3 $pkgdir/usr/bin/python
 }
