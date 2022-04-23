@@ -11,7 +11,7 @@ fetch() {
 
 build() {
 	cd $pkgname-$pkgver
-	./configure --prefix=/usr \
+	./configure --prefix=$PREFIX \
 		--build=$HOST_TRIPLE \
 		--host=$TRIPLE
 	bad --gmake gmake
