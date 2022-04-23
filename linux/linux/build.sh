@@ -6,9 +6,9 @@ ext="dev"
 fetch() {
 	curl "https://cdn.kernel.org/pub/linux/kernel/v5.x/$pkgname-$pkgver.tar.xz" -o $pkgname-$pkgver.tar.xz
 	tar -xf $pkgname-$pkgver.tar.xz
-	cd $pkgname-$pkgver
 	# use Alpine's kernel config so we don't have to maintain one
 	curl "https://git.alpinelinux.org/aports/plain/community/linux-edge/config-edge.$(uname -m)" -o .config
+	cd $pkgname-$pkgver
 }
 
 _arch=$ARCH
@@ -25,6 +25,7 @@ fi
 
 build() {
 	cd $pkgname-$pkgver
+	cp ../.config .
 	bad --gmake gmake CC=clang HOSTCC=clang YACC=yacc LLVM=1 LLVM_IAS=1 ARCH=$_arch mod2yesconfig
 	./scripts/config -m CONFIG_DRM
 	./scripts/config -m CONFIG_SND
@@ -32,6 +33,9 @@ build() {
 	./scripts/config -m CONFIG_BT
 	./scripts/config -m CONFIG_IPV6
 	./scripts/config -m CONFIG_MEDIA_SUPPORT
+	./scripts/config -m CONFIG_FIREWIRE
+	./scripts/config -m CONFIG_USB4
+	./scripts/config -m CONFIG_FW_LOADER
 
 	bad --gmake gmake CC=clang HOSTCC=clang YACC=yacc LLVM=1 LLVM_IAS=1 ARCH=$_arch olddefconfig
 	sed -i 's/CONFIG_UNWINDER_ORC=y/# CONFIG_UNWINDER_ORC is not set/g' .config
