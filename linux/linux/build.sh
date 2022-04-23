@@ -26,11 +26,22 @@ fi
 build() {
 	cd $pkgname-$pkgver
 	bad --gmake gmake CC=clang HOSTCC=clang YACC=yacc LLVM=1 LLVM_IAS=1 ARCH=$_arch mod2yesconfig
+	./scripts/config -m CONFIG_DRM
+	./scripts/config -m CONFIG_SND
+	./scripts/config -m CONFIG_CFG80211
+	./scripts/config -m CONFIG_BT
+	./scripts/config -m CONFIG_IPV6
+
+	bad --gmake gmake CC=clang HOSTCC=clang YACC=yacc LLVM=1 LLVM_IAS=1 ARCH=$_arch olddefconfig
 	sed -i 's/CONFIG_UNWINDER_ORC=y/# CONFIG_UNWINDER_ORC is not set/g' .config
 	sed -i 's/# CONFIG_UNWINDER_FRAME_POINTER is not set/CONFIG_UNWINDER_FRAME_POINTER=y/g' .config
 
 	if [ -z "$FOR_CROSS" ]; then
 		bad --gmake gmake CC=clang HOSTCC=clang YACC=yacc LLVM=1 LLVM_IAS=1 ARCH=$_arch
+
+		set +e # depmod causes errors
+		bad --gmake gmake CC=cc HOSTCC=cc YACC=yacc LLVM=1 LLVM_IAS=1 ARCH=$_arch INSTALL_MOD_PATH=$pkgdir/ modules_install
+		set -e
 	fi
 }
 
