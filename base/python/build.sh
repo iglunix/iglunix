@@ -18,7 +18,8 @@ build() {
 		--host=$TRIPLE  \
 		--with-system-ffi=true \
 		--with-ssl-default-suites=openssl \
-		ax_cv_c_float_words_bigendian=no
+		ax_cv_c_float_words_bigendian=no \
+		ac_cv_buggy_getaddrinfo=no
 	make
 }
 
