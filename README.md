@@ -14,9 +14,13 @@ majority of the base system, and Musl to be explicit about the C library,
 target triple and to differentiate it from any system using LLVM's libc
 (which will may very well likely use in the future).
 
+## Instalation
+See [INSTALL.md](INSTALL.md)
+
 ## Discord
 Join us at [link](https://discord.gg/NKB9qD2bMx)
 
+<!--
 ## Status of Other Kernels
 
 ### FreeBSD
@@ -32,6 +36,7 @@ otherwise the toolchain breaks).
 I have found no easy way of building libc on Darwin platforms as on yet.
 Because of this I haven't got far at all porting Iglunix to Darwin
 based systems such as MacOS and PureDarwin.
+-->
 
 ## Web Browsers
 Iglunix has Firefox ESR packaged requiring 2 extra GNU packages: `gm4` and
@@ -60,9 +65,3 @@ openssl and maybe ffmpeg replacing gstreamer.
 |sudo          | doas               | Privilege escalation             |
 |pkg-config    | pkgconf            | Package configuration tool       |
 |e2fsprogs     | make_ext4fs        | Make an ext4 file system         |
-
-
-
-## TODO (lots more TODO items in the Discord)
- - LLVM (Work out how to split packages)
- - QEMU for multiarch (need lots of work on glibr to get this to build)
