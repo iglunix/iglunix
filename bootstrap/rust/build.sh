@@ -17,14 +17,14 @@ build() {
 }
 
 package() {
-	stat $pkgdir/opt/rust/lib/rustlib/uninstall.sh > /dev/null 2> /dev/null \
+	[ -f $pkgdir/opt/rust/lib/rustlib/uninstall.sh ] \
 	|| ./rust-$pkgver-$ARCH-unknown-linux-musl/install.sh \
 	--disable-ldconfig \
 	--destdir=$pkgdir \
 	--prefix=/opt/rust
 
-	stat $pkgdir/opt/rust/lib/libgcc_s.so \
-	|| cp ./libgcc_s.so $pkgdir/opt/rust/lib/libgcc_s.so
+	[ -f $pkgdir/opt/rust/lib/libgcc_s.so.1 ] \
+	|| cp ./libgcc_s.so $pkgdir/opt/rust/lib/libgcc_s.so.1
 }
 
 backup() {
