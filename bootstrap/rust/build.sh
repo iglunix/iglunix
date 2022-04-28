@@ -2,18 +2,15 @@ pkgname=rust
 pkgver=beta
 
 fetch() {
-	stat rust.tar.gz > /dev/null 2> /dev/null \
-	|| curl "https://static.rust-lang.org/dist/rust-$pkgver-$ARCH-unknown-linux-musl.tar.gz" -o rust.tar.gz
-
-	stat rust-$pkgver-$ARCH-unknown-linux-musl > /dev/null 2> /dev/null \
-	|| tar -xf rust.tar.gz
+	curl "https://static.rust-lang.org/dist/rust-$pkgver-$ARCH-unknown-linux-musl.tar.gz" -o rust.tar.gz
+	tar -xf rust.tar.gz
 }
 
 build() {
-	stat libgcc_s.so > /dev/null 2> /dev/null \
+	[ -f libgcc_s.so ] \
 	|| clang -shared -o libgcc_s.so \
 	-Wl,--allow-multiple-definition -Wl,--whole-archive \
-	$(clang -print-libgcc-file-name)
+	$(clang -print-libgcc-file-name) -lunwind
 }
 
 package() {
