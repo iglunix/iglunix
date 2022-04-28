@@ -21,10 +21,9 @@ _clear_vendor_checksums() {
 	sed -i 's/\("files":{\)[^}]*/\1/' vendor/$1/.cargo-checksum.json
 }
 
-export RUSTROOT="/usr"
+export RUSTROOT="/opt/rust/"
 
 fetch() {
-	return
 	curl "https://static.rust-lang.org/dist/rustc-$pkgver-src.tar.gz" -o $pkgname-$pkgver.tar.xz
 	tar -xf $pkgname-$pkgver.tar.xz
 
@@ -44,7 +43,6 @@ fetch() {
 
 build() {
 	cd $pkgname-$pkgver
-	return
     #	--tools="cargo,rls,rustfmt,src" \
 	OPENSSL_LIB_DIR=/usr/lib/ ./configure \
 		--build="$TRIPLE" \
@@ -77,7 +75,8 @@ build() {
 		--set="target.$TRIPLE.cc=cc" \
 		--set="target.$TRIPLE.cxx=c++" \
 		--set="target.$TRIPLE.ar=ar" \
-		--set="target.$TRIPLE.linker=cc"
+		--set="target.$TRIPLE.linker=cc" \
+		--disable-llvm-static-stdcpp
 
 	sed 's/#deny-warnings = .*/deny-warnings = false/' -i config.toml
 #	sed 's|deny(warnings,|deny(|' -i src/bootstrap/lib.rs
