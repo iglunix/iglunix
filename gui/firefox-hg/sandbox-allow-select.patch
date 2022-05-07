@@ -1,0 +1,12 @@
+--- a/security/sandbox/linux/SandboxFilter.cpp
++++ b/security/sandbox/linux/SandboxFilter.cpp
+@@ -1999,6 +1999,9 @@
+       case __NR_uname:
+         return Allow();
+
++      CASES_FOR_select:
++        return Allow();
++
+       default:
+         return SandboxPolicyCommon::EvaluateSyscall(sysno);
+     }

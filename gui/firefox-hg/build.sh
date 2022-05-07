@@ -1,18 +1,19 @@
 pkgname=firefox
-pkgver=26726cd430955db041e5de33d9792bb816c57608
+pkgver=101.0
 mkdeps="cbindgen:rust"
 
 fetch() {
 	#curl "https://ftp.mozilla.org/pub/firefox/releases/${pkgver}esr/source/firefox-${pkgver}esr.source.tar.xz" -o $pkgname-$pkgver.tar.xz
-	curl "https://hg.mozilla.org/mozilla-unified/archive/26726cd430955db041e5de33d9792bb816c57608.zip" -o $pkgname-$pkgver.zip
-	unzip
-	mv mozilla-unified-$pkgver $pkgname-$pkgver
+	#curl "https://hg.mozilla.org/mozilla-unified/archive/26726cd430955db041e5de33d9792bb816c57608.zip" -o $pkgname-$pkgver.zip
+	curl "https://archive.mozilla.org/pub/firefox/releases/${pkgver}b3/source/firefox-${pkgver}b3.source.tar.xz" -o $pkgname-$pkgver.tar.xz
+	tar -xf $pkgname-$pkgver.tar.xz
 	cd $pkgname-$pkgver
 	# patch -p1 < ../../no-x11.patch
 	# patch -p1 < ../../fix-clang-as.patch
 	patch -p1 < ../../avoid-redefinition.patch
 	patch -p1 < ../../libcxx.patch
 	patch -p1 < ../../grefptr.patch
+	patch -p1 < ../../sandbox-allow-select.patch
 	# patch -p1 < ../../sandbox-fork.patch
 	# patch -p1 < ../../sandbox-sched.patch
 }
@@ -68,7 +69,7 @@ ac_add_options --without-wasm-sandboxed-libraries
 #ac_add_options MOZ_PGO=1
 EOF
 
-	bad --gmake --gm4 --autoconf ./mach clobber
+	# bad --gmake --gm4 --autoconf ./mach clobber
 	bad --gmake --gm4 --autoconf ./mach build
 }
 
