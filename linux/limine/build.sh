@@ -1,5 +1,5 @@
 pkgname=limine
-pkgver=3.4.1
+pkgver=3.4.4
 mkdeps="nasm:llvm"
 auto_cross
 
