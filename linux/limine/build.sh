@@ -10,7 +10,6 @@ fetch() {
 
 build() {
 	cd $pkgname-$pkgver
-	export LIMINE_CC=clang
 	bad --gmake ./configure \
 		--build=$HOST_TRIPLE \
 		--host=$TRIPLE \
