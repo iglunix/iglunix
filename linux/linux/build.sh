@@ -1,13 +1,59 @@
-pkgver=5.17.3
 pkgname=linux
 pkgrel=1
 ext="dev"
 
+# setting the KERNEL_TREE environment variable changes the source
+# location and updates the pkgver accordingly
+#
+# currently the following valuse for KERNEL_TREE are supported:
+#  - mainline - latest stable linux kernel release with alpine's config
+#
+#  - asahi - latest asahi kernel from git with config taken form their PKGBUILD
+#    repo
+#
+#  - rpi - latest raspberry pi kernel release with defconfig
+#
+#  - visionfive - latest starfive-tech kernel from the vision five branch with
+#    visionfive_defconfig
+#
+#  - megi - latest megi kernel with pinephone_pro_defconfig
+#
+# TODO:
+# add KERNEL_CONFIG option to override config used when compiling
+
+if [ -z "$KERNEL_TREE" ]; then
+	KERNEL_TREE=mainline
+fi
+
+case "$KERNEL_TREE" in
+	mainline)
+		pkgver=5.17.3
+		src_tar="https://cdn.kernel.org/pub/linux/kernel/v5.x/linux-$pkgver.tar.xz"
+		fetch_config="https://git.alpinelinux.org/aports/plain/community/linux-edge/config-edge.$(uname -m)"
+		config=olddefconfig
+		;;
+	asahi)
+		pkgver=asahi
+		src_tar="https://github.com/AsahiLinux/linux/archive/refs/heads/asahi.tar.gz"
+		fetch_config="https://raw.githubusercontent.com/AsahiLinux/PKGBUILDs/main/linux-asahi/config"
+		config=olddefconfig
+		;;
+	visionfive)
+		pkgver=visionfive
+		src_tar="https://github.com/starfive-tech/linux/archive/refs/heads/visionfive.tar.gz"
+		config=visionfive_defconfig
+		;;
+	*)
+		fatal "KERNEL_TREE $KERNEL_TREE isn't supported yet"
+		;;
+esac
+
 fetch() {
-	curl "https://cdn.kernel.org/pub/linux/kernel/v5.x/$pkgname-$pkgver.tar.xz" -o $pkgname-$pkgver.tar.xz
-	tar -xf $pkgname-$pkgver.tar.xz
+	curl -L "$src_tar" -o $pkgname-$pkgver.tar
+	tar -xf $pkgname-$pkgver.tar
+
 	# use Alpine's kernel config so we don't have to maintain one
-	curl "https://git.alpinelinux.org/aports/plain/community/linux-edge/config-edge.$(uname -m)" -o .config
+	[ ! -z "$fetch_config" ] && curl "$fetch_config" -o .config
 	cd $pkgname-$pkgver
 }
 
@@ -25,21 +71,11 @@ fi
 
 build() {
 	cd $pkgname-$pkgver
-	cp ../.config .
-	bad --gmake gmake CC=clang HOSTCC=clang YACC=yacc LLVM=1 LLVM_IAS=1 ARCH=$_arch mod2yesconfig
-	# ./scripts/config -m CONFIG_DRM
-	# ./scripts/config -m CONFIG_SND
-	# ./scripts/config -m CONFIG_CFG80211
-	# ./scripts/config -m CONFIG_BT
-	# ./scripts/config -m CONFIG_IPV6
-	# ./scripts/config -m CONFIG_MEDIA_SUPPORT
-	# ./scripts/config -m CONFIG_FIREWIRE
-	# ./scripts/config -m CONFIG_USB4
-	# ./scripts/config -m CONFIG_FW_LOADER
+	[ ! -z "$fetch_config" ] && cp ../.config .
+	bad --gmake gmake CC=clang HOSTCC=clang YACC=yacc LLVM=1 LLVM_IAS=1 ARCH=$_arch "$config"
 
-	# bad --gmake gmake CC=clang HOSTCC=clang YACC=yacc LLVM=1 LLVM_IAS=1 ARCH=$_arch olddefconfig
-	sed -i 's/CONFIG_UNWINDER_ORC=y/# CONFIG_UNWINDER_ORC is not set/g' .config
-	sed -i 's/# CONFIG_UNWINDER_FRAME_POINTER is not set/CONFIG_UNWINDER_FRAME_POINTER=y/g' .config
+	# sed -i 's/CONFIG_UNWINDER_ORC=y/# CONFIG_UNWINDER_ORC is not set/g' .config
+	# sed -i 's/# CONFIG_UNWINDER_FRAME_POINTER is not set/CONFIG_UNWINDER_FRAME_POINTER=y/g' .config
 
 	if [ -z "$FOR_CROSS" ]; then
 		bad --gmake gmake CC=clang HOSTCC=clang YACC=yacc LLVM=1 LLVM_IAS=1 ARCH=$_arch
@@ -52,10 +88,11 @@ package() {
 	if [ -z "$FOR_CROSS" ]; then
 		install -d $pkgdir/boot
 		bad --gmake gmake CC=cc HOSTCC=cc YACC=yacc LLVM=1 LLVM_IAS=1 ARCH=$_arch INSTALL_PATH=$pkgdir/boot install
+		bad --gmake gmake CC=cc HOSTCC=cc YACC=yacc LLVM=1 LLVM_IAS=1 ARCH=$_arch INSTALL_DTBS_PATH=$pkgdir/boot/dtbs dtbs_install
 
-		# set +e # depmod causes errors
-		# bad --gmake gmake CC=cc HOSTCC=cc YACC=yacc LLVM=1 LLVM_IAS=1 ARCH=$_arch INSTALL_MOD_PATH=$pkgdir/ modules_install
-		# set -e
+		set +e # depmod causes errors
+		bad --gmake gmake CC=cc HOSTCC=cc YACC=yacc LLVM=1 LLVM_IAS=1 ARCH=$_arch INSTALL_MOD_PATH=$pkgdir/ modules_install
+		set -e
 	fi
 
 	bad --gmake gmake CC=cc HOSTCC=cc YACC=yacc LLVM=1 LLVM_IAS=1 ARCH=$_arch headers
