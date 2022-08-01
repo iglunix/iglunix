@@ -68,6 +68,10 @@ if [ ! -z "$WITH_CROSS" ]; then
 	export CROSS_COMPILE=$WITH_CROSS-linux-musl
 fi
 
+if [ ! -z "$FOR_CROSS" ]; then
+	export HEADS_ONLY=1
+fi
+
 
 build() {
 	cd $pkgname-$pkgver
@@ -77,7 +81,7 @@ build() {
 	# sed -i 's/CONFIG_UNWINDER_ORC=y/# CONFIG_UNWINDER_ORC is not set/g' .config
 	# sed -i 's/# CONFIG_UNWINDER_FRAME_POINTER is not set/CONFIG_UNWINDER_FRAME_POINTER=y/g' .config
 
-	if [ -z "$FOR_CROSS" ]; then
+	if [ -z "$HEADS_ONLY" ]; then
 		bad --gmake gmake CC=clang HOSTCC=clang YACC=yacc LLVM=1 LLVM_IAS=1 ARCH=$_arch
 	fi
 }
@@ -85,7 +89,7 @@ build() {
 package() {
 	cd $pkgname-$pkgver
 
-	if [ -z "$FOR_CROSS" ]; then
+	if [ -z "$HEADS_ONLY" ]; then
 		install -d $pkgdir/boot
 		bad --gmake gmake CC=cc HOSTCC=cc YACC=yacc LLVM=1 LLVM_IAS=1 ARCH=$_arch INSTALL_PATH=$pkgdir/boot install
 		bad --gmake gmake CC=cc HOSTCC=cc YACC=yacc LLVM=1 LLVM_IAS=1 ARCH=$_arch INSTALL_DTBS_PATH=$pkgdir/boot/dtbs dtbs_install
@@ -102,8 +106,8 @@ package() {
 		install -d $pkgdir/usr/
 		cp -r usr/include $pkgdir/usr/
 	else
-		install -d $pkgdir/usr/$FOR_CROSS_DIR
-		cp -r usr/include $pkgdir/$FOR_CROSS_DIR
+		install -d $pkgdir/$FOR_CROSS_DIR/
+		cp -r usr/include $pkgdir/$FOR_CROSS_DIR/
 	fi
 }
 
