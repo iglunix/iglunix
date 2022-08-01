@@ -1,0 +1,55 @@
+--- a/toys/other/lspci.c
++++ b/toys/other/lspci.c
+@@ -78,18 +78,45 @@
+
+       fseek(TT.db, 0, SEEK_SET);
+       while (!vbig || !dbig) {
++        int tc = 0; // tab count
+         s = p;
+         if (!fgets(s, sizeof(toybuf)-(p-toybuf)-1, TT.db)) break;
+-        while (isspace(*s)) s++;
++        while (*s == ' ') s++;
+         if (*s == '#') continue;
+-        if (vbig && s == p) break;
+-        if (strstart(&s, vbig ? device : vendor)) {
+-          if (vbig) dbig = s+2;
+-          else vbig = s+2;
+-          s += strlen(s);
+-          s[-1] = 0; // trim ending newline
+-          p = s + 1;
++        while (*s == '\t') { s++; tc++; }
++        switch (tc) {
++        case 0:
++          if (strstart(&s, vendor)) {
++            vbig = s + 2;
++            s += strlen(s);
++            s[-1] = 0;
++            p = s + 1;
++          }
++          break;
++        case 1:
++          if (vbig && strstart(&s, device)) {
++            dbig = s + 2;
++            s += strlen(s);
++            s[-1] = 0;
++            p = s + 1;
++          }
++          break;
++        case 2:
++          if (strstart(&s, vendor)) {
++            s+=5;
++            if (strstart(&s, device))
++              printf("subven: %s\n", s);
++          }
++          break;
+         }
++
++        // if (strstart(&s, vbig ? device : vendor)) {
++        //   if (vbig) dbig = s+2;
++        //   else vbig = s+2;
++        //   s += strlen(s);
++        //   s[-1] = 0; // trim ending newline
++        //   p = s + 1;
++        // }
+       }
+     }

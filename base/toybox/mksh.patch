@@ -1,0 +1,35 @@
+--- a/scripts/genconfig.sh
++++ b/scripts/genconfig.sh
+@@ -16,7 +16,7 @@
+ # Symbol name is first argument, flags second, feed C file to stdin
+ probesymbol()
+ {
+-  probecc "${@:2}" 2>/dev/null && DEFAULT=y || DEFAULT=n
++  probecc "$2" 2>/dev/null && DEFAULT=y || DEFAULT=n
+   rm a.out 2>/dev/null
+   echo -e "config $1\n\tbool\n\tdefault $DEFAULT\n" || exit 1
+ }
+--- a/scripts/portability.sh
++++ b/scripts/portability.sh
+@@ -35,7 +35,7 @@
+ fi
+
+ # Centos 7 bug workaround, EOL June 30 2024. TODO
+-DASHN=-n; wait -n 2>/dev/null; [ $? -eq 2 ] && unset DASHN
++# DASHN=-n; wait -n 2>/dev/null; [ $? -eq 2 ] && unset DASHN
+
+ # If the build is using gnu tools, make them behave less randomly.
+ export LANG=c
+--- a/scripts/make.sh
++++ b/scripts/make.sh
+@@ -76,8 +76,8 @@
+   echo -e "\$BUILD lib/*.c $TOYFILES \$LINK -o $OUTNAME"
+ }
+
+-if ! cmp -s <(genbuildsh 2>/dev/null | head -n 5) \
+-            <(head -n 5 "$GENDIR"/build.sh 2>/dev/null | $SED '5s/ -o .*//')
++if [ "$(genbuildsh 2>/dev/null | head -n 5)" != \
++     "$(head -n 5 "$GENDIR"/build.sh 2>/dev/null | $SED '5s/ -o .*//')" ]
+ then
+   echo -n "Library probe"
+
