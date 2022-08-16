@@ -27,7 +27,7 @@ fi
 
 case "$KERNEL_TREE" in
 	mainline)
-		pkgver=5.17.3
+		pkgver=5.19.1
 		src_tar="https://cdn.kernel.org/pub/linux/kernel/v5.x/linux-$pkgver.tar.xz"
 		fetch_config="https://git.alpinelinux.org/aports/plain/community/linux-edge/config-edge.$(uname -m)"
 		config=olddefconfig
@@ -55,6 +55,7 @@ fetch() {
 	# use Alpine's kernel config so we don't have to maintain one
 	[ ! -z "$fetch_config" ] && curl "$fetch_config" -o .config
 	cd $pkgname-$pkgver
+	echo "#!/bin/true" > scripts/check-local-export
 }
 
 _arch=$ARCH
@@ -92,9 +93,9 @@ package() {
 	if [ -z "$HEADS_ONLY" ]; then
 		install -d $pkgdir/boot
 		bad --gmake gmake CC=cc HOSTCC=cc YACC=yacc LLVM=1 LLVM_IAS=1 ARCH=$_arch INSTALL_PATH=$pkgdir/boot install
-		bad --gmake gmake CC=cc HOSTCC=cc YACC=yacc LLVM=1 LLVM_IAS=1 ARCH=$_arch INSTALL_DTBS_PATH=$pkgdir/boot/dtbs dtbs_install
 
-		set +e # depmod causes errors
+		set +e # depmod causes errors and not all configs have dtbs
+		bad --gmake gmake CC=cc HOSTCC=cc YACC=yacc LLVM=1 LLVM_IAS=1 ARCH=$_arch INSTALL_DTBS_PATH=$pkgdir/boot/dtbs dtbs_install
 		bad --gmake gmake CC=cc HOSTCC=cc YACC=yacc LLVM=1 LLVM_IAS=1 ARCH=$_arch INSTALL_MOD_PATH=$pkgdir/ modules_install
 		set -e
 	fi
