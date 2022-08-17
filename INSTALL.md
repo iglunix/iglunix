@@ -55,6 +55,9 @@ For any packages you want to install
 tar -I zstd -xf /mnt/<pkgname>.<pkgver>.tar.zst -C /install_root
 ```
 
+## The init system
+Use https://github.com/iglunix/iglunix/tree/main/init not https://github.com/iglunix/init
+
 ## Installing Bootloaders
 
 ```
