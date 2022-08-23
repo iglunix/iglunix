@@ -15,7 +15,7 @@ build() {
 	./configure \
 		--prefix=/usr \
 		--build=$HOST_TRIPLE \
-		--host=$TRIPLE  \
+		--host=$HOST_TRIPLE  \
 		--with-system-ffi=true \
 		--with-ssl-default-suites=openssl \
 		--without-ensure-pip \
