@@ -28,12 +28,12 @@ fetch() {
 
 build() {
 	cd $pkgname-$pkgver
-	gmake CC="${CC:-clang}"
+	bad --gmake gmake CC="${CC:-clang}"
 }
 
 package() {
 	cd $pkgname-$pkgver
-	gmake install DESTDIR=$pkgdir
+	bad --gmake gmake install DESTDIR=$pkgdir
 }
 
 license() {

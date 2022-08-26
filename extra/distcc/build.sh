@@ -15,12 +15,12 @@ build() {
 		--host=x86_64-unknown-linux-musl \
 		--without-libiberty
 
-	gmake
+	bad --gmake gmake
 }
 
 package() {
 	cd $pkgname-$pkgver
-	gmake install DESTDIR=$pkgdir
+	bad --gmake gmake install DESTDIR=$pkgdir
 
 	install -d $pkgdir/usr/lib/distcc
 	ln -sr $pkgdir/usr/bin/distcc $pkgdir/usr/lib/distcc/cc

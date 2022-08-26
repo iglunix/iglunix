@@ -13,26 +13,26 @@ fetch() {
 
 build() {
 	cd $pkgname-$pkgver
-	gmake ARCH=arm64 CC=cc HOSTCC=cc LEX=flex YACC=yacc LLVM=1 LLVM_IAS=1 bcm2711_defconfig
-	gmake ARCH=arm64 CC=cc HOSTCC=cc LEX=flex YACC=yacc LLVM=1 LLVM_IAS=1
+	bad --gmake gmake ARCH=arm64 CC=cc HOSTCC=cc LEX=flex YACC=yacc LLVM=1 LLVM_IAS=1 bcm2711_defconfig
+	bad --gmake gmake ARCH=arm64 CC=cc HOSTCC=cc LEX=flex YACC=yacc LLVM=1 LLVM_IAS=1
 }
 
 package() {
 	cd $pkgname-$pkgver
 	install -d $pkgdir/boot
 	cp arch/arm64/boot/Image $pkgdir/boot/kernel8.img
-	gmake ARCH=arm64 CC=cc HOSTCC=cc LEX=flex YACC=yacc LLVM=1 LLVM_IAS=1 INSTALL_PATH=$pkgdir/boot install
-	gmake ARCH=arm64 CC=cc HOSTCC=cc LEX=flex YACC=yacc LLVM=1 LLVM_IAS=1 INSTALL_DTBS_PATH=$pkgdir/boot dtbs_install
-	gmake ARCH=arm64 CC=cc HOSTCC=cc LEX=flex YACC=yacc LLVM=1 LLVM_IAS=1 INSTALL_MOD_PATH=$pkgdir/ modules_install
+	bad --gmake gmake ARCH=arm64 CC=cc HOSTCC=cc LEX=flex YACC=yacc LLVM=1 LLVM_IAS=1 INSTALL_PATH=$pkgdir/boot install
+	bad --gmake gmake ARCH=arm64 CC=cc HOSTCC=cc LEX=flex YACC=yacc LLVM=1 LLVM_IAS=1 INSTALL_DTBS_PATH=$pkgdir/boot dtbs_install
+	bad --gmake gmake ARCH=arm64 CC=cc HOSTCC=cc LEX=flex YACC=yacc LLVM=1 LLVM_IAS=1 INSTALL_MOD_PATH=$pkgdir/ modules_install
 
 	mv $pkgdir/boot/broadcom/* $pkgdir/boot/
 	rmdir $pkgdir/boot/broadcom
 
 	if stat /usr/bin/rsync 2>/dev/null /dev/null; then
     	echo "using rsync"
-		gmake ARCH=arm64 CC=cc HOSTCC=cc LEX=flex YACC=yacc LLVM=1 LLVM_IAS=1 INSTALL_HDR_PATH=$pkgdir/usr headers_install
+		bad --gmake gmake ARCH=arm64 CC=cc HOSTCC=cc LEX=flex YACC=yacc LLVM=1 LLVM_IAS=1 INSTALL_HDR_PATH=$pkgdir/usr headers_install
 	else
-		gmake ARCH=arm64 CC=cc HOSTCC=cc LEX=flex YACC=yacc LLVM=1 LLVM_IAS=1 headers
+		bad --gmake gmake ARCH=arm64 CC=cc HOSTCC=cc LEX=flex YACC=yacc LLVM=1 LLVM_IAS=1 headers
 		find -name '.*' -exec rm {} \;
 		rm usr/include/Makefile
 		install -d $pkgdir/usr/

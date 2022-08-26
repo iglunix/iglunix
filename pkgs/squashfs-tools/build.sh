@@ -9,13 +9,13 @@ fetch() {
 build() {
 	cd $pkgname-$pkgver
 	cd $pkgname
-	gmake
+	bad --gmake gmake
 }
 
 package() {
 	cd $pkgname-$pkgver
 	cd $pkgname
-	gmake install INSTALL_DIR=$pkgdir/usr/bin
+	bad --gmake gmake install INSTALL_DIR=$pkgdir/usr/bin
 }
 
 license() {

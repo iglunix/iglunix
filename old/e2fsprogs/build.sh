@@ -19,7 +19,7 @@ build() {
 
 	#--exec_prefix=/
 
-	gmake
+	bad --gmake gmake
 }
 
 package() {

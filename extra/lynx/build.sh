@@ -16,12 +16,12 @@ build() {
 		--build=x86_64-unknown-linux-musl \
 		--host=x86_64-unknown-linux-musl
 
-	gmake
+	bad --gmake gmake
 }
 
 package() {
 	cd $pkgname-$pkgver
-	gmake install DESTDIR=$pkgdir
+	bad --gmake gmake install DESTDIR=$pkgdir
 }
 
 license() {

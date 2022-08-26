@@ -15,12 +15,12 @@ build() {
 		--build=$TRIPLE \
 		--host=$TRIPLE
 
-	gmake
+	bad --gmake gmake
 }
 
 package() {
 	cd $pkgname-$pkgver
-	gmake install DESTDIR=$pkgdir
+	bad --gmake gmake install DESTDIR=$pkgdir
 }
 
 license() {

@@ -27,11 +27,11 @@ build() {
 
 	patch -p1 < ../byacc-p-makefile.patch
 
-	gmake
+	bad --gmake gmake
 
 	patch -p1 < ../byacc-comment-defines.patch
 
-	gmake
+	bad --gmake gmake
 }
 
 package() {
