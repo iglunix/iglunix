@@ -15,18 +15,18 @@ build(){
 		--build=x86_64-unknown-linux-musl \
 		--host=x86_64-unknown-linux-musl \
 		--prefix=/usr
-	gmake
+	bad --gmake gmake
 }
 
 package() {
 	cd $pkgname-$pkgver
-	gmake DESTDIR="$pkgdir" install
+	bad --gmake gmake DESTDIR="$pkgdir" install
 	rm -r $pkgdir/usr/share
 }
 
 package_doc() {
 	cd $pkgname-$pkgver
-	gmake DESTDIR="$pkgdir" install
+	bad --gmake gmake DESTDIR="$pkgdir" install
 	rm -r $pkgdir/usr/bin
 }
 

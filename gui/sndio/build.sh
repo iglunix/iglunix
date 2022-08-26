@@ -13,12 +13,12 @@ build() {
 		--prefix=/usr \
 		--enable-alsa
 
-	gmake
+	bad --gmake gmake
 }
 
 package() {
 	cd $pkgname-$pkgver
-	gmake install DESTDIR=$pkgdir
+	bad --gmake gmake install DESTDIR=$pkgdir
 
 	rm -rf $pkgdir/usr/share/man
 
@@ -28,7 +28,7 @@ package() {
 
 package_dev() {
 	cd $pkgname-$pkgver
-	gmake install DESTDIR=$pkgdir
+	bad --gmake gmake install DESTDIR=$pkgdir
 
 	rm -rf $pkgdir/usr/bin
 	rm -rf $pkgdir/usr/share/man
@@ -37,7 +37,7 @@ package_dev() {
 
 package_doc() {
 	cd $pkgname-$pkgver
-	gmake install DESTDIR=$pkgdir
+	bad --gmake gmake install DESTDIR=$pkgdir
 
 	rm -rf $pkgdir/usr/lib
 	rm -rf $pkgdir/usr/bin

@@ -49,8 +49,8 @@ build() {
 		--target=aarch64-unknown-linux-musl \
 		--enable-wrappers=no
 
-	gmake
-	gmake install DESTDIR=$pkgdir
+	bad --gmake gmake
+	bad --gmake gmake install DESTDIR=$pkgdir
 }
 
 package() {

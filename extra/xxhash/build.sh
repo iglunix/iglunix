@@ -10,12 +10,12 @@ fetch() {
 
 build() {
 	cd $pkgname-$pkgver
-	gmake PREFIX=/usr
+	bad --gmake gmake PREFIX=/usr
 }
 
 package() {
 	cd $pkgname-$pkgver
-	gmake install PREFIX=/usr DESTDIR=$pkgdir
+	bad --gmake gmake install PREFIX=/usr DESTDIR=$pkgdir
 }
 
 license() {

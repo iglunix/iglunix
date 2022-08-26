@@ -11,12 +11,12 @@ build() {
 	cd $pkgname-$pkgver
 
 	qmake
-	gmake
+	bad --gmake gmake
 }
 
 package() {
 	cd $pkgname-$pkgver
-	gmake INSTALL_ROOT=$pkgdir install
+	bad --gmake gmake INSTALL_ROOT=$pkgdir install
 }
 
 license() {

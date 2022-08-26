@@ -20,13 +20,13 @@ build() {
 		-platform linux-clang-libc++ \
 		-prefix /usr
 
-	gmake
+	bad --gmake gmake
 }
 
 package() {
 	cd $pkgname-$pkgver
 	cd build
-	gmake INSTALL_ROOT=$pkgdir install
+	bad --gmake gmake INSTALL_ROOT=$pkgdir install
 }
 
 license() {

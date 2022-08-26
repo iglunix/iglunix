@@ -15,18 +15,18 @@ fetch() {
 build() {
 	cd $pkgname-$pkgver
 	./configure
-	gmake
+	bad --gmake gmake
 }
 
 package() {
 	cd $pkgname-$pkgver
-	gmake install ROOT=$pkgdir
+	bad --gmake gmake install ROOT=$pkgdir
 	rm -r $pkgdir/usr/share
 }
 
 package_doc() {
 	cd $pkgname-$pkgver
-	gmake install ROOT=$pkgdir
+	bad --gmake gmake install ROOT=$pkgdir
 	rm -r $pkgdir/usr/lib
 	rm -r $pkgdir/usr/bin
 }

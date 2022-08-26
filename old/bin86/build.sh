@@ -10,14 +10,14 @@ fetch() {
 
 build() {
 	cd $pkgname-$pkgver
-	gmake PREFIX=/usr
+	bad --gmake gmake PREFIX=/usr
 }
 
 package() {
 	cd $pkgname-$pkgver
 	install -d $pkgdir/usr/bin
 	install -d $pkgdir/usr/share/man/man1
-	gmake PREFIX=$pkgdir/usr MANDIR=$pkgdir/usr/share/man/man1 install
+	bad --gmake gmake PREFIX=$pkgdir/usr MANDIR=$pkgdir/usr/share/man/man1 install
 }
 
 license() {

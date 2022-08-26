@@ -13,12 +13,12 @@ build() {
 	cp ../config.mk .
 	cp ../velox.conf .
 	
-	gmake PREFIX=/usr CC=cc
+	bad --gmake gmake PREFIX=/usr CC=cc
 }
 
 package() {
 	cd $pkgname-$pkgver
-	gmake install DESTDIR=$pkgdir PREFIX=/usr
+	bad --gmake gmake install DESTDIR=$pkgdir PREFIX=/usr
 	install -d $pkgdir/etc
 	install -Dm644 velox.conf $pkgdir/etc/
 }
