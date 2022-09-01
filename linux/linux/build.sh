@@ -27,9 +27,9 @@ fi
 
 case "$KERNEL_TREE" in
 	mainline)
-		pkgver=5.19.1
-		src_tar="https://cdn.kernel.org/pub/linux/kernel/v5.x/linux-$pkgver.tar.xz"
-		fetch_config="https://git.alpinelinux.org/aports/plain/community/linux-edge/config-edge.$(uname -m)"
+		pkgver=6.0-rc3
+		src_tar="https://git.kernel.org/torvalds/t/linux-$pkgver.tar.gz"
+		fetch_config="https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-$ARCH-fedora.config"
 		config=olddefconfig
 		;;
 	asahi)
@@ -77,7 +77,20 @@ fi
 build() {
 	cd $pkgname-$pkgver
 	[ ! -z "$fetch_config" ] && cp ../.config .
+
 	bad --gmake gmake CC=clang HOSTCC=clang YACC=yacc LLVM=1 LLVM_IAS=1 ARCH=$_arch "$config"
+
+	# Known bad config options
+	./scripts/config -d CONFIG_IKHEADERS
+	./scripts/config -d CONFIG_SPEAKUP
+	./scripts/config -d CONFIG_DEBUG_INFO_BTF
+
+	# Bake in important modules to allow booting without initramfs
+	./scripts/config -e CONFIG_BLK_DEV_NVME
+	./scripts/config -e CONFIG_NVME_CORE
+	./scripts/config -e CONFIG_EXT4_FS
+
+	bad --gmake gmake CC=clang HOSTCC=clang YACC=yacc LLVM=1 LLVM_IAS=1 ARCH=$_arch "olddefconfig"
 
 	# sed -i 's/CONFIG_UNWINDER_ORC=y/# CONFIG_UNWINDER_ORC is not set/g' .config
 	# sed -i 's/# CONFIG_UNWINDER_FRAME_POINTER is not set/CONFIG_UNWINDER_FRAME_POINTER=y/g' .config
@@ -101,8 +114,6 @@ package() {
 	fi
 
 	bad --gmake gmake CC=cc HOSTCC=cc YACC=yacc LLVM=1 LLVM_IAS=1 ARCH=$_arch headers
-	find -name '.*' -exec rm {} \;
-	rm -f usr/include/Makefile
 	if [ -z "$FOR_CROSS" ]; then
 		install -d $pkgdir/usr/
 		cp -r usr/include $pkgdir/usr/
@@ -110,6 +121,7 @@ package() {
 		install -d $pkgdir/$FOR_CROSS_DIR/
 		cp -r usr/include $pkgdir/$FOR_CROSS_DIR/
 	fi
+	find $pkgdir/usr/include -type f ! -name '*.h' -delete
 }
 
 backup() {
