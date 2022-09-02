@@ -1,19 +1,19 @@
 pkgname=mesa
-#pkgver=21.2.1
-pkgver=main
+pkgver=22.1.0
+#pkgver=main
 deps="musl:wayland:wayland-protocols:llvm:zlib-ng:expat:libffi:libdrm:python-mako"
 ext=dev
 
 fetch() {
-#	curl "https://archive.mesa3d.org/$pkgname-$pkgver.tar.xz" -o $pkgname-$pkgver.tar.gz
-	curl "https://gitlab.freedesktop.org/mesa/mesa/-/archive/main/mesa-main.tar.gz" -o $pkgname-$pkgver.tar.gz
+	curl "https://archive.mesa3d.org/$pkgname-$pkgver.tar.xz" -o $pkgname-$pkgver.tar.gz
+#	curl "https://gitlab.freedesktop.org/mesa/mesa/-/archive/main/mesa-main.tar.gz" -o $pkgname-$pkgver.tar.gz
 	tar -xf $pkgname-$pkgver.tar.gz
 	mkdir $pkgname-$pkgver/build
 	cp ../byacc-out-mid-build.patch .
 	cp ../alpine-tls.patch .
 	cp ../LICENSE .
 	cd $pkgname-$pkgver
-	patch -p1 < ../alpine-tls.patch
+#	patch -p1 < ../alpine-tls.patch
 }
 
 _dri_drivers=""
@@ -42,23 +42,20 @@ build() {
 
 	meson .. \
 		--prefix=/usr \
+		--libdir=lib \
 		-Dplatforms=wayland \
-		-Ddri-drivers=$_dri_drivers \
 		-Ddri3=true \
 		-Dgallium-drivers=$_gallium_drivers \
 		-Dgallium-vdpau=false \
 		-Dgallium-xvmc=false \
 		-Dgallium-omx=disabled \
 		-Dgallium-va=false \
-		-Dgallium-xz=false \
 		-Dgallium-nine=false \
 		-Dgallium-opencl=disabled \
 		-Dvulkan-drivers=$_vulkan_drivers \
-		-Dvulkan-overlay-layer=true \
-		-Dvulkan-device-select-layer=true \
 		-Dshared-glapi=enabled \
-		-Dgles1=false \
-		-Dgles2=true \
+		-Dgles1=disabled \
+		-Dgles2=enabled \
 		-Dopengl=true \
 		-Dgbm=true \
 		-Dglx=disabled \
@@ -70,7 +67,8 @@ build() {
 		-Dlibunwind=false \
 		-Dlmsensors=false \
 		-Dbuild-tests=false \
-		-Duse-elf-tls=false
+		-Db_ndebug=true \
+		-Dcpp_rtti=false
 
 	samu
 
@@ -85,8 +83,6 @@ package() {
 	cd $pkgname-$pkgver
 	cd build
 	DESTDIR=$pkgdir samu install
-	rm -r $pkgdir/usr/include
-	rm -r $pkgdir/usr/lib/pkgconfig
 }
 
 package_dev() {
@@ -101,4 +97,8 @@ package_dev() {
 
 license() {
 	cat LICENSE
+}
+
+backup() {
+	return
 }
