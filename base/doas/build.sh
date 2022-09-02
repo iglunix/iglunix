@@ -1,4 +1,4 @@
-pkgver=6.8
+pkgver=6.8.2
 pkgname=doas
 pkgrel=1
 bad="gmake"
