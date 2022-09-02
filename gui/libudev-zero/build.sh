@@ -1,5 +1,5 @@
 pkgname=libudev-zero
-pkgver=1.0.0
+pkgver=1.0.1
 
 fetch() {
 	curl -L "https://github.com/illiliti/libudev-zero/archive/$pkgver.tar.gz" -o $pkgname-$pkgver.tar.xz
