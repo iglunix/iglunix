@@ -1,5 +1,5 @@
 pkgname=nasm
-pkgver=2.15
+pkgver=2.15.05
 pkgrel=1
 bad="gmake"
 ext="doc"
