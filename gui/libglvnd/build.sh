@@ -14,7 +14,8 @@ build() {
 		--buildtype=release \
 		--prefix=/usr \
 		--libexecdir=lib \
-		-Dtls=disabled
+		--libdir=lib \
+		-Dtls=false
 	samu
 }
 
@@ -26,6 +27,10 @@ package() {
 
 license() {
 	cd $pkgname-$pkgver
-	cat LICENSE
+	tail -n 20 README.md
 #	cat COPYING
+}
+
+backup() {
+	return
 }
