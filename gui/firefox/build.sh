@@ -1,18 +1,18 @@
 pkgname=firefox
-pkgver=101.0
+pkgver=104.0
 mkdeps="cbindgen:rust"
 
 fetch() {
 	#curl "https://ftp.mozilla.org/pub/firefox/releases/${pkgver}esr/source/firefox-${pkgver}esr.source.tar.xz" -o $pkgname-$pkgver.tar.xz
 	#curl "https://hg.mozilla.org/mozilla-unified/archive/26726cd430955db041e5de33d9792bb816c57608.zip" -o $pkgname-$pkgver.zip
-	curl "https://archive.mozilla.org/pub/firefox/releases/${pkgver}b3/source/firefox-${pkgver}b3.source.tar.xz" -o $pkgname-$pkgver.tar.xz
+	curl "https://archive.mozilla.org/pub/firefox/releases/${pkgver}/source/firefox-${pkgver}.source.tar.xz" -o $pkgname-$pkgver.tar.xz
 	tar -xf $pkgname-$pkgver.tar.xz
 	cd $pkgname-$pkgver
 	# patch -p1 < ../../no-x11.patch
 	# patch -p1 < ../../fix-clang-as.patch
 	patch -p1 < ../../avoid-redefinition.patch
 	patch -p1 < ../../libcxx.patch
-	patch -p1 < ../../grefptr.patch
+	# patch -p1 < ../../grefptr.patch
 	patch -p1 < ../../sandbox-allow-select.patch
 	# patch -p1 < ../../sandbox-fork.patch
 	# patch -p1 < ../../sandbox-sched.patch
@@ -69,8 +69,7 @@ ac_add_options --without-wasm-sandboxed-libraries
 #ac_add_options MOZ_PGO=1
 EOF
 
-	# bad --gmake --gm4 --autoconf ./mach clobber
-	bad --gmake --gm4 --autoconf ./mach build
+	bad --gmake --autoconf ./mach build
 }
 
 package() {
@@ -81,7 +80,7 @@ package() {
 	export RUSTFLAGS='-C target-feature=-crt-static'
 	export LDFLAGS="$LDFLAGS -Wl,-rpath=/usr/lib/firefox/,--enable-new-dtags"
 
-	DESTDIR=$pkgdir bad --gmake --gm4 --autoconf ./mach install
+	DESTDIR=$pkgdir bad --gmake --autoconf ./mach install
 }
 
 backup() {
