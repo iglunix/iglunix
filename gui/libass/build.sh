@@ -1,9 +1,18 @@
 pkgname=libass
-pkgver=0.15.0
+pkgver=0.16.0
 
 fetch() {
-	curl -L "https://github.com/libass/libass/releases/download/0.15.0/libass-0.15.0.tar.xz" -o $pkgname-$pkgver.tar.xz
+	curl -L "https://github.com/libass/libass/releases/download/$pkgver/libass-$pkgver.tar.xz" -o $pkgname-$pkgver.tar.xz
 	tar -xf $pkgname-$pkgver.tar.xz
+
+	cd $pkgname-$pkgver
+	patch -p1 < ../../no-fribidi.patch
+
+	sed -e 's/as_fn_error.*fribidi/: 0 "/' \
+		-e '/pkg_requires="fribidi >= .*/d' \
+	configure > _
+	mv -f _ configure
+	chmod +x configure
 }
 
 build() {
@@ -25,4 +34,8 @@ package() {
 license() {
 	cd $pkgname-$pkgver
 	cat COPYING
+}
+
+backup() {
+	return
 }
