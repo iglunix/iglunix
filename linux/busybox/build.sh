@@ -1,4 +1,4 @@
-pkgver=1.34.1
+pkgver=1.35.0
 pkgname=busybox
 bad=gmake
 deps="musl"
