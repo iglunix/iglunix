@@ -1,9 +1,9 @@
 pkgname=sway
-pkgver=master
+pkgver=1.7
 
 fetch() {
-	# curl -L "https://github.com/swaywm/sway/releases/download/$pkgver/sway-$pkgver.tar.gz" -o $pkgname-$pkgver.tar.xz
-	curl -L "https://github.com/swaywm/sway/archive/refs/heads/master.tar.gz" -o $pkgname-$pkgver.tar.gz
+	curl -L "https://github.com/swaywm/sway/releases/download/$pkgver/sway-$pkgver.tar.gz" -o $pkgname-$pkgver.tar.gz
+	# curl -L "https://github.com/swaywm/sway/archive/refs/heads/master.tar.gz" -o $pkgname-$pkgver.tar.gz
 	tar -xf $pkgname-$pkgver.tar.gz
 	mkdir $pkgname-$pkgver/build
 	cd $pkgname-$pkgver
