@@ -2,8 +2,8 @@ pkgname=openpam
 pkgver=20190224
 
 fetch() {
-	curl "https://www.openpam.org/downloads/38" -o $pkgname-$pkgver.tar.xz
-	tar -xf $pkgname-$pkgver.tar.xz
+	curl -LO "https://openpam.des.dev/downloads/openpam-$pkgver.tar.gz"
+	tar -xf $pkgname-$pkgver.tar.gz
 }
 
 build() {
@@ -25,4 +25,8 @@ license() {
 	cd $pkgname-$pkgver
 	cat LICENSE
 #	cat COPYING
+}
+
+backup() {
+	return
 }

@@ -5,9 +5,10 @@ fetch() {
 	curl "https://ftp.gnu.org/gnu/autoconf/autoconf-$pkgver.tar.gz" -o $pkgname-$pkgver.tar.gz
 	tar -xf $pkgname-$pkgver.tar.gz
 	cd $pkgname-$pkgver
-	patch -p1 < ../../makefile-m4f.patch
-	patch -p1 < ../../autoconf.sh.patch
-	patch -p1 < ../../autoheader.sh.patch
+	sed -i '/^M4FROZEN/d' Makefile.in
+	patch -p1 < ../../makefile.patch
+	# patch -p1 < ../../autoconf.sh.patch
+	# patch -p1 < ../../autoheader.sh.patch
 }
 
 build() {
@@ -28,4 +29,8 @@ package() {
 license() {
 	cd $pkgname-$pkgver
 	cat COPYING
+}
+
+backup() {
+	return
 }
