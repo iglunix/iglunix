@@ -1,8 +1,8 @@
 pkgname=mpv
-pkgver=0.33.1
+pkgver=0.34.1
 
 fetch() {
-	curl -L "https://github.com/mpv-player/mpv/archive/refs/tags/v0.33.1.tar.gz" -o $pkgname-$pkgver.tar.xz
+	curl -L "https://github.com/mpv-player/mpv/archive/refs/tags/v$pkgver.tar.gz" -o $pkgname-$pkgver.tar.xz
 	tar -xf $pkgname-$pkgver.tar.xz
 }
 
@@ -21,6 +21,11 @@ package() {
 
 license() {
 	cd $pkgname-$pkgver
-	cat LICENSE
+	cat Copyright
+	cat LICENSE.*
 #	cat COPYING
+}
+
+backup() {
+	return
 }
