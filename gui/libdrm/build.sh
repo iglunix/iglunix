@@ -1,4 +1,4 @@
-pkgver=2.4.109
+pkgver=2.4.112
 pkgname=libdrm
 dep="libpciaccess"
 bad=""
@@ -10,7 +10,7 @@ fetch() {
 
 build() {
 	cd $pkgname-$pkgver
-	meson build --prefix /usr
+	meson build --prefix /usr --libdir=lib
 	samu -C build
 }
 
