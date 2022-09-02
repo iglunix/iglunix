@@ -16,6 +16,7 @@ build() {
 		--buildtype=release \
 		--prefix=/usr \
 		--libexecdir=lib \
+		--libdir=lib \
 		-Ddaemon=false \
 		-Dtests=false \
 		-Ddoxygen=false \
