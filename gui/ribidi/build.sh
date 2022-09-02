@@ -18,7 +18,7 @@ package() {
 	install -d $pkgdir/usr/include/fribidi
 	ln -sr $pkgdir/usr/include/ribidi/ribidi.h $pkgdir/usr/include/fribidi/fribidi.h
 
-	
+
 	install -Dm644 $pkgname.pc $pkgdir/usr/lib/pkgconfig/
 	install -Dm644 f$pkgname.pc $pkgdir/usr/lib/pkgconfig/
 }
@@ -27,4 +27,8 @@ license() {
 	cd $pkgname-$pkgver
 	cat LICENSE
 #	cat COPYING
+}
+
+backup() {
+	return
 }
