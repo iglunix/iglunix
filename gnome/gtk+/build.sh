@@ -1,6 +1,6 @@
 pkgname=gtk+
 _pkgver=3.24
-pkgver=$_pkgver.31
+pkgver=$_pkgver.34
 
 fetch() {
 	curl -L "https://download.gnome.org/sources/gtk+/$_pkgver/gtk%2B-$pkgver.tar.xz" -o $pkgname-$pkgver.tar.xz
@@ -19,6 +19,16 @@ fetch() {
 	    gtk/a11y/gtkaccessibility.c > _
 	mv -f _ gtk/a11y/gtkaccessibility.c
 
+sed '/fribidi_dep/d;/fribidi_req  /d;s/fribidi_req//;s/fribidi//' meson.build > _
+mv -f _ meson.build
+sed '/fribidi_dep,/d' gtk/meson.build > _
+mv -f _ gtk/meson.build
+sed '/fribidi_dep,/d' gdk/meson.build > _
+mv -f _ gdk/meson.build
+
+
+	rm subprojects/*.wrap
+
 }
 
 build() {
@@ -28,6 +38,7 @@ build() {
 		--buildtype=release \
 		--prefix=/usr \
 		--libexecdir=lib \
+		--libdir=lib \
 		--localstatedir=/var \
 		-Dx11_backend=false \
 		-Dprint_backends=auto \
@@ -57,6 +68,5 @@ backup() {
 
 license() {
 	cd $pkgname-$pkgver
-	cat LICENSE
-#	cat COPYING
+	cat COPYING
 }
