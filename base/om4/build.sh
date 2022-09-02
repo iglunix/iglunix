@@ -1,4 +1,4 @@
-pkgver=6.7
+pkgver=master
 pkgname=om4
 pkgrel=1
 deps="musl"
@@ -7,11 +7,9 @@ ext="doc"
 auto_cross
 
 fetch() {
-	curl -L "https://github.com/ibara/m4/releases/download/om4-6.7/om4-6.7.tar.gz" -o $pkgname-$pkgver.tar.xz
+	curl -L "https://github.com/iglunix/om4/archive/refs/heads/$pkgver.tar.gz" -o $pkgname-$pkgver.tar.xz
 	tar -xf $pkgname-$pkgver.tar.xz
 	cd $pkgname-$pkgver
-	patch -p1 < ../../m4-hand-written-lexer.patch
-	patch -p1 < ../../configure.patch
 }
 
 build() {
