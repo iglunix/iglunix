@@ -1,5 +1,5 @@
 pkgname=i3status-rust
-pkgver=0.20.4
+pkgver=0.21.2
 
 _clear_vendor_checksums() {
 	sed -i 's/\("files":{\)[^}]*/\1/' vendor/$1/.cargo-checksum.json
@@ -10,12 +10,12 @@ fetch() {
 	tar -xf $pkgname-$pkgver.tar.xz
 	cd $pkgname-$pkgver
 	mkdir -p .cargo
-	/usr/src/rust-bootstrap/build/rust-root/bin/cargo vendor > .cargo/config
+	cargo vendor > .cargo/config
 }
 
 build() {
 	cd $pkgname-$pkgver
-	cargo build --release --locked --all-features
+	cargo build --release --locked
 }
 
 package() {
@@ -27,4 +27,8 @@ license() {
 	cd $pkgname-$pkgver
 	cat LICENSE
 #	cat COPYING
+}
+
+backup() {
+	return
 }
