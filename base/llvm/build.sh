@@ -1,4 +1,4 @@
-pkgver=14.0.1
+pkgver=15.0.0
 pkgname=llvm
 bad=""
 ext="dev"
@@ -9,7 +9,7 @@ fetch() {
 	mv llvm-project-$pkgver.src $pkgname-$pkgver
 
 	cd $pkgname-$pkgver
-	patch -p1 < ../../riscv-relax.patch
+	# patch -p1 < ../../riscv-relax.patch
 }
 
 build() {
@@ -41,18 +41,18 @@ build() {
 
 	mkdir -p build
 	cd build
+		# -DCMAKE_C_COMPILER_TARGET=$TRIPLE \
+		# -DCMAKE_CXX_COMPILER_TARGET=$TRIPLE \
 	cmake -G Ninja -Wno-dev \
-		-DCMAKE_C_COMPILER_TARGET=$TRIPLE \
-		-DCMAKE_CXX_COMPILER_TARGET=$TRIPLE \
 		-DCMAKE_C_COMPILER=$CC \
 		-DCMAKE_CXX_COMPILER=$CXX \
 		-DCMAKE_INSTALL_PREFIX=/usr \
 		-DCMAKE_BUILD_TYPE=Release \
 		-DLLVM_VERSION_SUFFIX="" \
 		-DLLVM_APPEND_VC_REV=OFF \
-		-DLLVM_ENABLE_PROJECTS="llvm;lld;clang" \
+		-DLLVM_ENABLE_PROJECTS="llvm;lld;clang;lldb;clang-tools-extra" \
 		-DLLVM_ENABLE_LLD=ON \
-		-DLLVM_TARGETS_TO_BUILD="all" \
+		-DLLVM_TARGETS_TO_BUILD="X86;RISCV;ARM;PowerPC" \
 		-DLLVM_INSTALL_BINUTILS_SYMLINKS=ON \
 		-DLLVM_INSTALL_CCTOOLS_SYMLINKS=ON \
 		-DLLVM_INCLUDE_EXAMPLES=OFF \
@@ -64,6 +64,7 @@ build() {
 		-DLLVM_DEFAULT_TARGET_TRIPLE=$TRIPLE \
 		-DLLVM_ENABLE_LIBXML2=OFF \
 		-DLLVM_ENABLE_ZLIB=OFF\
+		-DLLVM_ENABLE_BACKTRACES=OFF \
 		-DLLVM_BUILD_LLVM_DYLIB=ON \
 		-DLLVM_LINK_LLVM_DYLIB=ON \
 		-DLLVM_OPTIMIZED_TABLEGEN=ON \
@@ -120,6 +121,7 @@ build() {
 		$EXTRA_ARGS \
 		-DHAVE_CXX_ATOMICS_WITHOUT_LIB=ON \
 		-DHAVE_CXX_ATOMICS64_WITHOUT_LIB=ON \
+		-DHAVE_BACKTRACE=OFF \
 		../llvm
 
 	samu -j$JOBS
