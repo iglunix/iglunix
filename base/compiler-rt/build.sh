@@ -1,15 +1,15 @@
 pkgname=compiler-rt
-pkgver=14.0.1
+pkgver=15.0.0
 deps=linux
 
 fetch() {
-	curl -L "https://github.com/llvm/llvm-project/releases/download/llvmorg-$pkgver/compiler-rt-$pkgver.src.tar.xz" -o $pkgname-$pkgver.tar.xz
+	curl -L "https://github.com/llvm/llvm-project/releases/download/llvmorg-$pkgver/llvm-project-$pkgver.src.tar.xz" -o $pkgname-$pkgver.tar.xz
 	# for c++ headers
 	# curl -L "https://github.com/llvm/llvm-project/releases/download/llvmorg-$pkgver/libcxx-$pkgver.src.tar.xz" -o libcxx-$pkgver.tar.xz
 	# musl required for C headers
 	curl -O "http://musl.libc.org/releases/musl-1.2.2.tar.gz"
 	tar -xf $pkgname-$pkgver.tar.xz
-	mv $pkgname-$pkgver.src $pkgname-$pkgver
+	mv llvm-project-$pkgver.src $pkgname-$pkgver
 	# tar -xf libcxx-$pkgver.tar.xz
 	# mv libcxx-$pkgver.src libcxx-$pkgver
 	# cp ../__config_site libcxx-$pkgver/include
@@ -24,7 +24,9 @@ fetch() {
 build() {
 	cd $pkgname-$pkgver
 	cd build
-	cmake -G Ninja ../ \
+	cmake -G Ninja ../runtimes \
+		-DLLVM_ENABLE_RUNTIMES="compiler-rt" \
+		-DLLVM_RUNTIME_TARGETS= \
 		-DCMAKE_BUILD_TYPE=Release \
 		-DCMAKE_INSTALL_PREFIX=/usr/lib/clang/$pkgver/ \
 		-DCMAKE_INSTALL_LIBDIR=lib \
@@ -67,5 +69,5 @@ backup() {
 
 license() {
 	cd $pkgname-$pkgver
-	cat LICENSE.TXT
+	cat compiler-rt/LICENSE.TXT
 }
