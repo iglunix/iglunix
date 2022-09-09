@@ -22,6 +22,13 @@ package() {
 
 	[ -f $pkgdir/opt/rust/lib/libgcc_s.so.1 ] \
 	|| cp ./libgcc_s.so $pkgdir/opt/rust/lib/libgcc_s.so.1
+
+	[ -f $pkgdir/opt/rust/lib/rustlib/ ] \
+	|| echo 'INPUT(-lunwind)' > $pkgdir/opt/rust/lib/rustlib/x86_64-unknown-linux-musl/lib/libgcc_s.so
+
+	install -d $pkgdir/usr/bin
+	ln -sr $pkgdir/opt/rust/bin/rustc $pkgdir/usr/bin/rustc
+	ln -sr $pkgdir/opt/rust/bin/cargo $pkgdir/usr/bin/cargo
 }
 
 backup() {
