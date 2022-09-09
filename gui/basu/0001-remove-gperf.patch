@@ -1,0 +1,309 @@
+From 1e288463e23e761ab1e4ea7790fc8c1ad84e5052 Mon Sep 17 00:00:00 2001
+From: Ella Stanforth <ella@iglunix.org>
+Date: Fri, 6 May 2022 22:48:13 +0000
+Subject: [PATCH] remove gperf
+
+---
+ meson.build                       | 90 +++++++++++++++----------------
+ src/basic/errno-list.c            | 25 ++-------
+ src/basic/meson.build             | 65 +++++++++++-----------
+ src/libsystemd/sd-bus/bus-error.c |  5 +-
+ src/test/meson.build              |  3 +-
+ 5 files changed, 83 insertions(+), 105 deletions(-)
+
+diff --git a/meson.build b/meson.build
+index 1f29690..906e192 100644
+--- a/meson.build
++++ b/meson.build
+@@ -160,54 +160,54 @@ awk = find_program('awk')
+
+ ############################################################
+
+-gperf = find_program('gperf')
+-
+-gperf_test_format = '''
+-#include <string.h>
+-const char * in_word_set(const char *, @0@);
+-@1@
+-'''
+-gperf_snippet_format = 'echo foo,bar | @0@ -L ANSI-C'
+-gperf_snippet = run_command('sh', '-c', gperf_snippet_format.format(gperf.path()))
+-gperf_test = gperf_test_format.format('size_t', gperf_snippet.stdout())
+-if cc.compiles(gperf_test)
+-        gperf_len_type = 'size_t'
+-else
+-        gperf_test = gperf_test_format.format('unsigned', gperf_snippet.stdout())
+-        if cc.compiles(gperf_test)
+-                gperf_len_type = 'unsigned'
+-        else
+-                error('unable to determine gperf len type')
+-        endif
+-endif
+-message('gperf len type is @0@'.format(gperf_len_type))
+-conf.set('GPERF_LEN_TYPE', gperf_len_type,
+-         description : 'The type of gperf "len" parameter')
++# gperf = find_program('gperf')
++
++# gperf_test_format = '''
++# #include <string.h>
++# const char * in_word_set(const char *, @0@);
++# @1@
++# '''
++# gperf_snippet_format = 'echo foo,bar | @0@ -L ANSI-C'
++# gperf_snippet = run_command('sh', '-c', gperf_snippet_format.format(gperf.path()))
++# gperf_test = gperf_test_format.format('size_t', gperf_snippet.stdout())
++# if cc.compiles(gperf_test)
++#         gperf_len_type = 'size_t'
++# else
++#         gperf_test = gperf_test_format.format('unsigned', gperf_snippet.stdout())
++#         if cc.compiles(gperf_test)
++#                 gperf_len_type = 'unsigned'
++#         else
++#                 error('unable to determine gperf len type')
++#         endif
++# endif
++# message('gperf len type is @0@'.format(gperf_len_type))
++# conf.set('GPERF_LEN_TYPE', gperf_len_type,
++#          description : 'The type of gperf "len" parameter')
+
+ ############################################################
+
+ nobody_user = get_option('nobody-user')
+
+-if not meson.is_cross_build()
+-        getent_result = run_command('getent', 'passwd', '65534')
+-        if getent_result.returncode() == 0
+-                name = getent_result.stdout().split(':')[0]
+-                if name != nobody_user
+-                        warning('\n' +
+-                                'The local user with the UID 65534 does not match the configured user name "@0@" of the nobody user (its name is @1@).\n'.format(nobody_user, name) +
+-                                'Your build will result in an user table setup that is incompatible with the local system.')
+-                endif
+-        endif
+-        id_result = run_command('id', '-u', nobody_user)
+-        if id_result.returncode() == 0
+-                id = id_result.stdout().to_int()
+-                if id != 65534
+-                        warning('\n' +
+-                                'The local user with the configured user name "@0@" of the nobody user does not have UID 65534 (it has @1@).\n'.format(nobody_user, id) +
+-                                'Your build will result in an user table setup that is incompatible with the local system.')
+-                endif
+-        endif
+-endif
++# if not meson.is_cross_build()
++#         getent_result = run_command('getent', 'passwd', '65534')
++#         if getent_result.returncode() == 0
++#                 name = getent_result.stdout().split(':')[0]
++#                 if name != nobody_user
++#                         warning('\n' +
++#                                 'The local user with the UID 65534 does not match the configured user name "@0@" of the nobody user (its name is @1@).\n'.format(nobody_user, name) +
++#                                 'Your build will result in an user table setup that is incompatible with the local system.')
++#                 endif
++#         endif
++#         id_result = run_command('id', '-u', nobody_user)
++#         if id_result.returncode() == 0
++#                 id = id_result.stdout().to_int()
++#                 if id != 65534
++#                         warning('\n' +
++#                                 'The local user with the configured user name "@0@" of the nobody user does not have UID 65534 (it has @1@).\n'.format(nobody_user, id) +
++#                                 'Your build will result in an user table setup that is incompatible with the local system.')
++#                 endif
++#         endif
++# endif
+ conf.set_quoted('NOBODY_USER_NAME', nobody_user)
+
+ system_bus_address = get_option('system-bus-address')
+@@ -231,8 +231,8 @@
+ librt = cc.find_library('rt')
+ libm = cc.find_library('m')
+
+-libcap = dependency('libcap', required: false)
+-have_libcap = libcap.found()
++# libcap = dependency('libcap', required: false)
++have_libcap = false
+ conf.set10('HAVE_LIBCAP', have_libcap)
+
+ want_audit = get_option('audit')
+@@ -268,7 +268,7 @@
+ subdir('src/basic')
+ subdir('src/libsystemd')
+ subdir('src/systemd')
+-subdir('src/test')
++# subdir('src/test')
+
+ foreach tuple : tests
+         sources = tuple[0]
+--- a/src/basic/errno-list.c
++++ b/src/basic/errno-list.c
+@@ -7,31 +7,12 @@
+ #include "macro.h"
+
+ static const struct errno_name* lookup_errno(register const char *str,
+-                                             register GPERF_LEN_TYPE len);
+-
+-#include "errno-from-name.h"
+-#include "errno-to-name.h"
++                                             register size_t len);
+
+ const char *errno_to_name(int id) {
+-
+-        if (id < 0)
+-                id = -id;
+-
+-        if (id >= (int) ELEMENTSOF(errno_names))
+-                return NULL;
+-
+-        return errno_names[id];
++        return "we don't implement this";
+ }
+
+ int errno_from_name(const char *name) {
+-        const struct errno_name *sc;
+-
+-        assert(name);
+-
+-        sc = lookup_errno(name, strlen(name));
+-        if (!sc)
+-                return -EINVAL;
+-
+-        assert(sc->id > 0);
+-        return sc->id;
++        return 0;
+ }
+diff --git a/src/basic/meson.build b/src/basic/meson.build
+index 32671e6..dd70a89 100644
+--- a/src/basic/meson.build
++++ b/src/basic/meson.build
+@@ -94,7 +94,7 @@ endif
+
+ missing_h = files('missing.h')
+
+-generate_gperfs = find_program('generate-gperfs.py')
++# generate_gperfs = find_program('generate-gperfs.py')
+
+ if have_libcap
+         generate_cap_list = find_program('generate-cap-list.sh')
+@@ -114,7 +114,9 @@ errno_list_txt = custom_target(
+         command : [generate_errno_list, cpp],
+         capture : true)
+
+-generated_gperf_headers = []
++errno_list_txt = disabler()
++
++# generated_gperf_headers = []
+ foreach item : [['cap',    cap_list_txt,    'capability', ''],
+                 ['errno',  errno_list_txt,  'errno',      '']]
+
+@@ -122,47 +124,46 @@ foreach item : [['cap',    cap_list_txt,    'capability', ''],
+                 continue
+         endif
+
+-        fname = '@0@-from-name.gperf'.format(item[0])
+-        gperf_file = custom_target(
+-                fname,
+-                input : item[1],
+-                output : fname,
+-                command : [generate_gperfs, item[2], item[3], '@INPUT@'],
+-                capture : true)
++#         fname = '@0@-from-name.gperf'.format(item[0])
++#         gperf_file = custom_target(
++#                 fname,
++#                 input : item[1],
++#                 output : fname,
++#                 command : [generate_gperfs, item[2], item[3], '@INPUT@'],
++#                 capture : true)
+
+-        fname = '@0@-from-name.h'.format(item[0])
+-        target1 = custom_target(
+-                fname,
+-                input : gperf_file,
+-                output : fname,
+-                command : [gperf,
+-                           '-L', 'ANSI-C', '-t', '--ignore-case',
+-                           '-N', 'lookup_@0@'.format(item[2]),
+-                           '-H', 'hash_@0@_name'.format(item[2]),
+-                           '-p', '-C',
+-                           '@INPUT@'],
+-                capture : true)
++#         fname = '@0@-from-name.h'.format(item[0])
++#         target1 = custom_target(
++#                 fname,
++#                 input : gperf_file,
++#                 output : fname,
++#                 command : [gperf,
++#                            '-L', 'ANSI-C', '-t', '--ignore-case',
++#                            '-N', 'lookup_@0@'.format(item[2]),
++#                            '-H', 'hash_@0@_name'.format(item[2]),
++#                            '-p', '-C',
++#                            '@INPUT@'],
++#                 capture : true)
+
+-        fname = '@0@-to-name.h'.format(item[0])
+-        awkscript = '@0@-to-name.awk'.format(item[0])
+-        target2 = custom_target(
+-                fname,
+-                input : [awkscript, item[1]],
+-                output : fname,
+-                command : [awk, '-f', '@INPUT0@', '@INPUT1@'],
+-                capture : true)
++#         fname = '@0@-to-name.h'.format(item[0])
++#         awkscript = '@0@-to-name.awk'.format(item[0])
++#         target2 = custom_target(
++#                 fname,
++#                 input : [awkscript, item[1]],
++#                 output : fname,
++#                 command : [awk, '-f', '@INPUT0@', '@INPUT1@'],
++#                 capture : true)
+
+-        generated_gperf_headers += [target1, target2]
++#         generated_gperf_headers += [target1, target2]
+ endforeach
+
+-basic_sources += [missing_h] + generated_gperf_headers
++basic_sources += [missing_h]
+
+ libbasic = static_library(
+         'basic',
+         basic_sources,
+         include_directories : includes,
+         dependencies : [threads,
+-                        libcap,
+                         libm],
+         c_args : ['-fvisibility=default'],
+         install : false)
+diff --git a/src/libsystemd/sd-bus/bus-error.c b/src/libsystemd/sd-bus/bus-error.c
+index a251328..3ba067a 100644
+--- a/src/libsystemd/sd-bus/bus-error.c
++++ b/src/libsystemd/sd-bus/bus-error.c
+@@ -89,10 +89,7 @@ static int bus_error_name_to_errno(const char *name) {
+         p = startswith(name, "System.Error.");
+         if (p) {
+                 r = errno_from_name(p);
+-                if (r < 0)
+-                        return EIO;
+-
+-                return r;
++                return EIO;
+         }
+
+         if (additional_error_maps)
+diff --git a/src/test/meson.build b/src/test/meson.build
+index 89c07c6..7e8a577 100644
+--- a/src/test/meson.build
++++ b/src/test/meson.build
+@@ -5,7 +5,7 @@ libtest = static_library(
+         ['tests.c', 'tests.h'],
+         install: false,
+         include_directories : includes,
+-        dependencies : [threads, librt, libcap])
++        dependencies : [threads, librt])
+
+ ############################################################
+
+@@ -74,4 +74,3 @@ if cxx_cmd != ''
+                  []]
+         ]
+ endif
+-
+--
+2.32.0
