@@ -21,7 +21,7 @@ _clear_vendor_checksums() {
 	sed -i 's/\("files":{\)[^}]*/\1/' vendor/$1/.cargo-checksum.json
 }
 
-export RUSTROOT="/opt/rust/"
+export RUSTROOT="/opt/rust"
 
 fetch() {
 	curl "https://static.rust-lang.org/dist/rustc-$pkgver-src.tar.gz" -o $pkgname-$pkgver.tar.xz
@@ -63,6 +63,7 @@ build() {
 		--llvm-root="/usr" \
 		--llvm-libunwind="system" \
 		--enable-llvm-link-shared \
+		--set="llvm.use-libcxx" \
 		--set="target.$TRIPLE.llvm-config=/usr/bin/llvm-config" \
 		--set="rust.musl-root=/usr" \
 		--set="target.$TRIPLE.musl-root=/usr" \
