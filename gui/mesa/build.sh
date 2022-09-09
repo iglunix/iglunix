@@ -1,5 +1,5 @@
 pkgname=mesa
-pkgver=22.1.0
+pkgver=22.2.0-rc3
 #pkgver=main
 deps="musl:wayland:wayland-protocols:llvm:zlib-ng:expat:libffi:libdrm:python-mako"
 ext=dev
@@ -21,9 +21,8 @@ _gallium_drivers=""
 _vulkan_drivers=""
 case $ARCH in
 	x86_64)
-		_dri_drivers="i915,i965,nouveau"
-		_gallium_drivers="iris"
-		_vulkan_drivers="intel"
+		_gallium_drivers="radeonsi"
+		_vulkan_drivers="amd"
 		;;
 
 	aarch64)
