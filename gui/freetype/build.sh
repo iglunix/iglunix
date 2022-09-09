@@ -1,5 +1,5 @@
 pkgname=freetype
-pkgver=2.11.0
+pkgver=2.12.0
 
 fetch() {
 	curl "https://download-mirror.savannah.gnu.org/releases/freetype/freetype-$pkgver.tar.xz" -o $pkgname-$pkgver.tar.xz
@@ -14,6 +14,7 @@ build() {
 		--buildtype=release \
 		--prefix=/usr \
 		--libexecdir=lib \
+		--libdir=lib \
 		-Dharfbuzz=disabled
 	samu
 }
@@ -30,6 +31,6 @@ backup() {
 
 license() {
 	cd $pkgname-$pkgver
-	cat LICENSE
+	cat LICENSE.TXT
 #	cat COPYING
 }
