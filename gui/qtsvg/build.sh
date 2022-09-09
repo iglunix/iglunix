@@ -1,4 +1,4 @@
-pkgname=qtdeclarative
+pkgname=qtsvg
 pkgver=6.3.1
 
 fetch() {

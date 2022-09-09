@@ -1,4 +1,4 @@
-pkgname=qtdeclarative
+pkgname=qt5compat
 pkgver=6.3.1
 
 fetch() {

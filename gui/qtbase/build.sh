@@ -1,5 +1,5 @@
 pkgname=qtbase
-pkgver=5.15
+pkgver=6.3.1
 
 fetch() {
 	curl "https://invent.kde.org/qt/qt/qtbase/-/archive/$pkgver/qtbase-$pkgver.tar.gz" -o $pkgname-$pkgver.tar.xz
@@ -12,25 +12,35 @@ build() {
 	cd $pkgname-$pkgver
 	cd build
 
-	../configure \
-		-opensource \
-		-confirm-license \
-		-nomake examples \
-		-nomake tests \
-		-platform linux-clang-libc++ \
-		-prefix /usr
+	cmake -G Ninja .. \
+	-DCMAKE_BUILD_TYPE=Release \
+	-DCMAKE_INSTALL_PREFIX=/usr \
+	-DQT_FEATURE_gtk3=OFF
 
-	bad --gmake gmake
+	# ../configure \
+	# 	-opensource \
+	# 	-confirm-license \
+	# 	-nomake examples \
+	# 	-nomake tests \
+	# 	-platform linux-clang-libc++ \
+	# 	-prefix /usr \
+	# 	--disable-gtk \
+	# 	-no-feature-gtk3
+	samu
 }
 
 package() {
 	cd $pkgname-$pkgver
 	cd build
-	bad --gmake gmake INSTALL_ROOT=$pkgdir install
+	DESTDIR=$pkgdir samu install
 }
 
 license() {
 	cd $pkgname-$pkgver
 	cat LICENSE*
 #	cat COPYING
+}
+
+backup() {
+	return
 }

@@ -1,4 +1,4 @@
-pkgname=qtdeclarative
+pkgname=qtimageformats
 pkgver=6.3.1
 
 fetch() {
