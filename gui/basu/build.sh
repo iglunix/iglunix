@@ -16,7 +16,8 @@ build() {
 	meson .. \
 		--buildtype=release \
 		--prefix=/usr \
-		--libexecdir=lib
+		--libexecdir=lib \
+		--libdir=lib
 	samu
 }
 
