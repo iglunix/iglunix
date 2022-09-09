@@ -1,5 +1,5 @@
 pkgname=limine
-pkgver=3.4.4
+pkgver=4.0
 mkdeps="nasm:llvm"
 auto_cross
 
@@ -14,7 +14,10 @@ build() {
 	bad --gmake ./configure \
 		--build=$HOST_TRIPLE \
 		--host=$TRIPLE \
-		--prefix=/usr
+		--prefix=/usr \
+		--enable-bios \
+		--enable-efi-x86_64 \
+		--enable-limine-deploy
 	bad --gmake gmake
 }
 
