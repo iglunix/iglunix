@@ -15,7 +15,8 @@ build() {
 		--prefix=/usr \
 		--libexecdir=lib \
 		-Dudevrulesdir='/usr/lib/udev/rules.d/' \
-		-Duseroot=false
+		-Duseroot=false \
+		--libdir=lib
 	samu
 }
 
