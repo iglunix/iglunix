@@ -1,10 +1,10 @@
 pkgname=foot
-pkgver=1.10.3
+pkgver=1.13.1
 
 fetch() {
 	curl -L "https://codeberg.org/dnkl/foot/archive/$pkgver.tar.gz" -o $pkgname-$pkgver.tar.gz
-	curl -L "https://codeberg.org/dnkl/fcft/archive/2.4.5.tar.gz" -o fcft.tar.gz
-	curl -L "https://codeberg.org/dnkl/tllist/archive/1.0.5.tar.gz" -o tllist.tar.gz
+	curl -L "https://codeberg.org/dnkl/fcft/archive/3.1.4.tar.gz" -o fcft.tar.gz
+	curl -L "https://codeberg.org/dnkl/tllist/archive/1.1.0.tar.gz" -o tllist.tar.gz
 	tar -xf $pkgname-$pkgver.tar.gz
 	mv $pkgname $pkgname-$pkgver
 	mkdir $pkgname-$pkgver/build
