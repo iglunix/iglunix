@@ -16,7 +16,8 @@ build() {
 		--libexecdir=lib \
 		-Dintrospection=false \
 		-Dbackends=gtk3 \
-		-Ddocs=false
+		-Ddocs=false \
+		--libdir=lib
 	samu
 }
 
