@@ -1,5 +1,5 @@
 pkgname=wlroots
-pkgver=0.15.0
+pkgver=0.15.1
 
 fetch() {
 	curl -L "https://gitlab.freedesktop.org/wlroots/wlroots/-/archive/$pkgver/wlroots-$pkgver.tar.gz" -o $pkgname-$pkgver.tar.xz
@@ -18,7 +18,8 @@ build() {
 		-Dxwayland=disabled \
 		-Dexamples=false \
 		-Drenderers="['gles2', 'vulkan']" \
-		-Dbackends="['drm', 'libinput']"
+		-Dbackends="['drm', 'libinput']" \
+		--libdir=lib
 	samu
 }
 
