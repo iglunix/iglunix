@@ -46,7 +46,7 @@ build() {
 		-Dwin32_backend=false \
 		-Dquartz_backend=false \
 		-Dcolord=no \
-		-Ddemos=false \
+		-Ddemos=true \
 		-Dexamples=false \
 		-Dtests=false \
 		-Dinstalled_tests=false \
