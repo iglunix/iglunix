@@ -21,11 +21,10 @@ build() {
 		--buildtype=release \
 		--prefix=/usr \
 		--libexecdir=lib \
-		-Dgir=false \
 		-Dgtk_doc=false \
 		-Dxft=disabled \
 		-Dintrospection=disabled \
-		-Dinstall_tests=false
+		--libdir=lib
 	samu
 }
 
@@ -41,6 +40,5 @@ backup() {
 
 license() {
 	cd $pkgname-$pkgver
-	cat LICENSE
-#	cat COPYING
+	cat COPYING
 }
