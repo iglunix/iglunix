@@ -39,9 +39,7 @@ based systems such as MacOS and PureDarwin.
 -->
 
 ## Web Browsers
-Iglunix has Firefox ESR packaged requiring 2 extra GNU packages: `gm4` and
-`autoconf`. Iglunix may switch to using a patched version of webkit gtk with
-openssl and maybe ffmpeg replacing gstreamer.
+Iglunix has Firefox packaged requiring `autoconf` as an extra GNU package.
 
 ## Replacements LUT
 
