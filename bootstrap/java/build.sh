@@ -1,4 +1,4 @@
-pkgname=jdk
+pkgname=openjdk17
 pkgver=17.0.4.1
 
 fetch() {
@@ -14,8 +14,8 @@ build() {
 package() {
 	cd $pkgname-$pkgver
 
-	mkdir -p $pkgdir/usr/lib/jvm/openjdk17
-	cp -r * $pkgdir/usr/lib/jvm/openjdk17
+	mkdir -p $pkgdir/usr/lib/jvm/$pkgname
+	cp -r * $pkgdir/usr/lib/jvm/$pkgname
 }
 
 license() {
