@@ -14,7 +14,7 @@ majority of the base system, and Musl to be explicit about the C library,
 target triple and to differentiate it from any system using LLVM's libc
 (which will may very well likely use in the future).
 
-## Instalation
+## Installation
 See [INSTALL.md](INSTALL.md)
 
 ## Discord
