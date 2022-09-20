@@ -1,5 +1,5 @@
 pkgname=kak-lsp
-pkgver=9.0.0
+pkgver=14.0.0
 
 fetch() {
 	curl -L "https://github.com/kak-lsp/kak-lsp/archive/v$pkgver.tar.gz" -o $pkgname-$pkgver.tar.xz
@@ -21,4 +21,8 @@ package() {
 license() {
 	cd $pkgname-$pkgver
 	cat UNLICENSE
+}
+
+backup() {
+	return
 }
