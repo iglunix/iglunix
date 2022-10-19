@@ -1,4 +1,4 @@
-From 264674d6f63c97535cee19d88aefa77d6d1c8f04 Mon Sep 17 00:00:00 2001
+From e57041837e516866c6bd76fa64eea37fa7b009ac Mon Sep 17 00:00:00 2001
 From: Ella Stanforth <ella@iglunix.org>
 Date: Wed, 19 Oct 2022 19:33:47 +0000
 Subject: [PATCH] Add support for bash style process substitution
@@ -9,10 +9,10 @@ TODO: this should probably be exposed through `/dev/fd` instead
 for better portability
 ---
  eval.c | 19 ++++++++++++++++++-
- lex.c  | 23 ++++++++++++++++++++++-
+ lex.c  | 26 +++++++++++++++++++++++++-
  sh.h   |  1 +
  syn.c  | 12 ++++++++----
- 4 files changed, 49 insertions(+), 6 deletions(-)
+ 4 files changed, 52 insertions(+), 6 deletions(-)
 
 diff --git a/eval.c b/eval.c
 index da165d12..067b243d 100644
@@ -80,7 +80,7 @@ index da165d12..067b243d 100644
  
  /*
 diff --git a/lex.c b/lex.c
-index 74a33bf4..bfe6cb4a 100644
+index 74a33bf4..b0717eca 100644
 --- a/lex.c
 +++ b/lex.c
 @@ -254,7 +254,19 @@ yylex(int cf)
@@ -89,29 +89,32 @@ index 74a33bf4..bfe6cb4a 100644
  	while (!((c = getsc()) == 0 ||
 -	    ((state == SBASE || state == SHEREDELIM) && ctype(c, C_LEX1)))) {
 +	    ((state == SBASE || state == SHEREDELIM) && ctype(c, C_LEX1) && c != ORD('<')))) {
-+		if ((state == SBASE || state == SHEREDELIM) && ctype(c, C_LEX1)) {
-+			if (c == ORD('<')) {
-+				c = getsc();
-+				if (c != ORD('(')) {
-+					ungetsc(c);
-+					c = ORD('<');
-+					break;
-+				}
++		if (state == SHEREDELIM && c == ORD('<'))
++			break;
++		if (state == SBASE && c == ORD('<')) {
++			c = getsc();
++			if (c != ORD('(')) {
 +				ungetsc(c);
 +				c = ORD('<');
++				break;
 +			}
++			ungetsc(c);
++			c = ORD('<');
 +		}
  		if (state == SBASE &&
  		    subshell_nesting_type == ORD(/*{*/ '}') &&
  		    (unsigned int)c == ORD(/*{*/ '}'))
-@@ -572,6 +584,15 @@ yylex(int cf)
+@@ -572,6 +584,18 @@ yylex(int cf)
  					base = s2-- - STATE_BSIZE;
  				}
  				break;
 +			case ORD('<'):
++				if (state == SWORD)
++					goto store_char;
 +				c = getsc();
 +				if (c != ORD('(')) {
 +					ungetsc(c);
++					c = ORD('<');
 +					goto store_char;
 +				}
 +				c = PROCSUB;
