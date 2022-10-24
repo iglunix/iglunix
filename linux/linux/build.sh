@@ -114,6 +114,8 @@ package() {
 	fi
 
 	bad --gmake gmake CC=cc HOSTCC=cc YACC=yacc LLVM=1 LLVM_IAS=1 ARCH=$_arch headers
+	find usr/include -type f ! -name '*.h' -delete
+	
 	if [ -z "$FOR_CROSS" ]; then
 		install -d $pkgdir/usr/
 		cp -r usr/include $pkgdir/usr/
@@ -121,7 +123,6 @@ package() {
 		install -d $pkgdir/$FOR_CROSS_DIR/
 		cp -r usr/include $pkgdir/$FOR_CROSS_DIR/
 	fi
-	find $pkgdir/usr/include -type f ! -name '*.h' -delete
 }
 
 backup() {
