@@ -3,6 +3,7 @@ pkgname=mksh
 deps="musl"
 bad=""
 ext="doc"
+auto_cross
 
 fetch() {
 	curl http://www.mirbsd.org/MirOS/dist/mir/mksh/mksh-R59c.tgz -o $pkgname-$pkgver.tar.gz
