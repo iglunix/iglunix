@@ -1,5 +1,5 @@
 pkgname=openssl
-pkgver=3.0.0
+pkgver=3.0.7
 ext="dev"
 auto_cross
 
