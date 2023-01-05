@@ -78,12 +78,21 @@ build() {
 	cd $pkgname-$pkgver
 	[ ! -z "$fetch_config" ] && cp ../.config .
 
+	grep -v 'select HAVE_OBJTOOL' arch/x86/Kconfig > _
+	mv _ arch/x86/Kconfig
+
 	bad --gmake gmake CC=clang HOSTCC=clang YACC=yacc LLVM=1 LLVM_IAS=1 ARCH=$_arch "$config"
 
 	# Known bad config options
 	./scripts/config -d CONFIG_IKHEADERS
 	./scripts/config -d CONFIG_SPEAKUP
 	./scripts/config -d CONFIG_DEBUG_INFO_BTF
+
+	# Building with objtool requires libelf and that's utter pain
+	./scripts/config -d CONFIG_HAVE_OBJTOOL
+	./scripts/config -d CONFIG_OBJTOOL
+	./scripts/config -d CONFIG_UNWINDER_ORC
+	./scripts/config -e CONFIG_UNWINDER_FRAME_POINTER
 
 	# Bake in important modules to allow booting without initramfs
 	./scripts/config -e CONFIG_BLK_DEV_NVME
@@ -114,7 +123,7 @@ package() {
 	fi
 
 	bad --gmake gmake CC=cc HOSTCC=cc YACC=yacc LLVM=1 LLVM_IAS=1 ARCH=$_arch headers
-	
+
 	if [ -z "$FOR_CROSS" ]; then
 		install -d $pkgdir/usr/
 		cp -r usr/include $pkgdir/usr/
