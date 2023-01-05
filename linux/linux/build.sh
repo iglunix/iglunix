@@ -91,6 +91,7 @@ build() {
 	# Building with objtool requires libelf and that's utter pain
 	./scripts/config -d CONFIG_HAVE_OBJTOOL
 	./scripts/config -d CONFIG_OBJTOOL
+	./scripts/config -d CONFIG_FTRACE
 	./scripts/config -d CONFIG_UNWINDER_ORC
 	./scripts/config -e CONFIG_UNWINDER_FRAME_POINTER
 
