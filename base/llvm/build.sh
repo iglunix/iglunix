@@ -16,28 +16,29 @@ build() {
 	cd $pkgname-$pkgver
 
 	if [ ! -z "$WITH_CROSS" ]; then
-		EXTRA_ARGS="-DCMAKE_SYSROOT=$WITH_CROSS_DIR \
-			-DCMAKE_C_COMPILER_WORKS=ON \
-			-DCMAKE_CXX_COMPILER_WORKS=ON \
-			-DCMAKE_SYSTEM_NAME=Linux \
-			-DLLVM_TABLEGEN=$(pwd)/host-build/bin/llvm-tblgen \
-			-DCLANG_TABLEGEN=$(pwd)/host-build/bin/clang-tblgen \
-			-DLLVM_CONFIG_PATH=/usr/bin/llvm-config \
-			-DCMAKE_FIND_ROOT_PATH_MODE_PROGRAM=NEVER \
-			-DCMAKE_FIND_ROOT_PATH_MODE_LIBRARY=ONLY \
-			-DCMAKE_FIND_ROOT_PATH_MODE_INCLUDE=ONLY \
-			-DCMAKE_BUILD_TYPE=Release"
 		mkdir -p host-build
 		cd host-build
 		cmake -G Ninja -Wno-dev \
 			-DLLVM_ENABLE_PROJECTS='clang' \
 			-DCMAKE_C_COMPILER=cc \
 			-DCMAKE_CXX_COMPILER=c++ \
+			-DCMAKE_BUILD_TYPE=Release \
 			../llvm
 
 		samu llvm-tblgen clang-tblgen
 
 		cd ..
+		
+		EXTRA_ARGS="-DCMAKE_SYSROOT=$WITH_CROSS_DIR \
+            -DCMAKE_C_COMPILER_WORKS=ON \
+            -DCMAKE_CXX_COMPILER_WORKS=ON \
+            -DCMAKE_SYSTEM_NAME=Linux \
+            -DLLVM_TABLEGEN=$(pwd)/host-build/bin/llvm-tblgen \
+            -DCLANG_TABLEGEN=$(pwd)/host-build/bin/clang-tblgen \
+            -DLLVM_CONFIG_PATH=/usr/bin/llvm-config \
+            -DCMAKE_FIND_ROOT_PATH_MODE_PROGRAM=NEVER \
+            -DCMAKE_FIND_ROOT_PATH_MODE_LIBRARY=ONLY \
+            -DCMAKE_FIND_ROOT_PATH_MODE_INCLUDE=ONLY"
 	fi
 
 	mkdir -p build
