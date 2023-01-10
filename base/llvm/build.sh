@@ -25,7 +25,8 @@ build() {
 			-DLLVM_CONFIG_PATH=/usr/bin/llvm-config \
 			-DCMAKE_FIND_ROOT_PATH_MODE_PROGRAM=NEVER \
 			-DCMAKE_FIND_ROOT_PATH_MODE_LIBRARY=ONLY \
-			-DCMAKE_FIND_ROOT_PATH_MODE_INCLUDE=ONLY"
+			-DCMAKE_FIND_ROOT_PATH_MODE_INCLUDE=ONLY \
+			-DCMAKE_BUILD_TYPE=Release"
 		mkdir -p host-build
 		cd host-build
 		cmake -G Ninja -Wno-dev \
