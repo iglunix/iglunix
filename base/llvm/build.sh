@@ -28,7 +28,7 @@ build() {
 		samu llvm-tblgen clang-tblgen
 
 		cd ..
-		
+
 		EXTRA_ARGS="-DCMAKE_SYSROOT=$WITH_CROSS_DIR \
             -DCMAKE_C_COMPILER_WORKS=ON \
             -DCMAKE_CXX_COMPILER_WORKS=ON \
@@ -52,7 +52,7 @@ build() {
 		-DCMAKE_BUILD_TYPE=Release \
 		-DLLVM_VERSION_SUFFIX="" \
 		-DLLVM_APPEND_VC_REV=OFF \
-		-DLLVM_ENABLE_PROJECTS="llvm;lld;clang;lldb" \
+		-DLLVM_ENABLE_PROJECTS="llvm;lld;clang" \
 		-DLLVM_ENABLE_LLD=ON \
 		-DLLVM_TARGETS_TO_BUILD="X86;AArch64" \
 		-DLLVM_INSTALL_BINUTILS_SYMLINKS=ON \
