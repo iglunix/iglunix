@@ -1,6 +1,6 @@
 pkgname=wlroots
 pkgver=0.16.1
-deps="libdrm:libxkbcommon:libudev-zero"
+deps="libdrm:libxkbcommon:libudev-zero:pixman:mesa:libglvnd"
 
 fetch() {
 	curl -L "https://gitlab.freedesktop.org/wlroots/wlroots/-/archive/$pkgver/wlroots-$pkgver.tar.gz" -o $pkgname-$pkgver.tar.xz
