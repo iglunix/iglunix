@@ -11,18 +11,18 @@ build() {
 	cd $pkgname-$pkgver
 	[ -z "$WITH_CROSS" ] || extra_flags=--disable-bootstrap
 
-	./configure \
+	MAKE=gmake bad --gmake ./configure \
 		--prefix=/usr \
 		--build=$HOST_TRIPLE \
 		--host=$TRIPLE \
 		$extra_flags
 
-	make
+	bad --gmake gmake
 }
 
 package() {
 	cd $pkgname-$pkgver
-	make install DESTDIR=$pkgdir
+	bad --gmake gmake install DESTDIR=$pkgdir
 	ln -sr $pkgdir/usr/bin/flex $pkgdir/usr/bin/lex
 }
 
