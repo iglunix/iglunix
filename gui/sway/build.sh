@@ -1,5 +1,6 @@
 pkgname=sway
 pkgver=1.7
+deps="musl:pkgconf:wayland:json-c:pcre2:wlroots"
 
 fetch() {
 	curl -L "https://github.com/swaywm/sway/releases/download/$pkgver/sway-$pkgver.tar.gz" -o $pkgname-$pkgver.tar.gz
