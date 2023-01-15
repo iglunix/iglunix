@@ -1,5 +1,5 @@
 pkgname=json-c
-pkgver=0.15
+pkgver=0.16
 
 fetch() {
 	curl -L "https://s3.amazonaws.com/json-c_releases/releases/json-c-$pkgver.tar.gz" -o $pkgname-$pkgver.tar.xz
@@ -23,8 +23,12 @@ package() {
 	DESTDIR=$pkgdir samu install
 }
 
+backup() {
+  return
+}
+
 license() {
 	cd $pkgname-$pkgver
-	cat LICENSE
-#	cat COPYING
+#	cat LICENSE
+	cat COPYING
 }
