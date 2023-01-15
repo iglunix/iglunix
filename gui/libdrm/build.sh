@@ -1,4 +1,4 @@
-pkgver=2.4.112
+pkgver=2.4.114
 pkgname=libdrm
 dep="libpciaccess"
 bad=""
