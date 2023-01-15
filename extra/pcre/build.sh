@@ -2,7 +2,7 @@ pkgname=pcre
 pkgver=8.45
 
 fetch() {
-    curl "https://ftp.pcre.org/pub/pcre/pcre-$pkgver.tar.gz" -o $pkgname-$pkgver.tar.gz
+    curl -L "https://sourceforge.net/projects/pcre/files/pcre/8.45/pcre-8.45.tar.gz/download" -o $pkgname-$pkgver.tar.gz
 	tar -xf $pkgname-$pkgver.tar.gz
 }
 
