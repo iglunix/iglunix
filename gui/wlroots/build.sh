@@ -1,5 +1,6 @@
 pkgname=wlroots
-pkgver=0.15.1
+pkgver=0.16.1
+deps="libdrm"
 
 fetch() {
 	curl -L "https://gitlab.freedesktop.org/wlroots/wlroots/-/archive/$pkgver/wlroots-$pkgver.tar.gz" -o $pkgname-$pkgver.tar.xz
