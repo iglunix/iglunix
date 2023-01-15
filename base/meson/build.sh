@@ -1,4 +1,4 @@
-pkgver=0.60.2
+pkgver=1.0.0
 pkgname=meson
 deps=python
 bad=""
