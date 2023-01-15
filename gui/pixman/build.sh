@@ -18,6 +18,10 @@ build() {
 	samu
 }
 
+backup() {
+    return
+}
+
 package() {
 	cd $pkgname-$pkgver
 	cd build
