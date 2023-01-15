@@ -1,5 +1,6 @@
 pkgname=libxkbcommon
-pkgver=1.0.3
+pkgver=1.5.0
+deps="libdrm:libxkbcommon"
 
 fetch() {
 	curl -L "https://github.com/xkbcommon/libxkbcommon/archive/xkbcommon-1.0.3.tar.gz" -o $pkgname-$pkgver.tar.xz
@@ -19,6 +20,10 @@ build() {
 		-Denable-wayland=true \
 		-Denable-docs=false
 	samu
+}
+
+backup() {
+    return
 }
 
 package() {
