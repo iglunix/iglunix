@@ -46,7 +46,6 @@ build() {
 		-Ddri3=true \
 		-Dgallium-drivers=$_gallium_drivers \
 		-Dgallium-vdpau=false \
-		-Dgallium-xvmc=false \
 		-Dgallium-omx=disabled \
 		-Dgallium-va=false \
 		-Dgallium-nine=false \
