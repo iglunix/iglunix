@@ -1,4 +1,4 @@
-pkgver=1.1.4
+pkgver=1.2.4
 pkgname=python-mako
 deps=python
 bad=""
@@ -13,6 +13,10 @@ fetch() {
 build() {
 	cd $pkgname-$pkgver
 	python setup.py build
+}
+
+backup() {
+	return
 }
 
 package() {
