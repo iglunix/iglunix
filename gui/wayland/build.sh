@@ -1,8 +1,8 @@
 pkgname=wayland
-pkgver=1.20.0
+pkgver=1.21.0
 
 fetch() {
-	curl "https://wayland.freedesktop.org/releases/wayland-$pkgver.tar.xz" -o $pkgname-$pkgver.tar.xz
+	curl -L "https://gitlab.freedesktop.org/wayland/wayland/-/releases/$pkgver/downloads/wayland-$pkgver.tar.xz" -o $pkgname-$pkgver.tar.xz
 	tar -xf $pkgname-$pkgver.tar.xz
 	mkdir $pkgname-$pkgver/build
 }
