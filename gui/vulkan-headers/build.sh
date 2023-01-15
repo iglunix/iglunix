@@ -1,5 +1,5 @@
 pkgname=vulkan-headers
-pkgver=1.2.196
+pkgver=1.3.238
 
 fetch() {
 	curl -L "https://github.com/KhronosGroup/Vulkan-Headers/archive/v$pkgver.tar.gz" -o $pkgname-$pkgver.tar.xz
@@ -18,6 +18,10 @@ build() {
 	samu
 }
 
+backup() {
+	return
+}
+
 package() {
 	cd $pkgname-$pkgver
 	cd build
@@ -26,6 +30,6 @@ package() {
 
 license() {
 	cd $pkgname-$pkgver
-	cat LICENSE
+	cat LICENSE.txt
 #	cat COPYING
 }
