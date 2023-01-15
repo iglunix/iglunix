@@ -1,8 +1,8 @@
 pkgname=vulkan-icd-loader
-pkgver=1.2.182
+pkgver=1.3.238
 
 fetch() {
-	curl -L "https://github.com/KhronosGroup/Vulkan-Loader/archive/v1.2.182.tar.gz" -o $pkgname-$pkgver.tar.xz
+	curl -L "https://github.com/KhronosGroup/Vulkan-Loader/archive/v$pkgver.tar.gz" -o $pkgname-$pkgver.tar.xz
 	tar -xf $pkgname-$pkgver.tar.xz
 	mv Vulkan-Loader-$pkgver $pkgname-$pkgver
 	mkdir $pkgname-$pkgver/build
@@ -22,6 +22,10 @@ build() {
 	samu
 }
 
+backup() {
+	return
+}
+
 package() {
 	cd $pkgname-$pkgver
 	cd build
@@ -30,6 +34,6 @@ package() {
 
 license() {
 	cd $pkgname-$pkgver
-	cat LICENSE
+	cat LICENSE.txt
 #	cat COPYING
 }
