@@ -1,6 +1,6 @@
 pkgname=wlroots
 pkgver=0.16.1
-deps="libdrm:libxkbcommon:libudev-zero:pixman:mesa:libglvnd"
+deps="libdrm:libxkbcommon:libudev-zero:pixman:mesa:libglvnd:vulkan-headers:vulkan-icd-loader:hwdata"
 
 fetch() {
 	curl -L "https://gitlab.freedesktop.org/wlroots/wlroots/-/archive/$pkgver/wlroots-$pkgver.tar.gz" -o $pkgname-$pkgver.tar.xz
