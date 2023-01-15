@@ -1,5 +1,5 @@
 pkgname=python
-pkgver=3.10.4
+pkgver=3.10.9
 bad=""
 ext="doc"
 auto_cross
