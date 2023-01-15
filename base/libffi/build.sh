@@ -1,11 +1,11 @@
-pkgver=3.3
+pkgver=3.4.4
 pkgname=libffi
 bad="gmake"
 ext="dev"
 auto_cross
 
 fetch() {
-	curl -L "https://github.com/libffi/libffi/releases/download/v3.3/libffi-3.3.tar.gz" -o $pkgname-$pkgver.tar.gz
+	curl -L "https://github.com/libffi/libffi/releases/download/v$pkgver/libffi-$pkgver.tar.gz" -o $pkgname-$pkgver.tar.gz
 	tar -xf $pkgname-$pkgver.tar.gz
 }
 
