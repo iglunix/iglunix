@@ -1,5 +1,5 @@
 pkgname=mesa
-pkgver=22.2.0-rc3
+pkgver=22.3.3
 #pkgver=main
 deps="musl:wayland:wayland-protocols:llvm:zlib-ng:expat:libffi:libdrm:python-mako"
 ext=dev
