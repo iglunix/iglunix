@@ -16,6 +16,10 @@ build() {
 	make
 }
 
+backup() {
+	return
+}
+
 package() {
 	cd $pkgname-$pkgver
 	make install DESTDIR=$pkgdir
