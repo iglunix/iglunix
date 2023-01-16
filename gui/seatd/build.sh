@@ -1,5 +1,5 @@
 pkgname=seatd
-pkgver=0.6.3
+pkgver=0.7.0
 
 fetch() {
 	curl "https://git.sr.ht/~kennylevinsen/seatd/archive/$pkgver.tar.gz" -o $pkgname-$pkgver.tar.xz
@@ -17,6 +17,10 @@ build() {
 		-Dexamples=disabled \
 		-Dc_args=-Wno-sign-compare
 	samu
+}
+
+backup() {
+	return
 }
 
 package() {
