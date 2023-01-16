@@ -1,6 +1,7 @@
 pkgname=pango
-_pkgver=1.48
-pkgver=$_pkgver.10
+_pkgver=1.50
+pkgver=$_pkgver.0
+deps="harfbuzz"
 
 fetch() {
 	curl -L "https://download.gnome.org/sources/pango/$_pkgver/pango-$pkgver.tar.xz" -o $pkgname-$pkgver.tar.xz
