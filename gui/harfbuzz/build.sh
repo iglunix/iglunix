@@ -1,5 +1,6 @@
 pkgname=harfbuzz
-pkgver=3.0.0
+pkgver=6.0.0
+deps="icu"
 
 fetch() {
 	curl -L "https://github.com/harfbuzz/harfbuzz/releases/download/$pkgver/harfbuzz-$pkgver.tar.xz" -o $pkgname-$pkgver.tar.xz
@@ -19,6 +20,9 @@ build() {
 		-Dicu=enabled
 
 	samu
+}
+
+backup() {
 }
 
 package() {
