@@ -1,5 +1,6 @@
 pkgname=cairo
 pkgver=master
+deps="glib"
 
 fetch() {
 	curl "https://gitlab.freedesktop.org/cairo/cairo/-/archive/master/cairo-master.tar.gz" -o $pkgname-$pkgver.tar.xz
