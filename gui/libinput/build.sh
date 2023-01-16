@@ -1,6 +1,6 @@
 pkgname=libinput
 pkgver=1.19.4
-deps="mtdev"
+deps="mtdev:libevdev"
 
 fetch() {
 	curl "https://www.freedesktop.org/software/libinput/libinput-$pkgver.tar.xz" -o $pkgname-$pkgver.tar.xz
@@ -22,6 +22,10 @@ build() {
 	samu
 }
 
+backup() {
+	return
+}
+
 package() {
 	cd $pkgname-$pkgver
 	cd build
@@ -30,6 +34,6 @@ package() {
 
 license() {
 	cd $pkgname-$pkgver
-	cat LICENSE
-#	cat COPYING
+#	cat LICENSE
+	cat COPYING
 }
