@@ -14,6 +14,7 @@ build() {
         --build=$TRIPLE \
         --host=$TRIPLE
 
+   patch Makefile ../../install_T_fix
    bad --gmake g make
 }
 

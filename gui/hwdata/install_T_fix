@@ -1,0 +1,11 @@
+--- src/hwdata-0.366/Makefile
++++ src/hwdata-0.366/Makefile2
+@@ -50,7 +50,7 @@
+ 	done
+ 	@if [ "$(blacklist)" = true ]; then \
+ 		mkdir -p -m 755 $(DESTDIR)$(libdir)/modprobe.d ;\
+-		install -m 644 -T blacklist.conf $(DESTDIR)$(libdir)/modprobe.d/dist-blacklist.conf ;\
++		cp blacklist.conf $(DESTDIR)$(libdir)/modprobe.d/dist-blacklist.conf ;\
+ 	fi;
+ 	mkdir -p -m 755 $(DESTDIR)$(datadir)/pkgconfig
+ 	install -m 644 hwdata.pc $(DESTDIR)$(datadir)/pkgconfig/
