@@ -1,5 +1,5 @@
 pkgname=firefox
-pkgver=106.0
+pkgver=108.0
 mkdeps="cbindgen:rust"
 
 fetch() {
