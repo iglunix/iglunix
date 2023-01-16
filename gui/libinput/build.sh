@@ -1,8 +1,9 @@
 pkgname=libinput
-pkgver=1.16.4
+pkgver=1.19.4
+deps="mtdev"
 
 fetch() {
-	curl "https://www.freedesktop.org/software/libinput/libinput-1.16.4.tar.xz" -o $pkgname-$pkgver.tar.xz
+	curl "https://www.freedesktop.org/software/libinput/libinput-$pkgver.tar.xz" -o $pkgname-$pkgver.tar.xz
 	tar -xf $pkgname-$pkgver.tar.xz
 	mkdir $pkgname-$pkgver/build
 }
