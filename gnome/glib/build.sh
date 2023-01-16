@@ -1,6 +1,6 @@
 pkgname=glib
-_pkgver=2.68
-pkgver=$_pkgver.4
+_pkgver=2.75
+pkgver=$_pkgver.2
 
 fetch() {
 	curl -L "https://download.gnome.org/sources/glib/$_pkgver/glib-$pkgver.tar.xz" -o $pkgname-$pkgver.tar.xz
@@ -10,14 +10,22 @@ fetch() {
 
 build() {
 	cd $pkgname-$pkgver
+ 	patch meson.build ../../error_disable	
+
 	cd build
 	meson .. \
 		--buildtype=release \
 		--prefix=/usr \
 		--libexecdir=lib \
 		-Dtests=false \
-		-Dnls=disabled
+		-Dnls=disabled \
+		-Dwerror=false \
+		-Dwarning_level=0
 	samu
+}
+
+backup() {
+	return
 }
 
 package() {
@@ -33,6 +41,6 @@ package() {
 
 license() {
 	cd $pkgname-$pkgver
-	cat LICENSE
-#	cat COPYING
+#	cat LICENSE
+	cat COPYING
 }
