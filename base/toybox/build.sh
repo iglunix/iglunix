@@ -1,4 +1,4 @@
-pkgver=0.8.7
+pkgver=0.8.9
 pkgname=toybox
 pkgrel=1
 deps="musl"
@@ -10,6 +10,7 @@ fetch() {
 	cd $pkgname-$pkgver
 	patch -p1 < ../../ls-colour.patch
 	patch -p1 < ../../mksh.patch
+	patch -p1 < ../../mksh2
 	patch -p1 < ../../xxd-i.patch
 }
 
