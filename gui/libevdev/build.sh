@@ -1,5 +1,5 @@
 pkgname=libevdev
-pkgver=1.10.1
+pkgver=1.13.0
 
 fetch() {
 	curl "https://www.freedesktop.org/software/libevdev/libevdev-$pkgver.tar.xz" -o $pkgname-$pkgver.tar.xz
@@ -17,6 +17,10 @@ build() {
 		-Dtests=disabled \
 		-Ddocumentation=disabled
 	samu
+}
+
+backup() {
+	return
 }
 
 package() {
