@@ -1,6 +1,7 @@
 pkgname=gtk+
 _pkgver=3.24
-pkgver=$_pkgver.34
+pkgver=$_pkgver.36
+deps="gdk-pixbuf"
 
 fetch() {
 	curl -L "https://download.gnome.org/sources/gtk+/$_pkgver/gtk%2B-$pkgver.tar.xz" -o $pkgname-$pkgver.tar.xz
