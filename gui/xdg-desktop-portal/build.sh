@@ -1,5 +1,6 @@
 pkgname=xdg-desktop-portal
 pkgver=1.14.4
+pkgdep="glib:json-glib:libportal"
 
 fetch() {
 	curl -L "https://github.com/flatpak/xdg-desktop-portal/releases/download/$pkgver/xdg-desktop-portal-$pkgver.tar.xz" -o $pkgname-$pkgver.tar.xz
