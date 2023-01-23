@@ -17,6 +17,10 @@ build() {
 	samu
 }
 
+backup() {
+	return
+}
+
 package() {
 	cd $pkgname-$pkgver
 	cd build
@@ -25,6 +29,6 @@ package() {
 
 license() {
 	cd $pkgname-$pkgver
-	cat LICENSE
-#	cat COPYING
+#	cat LICENSE
+	cat COPYING
 }
