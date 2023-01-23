@@ -6,7 +6,7 @@ fetch() {
 	curl -L "https://download.gnome.org/sources/gdk-pixbuf/$_pkgver/gdk-pixbuf-$pkgver.tar.xz" -o $pkgname-$pkgver.tar.xz
 	tar -xf $pkgname-$pkgver.tar.xz
 	mkdir $pkgname-$pkgver/build
-	rm $pkgdir-$pkgver/subprojects/*.wrap
+	#rm $pkgdir-$pkgver/subprojects/*.wrap
 }
 
 build() {
