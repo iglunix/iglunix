@@ -36,7 +36,7 @@ package() {
 	rm -rf $pkgdir/usr/share/bash-completion
 	rm -rf $pkgdir/usr/share/gdb
 
-	rm -rf $pkgdir/usr/bin/gdbus*
+	rm -rf $pkgdir/usr/bin/gdbus
 }
 
 license() {
