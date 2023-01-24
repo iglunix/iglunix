@@ -1,5 +1,5 @@
 pkgname=rust-bindgen
-pkgver=0.60.1
+pkgver=0.63.0
 
 _clear_vendor_checksums() {
 	sed -i 's/\("files":{\)[^}]*/\1/' vendor/$1/.cargo-checksum.json
