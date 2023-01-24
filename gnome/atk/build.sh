@@ -1,5 +1,5 @@
 pkgname=atk
-_pkgver=2.36
+_pkgver=2.38
 pkgver=$_pkgver.0
 
 fetch() {
