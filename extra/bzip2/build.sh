@@ -13,6 +13,9 @@ build() {
 	make -f Makefile-libbz2_so CC=cc
 }
 
+backup() {
+}
+
 package() {
 	cd $pkgname-$pkgver
 	install -d $pkgdir/usr/lib/
@@ -20,10 +23,7 @@ package() {
 	ln -sr $pkgdir/usr/lib/libbz2.so.$pkgver $pkgdir/usr/lib/libbz2.so
 	ln -sr $pkgdir/usr/lib/libbz2.so.$pkgver $pkgdir/usr/lib/libbz2.so.1
 	ln -sr $pkgdir/usr/lib/libbz2.so.$pkgver $pkgdir/usr/lib/libbz2.so.1.0
-}
 
-package_dev() {
-    cd $pkgname-$pkgver
     install -d $pkgdir/usr/include/
     install -Dm644 ./bzlib.h $pkgdir/usr/include/
     install -d $pkgdir/usr/share/pkgconfig/
