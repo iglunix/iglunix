@@ -1,8 +1,8 @@
 pkgname=sqlite
-pkgver=3350100
+pkgver=3400100
 
 fetch() {
-	curl "https://sqlite.org/2021/sqlite-autoconf-3350100.tar.gz" -o $pkgname-$pkgver.tar.xz
+	curl "https://sqlite.org/2022/sqlite-autoconf-$pkgver.tar.gz" -o $pkgname-$pkgver.tar.xz
 	tar -xf $pkgname-$pkgver.tar.xz
 	mv $pkgname-autoconf-$pkgver $pkgname-$pkgver
 }
@@ -17,6 +17,10 @@ build() {
 	make
 }
 
+backup() {
+	return
+}
+
 package() {
 	cd $pkgname-$pkgver
 	make install DESTDIR=$pkgdir
@@ -24,6 +28,5 @@ package() {
 
 license() {
 	cd $pkgname-$pkgver
-	cat LICENSE
-#	cat COPYING
+	echo "public domain"
 }
