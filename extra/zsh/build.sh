@@ -1,5 +1,5 @@
 pkgname=zsh
-pkgver=5.8
+pkgver=5.9
 ext=doc
 
 fetch() {
@@ -15,7 +15,11 @@ build() {
 		--build=$TRIPLE \
 		--host=$TRIPLE
 
-	make
+	#make || echo "first make failed"
+	bad --gmake gmake
+}
+
+backup() {
 }
 
 package() {
