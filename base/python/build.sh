@@ -1,6 +1,6 @@
 pkgname=python
 pkgver=3.10.9
-mkdeps="libffi"
+mkdeps="libffi:bzip2"
 bad=""
 ext="doc"
 auto_cross
