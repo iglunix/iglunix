@@ -1,9 +1,9 @@
 pkgname=libsndfile
-pkgver=1.0.31
+pkgver=1.2.0
 
 fetch() {
-	curl -L "https://github.com/libsndfile/libsndfile/releases/download/$pkgver/libsndfile-$pkgver.tar.bz2" -o $pkgname-$pkgver.tar.bz2
-	tar -xf $pkgname-$pkgver.tar.bz2
+	curl -L "https://github.com/libsndfile/libsndfile/releases/download/$pkgver/libsndfile-$pkgver.tar.xz" -o $pkgname-$pkgver.tar.xz
+	tar -xf $pkgname-$pkgver.tar.xz
 	mkdir $pkgname-$pkgver/build
 }
 
