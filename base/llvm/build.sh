@@ -144,10 +144,6 @@ backup() {
 	return
 }
 
-package_dev() {
-	echo "No... Shut"
-}
-
 license() {
 	cd $pkgname-$pkgver
 	cat */LICENSE.TXT
