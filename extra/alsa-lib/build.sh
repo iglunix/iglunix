@@ -1,5 +1,5 @@
 pkgname=alsa-lib
-pkgver=1.2.5.1
+pkgver=1.2.7.2
 
 fetch() {
 	curl -L "http://www.alsa-project.org/files/pub/lib/alsa-lib-$pkgver.tar.bz2" -o $pkgname-$pkgver.tar.xz
@@ -16,6 +16,9 @@ build() {
 	make
 }
 
+backup() {
+}
+
 package() {
 	cd $pkgname-$pkgver
 	make install DESTDIR=$pkgdir
@@ -23,6 +26,6 @@ package() {
 
 license() {
 	cd $pkgname-$pkgver
-	cat LICENSE
-#	cat COPYING
+#	cat LICENSE
+	cat COPYING
 }
