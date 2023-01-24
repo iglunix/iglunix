@@ -1,5 +1,5 @@
 pkgname=nasm
-pkgver=2.15.05
+pkgver=2.16.01
 pkgrel=1
 bad="gmake"
 ext="doc"
@@ -16,6 +16,9 @@ build(){
 		--host=x86_64-unknown-linux-musl \
 		--prefix=/usr
 	bad --gmake gmake
+}
+
+backup() {
 }
 
 package() {
