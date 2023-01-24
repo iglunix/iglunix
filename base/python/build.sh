@@ -1,6 +1,6 @@
 pkgname=python
 pkgver=3.10.9
-mkdeps="libffi:bzip2"
+mkdeps="libffi:bzip2:sqlite"
 bad=""
 ext="doc"
 auto_cross
