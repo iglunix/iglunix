@@ -1,5 +1,5 @@
 pkgname=nodejs
-pkgver=16.6.1
+pkgver=16.19.0
 
 fetch() {
 	curl -L "https://nodejs.org/dist/v$pkgver/node-v$pkgver.tar.gz" -o $pkgname-$pkgver.tar.xz
@@ -23,6 +23,10 @@ build() {
 		--ninja
 
     samu -C out/Release
+}
+
+backup() {
+	return
 }
 
 package() {
