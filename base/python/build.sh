@@ -1,5 +1,6 @@
 pkgname=python
 pkgver=3.10.9
+mkdeps="libffi"
 bad=""
 ext="doc"
 auto_cross
@@ -36,8 +37,8 @@ package() {
 	rm -r $pkgdir/usr/lib/python3.10/ctypes/test
 	rm -r $pkgdir/usr/lib/python3.10/distutils/tests
 	rm -r $pkgdir/usr/lib/python3.10/idlelib/idle_test
-	rm -r $pkgidr/usr/lib/python3.10/lib2to3/tests
-	rm -r $pkgidr/usr/lib/python3.10/sqlite3/test
+	#rm -r $pkgidr/usr/lib/python3.10/lib2to3/tests
+	#rm -r $pkgidr/usr/lib/python3.10/sqlite3/test
 	rm -r $pkgdir/usr/lib/python3.10/tkinter/test
 	rm -r $pkgdir/usr/lib/python3.10/unittest/test
 	rm -r $pkgdir/usr/share
