@@ -1,5 +1,5 @@
 pkgname=cbindgen
-pkgver=0.20.0
+pkgver=0.24.3
 
 _clear_vendor_checksums() {
 	sed -i 's/\("files":{\)[^}]*/\1/' vendor/$1/.cargo-checksum.json
@@ -16,6 +16,9 @@ fetch() {
 build() {
 	cd $pkgname-$pkgver
 	cargo build --release --locked --all-features
+}
+
+backup() {
 }
 
 package() {
