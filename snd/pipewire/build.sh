@@ -1,6 +1,7 @@
 pkgname=pipewire
-pkgver=0.3.48
-mver=0.4.1
+pkgver=0.3.64
+mver=0.4.2
+deps="dbus-glib"
 
 fetch() {
 	curl "https://gitlab.freedesktop.org/pipewire/pipewire/-/archive/$pkgver/pipewire-$pkgver.tar.bz2" -o $pkgname-$pkgver.tar.bz2
