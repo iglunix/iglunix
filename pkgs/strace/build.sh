@@ -8,12 +8,12 @@ fetch() {
 
 build() {
 	cd $pkgname-$pkgver
-	./configure \
+	MAKE=gmake bad --gmake ./configure \
 		--prefix=/usr \
 		--build=$TRIPLE \
 		--host=$TRIPLE \
-		--enable-mpers=no \
-		--disable-dependency-tracking
+		--enable-mpers=no 
+	#	--disable-dependency-tracking
 
 	bad --gamke gmake
 }
