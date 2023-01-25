@@ -1,5 +1,5 @@
 pkgname=strace
-pkgver=5.13
+pkgver=6.1
 
 fetch() {
 	curl "https://strace.io/files/$pkgver/strace-$pkgver.tar.xz" -o $pkgname-$pkgver.tar.xz
@@ -11,18 +11,23 @@ build() {
 	./configure \
 		--prefix=/usr \
 		--build=$TRIPLE \
-		--host=$TRIPLE
+		--host=$TRIPLE \
+		--enable-mpers=no \
+		--disable-dependency-tracking
 
-	make
+	bad --gamke gmake
+}
+
+backup() {
 }
 
 package() {
 	cd $pkgname-$pkgver
-	make install DESTDIR=$pkgdir
+	bad --gamke gmake install DESTDIR=$pkgdir
 }
 
 license() {
 	cd $pkgname-$pkgver
-	cat LICENSE
-#	cat COPYING
+#	cat LICENSE
+	cat COPYING
 }
