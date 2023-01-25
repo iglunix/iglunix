@@ -22,7 +22,8 @@ build() {
 		--prefix=/usr \
 		--libexecdir=lib \
 		-Dterminfo=enabled \
-		-Ddefault-terminfo=foot
+		-Ddefault-terminfo=foot \
+		-Dwerror=false
 	samu
 }
 
