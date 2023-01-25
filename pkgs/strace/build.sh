@@ -15,7 +15,7 @@ build() {
 		--enable-mpers=no 
 	#	--disable-dependency-tracking
 
-	bad --gamke gmake
+	bad --gmake gmake
 }
 
 backup() {
@@ -23,7 +23,7 @@ backup() {
 
 package() {
 	cd $pkgname-$pkgver
-	bad --gamke gmake install DESTDIR=$pkgdir
+	bad --gmake gmake install DESTDIR=$pkgdir
 }
 
 license() {
