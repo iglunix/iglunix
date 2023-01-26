@@ -68,3 +68,9 @@ cp /usr/share/limine/BOOTX64.EFI /install_root/boot/efi/boot/bootx64.efi
 ```
 Edit `/install_root/boot/efi/oslo/entries.ini` and `/install_root/boot/limine.cfg`
 accordingly
+
+
+## Further reading
+
+https://docs.kernel.org/admin-guide/initrd.html#obsolete-root-change-mechanism
+https://man7.org/linux/man-pages/man2/pivot_root.2.html
