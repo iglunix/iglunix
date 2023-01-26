@@ -20,6 +20,11 @@ ext="dev"
 #
 # TODO:
 # add KERNEL_CONFIG option to override config used when compiling
+#
+# ----------
+#
+# If the user uses `iglu del`on this pkg, the pkg can NOT be rebuilt!
+# to fix this `../../../usr/bin/iglupkg --with-cross=x86_64 --with-cross-dir=/iglunix --for-cross --for-cross-dir=/usr fbp` from an external linux can be used
 
 if [ -z "$KERNEL_TREE" ]; then
 	KERNEL_TREE=mainline
