@@ -42,7 +42,7 @@ package() {
 	rm -r $pkgdir/usr/lib/python3.10/tkinter/test
 	rm -r $pkgdir/usr/lib/python3.10/unittest/test
 	rm -r $pkgdir/usr/share
-	ln -sr $pkgdir/usr/bin/python3 $pkgdir/usr/bin/python
+	ln -s python3 $pkgdir/usr/bin/python
 }
 
 package_doc() {
