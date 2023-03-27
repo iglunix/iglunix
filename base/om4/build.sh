@@ -22,7 +22,7 @@ package() {
 	cd $pkgname-$pkgver
 	install -d $pkgdir/usr/bin
 	install -Dm4755 om4 $pkgdir/usr/bin
-	ln -sr $pkgdir/usr/bin/om4 $pkgdir/usr/bin/m4
+	ln -s om4 $pkgdir/usr/bin/m4
 }
 
 package_doc() {
