@@ -7,10 +7,11 @@ auto_cross
 
 fetch() {
 	curl http://www.mirbsd.org/MirOS/dist/mir/mksh/mksh-R59c.tgz -o $pkgname-$pkgver.tar.gz
+	curl http://www.mirbsd.org/TaC-mksh.txt -o license.txt
 	tar -xf $pkgname-$pkgver.tar.gz
 	mv $pkgname $pkgname-$pkgver
 	cd $pkgname-$pkgver
-	patch -p1 < ../../procsub.patch
+	#patch -p1 < ../../procsub.patch
 }
 
 build() {
@@ -33,5 +34,5 @@ backup() {
 }
 
 license() {
-	curl http://www.mirbsd.org/TaC-mksh.txt
+	cat ../license.txt
 }
