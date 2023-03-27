@@ -30,5 +30,5 @@ package_doc() {
 
 license() {
 	cd $pkgname-$pkgver
-	cat LICENSE
+	cat COPYING
 }
