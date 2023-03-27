@@ -34,5 +34,5 @@ backup() {
 }
 
 license() {
-	cat ../license.txt
+	cat license.txt
 }
