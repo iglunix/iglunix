@@ -32,3 +32,7 @@ license() {
 	cd $pkgname-$pkgver
 	cat COPYING
 }
+
+backup() {
+	return
+}
