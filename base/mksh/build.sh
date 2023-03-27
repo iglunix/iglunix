@@ -25,8 +25,8 @@ package() {
 	install -d $pkgdir/bin
 	install -Dm755 ./mksh $pkgdir/bin
 	install -Dm755 ./lksh $pkgdir/bin
-	ln -sr $pkgdir/bin/mksh $pkgdir/bin/bash
-	ln -sr $pkgdir/bin/lksh $pkgdir/bin/sh
+	ln -s mksh $pkgdir/bin/bash
+	ln -s lksh $pkgdir/bin/sh
 }
 
 backup() {
