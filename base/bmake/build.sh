@@ -21,7 +21,7 @@ build() {
 
 package() {
 	cd $pkgname-$pkgver
-	bmake -m ./mk install -f Makefile DESTDIR=$pkgdir MANTARGET=man prefix=/usr/ BINDIR=/usr/bin
+	./bmake -m ./mk install -f Makefile DESTDIR=$pkgdir MANTARGET=man prefix=/usr/ BINDIR=/usr/bin
 	ln -s bmake $pkgdir/usr/bin/make
 	rm -rf $pkgdir/usr/share/man/cat1
 	install -Dm644 ./bmake.1 $pkgdir/usr/share/man/man1
