@@ -1,4 +1,4 @@
-pkgver=3.4.4
+pkgver=3.4.2
 pkgname=libffi
 bad="gmake"
 ext="dev"
