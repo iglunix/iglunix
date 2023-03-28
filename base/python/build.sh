@@ -28,6 +28,7 @@ build() {
 }
 
 backup() {
+	return
 }
 
 package() {
