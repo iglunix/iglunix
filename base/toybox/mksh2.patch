@@ -1,5 +1,5 @@
---- scripts/make.sh
-+++ scripts/make.sh
+--- a/scripts/make.sh
++++ b/scripts/make.sh
 @@ -56,7 +56,7 @@
  unset A B DOTPROG DIDNEWER
  
