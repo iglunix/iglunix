@@ -95,6 +95,9 @@ build() {
 	./scripts/config -d CONFIG_SPEAKUP
 	./scripts/config -d CONFIG_DEBUG_INFO_BTF
 
+	# Warnings exist ;~;
+	./scripts/config -d CONFIG_WERROR
+
 	# Building with objtool requires libelf and that's utter pain
 	./scripts/config -d CONFIG_HAVE_OBJTOOL
 	./scripts/config -d CONFIG_OBJTOOL
