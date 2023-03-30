@@ -100,6 +100,7 @@ build() {
 	./scripts/config -d CONFIG_OBJTOOL
 	./scripts/config -d CONFIG_FTRACE
 	./scripts/config -d CONFIG_UNWINDER_ORC
+	./scripts/config -d CONFIG_STACK_VALIDATION
 	./scripts/config -e CONFIG_UNWINDER_FRAME_POINTER
 
 	# Bake in important modules to allow booting without initramfs
@@ -108,6 +109,8 @@ build() {
 	./scripts/config -e CONFIG_EXT4_FS
 
 	bad --gmake gmake CC=clang HOSTCC=clang YACC=yacc LLVM=1 LLVM_IAS=1 ARCH=$_arch "olddefconfig"
+
+	cat .config > &2
 
 	# sed -i 's/CONFIG_UNWINDER_ORC=y/# CONFIG_UNWINDER_ORC is not set/g' .config
 	# sed -i 's/# CONFIG_UNWINDER_FRAME_POINTER is not set/CONFIG_UNWINDER_FRAME_POINTER=y/g' .config
