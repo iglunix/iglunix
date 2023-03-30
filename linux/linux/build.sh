@@ -33,7 +33,11 @@ fi
 case "$KERNEL_TREE" in
 	mainline)
 		pkgver=6.1.21
-		src_tar="https://git.kernel.org/torvalds/t/linux-$pkgver.tar.gz"
+		# Only for torvalds tree
+		# src_tar="https://git.kernel.org/torvalds/t/linux-$pkgver.tar.gz"
+
+		# LTS
+		src_tar="https://cdn.kernel.org/pub/linux/kernel/v6.x/linux-$pkgver.tar.xz"
 		# temporarily disabled to reduce ci time
 		# fetch_config="https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-$ARCH-fedora.config"
 		# config=olddefconfig
