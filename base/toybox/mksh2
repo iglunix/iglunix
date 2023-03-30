@@ -1,5 +1,5 @@
 --- src/toybox-0.8.9/scripts/make.sh
-+++ src/toybox-0.8.9/scripts/make.sh2
++++ src/toybox-0.8.9/scripts/make.sh
 @@ -56,7 +56,7 @@
  unset A B DOTPROG DIDNEWER
  
