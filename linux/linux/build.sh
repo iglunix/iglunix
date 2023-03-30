@@ -32,7 +32,7 @@ fi
 
 case "$KERNEL_TREE" in
 	mainline)
-		pkgver=6.0-rc5
+		pkgver=6.1.21
 		src_tar="https://git.kernel.org/torvalds/t/linux-$pkgver.tar.gz"
 		# temporarily disabled to reduce ci time
 		# fetch_config="https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-$ARCH-fedora.config"
@@ -97,6 +97,9 @@ build() {
 
 	# Warnings exist ;~;
 	./scripts/config -d CONFIG_WERROR
+
+	# Need for booting
+	./scripts/config -e CONFIG_EFI_STUB
 
 	# Building with objtool requires libelf and that's utter pain
 	./scripts/config -d CONFIG_HAVE_OBJTOOL
