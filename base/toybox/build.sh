@@ -10,7 +10,7 @@ fetch() {
 	cd $pkgname-$pkgver
 	patch -p1 < ../../ls-colour.patch
 	patch -p1 < ../../mksh.patch
-	patch -p1 < ../../mksh2
+	# patch -p1 < ../../mksh2
 	patch -p1 < ../../xxd-i.patch
 }
 
