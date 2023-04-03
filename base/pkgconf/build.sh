@@ -18,7 +18,7 @@ build() {
 package() {
 	cd $pkgname-$pkgver
 	make install DESTDIR=$pkgdir
-	ln -sr $pkgdir/usr/bin/pkgconf $pkgdir/usr/bin/pkg-config
+	ln -s pkgconf $pkgdir/usr/bin/pkg-config
 	rm -r $pkgdir/usr/share
 }
 
