@@ -2,7 +2,7 @@ pkgname=init
 pkgver=main
 
 fetch() {
-	curl "https://github.com/iglunix/init/archive/refs/heads/$pkgver.tar.gz" -o $pkgname-$pkgver.tar.gz
+	curl -L "https://github.com/iglunix/init/archive/refs/heads/$pkgver.tar.gz" -o $pkgname-$pkgver.tar.gz
 	tar -xf $pkgname-$pkgver.tar.gz
 }
 
