@@ -12,7 +12,6 @@ build() {
 
 package() {
 	cd $pkgname-$pkgver
-	make install DESTDIR=$pkgdir
 	cp -r etc $pkgdir
 	cp -r lib $pkgdir
 	cp -r sbin $pkgdir
@@ -22,4 +21,8 @@ license() {
 	cd $pkgname-$pkgver
 	cat LICENSE
 #	cat COPYING
+}
+
+backup() {
+	return
 }
