@@ -99,6 +99,11 @@ build() {
 	./scripts/config -d CONFIG_SPEAKUP
 	./scripts/config -d CONFIG_DEBUG_INFO_BTF
 
+	# This tries to tell clang to target thumbv8a-linux-gnuabi for aarch64
+	# We do not build this by default in iglunix-bootstrap.
+	./scripts/config -d CONFIG_COMPAT_VDSO
+	./scripts/config -d CONFIG_THUMB2_COMPAT_VDSO
+
 	# Warnings exist ;~;
 	./scripts/config -d CONFIG_WERROR
 
