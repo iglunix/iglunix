@@ -109,6 +109,7 @@ build() {
 
 	# Need for booting
 	./scripts/config -e CONFIG_EFI_STUB
+	./scripts/config -e CONFIG_FB_EFI
 
 	# Building with objtool requires libelf and that's utter pain
 	./scripts/config -d CONFIG_HAVE_OBJTOOL
