@@ -109,7 +109,14 @@ build() {
 
 	# Need for booting
 	./scripts/config -e CONFIG_EFI_STUB
-	./scripts/config -e CONFIG_FB_EFI
+
+	# Enable simple framebuffer only output.
+	# Note: no fbdev drivers.
+	./scripts/config -e CONFIG_FB
+	# ensure DRM is not a module.
+	./scripts/config -e CONFIG_DRM
+	./scripts/config -e CONFIG_SYSFB_SIMPLEFB
+	./scripts/config -e CONFIG_DRM_SIMPLEDRM
 
 	# Building with objtool requires libelf and that's utter pain
 	./scripts/config -d CONFIG_HAVE_OBJTOOL
