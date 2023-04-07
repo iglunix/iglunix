@@ -1,5 +1,5 @@
 pkgname=compiler-rt
-pkgver=15.0.0
+pkgver=16.0.0
 deps=linux
 
 fetch() {
@@ -28,7 +28,7 @@ build() {
 		-DLLVM_ENABLE_RUNTIMES="compiler-rt" \
 		-DLLVM_RUNTIME_TARGETS= \
 		-DCMAKE_BUILD_TYPE=Release \
-		-DCMAKE_INSTALL_PREFIX=/usr/lib/clang/$pkgver/ \
+		-DCMAKE_INSTALL_PREFIX=/usr/lib/clang/16/ \
 		-DCMAKE_INSTALL_LIBDIR=lib \
 		-DCMAKE_C_COMPILER_TARGET=$TRIPLE \
 		-DCMAKE_CXX_COMPILER_TARGET=$TRIPLE \
