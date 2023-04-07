@@ -7,21 +7,22 @@ fetch() {
 	# for c++ headers
 	# curl -L "https://github.com/llvm/llvm-project/releases/download/llvmorg-$pkgver/libcxx-$pkgver.src.tar.xz" -o libcxx-$pkgver.tar.xz
 	# musl required for C headers
-	curl -O "http://musl.libc.org/releases/musl-1.2.2.tar.gz"
+	curl -O "http://musl.libc.org/releases/musl-1.2.3.tar.gz"
 	tar -xf $pkgname-$pkgver.tar.xz
 	mv llvm-project-$pkgver.src $pkgname-$pkgver
 	# tar -xf libcxx-$pkgver.tar.xz
 	# mv libcxx-$pkgver.src libcxx-$pkgver
 	# cp ../__config_site libcxx-$pkgver/include
 	mkdir $pkgname-$pkgver/build
-	tar -xf musl-1.2.2.tar.gz
-	cd musl-1.2.2
-	CFLAGS="--sysroot=/usr/$ARCH-linux-musl --target=$TRIPLE" ./configure --prefix=$(pwd)/../libc --target=$TRIPLE
-	bad --gmake gmake install-headers
+	tar -xf musl-1.2.3.tar.gz
 }
 
 
 build() {
+	cd musl-1.2.3
+	CFLAGS="--sysroot=/usr/$ARCH-linux-musl --target=$TRIPLE" ./configure --prefix=$(pwd)/../libc --target=$TRIPLE
+	bad --gmake gmake install-headers
+	cd ..
 	cd $pkgname-$pkgver
 	cd build
 	cmake -G Ninja ../runtimes \
