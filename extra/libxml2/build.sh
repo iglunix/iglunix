@@ -1,11 +1,12 @@
-pkgver=2.10.3
+_pkgver=2.10
+pkgver=$_pkgver.3
 pkgname=libxml2
 bad=""
 ext="dev"
 
 fetch() {
-    curl -L "https://download.gnome.org/sources/libxml2/2.10/libxml2-$pkgver.tar.xz" -o $pkgname-$pkgver.tar.gz
-    tar -xf $pkgname-$pkgver.tar.gz
+	curl -L "https://download.gnome.org/sources/libxml2/$_pkgver/libxml2-$pkgver.tar.xz" -o $pkgname-$pkgver.tar.gz
+	tar -xf $pkgname-$pkgver.tar.gz
 }
 
 backup() {
@@ -32,4 +33,3 @@ license() {
     cd $pkgname-$pkgver
     cat Copyright
 }
-
