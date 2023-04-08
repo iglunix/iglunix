@@ -33,7 +33,7 @@ fetch() {
 	cd $pkgname-$pkgver
 	patch -p1 < ../no_git_repo.patch
 	patch -p1 < ../alpine-crt.patch
-	patch -p1 < ../libexec.patch
+	# patch -p1 < ../libexec.patch
 	patch -p1 < ../fix-curl.patch
 
 	sed -i /LD_LIBRARY_PATH/d src/bootstrap/bootstrap.py
