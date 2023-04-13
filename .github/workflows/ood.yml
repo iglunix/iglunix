@@ -1,0 +1,15 @@
+on:
+  schedule:
+    - cron: '0 0 * * 6'
+jobs:
+  ood:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Out of date
+        run:
+          ./scripts/ood.sh | tee -a issue.md
+          if [ ! -z "$(cat issue.md)" ]
+          then
+          gh issue create -t "Out of date packages $(date -I)" -Fissue.md
+          fi
