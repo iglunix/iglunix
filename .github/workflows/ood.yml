@@ -8,7 +8,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Out of date
-        run:
+        run: |
           ./scripts/ood.sh | tee -a issue.md
           if [ ! -z "$(cat issue.md)" ]
           then
