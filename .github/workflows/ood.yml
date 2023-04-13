@@ -14,3 +14,5 @@ jobs:
           then
           gh issue create -t "Out of date packages $(date -I)" -Fissue.md
           fi
+        env:
+	  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
