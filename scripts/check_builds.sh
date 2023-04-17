@@ -21,4 +21,4 @@ $IGLUPKG f
 
 cd $BASE
 
-sudo chroot ./sysroot /build/scripts/check_builds_chroot.sh
+sudo chroot ./sysroot /build/scripts/check_builds_chroot.sh "$1"
