@@ -1,5 +1,5 @@
 pkgname=zlib-ng
-pkgver=2.0.5
+pkgver=2.0.7
 
 fetch() {
 	curl -L "https://github.com/zlib-ng/zlib-ng/archive/refs/tags/$pkgver.tar.gz" -o $pkgname-$pkgver.tar.xz
