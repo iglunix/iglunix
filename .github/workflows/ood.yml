@@ -10,6 +10,7 @@ jobs:
       - name: Out of date
         run: |
           ./scripts/ood.sh
+          cat ood.list
           ./scripts/fetch_autobuild.sh
           ./scripts/setup_sysroot.sh
           for pkg in $(cat ood.list)
