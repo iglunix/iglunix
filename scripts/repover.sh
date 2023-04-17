@@ -1,4 +1,5 @@
 #!/bin/sh
+printf 'trying %s/%s\n' "$1" "$2" >&2
 REPO_VER=$(curl "https://repology.org/project/$2/history" 2>/dev/null | grep "version-newest" | tr '>' ' ' | tr '<' ' ' | awk '{ print $5; }' | head -n1)
 
 REPO_MAJOR=$(echo $REPO_VER | tr '.' ' ' | awk '{ print $1; }')
@@ -44,7 +45,7 @@ then
 	LOCAL_MICRO=0
 fi
 
-if [ "$REPO_MAJOR" -gt "$LOCAL_MAJOR" -o "$REPO_MINOR" -gt "$LOCAL_MINOR" -o "$REPO_MICRO" -gt "$LOCAL_MICRO" ]
+if [ "$REPO_MAJOR" -gt "$LOCAL_MAJOR" -o '(' "$REPO_MAJOR" -eq "$LOCAL_MAJOR" -a "$REPO_MINOR" -gt "$LOCAL_MINOR" ')' -o '(' "$REPO_MAJOR" -eq "$LOCAL_MAJOR" -a "$REPO_MINOR" -eq "$LOCAL_MINOR" -a "$REPO_MICRO" -gt "$LOCAL_MICRO" ')' ]
 then
 	printf '%s\n' "$1/$2" >> ood.list
 	printf '\n'
