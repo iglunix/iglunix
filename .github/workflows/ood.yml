@@ -9,6 +9,11 @@ jobs:
       - uses: actions/checkout@v3
       - name: Out of date
         run: |
+          sudo apt install libarchive-tools
+          TAR=$(command -V tar)
+          rm -f $TAR
+          ln -s bsdtar $TAR
+          tar --version
           ./scripts/ood.sh
           cat ood.list
           ./scripts/fetch_autobuild.sh
