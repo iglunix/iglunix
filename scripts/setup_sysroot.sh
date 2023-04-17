@@ -20,8 +20,8 @@ mkdir -p sysroot/proc
 mkdir -p sysroot/sys
 mkdir -p sysroot/dev
 mkdir -p sysroot/build
-mount --bind /tmp sysroot/tmp
-mount --bind /proc sysroot/proc
-mount --bind /sys sysroot/sys
-mount --bind /dev sysroot/dev
-mount --bind $(pwd) sysroot/build
+sudo mount --bind /tmp sysroot/tmp
+sudo mount --bind /proc sysroot/proc
+sudo mount --bind /sys sysroot/sys
+sudo mount --bind /dev sysroot/dev
+sudo mount --bind $(pwd) sysroot/build
