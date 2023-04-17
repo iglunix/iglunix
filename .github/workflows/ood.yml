@@ -9,6 +9,7 @@ jobs:
       - uses: actions/checkout@v3
       - name: Out of date
         run: |
+          set -x
           git config --global user.name 'GitHub Actions'
           git config --global user.email 'example@example.com'
           sudo apt install libarchive-tools
@@ -28,11 +29,11 @@ jobs:
           git commit -m "bump $pkg"
           fi
           done
-          git push -u origin main
           ./scripts/ood.sh | tee -a issue.md
           if [ ! -z "$(cat issue.md)" ]
           then
           gh issue create -t "Out of date packages $(date -I)" -Fissue.md
           fi
+          git push -u origin main
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
