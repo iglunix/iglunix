@@ -25,3 +25,12 @@ sudo mount --bind /proc sysroot/proc
 sudo mount --bind /sys sysroot/sys
 sudo mount --bind /dev sysroot/dev
 sudo mount --bind $(pwd) sysroot/build
+
+mkdir -p sysroot/etc
+cat > sysroot/etc/passwd << EOF
+root:x:0:0:Admin,,,:/root:/bin/sh
+EOF
+
+cat > sysroot/etc/group << EOF
+root:x:0:
+EOF
