@@ -46,6 +46,7 @@ fi
 
 if [ "$REPO_MAJOR" -gt "$LOCAL_MAJOR" -o "$REPO_MINOR" -gt "$LOCAL_MINOR" -o "$REPO_MICRO" -gt "$LOCAL_MICRO" ]
 then
+	printf '%s\n' "$1/$2" >> ood.list
 	printf '\n'
 	printf ' - [ ] Package `%s` is out of date!\n' "$1/$2"
 	printf '       Remote Version: `%s.%s.%s`\n' $REPO_MAJOR $REPO_MINOR $REPO_MICRO
