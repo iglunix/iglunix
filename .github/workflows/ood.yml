@@ -29,6 +29,9 @@ jobs:
           git commit -m "bump $pkg"
           fi
           done
+          # we need to reset the changes that didn't stick
+          # so we can create an issue about still out of date packages
+          git reset --hard
           ./scripts/ood.sh | tee -a issue.md
           if [ ! -z "$(cat issue.md)" ]
           then
