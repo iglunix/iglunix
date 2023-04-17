@@ -14,7 +14,7 @@ fi
 
 BASE=$(pwd)
 SYSROOT=$BASE/sysroot
-IGLUPKG=$BASE/sysroot/usr/sbin/iglupkg
+IGLUPKG=$BASE/sysroot/usr/bin/iglupkg
 cd "$1"
 
 $IGLUPKG f
