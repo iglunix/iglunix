@@ -1,4 +1,4 @@
-pkgver=20220128
+pkgver=20230219
 pkgname=byacc
 deps="musl"
 mkdeps="bmake"
