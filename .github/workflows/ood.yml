@@ -9,6 +9,19 @@ jobs:
       - uses: actions/checkout@v3
       - name: Out of date
         run: |
+          ./scripts/ood.sh
+          ./scripts/fetch_autobuild.sh
+          ./scripts/setup_sysroot.sh
+          for pkg in $(cat ood.list)
+          do
+          ./scripts/updatever.sh
+          if ./scripts/check_builds.sh $pkg
+          then
+          git add $pkg/build.sh
+          git commit -m "bump $pkg"
+          fi
+          done
+          git push -u origin main
           ./scripts/ood.sh | tee -a issue.md
           if [ ! -z "$(cat issue.md)" ]
           then
