@@ -1,0 +1,14 @@
+on:
+  workflow_dispatch:
+jobs:
+  ood:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Out of date
+        run: |
+          ./scripts/fetch_autobuild.sh
+          ./scripts/setup_sysroot.sh
+          ./scripts/check_builds.sh base/byacc
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
