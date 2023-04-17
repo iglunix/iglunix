@@ -11,6 +11,7 @@ mkdir -p sysroot
 for pkg in $(tar -tf pkgs.tar.zst)
 do
 	tar -xf pkgs.tar.zst $pkg -C /tmp
+	ls /tmp
 	tar -xf /tmp/$pkg -C sysroot
 	rm -f /tmp/$pkg
 done
