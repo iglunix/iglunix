@@ -1,7 +1,7 @@
 pkgver=2.39.0
 pkgname=git
 pkgrel=1
-mkdeps="zlib-ng-dev:curl-dev:gmake"
+mkdeps="zlib-ng:curl:gmake"
 deps="zlib-ng:curl"
 bad="gmake"
 ext="doc"
