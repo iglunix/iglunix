@@ -10,9 +10,8 @@ jobs:
       - name: Out of date
         run: |
           sudo apt install libarchive-tools
-          TAR=$(command -V tar)
-          sudo rm -f $TAR
-          sudo ln -s $TAR bsdtar
+          sudo rm -f /usr/bin/tar
+          sudo ln -s bsdtar /usr/bin/tar
           tar --version
           ./scripts/ood.sh
           cat ood.list
