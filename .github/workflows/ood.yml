@@ -19,7 +19,7 @@ jobs:
           ./scripts/setup_sysroot.sh
           for pkg in $(cat ood.list)
           do
-          ./scripts/updatever.sh $pkg
+          ./scripts/updatever.sh $(dirname $pkg) $(basename $pkg)
           if ./scripts/check_builds.sh $pkg
           then
           git add $pkg/build.sh
