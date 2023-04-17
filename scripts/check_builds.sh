@@ -17,7 +17,7 @@ SYSROOT=$BASE/sysroot
 IGLUPKG=$BASE/sysroot/usr/bin/iglupkg
 cd "$1"
 
-$IGLUPKG f
+sh -e -x $IGLUPKG f
 
 cd $BASE
 
