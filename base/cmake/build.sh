@@ -7,7 +7,7 @@ bad=""
 ext=""
 
 fetch() {
-	curl "https://cmake.org/files/v3.23/cmake-$pkgver.tar.gz" -o $pkgname-$pkgver.tar.gz
+	curl -LO "https://github.com/Kitware/CMake/releases/download/v$pkgver/cmake-$pkgver.tar.gz"
 	tar -xf $pkgname-$pkgver.tar.gz
 }
 
