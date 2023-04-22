@@ -1,5 +1,5 @@
 pkgname=dhcpcd
-pkgver=9.4.1
+pkgver=10.0.1
 
 fetch() {
 	curl -LO "https://github.com/NetworkConfiguration/dhcpcd/releases/download/v$pkgver/dhcpcd-$pkgver.tar.xz"
