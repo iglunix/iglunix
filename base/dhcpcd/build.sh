@@ -2,7 +2,7 @@ pkgname=dhcpcd
 pkgver=9.4.1
 
 fetch() {
-	curl -LO "https://roy.marples.name/downloads/dhcpcd/dhcpcd-$pkgver.tar.xz"
+	curl -LO "https://github.com/NetworkConfiguration/dhcpcd/releases/download/v$pkgver/dhcpcd-$pkgver.tar.xz"
 	tar -xf $pkgname-$pkgver.tar.xz
 }
 
