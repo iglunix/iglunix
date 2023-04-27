@@ -23,7 +23,7 @@ build() {
 package() {
 	cd $pkgname-$pkgver
 	bad --gmake gmake install DESTDIR=$pkgdir
-	ln -sr $pkgdir/usr/bin/flex $pkgdir/usr/bin/lex
+	ln -s flex $pkgdir/usr/bin/lex
 }
 
 license() {

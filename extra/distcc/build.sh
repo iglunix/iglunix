@@ -23,10 +23,11 @@ package() {
 	bad --gmake gmake install DESTDIR=$pkgdir
 
 	install -d $pkgdir/usr/lib/distcc
-	ln -sr $pkgdir/usr/bin/distcc $pkgdir/usr/lib/distcc/cc
-	ln -sr $pkgdir/usr/bin/distcc $pkgdir/usr/lib/distcc/c89
-	ln -sr $pkgdir/usr/bin/distcc $pkgdir/usr/lib/distcc/c99
-	ln -sr $pkgdir/usr/bin/distcc $pkgdir/usr/lib/distcc/c++
+
+	ln -s ../../../usr/bin/distcc $pkgdir/usr/lib/distcc/cc
+	ln -s ../../../usr/bin/distcc $pkgdir/usr/lib/distcc/c89
+	ln -s ../../../usr/bin/distcc $pkgdir/usr/lib/distcc/c99
+	ln -s ../../../usr/bin/distcc $pkgdir/usr/lib/distcc/c++
 }
 
 license() {

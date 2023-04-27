@@ -26,7 +26,7 @@ package() {
 	install -d /usr/bin
 	install -Dm755 ./pico/pico $pkgdir/usr/bin/
 	install -Dm755 ./pico/pilot $pkgdir/usr/bin/
-	ln -sr $pkgdir/usr/bin/pico $pkgdir/usr/bin/nano
+	ln -s ../usr/bin/pico $pkgdir/usr/bin/nano
 }
 
 license() {

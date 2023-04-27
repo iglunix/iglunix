@@ -21,8 +21,8 @@ build() {
 package() {
 	cd $pkgname-$pkgver
 	bad --gmake gmake install DESTDIR=$pkgdir PROGRAMS='dropbear dbclient dropbearkey dropbearconvert scp'
-	ln -sr $pkgdir/usr/sbin/dropbear $pkgdir/usr/sbin/sshd
-	ln -sr $pkgdir/usr/bin/dbclient $pkgdir/usr/bin/ssh
+	ln -s ../../usr/sbin/dropbear $pkgdir/usr/sbin/sshd
+	ln -s ../usr/bin/dbclient $pkgdir/usr/bin/ssh
 	rm -r $pkgdir/usr/share
 }
 
