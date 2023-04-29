@@ -1,5 +1,5 @@
 pkgname=perl
-pkgver=5.36.0
+pkgver=5.36.1
 
 fetch() {
 	curl "https://www.cpan.org/src/5.0/perl-$pkgver.tar.gz" -o $pkgname-$pkgver.tar.xz
