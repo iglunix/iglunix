@@ -1,2 +1,3 @@
 #!/bin/sh
-curl -L https://curl.haxx.se/ca/cacert.pem -o /etc/ssl/cert.pem
+cd /etc/ssl
+curl -LO https://curl.haxx.se/ca/cacert.pem
