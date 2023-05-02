@@ -17,7 +17,8 @@ build() {
 	./configure --prefix=/usr \
 		--build=$HOST_TRIPLE \
 		--host=$TRIPLE \
-		--with-openssl
+		--with-openssl \
+		--with-ca-bundle=/etc/ssl/cacert.pem
 	make
 }
 
