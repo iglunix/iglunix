@@ -18,7 +18,7 @@ build() {
 		--build=$HOST_TRIPLE \
 		--host=$TRIPLE \
 		--with-openssl \
-		--with-ca-bundle=/etc/ssl/cacert.pem
+		--with-ca-bundle=/etc/ssl/cert.pem
 	make
 }
 
