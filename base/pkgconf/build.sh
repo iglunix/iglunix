@@ -1,4 +1,4 @@
-pkgver=1.9.4
+pkgver=1.9.5
 pkgname=pkgconf
 bad=""
 ext="doc"
