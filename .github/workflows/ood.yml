@@ -17,6 +17,10 @@ jobs:
           sudo ln -s bsdtar /usr/bin/tar
           tar --version
           ./scripts/ood.sh
+          if [ ! -f ood.list ]
+          then
+          exit 0
+          fi
           cat ood.list
           ./scripts/fetch_autobuild.sh
           ./scripts/setup_sysroot.sh
