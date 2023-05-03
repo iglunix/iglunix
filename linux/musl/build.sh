@@ -1,4 +1,4 @@
-pkgver=1.2.3
+pkgver=1.2.4
 pkgname=musl
 deps=""
 mkdeps="gmake"
