@@ -67,3 +67,5 @@ $CV base zlib-ng 2>/dev/null
 
 # uses branch name
 # $CV base 🦆 2>/dev/null
+
+$CV base mandoc 2>/dev/null
