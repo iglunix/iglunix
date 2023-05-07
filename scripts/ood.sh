@@ -19,17 +19,9 @@ $CV base curl 2>/dev/null
 $CV base dhcpcd 2>/dev/null
 # doas has two seperate repos with different version schemes
 # $CV base doas 2>/dev/null
-$CV base expat 2>/dev/null
-
-# we really should remove fakeroot; it doesn't even work for toybox and we have
-# a different method for ensuring root ownership
-# $CV base fakeroot 2>/dev/null
 
 # flex repover is not right
 # $CV base flex 2>/dev/null
-
-# we really should remove gettext-tiny; or perhaps move it to extra
-# $CV base gettext-tiny 2>/dev/null
 
 $CV base git 2>/dev/null
 
@@ -40,21 +32,10 @@ $CV base git 2>/dev/null
 # $CV base installer 2>/dev/null
 # $CV base kakoune 2>/dev/null
 
-# really should remove; it can't do shit
-# $CV base kati 2>/dev/null
-# WIP
-# $CV base lc-make 2>/dev/null
-
 # part of LLVM stuff; versions should be synchronised
 # $CV base libcxx 2>/dev/null
 
-# Only used by linux kernel build. we patch it out
-# $CV base libelf 2>/dev/null
-
 $CV base libffi 2>/dev/null
-
-# We should remove. IIRC not required by IWD
-# $CV base libnl-tiny 2>/dev/null
 
 # part of LLVM stuff; versions should be synchronised
 # $CV base libunwind 2>/dev/null
@@ -64,9 +45,6 @@ $CV base libffi 2>/dev/null
 
 # upstream version name is not numeric
 # $CV base man-pages-posix 2>/dev/null
-
-# should be replaced by muon and moved to extra
-# $CV base meson 2>/dev/null
 
 # mksh versions are not integers
 # $CV base mksh 2>/dev/null
