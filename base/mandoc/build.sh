@@ -1,5 +1,5 @@
 pkgname=mandoc
-pkgver=1.14.5
+pkgver=1.14.6
 
 fetch() {
 	curl "https://mandoc.bsd.lv/snapshots/mandoc-$pkgver.tar.gz" -o $pkgname-$pkgver.tar.gz
