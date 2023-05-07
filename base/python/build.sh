@@ -1,5 +1,5 @@
 pkgname=python
-pkgver=3.10.9
+pkgver=3.11.3
 mkdeps="libffi:bzip2:sqlite"
 bad=""
 ext="doc"
@@ -34,14 +34,14 @@ backup() {
 package() {
     	cd $pkgname-$pkgver
 	make install DESTDIR=$pkgdir
-	rm -r $pkgdir/usr/lib/python3.10/test
-	rm -r $pkgdir/usr/lib/python3.10/ctypes/test
-	rm -r $pkgdir/usr/lib/python3.10/distutils/tests
-	rm -r $pkgdir/usr/lib/python3.10/idlelib/idle_test
-	#rm -r $pkgidr/usr/lib/python3.10/lib2to3/tests
-	#rm -r $pkgidr/usr/lib/python3.10/sqlite3/test
-	rm -r $pkgdir/usr/lib/python3.10/tkinter/test
-	rm -r $pkgdir/usr/lib/python3.10/unittest/test
+	rm -r $pkgdir/usr/lib/python*/test
+	rm -r $pkgdir/usr/lib/python*/ctypes/test
+	rm -r $pkgdir/usr/lib/python*/distutils/tests
+	rm -r $pkgdir/usr/lib/python*/idlelib/idle_test
+	rm -r $pkgdir/usr/lib/python*/lib2to3/tests
+	#rm -r $pkgidr/usr/lib/python*/sqlite3/test
+	rm -r $pkgdir/usr/lib/python*/tkinter/test
+	rm -r $pkgdir/usr/lib/python*/unittest/test
 	rm -r $pkgdir/usr/share
 	ln -s python3 $pkgdir/usr/bin/python
 }
