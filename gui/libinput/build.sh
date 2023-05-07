@@ -10,16 +10,15 @@ fetch() {
 
 build() {
 	cd $pkgname-$pkgver
-	cd build
-	meson .. \
-		--buildtype=release \
-		--prefix=/usr \
-		--libexecdir=lib \
+	muon setup \
+		-Dbuildtype=release \
+		-Dprefix=/usr \
 		-Dlibwacom=false \
 		-Ddocumentation=false \
 		-Ddebug-gui=false \
-		-Dtests=false
-	samu
+		-Dtests=false \
+		build
+	samu -C build
 }
 
 backup() {
@@ -28,8 +27,7 @@ backup() {
 
 package() {
 	cd $pkgname-$pkgver
-	cd build
-	DESTDIR=$pkgdir samu install
+	DESTDIR=$pkgdir muon -C build install
 }
 
 license() {
