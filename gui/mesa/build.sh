@@ -1,5 +1,5 @@
 pkgname=mesa
-pkgver=22.3.3
+pkgver=23.0.3
 #pkgver=main
 deps="musl:wayland:wayland-protocols:llvm:zlib-ng:expat:libffi:libdrm:python-mako:glslang"
 ext=dev
@@ -13,6 +13,8 @@ fetch() {
 	cp ../alpine-tls.patch .
 	cp ../LICENSE .
 	cd $pkgname-$pkgver
+	sed -i "s|, 'rust_std=2021'||" meson.build
+	sed -i 's|if not have_mtls_dialect|if false|' meson.build
 #	patch -p1 < ../alpine-tls.patch
 }
 
@@ -21,7 +23,7 @@ _gallium_drivers=""
 _vulkan_drivers=""
 case $ARCH in
 	x86_64)
-		_gallium_drivers="radeonsi"
+		_gallium_drivers="zink"
 		_vulkan_drivers="amd"
 		;;
 
@@ -34,41 +36,42 @@ esac
 
 build() {
 	cd $pkgname-$pkgver
-	cd build
 	echo "dri drivers: "$_dri_drivers
 	echo "gallium drivers: "$_gallium_drivers
 	echo "vulkan drivers: "$_vulkan_drivers
 
-	meson .. \
-		--prefix=/usr \
-		--libdir=lib \
-		-Dplatforms=wayland \
-		-Ddri3=true \
-		-Dgallium-drivers=$_gallium_drivers \
-		-Dgallium-vdpau=false \
-		-Dgallium-omx=disabled \
-		-Dgallium-va=false \
-		-Dgallium-nine=false \
-		-Dgallium-opencl=disabled \
-		-Dvulkan-drivers=$_vulkan_drivers \
-		-Dshared-glapi=enabled \
-		-Dgles1=disabled \
-		-Dgles2=enabled \
-		-Dopengl=true \
-		-Dgbm=true \
-		-Dglx=disabled \
-		-Dglvnd=true \
-		-Degl=true \
-		-Dllvm=true \
-		-Dshared-llvm=true \
-		-Dvalgrind=false \
-		-Dlibunwind=false \
-		-Dlmsensors=false \
-		-Dbuild-tests=false \
-		-Db_ndebug=true \
-		-Dcpp_rtti=false
+	muon setup \
+		-D warning_level=0 \
+		-D prefix=/usr \
+		-D libdir=lib \
+		-D platforms=wayland \
+		-D dri3=true \
+		-D gallium-drivers=$_gallium_drivers \
+		-D gallium-vdpau=false \
+		-D gallium-omx=disabled \
+		-D gallium-va=false \
+		-D gallium-nine=false \
+		-D gallium-opencl=disabled \
+		-D vulkan-drivers=$_vulkan_drivers \
+		-D shared-glapi=enabled \
+		-D gles1=disabled \
+		-D gles2=enabled \
+		-D opengl=true \
+		-D gbm=true \
+		-D glx=disabled \
+		-D glvnd=true \
+		-D egl=true \
+		-D llvm=disabled \
+		-D shared-llvm=true \
+		-D valgrind=false \
+		-D libunwind=false \
+		-D lmsensors=false \
+		-D build-tests=false \
+		-D b_ndebug=true \
+		-D cpp_rtti=false \
+		build
 
-	samu
+	samu -C build
 
 #	NEEDED IF NOT USING A PATCHED BYACC
 #	OR BYACC >= 20210328
@@ -79,8 +82,7 @@ build() {
 
 package() {
 	cd $pkgname-$pkgver
-	cd build
-	DESTDIR=$pkgdir samu install
+	DESTDIR=$pkgdir muon -C build install
 }
 
 package_dev() {
