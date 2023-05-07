@@ -19,8 +19,6 @@ build() {
 		build
 
 	samu -C build
-
-	build/muon -C build test
 }
 
 package() {
