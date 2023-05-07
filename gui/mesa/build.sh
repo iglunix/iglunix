@@ -23,14 +23,14 @@ _gallium_drivers=""
 _vulkan_drivers=""
 case $ARCH in
 	x86_64)
-		_gallium_drivers="zink"
-		_vulkan_drivers="amd"
+		_gallium_drivers="nouveau,zink,crocus,i915,iris"
+		_vulkan_drivers="amd,intel,intel_hasvk"
 		;;
 
 	aarch64)
 		_dri_drivers=""
 		_gallium_drivers="vc4,v3d,zink"
-		_vulkan_drivers="broadcom"
+		_vulkan_drivers="broadcom,panfrost,freedreno"
 		;;
 esac
 
