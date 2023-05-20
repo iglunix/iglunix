@@ -22,3 +22,10 @@ sh -e -x $IGLUPKG f
 cd $BASE
 
 sudo chroot ./sysroot /build/scripts/check_builds_chroot.sh "$1"
+
+if [ -e ~/.ssh/mirror.key ]
+then
+	scp -i ~/.ssh/mirror.key \
+	"$1"/out/*.tar.zst \
+	root@mirror.iglunix.org:/srv/http/mirror/x86_64/$(basename "$1").tar.zst
+fi

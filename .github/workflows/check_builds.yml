@@ -7,8 +7,12 @@ jobs:
       - uses: actions/checkout@v3
       - name: Out of date
         run: |
+          mkdir -p ~/.ssh/
+          echo "$SSH_PRIVATE_KEY" > ~/.ssh/mirror.key
+          sudo chmod 600 ~/.ssh/mirror.key
           ./scripts/fetch_autobuild.sh
           ./scripts/setup_sysroot.sh
           ./scripts/check_builds.sh base/byacc
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SSH_PRIVATE_KEY: ${{secrets.SSH_PRIVATE_KEY}}
