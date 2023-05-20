@@ -12,7 +12,7 @@ jobs:
           sudo chmod 600 ~/.ssh/mirror.key
           ./scripts/fetch_autobuild.sh
           ./scripts/setup_sysroot.sh
-          ./scripts/check_builds.sh base/byacc
+          ./scripts/check_builds.sh base/om4
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SSH_PRIVATE_KEY: ${{secrets.SSH_PRIVATE_KEY}}
