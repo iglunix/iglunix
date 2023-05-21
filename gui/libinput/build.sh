@@ -1,6 +1,6 @@
 pkgname=libinput
 pkgver=1.22.1
-mkdeps="samurai:muon"
+mkdeps="samurai:muon:pkgconf"
 deps="mtdev:libevdev"
 
 fetch() {
