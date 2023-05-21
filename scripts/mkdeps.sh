@@ -13,7 +13,7 @@ fi
 . ./$1/build.sh
 
 {
-	base_deps="linux musl mksh toybox busybox libcxx libunwind llvm compiler-rt"
+	base_deps="linux musl mksh toybox busybox libcxx llvm compiler-rt"
 	printf "%s\n" $base_deps
 
 	IFS=: set -- $mkdeps
