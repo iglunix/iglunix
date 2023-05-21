@@ -26,11 +26,11 @@ jobs:
           exit 0
           fi
           cat ood.list
-          ./scripts/fetch_autobuild.sh
-          ./scripts/setup_sysroot.sh
+          # ./scripts/fetch_autobuild.sh
           for pkg in $(cat ood.list)
           do
           ./scripts/updatever.sh $(dirname $pkg) $(basename $pkg)
+          ./scripts/setup_sysroot.sh $pkg
           if ./scripts/check_builds.sh $pkg
           then
           git add $pkg/build.sh
