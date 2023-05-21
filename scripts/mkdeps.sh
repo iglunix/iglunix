@@ -17,7 +17,14 @@ fi
 	printf "%s\n" $base_deps
 
 	IFS=: set -- $mkdeps
-	printf "%s\n" $@
+	if [ ! -z "$1" ]
+	then
+		printf "%s\n" $@
+	fi
+
 	IFS=: set -- $deps
-	printf "%s\n" $@
+	if [ ! -z "$1" ]
+	then
+		printf "%s\n" $@
+	fi
 } | sort | uniq
