@@ -1,5 +1,5 @@
 pkgname=libinput
-pkgver=1.22.1
+pkgver=1.23.0
 mkdeps="samurai:muon:pkgconf"
 deps="mtdev:libevdev:libudev-zero"
 
