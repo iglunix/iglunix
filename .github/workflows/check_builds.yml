@@ -16,8 +16,8 @@ jobs:
           sudo ln -s bsdtar /usr/bin/tar
           tar --version
           # ./scripts/fetch_autobuild.sh
-          ./scripts/setup_sysroot.sh base/libunwind
-          ./scripts/check_builds.sh base/libunwind
+          ./scripts/setup_sysroot.sh base/cmake
+          ./scripts/check_builds.sh base/cmake
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SSH_PRIVATE_KEY: ${{secrets.SSH_PRIVATE_KEY}}
