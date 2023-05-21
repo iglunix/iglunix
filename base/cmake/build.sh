@@ -14,13 +14,15 @@ fetch() {
 build() {
 	cd $pkgname-$pkgver
 	if [ -z "$WITH_CROSS" ]; then
+		printf 'set (CMAKE_USE_OPENSSL OFF CACHE BOOL "Use OpenSSL." FORCE)\n' > init.cmake
 		./bootstrap \
 			--prefix=/usr \
 			--mandir=/share/man \
 			--datadir=/share/$pkgname \
 			--docdir=/share/doc/$pkgname \
 			--generator=Ninja \
-			--no-system-libs
+			--no-system-libs \
+			--init=init.cmake
 	else
 		mkdir -p build
 		cd build
