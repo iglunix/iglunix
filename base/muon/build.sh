@@ -1,5 +1,6 @@
 pkgname=muon
 pkgver=0.2.0
+mkdeps=samurai
 deps=pkgconf
 
 fetch() {
