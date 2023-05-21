@@ -16,8 +16,10 @@ jobs:
           sudo ln -s bsdtar /usr/bin/tar
           tar --version
           # ./scripts/fetch_autobuild.sh
-          ./scripts/setup_sysroot.sh base/bmake
-          ./scripts/check_builds.sh base/bmake
+          ./scripts/setup_sysroot.sh gui/libevdev
+          ./scripts/check_builds.sh gui/libevdev
+          ./scripts/setup_sysroot.sh gui/mtdev
+          ./scripts/check_builds.sh gui/mtdev
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SSH_PRIVATE_KEY: ${{secrets.SSH_PRIVATE_KEY}}
