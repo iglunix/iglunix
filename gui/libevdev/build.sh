@@ -1,6 +1,6 @@
 pkgname=libevdev
 pkgver=1.13.1
-mkdeps="samurai:muon"
+mkdeps="samurai:muon:pkgconf"
 
 fetch() {
 	curl "https://www.freedesktop.org/software/libevdev/libevdev-$pkgver.tar.xz" -o $pkgname-$pkgver.tar.xz
