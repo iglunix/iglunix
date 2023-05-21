@@ -71,3 +71,4 @@ $CV base zlib-ng 2>/dev/null
 $CV base mandoc 2>/dev/null
 
 $CV gui libudev-zero 2>/dev/null
+$CV gui libevdev 2>/dev/null
