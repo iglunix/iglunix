@@ -1,18 +1,20 @@
 #!/bin/sh -e
 
-if [ ! -f pkgs.tar.zst ]
-then
-	printf 'ERROR: must download pkgs.tar.zst first'
-	false
-fi
+MIRROR=https://mirror.iglunix.org/$(uname -m)
 
+mkdir -p cache
+
+rm -rf sysroot
 mkdir -p sysroot
 
-for pkg in $(tar -tf pkgs.tar.zst)
+for dep in $(./scripts/mkdeps.sh "$1")
 do
-	tar -C /tmp -xf pkgs.tar.zst $pkg
-	tar -xf /tmp/$pkg -C sysroot
-	rm -f /tmp/$pkg
+	if [ ! -e cache/$dep.tar.zst ]
+	then
+		curl $MIRROR/$dep.tar.zst -o cache/$dep.tar.zst
+	fi
+
+	tar -xf cache/$dep.tar.zst -C sysroot
 done
 
 mkdir -p sysroot/tmp

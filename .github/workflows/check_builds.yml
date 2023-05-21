@@ -11,8 +11,8 @@ jobs:
           echo "$SSH_PRIVATE_KEY" > ~/.ssh/mirror.key
           sudo chmod 600 ~/.ssh/mirror.key
           echo "$SSH_KNOWN_HOST" > ~/.ssh/known_hosts
-          ./scripts/fetch_autobuild.sh
-          ./scripts/setup_sysroot.sh
+          # ./scripts/fetch_autobuild.sh
+          ./scripts/setup_sysroot.sh base/om4
           ./scripts/check_builds.sh base/om4
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
