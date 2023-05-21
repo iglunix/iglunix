@@ -13,6 +13,7 @@ build() {
 	cd $pkgname-$pkgver
 	muon setup \
 		-Dbuildtype=release \
+		-Ddefault_library=shared \
 		-Dprefix=/usr \
 		-Dlibwacom=false \
 		-Ddocumentation=false \
