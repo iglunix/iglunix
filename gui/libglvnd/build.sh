@@ -1,5 +1,5 @@
 pkgname=libglvnd
-pkgver=1.5.0
+pkgver=1.6.0
 mkdeps=samurai:muon:pkgconf:python
 
 fetch() {
