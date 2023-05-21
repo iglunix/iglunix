@@ -1,5 +1,6 @@
 pkgname=libevdev
-pkgver=1.13.0
+pkgver=1.13.1
+mkdeps="samurai:muon"
 
 fetch() {
 	curl "https://www.freedesktop.org/software/libevdev/libevdev-$pkgver.tar.xz" -o $pkgname-$pkgver.tar.xz
@@ -9,14 +10,14 @@ fetch() {
 
 build() {
 	cd $pkgname-$pkgver
-	cd build
-	meson .. \
-		--buildtype=release \
-		--prefix=/usr \
-		--libexecdir=lib \
+	muon setup \
+		-Dbuildtype=release \
+		-Dprefix=/usr \
+		-Dlibexecdir=lib \
 		-Dtests=disabled \
-		-Ddocumentation=disabled
-	samu
+		-Ddocumentation=disabled \
+		build
+	samu -C build
 }
 
 backup() {
@@ -25,8 +26,7 @@ backup() {
 
 package() {
 	cd $pkgname-$pkgver
-	cd build
-	DESTDIR=$pkgdir samu install
+	DESTDIR=$pkgdir muon -C build install
 }
 
 license() {
