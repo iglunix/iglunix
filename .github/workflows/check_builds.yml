@@ -16,6 +16,8 @@ jobs:
           sudo ln -s bsdtar /usr/bin/tar
           tar --version
           # ./scripts/fetch_autobuild.sh
+          ./scripts/setup_sysroot.sh base/muon
+          ./scripts/check_builds.sh base/muon
           ./scripts/setup_sysroot.sh gui/libevdev
           ./scripts/check_builds.sh gui/libevdev
           ./scripts/setup_sysroot.sh gui/mtdev
