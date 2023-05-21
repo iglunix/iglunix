@@ -3,8 +3,16 @@
 MIRROR=https://mirror.iglunix.org/$(uname -m)
 
 mkdir -p cache
+if [ -e sysroot ]
+then
+	sudo umount sysroot/tmp
+	sudo umount sysroot/proc
+	sudo umount sysroot/sys
+	sudo umount sysroot/dev
+	sudo umount sysroot/build
+	rm -rf sysroot
+fi
 
-rm -rf sysroot
 mkdir -p sysroot
 
 for dep in $(./scripts/mkdeps.sh "$1")
