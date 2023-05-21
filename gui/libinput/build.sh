@@ -1,5 +1,5 @@
 pkgname=libinput
-pkgver=1.23.0
+pkgver=1.22.1
 mkdeps="samurai:muon:pkgconf"
 deps="mtdev:libevdev:libudev-zero"
 
@@ -15,6 +15,7 @@ build() {
 		-Dbuildtype=release \
 		-Ddefault_library=shared \
 		-Dprefix=/usr \
+		-Dlibexecdir=lib \
 		-Dlibwacom=false \
 		-Ddocumentation=false \
 		-Ddebug-gui=false \
