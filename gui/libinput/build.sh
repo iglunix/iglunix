@@ -1,9 +1,10 @@
 pkgname=libinput
 pkgver=1.22.1
+mkdeps="samurai:muon"
 deps="mtdev:libevdev"
 
 fetch() {
-	curl "https://gitlab.freedesktop.org/libinput/libinput/-/archive/1.22.1/libinput-$pkgver.tar.gz" -o $pkgname-$pkgver.tar.xz
+	curl "https://gitlab.freedesktop.org/libinput/libinput/-/archive/$pkgver/libinput-$pkgver.tar.gz" -o $pkgname-$pkgver.tar.xz
 	tar -xf $pkgname-$pkgver.tar.xz
 	mkdir $pkgname-$pkgver/build
 }
