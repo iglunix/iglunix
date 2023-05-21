@@ -1,10 +1,11 @@
 pkgname=libglvnd
-pkgver=master
+pkgver=1.5.0
 mkdeps=samurai:muon:pkgconf
 
 fetch() {
-	curl -L "https://github.com/NVIDIA/libglvnd/archive/refs/heads/master.tar.gz" -o $pkgname-$pkgver.tar.xz
-	tar -xf $pkgname-$pkgver.tar.xz
+	curl -L "https://gitlab.freedesktop.org/glvnd/libglvnd/-/archive/v$pkgver/libglvnd-v$pkgver.tar.gz" -o $pkgname-$pkgver.tar.gz
+	tar -xf $pkgname-$pkgver.tar.gz
+	mv $pkgname-v$pkgver $pkgname-$pkgver
 	mkdir $pkgname-$pkgver/build
 	cd $pkgname-$pkgver
 	sed -i "s|if not gl_dispatch_type.endswith('_tls')|if false|" meson.build
