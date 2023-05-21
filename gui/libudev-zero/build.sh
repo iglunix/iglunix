@@ -1,5 +1,5 @@
 pkgname=libudev-zero
-pkgver=1.0.1
+pkgver=1.0.2
 mkdeps=bmake
 
 fetch() {
