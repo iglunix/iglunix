@@ -23,6 +23,11 @@ cd $BASE
 
 sudo chroot ./sysroot /build/scripts/check_builds_chroot.sh "$1"
 
+if [ -e "$1"/out/*.tar ]
+then
+	zstd --ultra -22 "$1"/out/*.tar
+fi
+
 if [ -e ~/.ssh/mirror.key ]
 then
 	scp -i ~/.ssh/mirror.key \
