@@ -1,5 +1,7 @@
 pkgname=mtdev
 pkgver=1.1.6
+mkdeps=bmake
+deps=
 
 fetch() {
 	curl "http://bitmath.org/code/mtdev/mtdev-$pkgver.tar.gz" -o $pkgname-$pkgver.tar.xz
