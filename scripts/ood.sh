@@ -73,3 +73,4 @@ $CV base mandoc 2>/dev/null
 $CV gui libudev-zero 2>/dev/null
 $CV gui libevdev 2>/dev/null
 $CV gui mtdev 2>/dev/null
+$CV gui libinput 2>/dev/null
