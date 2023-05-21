@@ -1,7 +1,7 @@
 pkgver=master
 pkgname=om4
 pkgrel=1
-mkdeps="bmake"
+mkdeps="bmake:byacc"
 deps="musl"
 bad=""
 ext="doc"
