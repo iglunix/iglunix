@@ -1,5 +1,6 @@
 pkgname=libudev-zero
 pkgver=1.0.1
+mkdeps=bmake
 
 fetch() {
 	curl -L "https://github.com/illiliti/libudev-zero/archive/$pkgver.tar.gz" -o $pkgname-$pkgver.tar.xz
