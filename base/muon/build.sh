@@ -1,5 +1,6 @@
 pkgname=muon
 pkgver=0.2.0
+deps=pkgconf
 
 fetch() {
 	curl -L "https://git.sr.ht/~lattis/muon/archive/$pkgver.tar.gz" -o $pkgname-$pkgver.tar.gz
