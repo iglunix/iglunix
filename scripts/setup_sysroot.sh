@@ -1,4 +1,4 @@
-#!/bin/sh -e
+#!/bin/sh -ex
 
 MIRROR=https://mirror.iglunix.org/$(uname -m)
 
