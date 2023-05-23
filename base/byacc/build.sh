@@ -6,7 +6,7 @@ bad=""
 auto_cross
 
 fetch() {
-	curl "ftp://ftp.invisible-island.net/byacc/byacc-$pkgver.tgz" -O
+	curl -O "https://invisible-island.net/archives/byacc/byacc-$pkgver.tgz"
 	tar -xf $pkgname-$pkgver.tgz
 	# Merged upstream; Don't need
 #	cp ../reader-mesa.patch .
