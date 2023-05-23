@@ -75,3 +75,6 @@ $CV gui libevdev 2>/dev/null
 $CV gui mtdev 2>/dev/null
 $CV gui libinput 2>/dev/null
 $CV gui libglvnd 2>/dev/null
+
+$CV gui wayland 2>/dev/null
+$CV gui wayland-protocols 2>/dev/null
