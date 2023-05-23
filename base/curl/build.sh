@@ -2,7 +2,7 @@ pkgver=8.1.0
 pkg_ver=$(echo $pkgver | tr '.' '_')
 pkgname=curl
 pkgrel=1
-mkdeps=""
+mkdeps="bmake"
 deps="openssl"
 bad=""
 auto_cross
@@ -18,8 +18,7 @@ build() {
 		--build=$HOST_TRIPLE \
 		--host=$TRIPLE \
 		--with-openssl \
-		--with-ca-bundle=/etc/ssl/cert.pem \
-		--disable-dependency-tracking
+		--with-ca-bundle=/etc/ssl/cert.pem
 	make
 }
 
