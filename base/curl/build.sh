@@ -18,7 +18,8 @@ build() {
 		--build=$HOST_TRIPLE \
 		--host=$TRIPLE \
 		--with-openssl \
-		--with-ca-bundle=/etc/ssl/cert.pem
+		--with-ca-bundle=/etc/ssl/cert.pem \
+		--disable-dependency-tracking
 	make
 }
 
