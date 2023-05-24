@@ -16,6 +16,8 @@ jobs:
           sudo ln -s bsdtar /usr/bin/tar
           tar --version
           # ./scripts/fetch_autobuild.sh
+          ./scripts/setup_sysroot.sh extra/expat
+          ./scripts/check_builds.sh extra/expat
           ./scripts/setup_sysroot.sh gui/wayland
           ./scripts/check_builds.sh gui/wayland
           ./scripts/setup_sysroot.sh gui/wayland-protocols
