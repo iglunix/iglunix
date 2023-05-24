@@ -1,6 +1,6 @@
 pkgname=wayland
 pkgver=1.21.0
-mkdeps=muon:samurai:pkgconf
+mkdeps=muon:samurai:pkgconf:python
 deps=libffi:expat
 
 fetch() {
