@@ -16,12 +16,10 @@ jobs:
           sudo ln -s bsdtar /usr/bin/tar
           tar --version
           # ./scripts/fetch_autobuild.sh
-          ./scripts/setup_sysroot.sh base/muon
-          ./scripts/check_builds.sh base/muon
-          ./scripts/setup_sysroot.sh gui/libevdev
-          ./scripts/check_builds.sh gui/libevdev
-          ./scripts/setup_sysroot.sh gui/mtdev
-          ./scripts/check_builds.sh gui/mtdev
+          ./scripts/setup_sysroot.sh gui/wayland
+          ./scripts/check_builds.sh gui/wayland
+          ./scripts/setup_sysroot.sh gui/wayland-protocols
+          ./scripts/check_builds.sh gui/wayland-protocols
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SSH_PRIVATE_KEY: ${{secrets.SSH_PRIVATE_KEY}}
