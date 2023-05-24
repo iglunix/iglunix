@@ -49,8 +49,8 @@ $CV base libffi 2>/dev/null
 # mksh versions are not integers
 # $CV base mksh 2>/dev/null
 
+$CV base netbsd-curses 2>/dev/null
 # uses branch name
-# $CV base netbsd-curses 2>/dev/null
 # $CV base om4 2>/dev/null
 
 # non numeric name
