@@ -1,7 +1,7 @@
 pkgname=wayland
 pkgver=1.21.0
 mkdeps=muon:samurai:pkgconf
-deps=libffi
+deps=libffi:expat
 
 fetch() {
 	curl -L "https://gitlab.freedesktop.org/wayland/wayland/-/releases/$pkgver/downloads/wayland-$pkgver.tar.xz" -o $pkgname-$pkgver.tar.xz
