@@ -1,6 +1,7 @@
 pkgname=wayland-protocols
 pkgver=1.31
-deps="musl:pkgconf:wayland"
+mkdeps="muon:samurai:pkgconf"
+deps="musl:wayland"
 
 fetch() {
 	curl -L "https://gitlab.freedesktop.org/wayland/wayland-protocols/-/releases/$pkgver/downloads/wayland-protocols-$pkgver.tar.xz" -o $pkgname-$pkgver.tar.xz
@@ -10,18 +11,19 @@ fetch() {
 
 build() {
 	cd $pkgname-$pkgver
-    cd build
-	meson .. \
-		--buildtype=release \
-		--prefix=/usr \
-		--libexecdir=lib
-	samu
+	muon setup \
+		-Dbuildtype=release \
+		-Dprefix=/usr \
+		-Dlibexecdir=lib \
+		-Ddefault_library=shared \
+		-Dtests=false \
+		build
+	samu -C build
 }
 
 package() {
 	cd $pkgname-$pkgver
-	cd build
-	DESTDIR=$pkgdir samu install
+	DESTDIR=$pkgdir muon -C build install
 }
 
 backup() {
