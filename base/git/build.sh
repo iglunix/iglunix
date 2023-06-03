@@ -2,7 +2,7 @@ pkgver=2.40.1
 pkgname=git
 pkgrel=1
 mkdeps="zlib-ng:curl:bad:gmake"
-deps="zlib-ng:curl"
+deps="zlib-ng:curl:openssl"
 bad="gmake"
 ext="doc"
 
