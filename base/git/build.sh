@@ -1,7 +1,7 @@
 pkgver=2.40.1
 pkgname=git
 pkgrel=1
-mkdeps="zlib-ng:curl:gmake"
+mkdeps="zlib-ng:curl:bad:gmake"
 deps="zlib-ng:curl"
 bad="gmake"
 ext="doc"
