@@ -1,5 +1,7 @@
 pkgname=openssl
 pkgver=3.1.0
+mkdeps=perl:bmake
+deps=
 ext="dev"
 auto_cross
 
