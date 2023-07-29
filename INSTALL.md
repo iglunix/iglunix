@@ -22,7 +22,7 @@ dd if=build/iglunix.img of=/dev/sdX bs=64M
 
 ## Disk Partitioning
 Iglunix recommends a two partition layout with an MBR partition table, a FAT
-formatted boot partition and an EXT4 formated root partition. The following
+formatted boot partition and an EXT4 formatted root partition. The following
 is a guide on how to do it where `/dev/disk` is the target install disk.
 ```
 fdisk /dev/disk
