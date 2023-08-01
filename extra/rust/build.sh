@@ -44,40 +44,43 @@ fetch() {
 build() {
 	cd $pkgname-$pkgver
     #	--tools="cargo,rls,rustfmt,src" \
-	OPENSSL_LIB_DIR=/usr/lib/ ./configure \
-		--build="$TRIPLE" \
-		--host="$TRIPLE" \
-		--target="$TRIPLE" \
-		--prefix="/usr" \
-		--musl-root="/usr" \
-		--release-channel="nightly" \
-		--enable-local-rust \
-		--local-rust-root=$RUSTROOT \
-		--disable-docs \
-		--enable-extended \
-		--tools="cargo,rustfmt,rls,src" \
-		--enable-vendor \
-		--disable-locked-deps \
-		--enable-option-checking \
-		--python="python" \
-		--llvm-root="/usr" \
-		--llvm-libunwind="system" \
-		--enable-llvm-link-shared \
-		--set="llvm.use-libcxx" \
-		--set="target.$TRIPLE.llvm-config=/usr/bin/llvm-config" \
-		--set="rust.musl-root=/usr" \
-		--set="target.$TRIPLE.musl-root=/usr" \
-		--set="target.$TRIPLE.crt-static=false" \
-		--set="target.$TRIPLE.cc=cc" \
-		--set="target.$TRIPLE.cxx=c++" \
-		--set="target.$TRIPLE.ar=ar" \
-		--set="target.$TRIPLE.linker=cc" \
-		--set="target.$TRIPLE.crt-static=false" \
-		--set="target.$TRIPLE.cc=cc" \
-		--set="target.$TRIPLE.cxx=c++" \
-		--set="target.$TRIPLE.ar=ar" \
-		--set="target.$TRIPLE.linker=cc" \
-		--disable-llvm-static-stdcpp
+	if [ ! -e config.toml ]
+	then
+		OPENSSL_LIB_DIR=/usr/lib/ ./configure \
+			--build="$TRIPLE" \
+			--host="$TRIPLE" \
+			--target="$TRIPLE" \
+			--prefix="/usr" \
+			--musl-root="/usr" \
+			--release-channel="nightly" \
+			--enable-local-rust \
+			--local-rust-root=$RUSTROOT \
+			--disable-docs \
+			--enable-extended \
+			--tools="cargo,rustfmt,rls,src" \
+			--enable-vendor \
+			--disable-locked-deps \
+			--enable-option-checking \
+			--python="python" \
+			--llvm-root="/usr" \
+			--llvm-libunwind="system" \
+			--enable-llvm-link-shared \
+			--set="llvm.use-libcxx" \
+			--set="target.$TRIPLE.llvm-config=/usr/bin/llvm-config" \
+			--set="rust.musl-root=/usr" \
+			--set="target.$TRIPLE.musl-root=/usr" \
+			--set="target.$TRIPLE.crt-static=false" \
+			--set="target.$TRIPLE.cc=cc" \
+			--set="target.$TRIPLE.cxx=c++" \
+			--set="target.$TRIPLE.ar=ar" \
+			--set="target.$TRIPLE.linker=cc" \
+			--set="target.$TRIPLE.crt-static=false" \
+			--set="target.$TRIPLE.cc=cc" \
+			--set="target.$TRIPLE.cxx=c++" \
+			--set="target.$TRIPLE.ar=ar" \
+			--set="target.$TRIPLE.linker=cc" \
+			--disable-llvm-static-stdcpp
+	fi
 
 	sed 's/#deny-warnings = .*/deny-warnings = false/' -i config.toml
 #	sed 's|deny(warnings,|deny(|' -i src/bootstrap/lib.rs
