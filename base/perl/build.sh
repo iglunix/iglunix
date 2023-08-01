@@ -1,5 +1,7 @@
 pkgname=perl
 pkgver=5.36.1
+mkdeps="bmake"
+deps="musl"
 
 fetch() {
 	curl "https://www.cpan.org/src/5.0/perl-$pkgver.tar.gz" -o $pkgname-$pkgver.tar.xz
