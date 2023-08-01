@@ -1,5 +1,7 @@
 pkgname=dhcpcd
 pkgver=10.0.1
+mkdeps="bmake"
+deps="musl"
 
 fetch() {
 	curl -LO "https://github.com/NetworkConfiguration/dhcpcd/releases/download/v$pkgver/dhcpcd-$pkgver.tar.xz"
