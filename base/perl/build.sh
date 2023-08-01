@@ -1,5 +1,5 @@
 pkgname=perl
-pkgver=5.36.1
+pkgver=5.38.0
 mkdeps="bmake"
 deps="musl"
 
