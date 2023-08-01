@@ -10,16 +10,18 @@ fetch() {
 
 build() {
 	cd $pkgname-$pkgver
-	cd build
-	CFLAGS="$CFLAGS -Wunused-but-set-variable" meson .. \
-		--buildtype=release \
-		--prefix=/usr \
-		--libexecdir=lib \
+	CFLAGS="$CFLAGS -Wunused-but-set-variable" muon setup \
+		-Dbuildtype=release \
+		-Dprefix=/usr \
+		-Dlibexecdir=lib \
+		-Ddefault_library=shared \
 		-Dglib=disabled \
 		-Dgobject=disabled \
-		-Dicu=enabled
+		-Dicu=enabled \
+		-Dgraphite2=enabled \
+		build
 
-	samu
+	samu -C build
 }
 
 backup() {
@@ -27,8 +29,7 @@ backup() {
 
 package() {
 	cd $pkgname-$pkgver
-	cd build
-	DESTDIR=$pkgdir samu install
+	DESTDIR=$pkgdir muon -C build install
 }
 
 license() {
