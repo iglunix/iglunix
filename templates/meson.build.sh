@@ -9,22 +9,24 @@ fetch() {
 
 build() {
 	cd $pkgname-$pkgver
-	cd build
-	meson .. \
-		--buildtype=release \
-		--prefix=/usr \
-		--libexecdir=lib
-	samu
+	muon setup build \
+		-Dbuildtype=release \
+		-Dprefix=/usr \
+		-Dlibexecdir=lib
+	samu -C
 }
 
 package() {
 	cd $pkgname-$pkgver
-	cd build
-	DESTDIR=$pkgdir samu install
+	DESTDIR=$pkgdir muon -C build install
 }
 
 license() {
 	cd $pkgname-$pkgver
 	cat LICENSE
 #	cat COPYING
+}
+
+backup() {
+
 }
