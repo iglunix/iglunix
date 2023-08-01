@@ -1,7 +1,7 @@
 pkgver=20230622
 pkgname=bmake
 mkdeps=""
-deps=""
+deps="musl"
 auto_cross
 
 fetch() {
@@ -9,8 +9,8 @@ fetch() {
 	tar -xf $pkgname-$pkgver.tar.gz
 	mv $pkgname $pkgname-$pkgver
 	cd $pkgname-$pkgver
-	patch ./boot-strap < ../../no-test.patch
-	patch ./install-sh < ../../install.patch
+	sed -e '/Bmake test/d' boot-strap > _
+	mv _ boot-strap
 }
 
 build() {
