@@ -6,13 +6,9 @@ All build scripts are 0BSD Licensed.
 To create an ISO from a non-iglunix OS please see https://github.com/iglunix/iglunix-autobuild
 
 ## Is this GNU/Linux
-No, GNU currently contributes roughly 10 MiB of code in the base system whilst,
-LLVM and Linux both contribute approximately 1 GiB each. Instead we suggest that
-one should refer to Iglunix running on the Linux kernel as LLVM/Musl/Linux.
-LLVM and Linux because they are the two largest packages and make up the
-majority of the base system, and Musl to be explicit about the C library,
-target triple and to differentiate it from any system using LLVM's libc
-(which will may very well likely use in the future).
+No. We currently only have one GNU package in the whole system: GNU Make.
+Iglunix has the least possible software for any self hosting Linux distribution.
+In the future, with a rewrite of GNU Make, we will have no GNU software at all.
 
 ## Installation
 See [INSTALL.md](INSTALL.md)
