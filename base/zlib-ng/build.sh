@@ -25,6 +25,7 @@ build() {
 		-DCMAKE_INSTALL_PREFIX=$PREFIX \
 		-DCMAKE_INSTALL_LIBDIR=lib \
 		-DZLIB_COMPAT=ON \
+		-DZLIB_ENABLE_TESTS=OFF \
 		$cmake_extra_flags
 
 	samu
