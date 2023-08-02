@@ -15,13 +15,20 @@
 # OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
 pkgname=rust
-pkgver=beta
+pkgver=1.71.0
+mkdeps="rust"
+deps="llvm:musl:libcxx:libunwind:openssl:zlib-ng"
 
 _clear_vendor_checksums() {
 	sed -i 's/\("files":{\)[^}]*/\1/' vendor/$1/.cargo-checksum.json
 }
 
-export RUSTROOT="/opt/rust"
+if [ -d /opt/rust/bin ]
+then
+	export RUSTROOT="/opt/rust"
+else
+	export RUSTROOT="/usr"
+fi
 
 fetch() {
 	curl "https://static.rust-lang.org/dist/rustc-$pkgver-src.tar.gz" -o $pkgname-$pkgver.tar.xz
@@ -35,9 +42,20 @@ fetch() {
 	patch -p1 < ../alpine-crt.patch
 	# patch -p1 < ../libexec.patch
 	patch -p1 < ../fix-curl.patch
+	patch -p1 < ../lfs64-rust.patch
+
+	patch -p1 -d vendor/getrandom-0.2.8 < ../lfs64-getrandom.patch
+
+	for dir in vendor/libc*
+	do
+		_clear_vendor_checksums ${dir##vendor/}
+		patch -p1 -d $dir < ../lfs64-libc.patch
+	done
+
 
 	sed -i /LD_LIBRARY_PATH/d src/bootstrap/bootstrap.py
 	_clear_vendor_checksums curl
+	_clear_vendor_checksums getrandom-0.2.8
 	_clear_vendor_checksums curl-sys
 }
 
