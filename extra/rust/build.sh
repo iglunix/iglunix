@@ -16,7 +16,7 @@
 
 pkgname=rust
 pkgver=1.71.0
-mkdeps="rust:python"
+mkdeps="rust:python:pkgconf"
 deps="llvm:musl:libcxx:libunwind:openssl:zlib-ng"
 
 _clear_vendor_checksums() {
