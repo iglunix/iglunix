@@ -16,10 +16,8 @@ jobs:
           sudo ln -s bsdtar /usr/bin/tar
           tar --version
           # ./scripts/fetch_autobuild.sh
-          ./scripts/setup_sysroot.sh base/llvm
-          ./scripts/check_builds.sh base/llvm
-          # ./scripts/setup_sysroot.sh extra/rust
-          # ./scripts/check_builds.sh extra/rust
+          ./scripts/setup_sysroot.sh extra/rust
+          ./scripts/check_builds.sh extra/rust
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SSH_PRIVATE_KEY: ${{secrets.SSH_PRIVATE_KEY}}
