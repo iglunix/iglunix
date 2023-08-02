@@ -25,6 +25,8 @@ $CV base dhcpcd 2>/dev/null
 
 $CV base git 2>/dev/null
 
+$CV base hwdata 2>/dev/null
+
 # uses branch name
 # $CV base iglunix 2>/dev/null
 # $CV base iglupkg 2>/dev/null
