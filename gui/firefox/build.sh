@@ -1,6 +1,10 @@
 pkgname=firefox
-pkgver=109.0
+pkgver=116.0
 mkdeps="cbindgen:rust"
+
+_clear_vendor_checksums() {
+	sed -i 's/\("files":{\)[^}]*/\1/' third_party/rust/$1/.cargo-checksum.json
+}
 
 fetch() {
 	#curl "https://ftp.mozilla.org/pub/firefox/releases/${pkgver}esr/source/firefox-${pkgver}esr.source.tar.xz" -o $pkgname-$pkgver.tar.xz
@@ -10,10 +14,13 @@ fetch() {
 	cd $pkgname-$pkgver
 	# patch -p1 < ../../no-x11.patch
 	# patch -p1 < ../../fix-clang-as.patch
-	patch -p1 < ../../avoid-redefinition.patch
-	patch -p1 < ../../libcxx.patch
+	# patch -p1 < ../../avoid-redefinition.patch
+	# patch -p1 < ../../libcxx.patch
 	# patch -p1 < ../../grefptr.patch
 	patch -p1 < ../../sandbox-allow-select.patch
+	patch -p1 < ../../audio-lfs64.patch
+
+	_clear_vendor_checksums audio_thread_priority
 	# patch -p1 < ../../sandbox-fork.patch
 	# patch -p1 < ../../sandbox-sched.patch
 }
@@ -37,7 +44,8 @@ ac_add_options --enable-strip
 ac_add_options --enable-release
 ac_add_options --enable-rust-simd
 ac_add_options --enable-install-strip
-ac_add_options --enable-official-branding
+ac_add_options --with-branding=browser/branding/nightly
+ac_add_options --enable-update-channel=nightly
 ac_add_options --enable-application=browser
 ac_add_options --enable-optimize="-O3 -w"
 ac_add_options --without-system-libvpx
