@@ -52,7 +52,7 @@ fetch() {
 		patch -p1 -d $dir < ../lfs64-libc.patch
 	done
 
-
+	sed -i '/config.check_build_rustc_version();/d' src/bootstrap/lib.rs
 	sed -i /LD_LIBRARY_PATH/d src/bootstrap/bootstrap.py
 	_clear_vendor_checksums curl
 	_clear_vendor_checksums getrandom-0.2.8
