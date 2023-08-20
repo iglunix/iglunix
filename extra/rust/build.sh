@@ -43,6 +43,7 @@ fetch() {
 	# patch -p1 < ../libexec.patch
 	patch -p1 < ../fix-curl.patch
 	patch -p1 < ../lfs64-rust.patch
+	patch -p1 < ../offset.patch
 
 	patch -p1 -d vendor/getrandom-0.2.8 < ../lfs64-getrandom.patch
 
@@ -70,7 +71,7 @@ build() {
 			--target="$TRIPLE" \
 			--prefix="/usr" \
 			--musl-root="/usr" \
-			--release-channel="nightly" \
+			--release-channel="stable" \
 			--enable-local-rust \
 			--local-rust-root=$RUSTROOT \
 			--disable-docs \
