@@ -1,0 +1,21 @@
+--- a/library/core/src/intrinsics.rs
++++ b/library/core/src/intrinsics.rs
+@@ -1425,18 +1425,10 @@
+     /// returned value will result in undefined behavior.
+     ///
+     /// The stabilized version of this intrinsic is [`pointer::offset`].
+-    #[cfg(not(bootstrap))]
+     #[must_use = "returns a new pointer rather than modifying its argument"]
+     #[rustc_const_stable(feature = "const_ptr_offset", since = "1.61.0")]
+     #[rustc_nounwind]
+     pub fn offset<Ptr, Delta>(dst: Ptr, offset: Delta) -> Ptr;
+-
+-    /// The bootstrap version of this is more restricted.
+-    #[cfg(bootstrap)]
+-    #[must_use = "returns a new pointer rather than modifying its argument"]
+-    #[rustc_const_stable(feature = "const_ptr_offset", since = "1.61.0")]
+-    #[rustc_nounwind]
+-    pub fn offset<T>(dst: *const T, offset: isize) -> *const T;
+
+     /// Calculates the offset from a pointer, potentially wrapping.
+     ///
