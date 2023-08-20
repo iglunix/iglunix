@@ -2,7 +2,7 @@ pkgver=1.9.5
 pkgname=pkgconf
 bad=""
 ext="doc"
-mkdeps="make"
+mkdeps="bmake"
 
 fetch() {
 	curl https://distfiles.dereferenced.org/pkgconf/pkgconf-$pkgver.tar.xz -o $pkgname-$pkgver.tar.xz
