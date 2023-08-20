@@ -1,6 +1,7 @@
 pkgver=0.8.9
 pkgname=toybox
 pkgrel=1
+mkdeps="bad:gmake"
 deps="musl"
 
 fetch() {
