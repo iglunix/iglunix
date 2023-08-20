@@ -1,5 +1,6 @@
 pkgname=hwdata
 pkgver=0.370
+mkdeps="bad:gmake"
 
 fetch() {
 	curl -L "https://github.com/vcrhonek/hwdata/archive/refs/tags/v$pkgver.tar.gz" -o $pkgname-$pkgver.tar.gz
