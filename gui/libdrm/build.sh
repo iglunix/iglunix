@@ -1,6 +1,6 @@
 pkgver=2.4.114
 pkgname=libdrm
-deps="libpciaccess"
+mkdeps="muon:samurai"
 bad=""
 
 fetch() {
@@ -10,13 +10,14 @@ fetch() {
 
 build() {
 	cd $pkgname-$pkgver
-	meson build --prefix /usr --libdir=lib
+	muon setup $muon_base_args \
+		build
 	samu -C build
 }
 
 package() {
 	cd $pkgname-$pkgver
-	DESTDIR=$pkgdir samu -C build install
+	DESTDIR=$pkgdir muon -C build install
 }
 
 backup() {
