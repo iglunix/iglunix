@@ -1,7 +1,8 @@
 pkgname=mesa
 pkgver=23.0.3
 #pkgver=main
-deps="musl:wayland:wayland-protocols:llvm:zlib-ng:expat:libffi:libdrm:python-mako:glslang"
+mkdeps="python:python-mako:samurai"
+deps="musl:wayland:wayland-protocols:llvm:zlib-ng:expat:libffi:libdrm:glslang"
 ext=dev
 
 fetch() {
