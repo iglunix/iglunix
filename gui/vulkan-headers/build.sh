@@ -1,5 +1,6 @@
 pkgname=vulkan-headers
-pkgver=1.3.238
+pkgver=1.3.255
+mkdeps=cmake:samurai
 
 fetch() {
 	curl -L "https://github.com/KhronosGroup/Vulkan-Headers/archive/v$pkgver.tar.gz" -o $pkgname-$pkgver.tar.xz
