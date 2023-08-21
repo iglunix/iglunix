@@ -80,6 +80,7 @@ $CV gui mtdev 2>/dev/null
 $CV gui libinput 2>/dev/null
 $CV gui libglvnd 2>/dev/null
 $CV gui libdrm 2>/dev/null
+$CV gui vulkan-headers 2>/dev/null
 
 $CV gui wayland 2>/dev/null
 $CV gui wayland-protocols 2>/dev/null
