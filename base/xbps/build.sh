@@ -1,12 +1,13 @@
 pkgname=xbps
-pkgver=master
+pkgver=0.59.1
 
 fetch() {
-	curl -L "https://github.com/void-linux/xbps/archive/$pkgver.tar.gz" -o $pkgname-$pkgver.tar.gz
+	curl -L "https://github.com/void-linux/xbps/archive/refs/tags/$pkgver.tar.gz" -o $pkgname-$pkgver.tar.gz
 	tar -xf $pkgname-$pkgver.tar.gz
 
 	cd $pkgname-$pkgver
 	patch -p1 < ../../cert-file.patch
+	patch -p1 < ../../openssl3.patch
 }
 
 build() {
