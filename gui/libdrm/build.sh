@@ -1,6 +1,6 @@
 pkgver=2.4.114
 pkgname=libdrm
-mkdeps="muon:samurai"
+mkdeps="muon:samurai:pkgconf"
 bad=""
 
 fetch() {
