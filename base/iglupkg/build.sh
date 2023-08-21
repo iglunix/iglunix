@@ -1,5 +1,6 @@
 pkgname=iglupkg
 pkgver=main
+mkdeps="bmake"
 
 fetch() {
 	curl -L "https://github.com/iglunix/iglupkg/archive/refs/heads/main.tar.gz" -o $pkgname-$pkgver.tar.xz
