@@ -1,5 +1,5 @@
 pkgname=vulkan-headers
-pkgver=1.3.255
+pkgver=1.3.261
 mkdeps=cmake:samurai
 
 fetch() {
@@ -31,6 +31,6 @@ package() {
 
 license() {
 	cd $pkgname-$pkgver
-	cat LICENSE.txt
+	cat LICENSE.md
 #	cat COPYING
 }
