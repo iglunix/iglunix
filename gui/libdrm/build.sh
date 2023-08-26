@@ -1,4 +1,4 @@
-pkgver=2.4.115
+pkgver=2.4.116
 pkgname=libdrm
 mkdeps="muon:samurai:pkgconf:python"
 bad=""
