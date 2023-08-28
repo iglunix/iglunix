@@ -40,23 +40,22 @@ fetch() {
 	cd $pkgname-$pkgver
 	patch -p1 < ../no_git_repo.patch
 	patch -p1 < ../alpine-crt.patch
-	# patch -p1 < ../libexec.patch
 	patch -p1 < ../fix-curl.patch
-	patch -p1 < ../lfs64-rust.patch
-	patch -p1 < ../offset.patch
+	# patch -p1 < ../libexec.patch
+	# patch -p1 < ../lfs64-rust.patch
+	# patch -p1 < ../offset.patch
 
-	patch -p1 -d vendor/getrandom-0.2.8 < ../lfs64-getrandom.patch
+	# patch -p1 -d vendor/getrandom-0.2.8 < ../lfs64-getrandom.patch
 
-	for dir in vendor/libc*
-	do
-		_clear_vendor_checksums ${dir##vendor/}
-		patch -p1 -d $dir < ../lfs64-libc.patch
-	done
+	# for dir in vendor/libc*
+	# do
+	# 	_clear_vendor_checksums ${dir##vendor/}
+	# 	patch -p1 -d $dir < ../lfs64-libc.patch
+	# done
 
-	sed -i '/config.check_build_rustc_version();/d' src/bootstrap/lib.rs
+	# sed -i '/config.check_build_rustc_version();/d' src/bootstrap/lib.rs
 	sed -i /LD_LIBRARY_PATH/d src/bootstrap/bootstrap.py
 	_clear_vendor_checksums curl
-	_clear_vendor_checksums getrandom-0.2.8
 	_clear_vendor_checksums curl-sys
 }
 
