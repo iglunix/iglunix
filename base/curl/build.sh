@@ -1,4 +1,4 @@
-pkgver=8.2.1
+pkgver=8.3.0
 pkg_ver=$(echo $pkgver | tr '.' '_')
 pkgname=curl
 pkgrel=1
