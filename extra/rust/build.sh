@@ -15,7 +15,7 @@
 # OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
 pkgname=rust
-pkgver=1.72.1
+pkgver=1.73.0
 mkdeps="rust:python:pkgconf"
 deps="llvm:musl:libcxx:libunwind:openssl:zlib-ng"
 
