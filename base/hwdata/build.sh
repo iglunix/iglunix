@@ -1,5 +1,5 @@
 pkgname=hwdata
-pkgver=0.374
+pkgver=0.375
 mkdeps="bad:gmake"
 
 fetch() {
