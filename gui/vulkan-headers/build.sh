@@ -1,5 +1,5 @@
 pkgname=vulkan-headers
-pkgver=1.3.266
+pkgver=1.3.268
 mkdeps=cmake:samurai
 
 fetch() {
