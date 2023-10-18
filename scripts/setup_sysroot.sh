@@ -10,6 +10,8 @@ then
 	sudo umount sysroot/sys
 	sudo umount sysroot/dev
 	sudo umount sysroot/build
+	# some files in here we can't remove as the normal user
+	sudo rm -rf sysroot/root
 	rm -rf sysroot
 fi
 
