@@ -1,6 +1,7 @@
 pkgver=1.2.4
 pkgname=python-mako
 deps=python
+desc="A super-fast templating language"
 bad=""
 ext="doc"
 
@@ -8,6 +9,7 @@ fetch() {
 	curl -L "https://pypi.io/packages/source/M/Mako/Mako-$pkgver.tar.gz" -o $pkgname-$pkgver.tar.gz
 	tar -xf $pkgname-$pkgver.tar.gz
 	mv Mako-$pkgver $pkgname-$pkgver
+	sed 's|ImportError|ImportError, ModuleNotFoundError|' $pkgname-$pkgver/mako/exceptions.py
 }
 
 build() {
