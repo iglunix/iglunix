@@ -1,5 +1,6 @@
 pkgver=2.1.1
 pkgname=python-markupsafe
+desc="Safely add untrusted strings to HTML/XML markup"
 deps=python
 bad=""
 ext="doc"
