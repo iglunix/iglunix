@@ -1,31 +1,29 @@
-pkgname=vulkan-icd-loader
-pkgver=1.3.269
-desc="vulkan loader"
+pkgname=vulkan-tools
+pkgver=1.3.261.1
 deps="musl"
+desc="Vulkan tools"
 
 fetch() {
-	curl -L "https://github.com/KhronosGroup/Vulkan-Loader/archive/v$pkgver.tar.gz" -o $pkgname-$pkgver.tar.xz
+	curl -L "https://github.com/KhronosGroup/Vulkan-Tools/archive/refs/tags/sdk-$pkgver.tar.gz" -o $pkgname-$pkgver.tar.xz
 	tar -xf $pkgname-$pkgver.tar.xz
-	mv Vulkan-Loader-$pkgver $pkgname-$pkgver
+	mv Vulkan-Tools-sdk-$pkgver $pkgname-$pkgver
 	mkdir $pkgname-$pkgver/build
 }
 
 build() {
 	cd $pkgname-$pkgver
+	cp /usr/bin/glslangValidator glslang/linux/bin/glslangValidator
 	cd build
 	cmake -G Ninja ../ \
 		-DCMAKE_BUILD_TYPE=Release \
 		-DCMAKE_INSTALL_PREFIX=/usr \
 		-DCMAKE_INSTALL_LIBDIR=lib \
-		-DBUILD_WSI_WAYLAND_SUPPORT=On \
-		-DBUILD_WSI_XLIB_SUPPORT=OFF \
 		-DBUILD_WSI_XCB_SUPPORT=OFF \
-		-DBUILD_WSI_DISPLAY_SUPPORT=ON
-	samu
-}
+		-DBUILD_WSI_XLIB_SUPPORT=OFF \
+		-DCUBE_WSI_SELECTION=WAYLAND \
+		-DSPIRV_HEADERS_INSTALL_DIR="/usr"
 
-backup() {
-	return
+	samu
 }
 
 package() {
@@ -38,4 +36,8 @@ license() {
 	cd $pkgname-$pkgver
 	cat LICENSE.txt
 #	cat COPYING
+}
+
+backup() {
+	return
 }

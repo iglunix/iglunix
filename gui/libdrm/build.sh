@@ -1,6 +1,9 @@
 pkgver=2.4.118
 pkgname=libdrm
-mkdeps="muon:samurai:pkgconf:python"
+# mkdeps="muon:samurai:pkgconf:python"
+# mkdeps="muon:pkgconf"
+deps="musl"
+desc="Userspace interface to kernel DRM services"
 bad=""
 
 fetch() {

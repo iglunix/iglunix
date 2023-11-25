@@ -1,5 +1,7 @@
 pkgver=3.4.4
 pkgname=libffi
+desc="A portable foreign-function interface library."
+deps="musl"
 bad="gmake"
 ext="dev"
 auto_cross

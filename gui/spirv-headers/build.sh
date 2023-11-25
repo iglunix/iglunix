@@ -1,10 +1,12 @@
 pkgname=spirv-headers
-pkgver=master
+pkgver=1.3.261.1
+desc="spirv headers"
+deps="musl"
 
 fetch() {
-	curl -L "https://github.com/KhronosGroup/SPIRV-Headers/archive/refs/heads/master.tar.gz" -o $pkgname-$pkgver.tar.xz
+	curl -L "https://github.com/KhronosGroup/SPIRV-Headers/archive/refs/tags/sdk-$pkgver.tar.gz" -o $pkgname-$pkgver.tar.xz
 	tar -xf $pkgname-$pkgver.tar.xz
-	mv SPIRV-Headers-$pkgver spirv-headers-$pkgver
+	mv SPIRV-Headers-sdk-$pkgver spirv-headers-$pkgver
 	mkdir $pkgname-$pkgver/build
 }
 
@@ -28,4 +30,8 @@ license() {
 	cd $pkgname-$pkgver
 	cat LICENSE
 #	cat COPYING
+}
+
+backup() {
+	return
 }

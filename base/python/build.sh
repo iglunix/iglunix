@@ -1,6 +1,8 @@
 pkgname=python
-pkgver=3.11.3
+pkgver=3.12.0
 mkdeps="libffi"
+deps="musl"
+desc="high-level scripting language"
 bad=""
 ext="doc"
 auto_cross
@@ -9,21 +11,25 @@ fetch() {
 	curl "https://www.python.org/ftp/python/$pkgver/Python-$pkgver.tar.xz" -o $pkgname-$pkgver.tar.xz
 	tar -xf $pkgname-$pkgver.tar.xz
 	mv Python-$pkgver $pkgname-$pkgver
+	cd $pkgname-$pkgver
+	patch -p1 < ../../always-pip.patch
+	cat >> Modules/Setup <<EOF
+*disabled*
+_uuid nis ossaudiodev
+EOF
+
 }
 
 build() {
 	cd $pkgname-$pkgver
 	./configure \
-		--prefix=/usr \
 		--build=$HOST_TRIPLE \
 		--host=$TRIPLE  \
+		--prefix=/usr \
+		--enable-shared \
 		--with-system-ffi=true \
-		--with-ssl-default-suites=openssl \
-		--without-ensure-pip \
-		ax_cv_c_float_words_bigendian=no \
-		ac_cv_buggy_getaddrinfo=no \
-		ac_cv_file__dev_ptmx=yes \
-		ac_cv_file__dev_ptc=no
+		--with-ensurepip=yes \
+		--with-ssl-default-suites=openssl
 	make
 }
 
@@ -34,15 +40,11 @@ backup() {
 package() {
     	cd $pkgname-$pkgver
 	make install DESTDIR=$pkgdir
-	rm -r $pkgdir/usr/lib/python*/test
-	rm -r $pkgdir/usr/lib/python*/ctypes/test
-	rm -r $pkgdir/usr/lib/python*/distutils/tests
-	rm -r $pkgdir/usr/lib/python*/idlelib/idle_test
-	rm -r $pkgdir/usr/lib/python*/lib2to3/tests
-	#rm -r $pkgidr/usr/lib/python*/sqlite3/test
-	rm -r $pkgdir/usr/lib/python*/tkinter/test
-	rm -r $pkgdir/usr/lib/python*/unittest/test
-	rm -r $pkgdir/usr/share
+	cd $pkgdir/usr/lib/python*
+	rm -rf test ./*/test ./*/tests
+	rm -rf idlelib turtle* config-*
+	rm -rf $pkgdir/usr/share
+	rm -f $pkgdir/usr/bin/idle*
 	ln -s python3 $pkgdir/usr/bin/python
 }
 

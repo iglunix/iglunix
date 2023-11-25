@@ -1,6 +1,8 @@
 pkgver=1.2
 pkgname=samurai
+desc="ninja-compatible build tool written in C"
 pkgrel=1
+deps="musl"
 auto_cross
 
 fetch() {

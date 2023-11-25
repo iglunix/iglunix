@@ -2,6 +2,7 @@ pkgver=20230909
 pkgname=bmake
 mkdeps=""
 deps="musl"
+desc="Portable version of the NetBSD make build tool"
 auto_cross
 
 fetch() {
