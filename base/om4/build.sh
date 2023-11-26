@@ -1,4 +1,4 @@
-pkgver=master
+pkgver=0.0.1
 pkgname=om4
 pkgrel=1
 mkdeps="bmake:byacc"
@@ -8,7 +8,7 @@ ext="doc"
 auto_cross
 
 fetch() {
-	curl -L "https://github.com/iglunix/om4/archive/refs/heads/$pkgver.tar.gz" -o $pkgname-$pkgver.tar.xz
+	curl -L "https://github.com/iglunix/om4/archive/refs/tags/v$pkgver.tar.gz" -o $pkgname-$pkgver.tar.xz
 	tar -xf $pkgname-$pkgver.tar.xz
 	cd $pkgname-$pkgver
 }
