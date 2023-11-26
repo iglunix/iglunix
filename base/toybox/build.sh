@@ -3,6 +3,7 @@ pkgname=toybox
 pkgrel=1
 mkdeps="bad:gmake"
 deps="musl"
+desc="all-in-one Linux command line."
 
 fetch() {
 	curl -O "https://landley.net/toybox/downloads/toybox-$pkgver.tar.gz"
