@@ -1,11 +1,11 @@
 pkgname=make_ext4fs
-pkgver=main
+pkgver=0.0.1
 mkdeps=toybox:bmake:llvm
 deps=musl:zlib-ng
 auto_cross
 
 fetch() {
-	curl -L "https://github.com/iglunix/make_ext4fs/archive/refs/heads/main.tar.gz" -o $pkgname-$pkgver.tar.gz
+	curl -L "https://github.com/iglunix/make_ext4fs/archive/refs/tags/v$pkgver.tar.gz" -o $pkgname-$pkgver.tar.gz
 	tar -xf $pkgname-$pkgver.tar.gz
 }
 
