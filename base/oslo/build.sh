@@ -1,8 +1,8 @@
 pkgname=oslo
-pkgver=main
+pkgver=0.0.1
 
 fetch() {
-	curl -L "https://github.com/iglunix/oslo/archive/refs/heads/main.tar.gz" -o $pkgname-$pkgver.tar.gz
+	curl -L "https://github.com/iglunix/oslo/archive/refs/tags/v$pkgver.tar.gz" -o $pkgname-$pkgver.tar.gz
 	tar -xf $pkgname-$pkgver.tar.gz
 }
 
