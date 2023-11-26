@@ -3,6 +3,7 @@ pkgname=mksh
 deps="musl"
 bad=""
 ext="doc"
+desc="MirBSD Korn Shell"
 auto_cross
 
 fetch() {
