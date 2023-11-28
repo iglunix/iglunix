@@ -25,16 +25,12 @@ sudo chroot ./sysroot /build/scripts/check_builds_chroot.sh "$1"
 
 mkdir -p out
 
-if [ -e "$1"/out/*.tar ]
-then
-	zstd --ultra -22 "$1"/out/*.tar -o out/$(basename "$1").tar.zst
-else
-	cp "$1"/out/*.tar.zst out/$(basename "$1").tar.zst
-fi
-
 if [ -e ~/.ssh/mirror.key ]
 then
+	XBPS_PASSPHRASE="$2" xbps-rindex --privkey ~/.ssh/xbps.key \
+	--sign-pkg "$1"/out/*.xbps --signedby 'mirror <mirror@iglunix.org>'
+
 	scp -i ~/.ssh/mirror.key \
-	out/$(basename "$1").tar.zst \
-	root@mirror.iglunix.org:/srv/http/mirror/x86_64/$(basename "$1").tar.zst
+	"$1"/out/*.xbps "$1"/out/*.xbps.sig \
+	root@mirror.iglunix.org:/srv/http/mirror/
 fi
