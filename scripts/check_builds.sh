@@ -27,7 +27,17 @@ mkdir -p out
 
 if [ -e ~/.ssh/mirror.key ]
 then
-	XBPS_PASSPHRASE="$2" xbps-rindex --privkey ~/.ssh/xbps.key \
+	if [ -z "$XBPS_PASSPHRASE" ]
+	then
+		printf 'Empty passphrase\n'
+	fi
+
+	if [ ! -e "~/.ssh/xbps.key" ]
+	then
+		printf 'No xbps key'
+	fi
+
+	xbps-rindex --privkey ~/.ssh/xbps.key \
 	--sign-pkg "$1"/out/*.xbps --signedby 'mirror <mirror@iglunix.org>'
 
 	scp -i ~/.ssh/mirror.key \
