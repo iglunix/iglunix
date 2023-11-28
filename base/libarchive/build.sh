@@ -11,7 +11,10 @@ build() {
 	./configure \
 		--prefix=/usr \
 		--build=$TRIPLE \
-		--host=$TRIPLE
+		--host=$TRIPLE \
+		--without-bz2lib \
+		--without-xml2 \
+		--without-expat
 
 	make
 }
