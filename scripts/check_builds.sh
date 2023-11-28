@@ -37,10 +37,9 @@ then
 		printf 'No xbps key'
 	fi
 
-	sudo --preserve-env=XBPS_PASSPHRASE xbps-rindex --privkey ~/.ssh/xbps.key \
-	--sign-pkg "$1"/out/*.xbps --signedby 'mirror <mirror@iglunix.org>'
-
 	scp -i ~/.ssh/mirror.key \
-	"$1"/out/*.xbps "$1"/out/*.xbps.sig \
+	"$1"/out/*.xbps \
 	root@mirror.iglunix.org:/srv/http/mirror/
+
+	ssh -i ~/.ssh/mirror.key root@mirror.iglunix.org '~/sign.sh'
 fi
