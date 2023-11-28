@@ -1,5 +1,5 @@
 pkgname=iglupkg
-pkgver=0.0.1
+pkgver=0.0.2
 mkdeps="bmake"
 
 fetch() {
