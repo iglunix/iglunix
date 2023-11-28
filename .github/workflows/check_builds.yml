@@ -20,7 +20,7 @@ jobs:
           ./scripts/xbps-for-ci.sh
           # ./scripts/fetch_autobuild.sh
           ./scripts/setup_sysroot.sh base/iglupkg
-          ./scripts/check_builds.sh base/iglupkg "$XBPS_PASSPHRASE"
+          XBPS_PASSPHRASE="$XBPS_PASSPHRASE" ./scripts/check_builds.sh base/iglupkg "$XBPS_PASSPHRASE"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SSH_PRIVATE_KEY: ${{secrets.SSH_PRIVATE_KEY}}
