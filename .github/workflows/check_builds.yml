@@ -19,8 +19,8 @@ jobs:
           tar --version
           ./scripts/xbps-for-ci.sh
           # ./scripts/fetch_autobuild.sh
-          ./scripts/setup_sysroot.sh base/iglupkg
-          XBPS_PASSPHRASE="$XBPS_PASSPHRASE" ./scripts/check_builds.sh base/iglupkg
+          ./scripts/setup_sysroot.sh base/xbps
+          XBPS_PASSPHRASE="$XBPS_PASSPHRASE" ./scripts/check_builds.sh base/xbps
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SSH_PRIVATE_KEY: ${{secrets.SSH_PRIVATE_KEY}}
