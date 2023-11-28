@@ -1,7 +1,7 @@
 pkgname=xbps
 pkgver=0.59.2
 mkdeps=pkgconf:bad:gmake
-deps=libarchive:zstd:zlib-ng:openssl
+deps=libarchive:openssl
 desc="fast, easy to use and portable package manager"
 
 fetch() {
