@@ -1,5 +1,5 @@
 pkgname=xbps
-pkgver=0.59.1
+pkgver=0.59.2
 
 fetch() {
 	curl -L "https://github.com/void-linux/xbps/archive/refs/tags/$pkgver.tar.gz" -o $pkgname-$pkgver.tar.gz
@@ -7,7 +7,9 @@ fetch() {
 
 	cd $pkgname-$pkgver
 	patch -p1 < ../../cert-file.patch
-	patch -p1 < ../../openssl3.patch
+	# patch -p1 < ../../openssl3.patch
+	# patch -p1 < ../../sig2.patch
+	printf 'repository=https://mirror.iglunix.org\n' > data/repod-main.conf
 }
 
 build() {
