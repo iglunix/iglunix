@@ -21,7 +21,6 @@ sh -e -x $IGLUPKG f
 
 cd $BASE
 
-find sysroot
 sudo chroot ./sysroot /build/scripts/check_builds_chroot.sh "$1"
 
 mkdir -p out
