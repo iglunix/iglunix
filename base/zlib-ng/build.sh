@@ -1,5 +1,5 @@
 pkgname=zlib-ng
-pkgver=2.1.4
+pkgver=2.1.5
 mkdeps="cmake:samurai"
 deps="musl"
 
