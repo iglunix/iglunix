@@ -1,4 +1,4 @@
-pkgver=20231124
+pkgver=20231210
 pkgname=bmake
 mkdeps=""
 deps="musl"
