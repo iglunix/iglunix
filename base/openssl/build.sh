@@ -1,5 +1,5 @@
 pkgname=openssl
-pkgver=3.2.0
+pkgver=3.2.1
 mkdeps=perl:bmake
 deps=
 ext="dev"
