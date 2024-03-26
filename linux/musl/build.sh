@@ -37,10 +37,10 @@ package() {
 	bad --gmake gmake DESTDIR=$pkgdir install
 	rm $pkgdir/lib/ld-musl-$ARCH.so.1
 	mv $pkgdir/$PREFIX/lib/libc.so $pkgdir/lib/ld-musl-$ARCH.so.1
-	ln -sr $pkgdir/lib/ld-musl-$ARCH.so.1 $pkgdir/$PREFIX/lib/libc.so
+	ln -s ../../lib/ld-musl-$ARCH.so.1 $pkgdir/$PREFIX/lib/libc.so
 	if [ -z "$FOR_CROSS" ]; then
 		install -d $pkgdir/$PREFIX/bin
-		ln -sr $pkgdir/lib/ld-musl-$ARCH.so.1 $pkgdir/$PREFIX/bin/ldd
+		ln -s ../../lib/ld-musl-$ARCH.so.1 $pkgdir/$PREFIX/bin/ldd
 	fi
 }
 

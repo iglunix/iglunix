@@ -20,17 +20,17 @@ build() {
 package() {
 	cd $pkgname-$pkgver
 	make install DESTDIR=$pkgdir
-	ln -sr $pkgdir/usr/bin/gm $pkgdir/usr/bin/animate
-	ln -sr $pkgdir/usr/bin/gm $pkgdir/usr/bin/compare
-	ln -sr $pkgdir/usr/bin/gm $pkgdir/usr/bin/composite
-	ln -sr $pkgdir/usr/bin/gm $pkgdir/usr/bin/conjure
-	ln -sr $pkgdir/usr/bin/gm $pkgdir/usr/bin/convert
-	ln -sr $pkgdir/usr/bin/gm $pkgdir/usr/bin/display
-	ln -sr $pkgdir/usr/bin/gm $pkgdir/usr/bin/identify
-	ln -sr $pkgdir/usr/bin/gm $pkgdir/usr/bin/import
-	ln -sr $pkgdir/usr/bin/gm $pkgdir/usr/bin/mogrify
-	ln -sr $pkgdir/usr/bin/gm $pkgdir/usr/bin/montage
-	
+
+	ln -s ../usr/bin/gm $pkgdir/usr/bin/animate
+	ln -s ../usr/bin/gm $pkgdir/usr/bin/compare
+	ln -s ../usr/bin/gm $pkgdir/usr/bin/composite
+	ln -s ../usr/bin/gm $pkgdir/usr/bin/conjure
+	ln -s ../usr/bin/gm $pkgdir/usr/bin/convert
+	ln -s ../usr/bin/gm $pkgdir/usr/bin/display
+	ln -s ../usr/bin/gm $pkgdir/usr/bin/identify
+	ln -s ../usr/bin/gm $pkgdir/usr/bin/import
+	ln -s ../usr/bin/gm $pkgdir/usr/bin/mogrify
+	ln -s ../usr/bin/gm $pkgdir/usr/bin/montage
 }
 
 license() {

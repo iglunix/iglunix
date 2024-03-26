@@ -20,7 +20,7 @@ package() {
 	cd $pkgname-$pkgver
 	make install DESTDIR=$pkgdir
 
-	ln -sr $pkgdir/usr/bin/reflex $pkgdir/usr/bin/lex
+	ln -s ../usr/bin/reflex $pkgdir/usr/bin/lex
 }
 
 license() {
