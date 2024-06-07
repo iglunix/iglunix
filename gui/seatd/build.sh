@@ -1,5 +1,6 @@
 pkgname=seatd
 pkgver=0.7.0
+mkdeps=samurai:muon
 deps=musl
 
 fetch() {
@@ -11,7 +12,7 @@ fetch() {
 build() {
 	cd $pkgname-$pkgver
 	cd build
-	meson .. \
+	muon .. \
 		--buildtype=release \
 		--prefix=/usr \
 		--libexecdir=lib \
