@@ -27,7 +27,7 @@ backup() {
 
 package() {
 	cd $pkgname-$pkgver
-	DESTDIR=$pkgdir samu -C build install
+	DESTDIR=$pkgdir muon -C build install
 }
 
 backup() {
