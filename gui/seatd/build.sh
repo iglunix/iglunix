@@ -1,5 +1,6 @@
 pkgname=seatd
 pkgver=0.7.0
+deps=musl
 
 fetch() {
 	curl "https://git.sr.ht/~kennylevinsen/seatd/archive/$pkgver.tar.gz" -o $pkgname-$pkgver.tar.xz
