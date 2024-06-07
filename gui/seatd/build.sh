@@ -1,6 +1,6 @@
 pkgname=seatd
 pkgver=0.7.0
-mkdeps=samurai:muon
+mkdeps=samurai:muon:pkgconf
 deps=musl
 
 fetch() {
