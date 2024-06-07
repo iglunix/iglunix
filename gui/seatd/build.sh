@@ -11,14 +11,14 @@ fetch() {
 
 build() {
 	cd $pkgname-$pkgver
-	cd build
-	muon .. \
+	muon setup \
 		--buildtype=release \
 		--prefix=/usr \
 		--libexecdir=lib \
 		-Dexamples=disabled \
-		-Dc_args=-Wno-sign-compare
-	samu
+		-Dc_args=-Wno-sign-compare \
+		build
+	samu -C build
 }
 
 backup() {
@@ -27,8 +27,7 @@ backup() {
 
 package() {
 	cd $pkgname-$pkgver
-	cd build
-	DESTDIR=$pkgdir samu install
+	DESTDIR=$pkgdir samu -C build install
 }
 
 backup() {
