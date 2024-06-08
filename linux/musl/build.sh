@@ -1,7 +1,7 @@
 pkgver=1.2.5
 pkgname=musl
 deps=""
-mkdeps="gmake"
+mkdeps="bad:gmake"
 bad="gmake"
 ext="dev"
 
