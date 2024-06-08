@@ -12,9 +12,9 @@ fetch() {
 build() {
 	cd $pkgname-$pkgver
 	muon setup \
-		--buildtype=release \
-		--prefix=/usr \
-		--libexecdir=lib \
+		-Dbuildtype=release \
+		-Dprefix=/usr \
+		-Dlibexecdir=lib \
 		-Dexamples=disabled \
 		-Dc_args=-Wno-sign-compare \
 		build
