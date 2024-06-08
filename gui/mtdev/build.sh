@@ -1,5 +1,5 @@
 pkgname=mtdev
-pkgver=1.1.6
+pkgver=1.1.7
 mkdeps=bmake
 deps=
 
