@@ -1,5 +1,5 @@
 pkgname=seatd
-pkgver=0.7.0
+pkgver=0.8.0
 mkdeps=samurai:muon:pkgconf
 deps=musl
 
