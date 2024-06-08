@@ -45,10 +45,11 @@ jobs:
           then
           if gh issue list | grep "Out of date packages"
           then
-              NUM=$(gh issue list | grep "Out of date packages" | cut -f1)
-              gh issue edit $NUM --body-file issue.md
+          NUM=$(gh issue list | grep "Out of date packages" | cut -f1)
+          gh issue edit $NUM --body-file issue.md
           else
-              gh issue create -t "Out of date packages" -Fissue.md
+          gh issue create -t "Out of date packages" -Fissue.md
+          fi
           fi
           git push -u origin main
         env:
