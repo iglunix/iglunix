@@ -1,4 +1,4 @@
-pkgver=1.2.4
+pkgver=1.2.5
 pkgname=musl
 deps=""
 mkdeps="gmake"
@@ -24,7 +24,7 @@ build() {
 	cd $pkgname-$pkgver
 
 
-	CC=$(pwd)/../$ARCH-linux-musl-cc ./configure \
+	CC=$(pwd)/../$ARCH-linux-musl-cc bad --gmake ./configure \
 		--prefix=$PREFIX \
 		--target=$TRIPLE \
 		--disable-wrapper
