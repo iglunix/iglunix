@@ -1,6 +1,7 @@
 #!/bin/sh
 printf 'trying %s/%s\n' "$1" "$2" >&2
-REPO_VER=$(curl "https://repology.org/project/$2/history" 2>/dev/null | grep "version-newest" | tr '>' ' ' | tr '<' ' ' | awk '{ print $5; }' | head -n1)
+
+REPO_VER=$(curl -A "Iglunix Package Updater" -L "https://repology.org/api/v1/project/$2" | jq '[.[] | select(.status=="newest")][0].version' | cut -d'"' -f2)
 
 REPO_MAJOR=$(echo $REPO_VER | tr '.' ' ' | awk '{ print $1; }')
 REPO_MINOR=$(echo $REPO_VER | tr '.' ' ' | awk '{ print $2; }')
