@@ -1,5 +1,5 @@
 pkgname=libevdev
-pkgver=1.13.1
+pkgver=1.13.2
 mkdeps="samurai:muon:pkgconf:python"
 
 fetch() {
