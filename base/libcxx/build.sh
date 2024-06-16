@@ -1,5 +1,6 @@
 pkgver=16.0.1
 pkgname=libcxx
+deps="musl"
 bad=""
 ext="dev"
 
