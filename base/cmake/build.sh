@@ -1,4 +1,4 @@
-pkgver=3.29.5
+pkgver=3.29.6
 pkgname=cmake
 pkgrel=1
 mkdeps="samurai"
