@@ -20,9 +20,10 @@ package() {
 	cd $pkgname-$pkgver
 	install -d $pkgdir/usr/lib/
 	install -Dm755 ./libbz2.so.$pkgver $pkgdir/usr/lib/
-	ln -sr /usr/lib/libbz2.so.$pkgver $pkgdir/usr/lib/libbz2.so
-	ln -sr /usr/lib/libbz2.so.$pkgver $pkgdir/usr/lib/libbz2.so.1
-	ln -sr /usr/lib/libbz2.so.$pkgver $pkgdir/usr/lib/libbz2.so.1.0
+
+	ln -s ../../lib/libbz2.so.$pkgver $pkgdir/usr/lib/libbz2.so
+	ln -s ../../lib/libbz2.so.$pkgver $pkgdir/usr/lib/libbz2.so.1
+	ln -s ../../lib/libbz2.so.$pkgver $pkgdir/usr/lib/libbz2.so.1.0
 
     install -d $pkgdir/usr/include/
     install -Dm644 ./bzlib.h $pkgdir/usr/include/
@@ -42,7 +43,7 @@ Libs: -L${libdir} -lbz2
 Cflags: -I${includedir}
 EOF
 
-    
+
 }
 
 license() {

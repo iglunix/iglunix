@@ -17,7 +17,7 @@ build() {
 package() {
 	cd $pkgname-$pkgver
 	bad --gmake gmake install DESTDIR=$pkgdir
-	ln -sr $pkgdir/usr/bin/mold $pkgdir/usr/bin/ld.mold
+	ln -s mold $pkgdir/usr/bin/ld.mold
 }
 
 license() {

@@ -27,8 +27,9 @@ package() {
 	|| echo 'INPUT(-lunwind)' > $pkgdir/opt/rust/lib/rustlib/x86_64-unknown-linux-musl/lib/libgcc_s.so
 
 	install -d $pkgdir/usr/bin
-	ln -sr $pkgdir/opt/rust/bin/rustc $pkgdir/usr/bin/rustc
-	ln -sr $pkgdir/opt/rust/bin/cargo $pkgdir/usr/bin/cargo
+
+	ln -s ../../../opt/rust/bin/rustc $pkgdir/usr/bin/rustc
+	ln -s ../../../opt/rust/bin/cargo $pkgdir/usr/bin/cargo
 }
 
 backup() {

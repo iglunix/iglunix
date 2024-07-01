@@ -22,8 +22,8 @@ package() {
 	install -d $pkgdir/usr/lib/go
 	cp -a bin pkg src lib misc api test $pkgdir/usr/lib/go
 
-	ln -sr $pkgdir/usr/lib/go/bin/go $pkgdir/usr/bin/go
-	ln -sr $pkgdir/usr/lib/go/bin/gofmt  $pkgdir/usr/bin/gofmt
+	ln -s ../../lib/go/bin/go $pkgdir/usr/bin/go
+	ln -s ../../lib/go/bin/gofmt $pkgdir/usr/bin/gofmt
 }
 
 license() {
