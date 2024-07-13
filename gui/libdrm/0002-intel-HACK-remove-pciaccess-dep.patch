@@ -1,0 +1,114 @@
+From 468f61754fbbed41eaeeab4a49e86a250f2ed895 Mon Sep 17 00:00:00 2001
+From: Ella Stanforth <ella@iglunix.org>
+Date: Sat, 13 Jul 2024 13:11:35 +0000
+Subject: [PATCH 2/2] intel: HACK: remove pciaccess dep
+
+---
+ intel/intel_bufmgr.c | 45 +-------------------------------------------
+ intel/meson.build    |  2 +-
+ meson.build          |  3 ---
+ 3 files changed, 2 insertions(+), 48 deletions(-)
+
+diff --git a/intel/intel_bufmgr.c b/intel/intel_bufmgr.c
+index 68d97c0e..6547a203 100644
+--- a/intel/intel_bufmgr.c
++++ b/intel/intel_bufmgr.c
+@@ -32,9 +32,6 @@
+ #include <errno.h>
+ #include <drm.h>
+ #include <i915_drm.h>
+-#ifndef __ANDROID__
+-#include <pciaccess.h>
+-#endif
+ #include "libdrm_macros.h"
+ #include "intel_bufmgr.h"
+ #include "intel_bufmgr_priv.h"
+@@ -324,42 +321,6 @@ drm_intel_get_pipe_from_crtc_id(drm_intel_bufmgr *bufmgr, int crtc_id)
+ 	return -1;
+ }
+ 
+-#ifndef __ANDROID__
+-static size_t
+-drm_intel_probe_agp_aperture_size(int fd)
+-{
+-	struct pci_device *pci_dev;
+-	size_t size = 0;
+-	int ret;
+-
+-	ret = pci_system_init();
+-	if (ret)
+-		goto err;
+-
+-	/* XXX handle multiple adaptors? */
+-	pci_dev = pci_device_find_by_slot(0, 0, 2, 0);
+-	if (pci_dev == NULL)
+-		goto err;
+-
+-	ret = pci_device_probe(pci_dev);
+-	if (ret)
+-		goto err;
+-
+-	size = pci_dev->regions[2].size;
+-err:
+-	pci_system_cleanup ();
+-	return size;
+-}
+-#else
+-static size_t
+-drm_intel_probe_agp_aperture_size(int fd)
+-{
+-	/* Nothing seems to rely on this value on Android anyway... */
+-	fprintf(stderr, "%s: Mappable aperture size hardcoded to 64MiB\n", __func__);
+-	return 64 * 1024 * 1024;
+-}
+-#endif
+-
+ drm_public int
+ drm_intel_get_aperture_sizes(int fd, size_t *mappable, size_t *total)
+ {
+@@ -371,12 +332,8 @@ drm_intel_get_aperture_sizes(int fd, size_t *mappable, size_t *total)
+ 	if (ret)
+ 		return ret;
+ 
+-	*mappable = 0;
+ 	/* XXX add a query for the kernel value? */
+-	if (*mappable == 0)
+-		*mappable = drm_intel_probe_agp_aperture_size(fd);
+-	if (*mappable == 0)
+-		*mappable = 64 * 1024 * 1024; /* minimum possible value */
++	*mappable = 64 * 1024 * 1024; /* minimum possible value */
+ 	*total = aperture.aper_size;
+ 	return 0;
+ }
+diff --git a/intel/meson.build b/intel/meson.build
+index e609449c..5362ef3f 100644
+--- a/intel/meson.build
++++ b/intel/meson.build
+@@ -29,7 +29,7 @@ libdrm_intel = library(
+   ],
+   include_directories : [inc_root, inc_drm],
+   link_with : libdrm,
+-  dependencies : [dep_pciaccess, dep_threads, dep_rt, dep_valgrind, dep_atomic_ops],
++  dependencies : [dep_threads, dep_rt, dep_valgrind, dep_atomic_ops],
+   c_args : libdrm_c_args,
+   gnu_symbol_visibility : 'hidden',
+   version : '1.0.0',
+diff --git a/meson.build b/meson.build
+index 906cb92d..5678a369 100644
+--- a/meson.build
++++ b/meson.build
+@@ -88,11 +88,8 @@ endif
+ config.set10('HAVE_LIBDRM_ATOMIC_PRIMITIVES', intel_atomics)
+ config.set10('HAVE_LIB_ATOMIC_OPS', lib_atomics)
+ 
+-dep_pciaccess = dependency('pciaccess', version : '>= 0.10', required : get_option('intel'))
+-
+ with_intel = get_option('intel') \
+   .require(with_atomics, error_message : 'libdrm_intel requires atomics') \
+-  .require(dep_pciaccess.found(), error_message : 'libdrm_intel requires libpciaccess') \
+   .allowed()
+ summary('Intel', with_intel)
+ 
+-- 
+2.45.2
+

@@ -1,0 +1,25 @@
+From 01ecb2a04eba6408ed58fa10dfe8d903e3ea798b Mon Sep 17 00:00:00 2001
+From: Ella Stanforth <ella@iglunix.org>
+Date: Sat, 13 Jul 2024 13:08:24 +0000
+Subject: [PATCH 1/2] intel: don't auto disable on non x86 platforms
+
+intel dGPUs exist now
+---
+ meson.build | 1 -
+ 1 file changed, 1 deletion(-)
+
+diff --git a/meson.build b/meson.build
+index 8fd0a196..906cb92d 100644
+--- a/meson.build
++++ b/meson.build
+@@ -93,7 +93,6 @@ dep_pciaccess = dependency('pciaccess', version : '>= 0.10', required : get_opti
+ with_intel = get_option('intel') \
+   .require(with_atomics, error_message : 'libdrm_intel requires atomics') \
+   .require(dep_pciaccess.found(), error_message : 'libdrm_intel requires libpciaccess') \
+-  .disable_auto_if(not host_machine.cpu_family().startswith('x86')) \
+   .allowed()
+ summary('Intel', with_intel)
+ 
+-- 
+2.45.2
+
