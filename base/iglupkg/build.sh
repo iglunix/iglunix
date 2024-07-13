@@ -1,6 +1,7 @@
 pkgname=iglupkg
-pkgver=0.0.2
+pkgver=0.0.3
 mkdeps="bmake"
+deps="busybox:toybox:mksh:xbps"
 
 fetch() {
 	curl -L "https://github.com/iglunix/iglupkg/archive/refs/tags/v$pkgver.tar.gz" -o $pkgname-$pkgver.tar.xz
@@ -13,7 +14,7 @@ build() {
 
 package() {
 	cd $pkgname-$pkgver
-	make install DESTDIR=$pkgdir PREFIX=/usr
+	bad --gmake gmake install DESTDIR=$pkgdir PREFIX=/usr
 }
 
 license() {
