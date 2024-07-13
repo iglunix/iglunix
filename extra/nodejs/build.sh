@@ -1,5 +1,5 @@
 pkgname=nodejs
-pkgver=16.19.0
+pkgver=20.15.0
 
 fetch() {
 	curl -L "https://nodejs.org/dist/v$pkgver/node-v$pkgver.tar.gz" -o $pkgname-$pkgver.tar.xz
@@ -7,22 +7,22 @@ fetch() {
 	mv node-v$pkgver $pkgname-$pkgver
 	cd $pkgname-$pkgver
 	sed -i 's/-latomic//' node.gyp
+	patch -p1 < ../../no-bz2.patch
 }
 
 build() {
 	cd $pkgname-$pkgver
 	./configure \
 		--shared-zlib \
-    	--shared-openssl \
+		--shared-openssl \
 		--with-intl=none \
-		--without-etw \
-		--without-dtrace \
 		--without-report \
 		--without-node-snapshot \
 		--without-node-code-cache \
 		--ninja
 
-    samu -C out/Release
+
+	samu -C out/Release
 }
 
 backup() {
@@ -32,7 +32,7 @@ backup() {
 package() {
 	cd $pkgname-$pkgver
 
-	./tools/install.py install $pkgdir /usr
+	./tools/install.py install --dest-dir $pkgdir --prefix /usr
 }
 
 license() {
