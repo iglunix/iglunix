@@ -6,7 +6,7 @@ bad="gmake"
 ext="dev"
 auto_cross
 
-fetch() {
+iiifetch() {
 	curl -L "https://github.com/libffi/libffi/releases/download/v$pkgver/libffi-$pkgver.tar.gz" -o $pkgname-$pkgver.tar.gz
 	tar -xf $pkgname-$pkgver.tar.gz
 	cd $pkgname-$pkgver

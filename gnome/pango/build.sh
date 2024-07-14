@@ -2,7 +2,7 @@ pkgname=pango
 _pkgver=1.49
 pkgver=$_pkgver.1
 
-fetch() {
+iifetch() {
 	curl -L "https://download.gnome.org/sources/pango/$_pkgver/pango-$pkgver.tar.xz" -o $pkgname-$pkgver.tar.xz
 	tar -xf $pkgname-$pkgver.tar.xz
 	mkdir $pkgname-$pkgver/build

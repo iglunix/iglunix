@@ -3,7 +3,7 @@ pkgver=0.8.0
 mkdeps=samurai:muon:pkgconf
 deps=musl
 
-fetch() {
+iifetch() {
 	curl "https://git.sr.ht/~kennylevinsen/seatd/archive/$pkgver.tar.gz" -o $pkgname-$pkgver.tar.xz
 	tar -xf $pkgname-$pkgver.tar.xz
 	mkdir $pkgname-$pkgver/build

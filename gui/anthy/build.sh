@@ -1,7 +1,7 @@
 pkgname=anthy
 pkgver=9100h
 
-fetch() {
+iifetch() {
 	curl -L "https://ftp.halifax.rwth-aachen.de/osdn/anthy/37536/anthy-$pkgver.tar.gz" -o $pkgname-$pkgver.tar.xz
 	tar -xf $pkgname-$pkgver.tar.xz
 }

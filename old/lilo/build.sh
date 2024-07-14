@@ -1,7 +1,7 @@
 pkgname=lilo
 pkgver=24.2
 
-fetch() {
+ifetch() {
 	curl "http://ftp.debian.org/debian/pool/main/l/lilo/lilo_$pkgver.orig.tar.gz" -o $pkgname-$pkgver.tar.xz
 	tar -xf $pkgname-$pkgver.tar.xz
 	cd $pkgname-$pkgver

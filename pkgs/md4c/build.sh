@@ -1,7 +1,7 @@
 pkgname=md4c
 pkgver=master
 
-fetch() {
+ifetch() {
 	curl -L "https://github.com/mity/md4c/archive/refs/heads/master.tar.gz" -o $pkgname-$pkgver.tar.xz
 	tar -xf $pkgname-$pkgver.tar.xz
 	mkdir $pkgname-$pkgver/build

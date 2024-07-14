@@ -1,7 +1,7 @@
 pkgname=rawk
 pkgver=master
 
-fetch() {
+ifetch() {
 	curl -L "https://github.com/kisom/rawk/archive/refs/heads/master.tar.gz" -o $pkgname-$pkgver.tar.xz
 	tar -xf $pkgname-$pkgver.tar.xz
 	cp ../cp-u.patch .

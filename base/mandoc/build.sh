@@ -1,7 +1,7 @@
 pkgname=mandoc
 pkgver=1.14.6
 
-fetch() {
+iifetch() {
 	curl "https://mandoc.bsd.lv/snapshots/mandoc-$pkgver.tar.gz" -o $pkgname-$pkgver.tar.gz
 	tar -xf $pkgname-$pkgver.tar.gz
 	cp ../configure.local .

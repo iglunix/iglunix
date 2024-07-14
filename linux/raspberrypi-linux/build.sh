@@ -1,7 +1,7 @@
 pkgver=1.20211007
 pkgname=raspberrypi-linux
 
-fetch() {
+ifetch() {
 	curl -L "https://github.com/raspberrypi/linux/archive/refs/tags/$pkgver.tar.gz" -o $pkgname-$pkgver.tar.gz
 	tar -xf $pkgname-$pkgver.tar.gz
 	mv linux-raspberrypi-kernel_$pkgver $pkgname-$pkgver

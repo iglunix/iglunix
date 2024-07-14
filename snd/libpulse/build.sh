@@ -2,7 +2,7 @@ pkgname=libpulse
 pkgver=16.1
 deps="libsndfile"
 
-fetch() {
+ifetch() {
 	curl -L "https://freedesktop.org/software/pulseaudio/releases/pulseaudio-$pkgver.tar.xz" -o $pkgname-$pkgver.tar.bz2
 	tar -xf $pkgname-$pkgver.tar.bz2
 	mv pulseaudio-$pkgver $pkgname-$pkgver

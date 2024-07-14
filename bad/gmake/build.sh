@@ -6,7 +6,7 @@ bad="gmake"
 ext="doc:dev"
 auto_cross
 
-fetch() {
+iiifetch() {
 	curl "https://ftp.gnu.org/gnu/make/make-$pkgver.tar.gz" -o $pkgname-$pkgver.tar.gz
 	tar -xf $pkgname-$pkgver.tar.gz
 	mv make-$pkgver $pkgname-$pkgver

@@ -4,7 +4,7 @@ pkgrel=1
 bad="gmake"
 ext="doc"
 
-fetch(){
+ifetch(){
 	curl "https://www.nasm.us/pub/nasm/releasebuilds/$pkgver/$pkgname-$pkgver.tar.xz" -o $pkgname-$pkgver.tar.gz
 	tar -xf $pkgname-$pkgver.tar.gz
 }

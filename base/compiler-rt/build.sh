@@ -3,7 +3,7 @@ pkgver=18.1.8
 mver=18
 deps=linux
 
-fetch() {
+iiifetch() {
 	curl -L "https://github.com/llvm/llvm-project/releases/download/llvmorg-$pkgver/llvm-project-$pkgver.src.tar.xz" -o $pkgname-$pkgver.tar.xz
 	# for c++ headers
 	# curl -L "https://github.com/llvm/llvm-project/releases/download/llvmorg-$pkgver/libcxx-$pkgver.src.tar.xz" -o libcxx-$pkgver.tar.xz

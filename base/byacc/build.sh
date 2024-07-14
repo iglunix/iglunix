@@ -5,7 +5,7 @@ mkdeps="bmake"
 bad=""
 auto_cross
 
-fetch() {
+iiifetch() {
 	curl -O "https://invisible-island.net/archives/byacc/byacc-$pkgver.tgz"
 	tar -xf $pkgname-$pkgver.tgz
 	# Merged upstream; Don't need

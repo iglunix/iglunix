@@ -1,7 +1,7 @@
 pkgname=imv
 pkgver=4.2.0
 
-fetch() {
+ifetch() {
 	curl -L "https://github.com/eXeC64/imv/archive/refs/tags/v$pkgver.tar.gz" -o $pkgname-$pkgver.tar.xz
 	tar -xf $pkgname-$pkgver.tar.xz
 	mkdir $pkgname-$pkgver/build

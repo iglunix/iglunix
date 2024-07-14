@@ -1,8 +1,8 @@
-pkgname=pfetch
+pkgname=piifetch
 pkgver=master
 
-fetch() {
-    curl -L "https://github.com/dylanaraps/pfetch/archive/refs/heads/$pkgver.tar.gz" -o $pkgname-$pkgver.tar.gz
+iifetch() {
+    curl -L "https://github.com/dylanaraps/piifetch/archive/refs/heads/$pkgver.tar.gz" -o $pkgname-$pkgver.tar.gz
 	tar -xf $pkgname-$pkgver.tar.gz
 }
 
@@ -13,7 +13,7 @@ build() {
 
 package() {
 	cd $pkgname-$pkgver
-	install -Dm755 pfetch $pkgdir/usr/bin/
+	install -Dm755 piifetch $pkgdir/usr/bin/
 }
 
 license() {

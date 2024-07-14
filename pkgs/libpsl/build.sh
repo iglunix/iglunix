@@ -1,7 +1,7 @@
 pkgname=libpsl
 pkgver=0.21.1
 
-fetch() {
+ifetch() {
 	curl -L "https://github.com/rockdaboot/libpsl/releases/download/0.21.1/libpsl-0.21.1.tar.gz" -o $pkgname-$pkgver.tar.xz
 	tar -xf $pkgname-$pkgver.tar.xz
 	mkdir $pkgname-$pkgver/build

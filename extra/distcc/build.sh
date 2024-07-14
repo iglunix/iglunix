@@ -2,7 +2,7 @@ pkgname=distcc
 pkgver=3.3.5
 bad="gmake"
 
-fetch() {
+iifetch() {
 	curl -L "https://github.com/distcc/distcc/releases/download/v$pkgver/distcc-$pkgver.tar.gz" -o $pkgname-$pkgver.tar.xz
 	tar -xf $pkgname-$pkgver.tar.xz
 }

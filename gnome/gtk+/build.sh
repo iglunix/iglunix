@@ -3,7 +3,7 @@ _pkgver=3.24
 pkgver=$_pkgver.36
 deps="gdk-pixbuf:libepoxy:atk"
 
-fetch() {
+iifetch() {
 	curl -L "https://download.gnome.org/sources/gtk+/$_pkgver/gtk%2B-$pkgver.tar.xz" -o $pkgname-$pkgver.tar.xz
 	tar -xf $pkgname-$pkgver.tar.xz
 	mkdir -p $pkgname-$pkgver/build

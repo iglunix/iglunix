@@ -1,7 +1,7 @@
 pkgname=libnl
 pkgver=3.5.0
 
-fetch() {
+ifetch() {
 	curl -L "https://github.com/thom311/libnl/releases/download/libnl3_5_0/libnl-3.5.0.tar.gz" -o $pkgname-$pkgver.tar.xz
 	tar -xf $pkgname-$pkgver.tar.xz
 	cp ../byacc-p-makefile.patch .

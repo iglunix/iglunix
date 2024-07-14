@@ -3,7 +3,7 @@ pkgver=2.2.1
 mkdeps="cmake:samurai"
 deps="musl"
 
-fetch() {
+iifetch() {
 	curl -L "https://github.com/zlib-ng/zlib-ng/archive/refs/tags/$pkgver.tar.gz" -o $pkgname-$pkgver.tar.xz
 	tar -xf $pkgname-$pkgver.tar.xz
 	mkdir $pkgname-$pkgver/build

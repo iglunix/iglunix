@@ -4,7 +4,7 @@ mkdeps=toybox:bmake:llvm
 deps=musl:zlib-ng
 auto_cross
 
-fetch() {
+ifetch() {
 	curl -L "https://github.com/iglunix/make_ext4fs/archive/refs/tags/v$pkgver.tar.gz" -o $pkgname-$pkgver.tar.gz
 	tar -xf $pkgname-$pkgver.tar.gz
 }

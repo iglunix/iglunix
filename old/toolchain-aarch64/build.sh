@@ -1,7 +1,7 @@
 pkgname=toolchain-aarch64
 pkgver=12.0.0
 
-fetch() {
+ifetch() {
 	curl -L "https://github.com/llvm/llvm-project/releases/download/llvmorg-$pkgver/llvm-project-$pkgver.src.tar.xz" -o llvm-$pkgver.tar.gz
 	curl "https://musl.libc.org/releases/musl-1.2.2.tar.gz" -o musl-1.2.2.tar.gz
 	tar -xf llvm-$pkgver.tar.gz

@@ -1,7 +1,7 @@
 pkgname=glfw
 pkgver=3.3.4
 
-fetch() {
+iifetch() {
 	curl -L "https://github.com/glfw/glfw/archive/refs/tags/3.3.4.tar.gz" -o $pkgname-$pkgver.tar.xz
 	tar -xf $pkgname-$pkgver.tar.xz
 	mkdir $pkgname-$pkgver/build

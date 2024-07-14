@@ -1,7 +1,7 @@
 pkgname=cmph
 pkgver=2.0.2
 
-fetch() {
+ifetch() {
 	curl -L "http://downloads.sourceforge.net/$pkgname/$pkgname-$pkgver.tar.gz" -o $pkgname-$pkgver.tar.xz
 	tar -xf $pkgname-$pkgver.tar.xz
 }

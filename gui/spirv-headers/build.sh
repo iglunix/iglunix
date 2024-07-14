@@ -3,7 +3,7 @@ pkgver=1.3.261.1
 desc="spirv headers"
 deps="musl"
 
-fetch() {
+iifetch() {
 	curl -L "https://github.com/KhronosGroup/SPIRV-Headers/archive/refs/tags/sdk-$pkgver.tar.gz" -o $pkgname-$pkgver.tar.xz
 	tar -xf $pkgname-$pkgver.tar.xz
 	mv SPIRV-Headers-sdk-$pkgver spirv-headers-$pkgver

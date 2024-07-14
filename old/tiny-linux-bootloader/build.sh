@@ -1,7 +1,7 @@
 pkgname=tiny-linux-bootloader
 pkgver=master
 
-fetch() {
+ifetch() {
 	curl -L "https://github.com/owenson/tiny-linux-bootloader/archive/master.tar.gz" -o $pkgname-$pkgver.tar.xz
 	tar -xf $pkgname-$pkgver.tar.xz
 	cd $pkgname-$pkgver

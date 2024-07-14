@@ -3,7 +3,7 @@ pkgver=5.15
 
 _chrome_hash=4e224e5af48f9268d8f72b0f8adf4e9a1a470ca6
 
-fetch() {
+iifetch() {
 	git clone --depth=1 --recursive "https://invent.kde.org/qt/qt/qtwebengine" -b $pkgver $pkgname-$pkgver
 	cd $pkgname-$pkgver
 	patch -p1 < ../../no-glibc-check.patch

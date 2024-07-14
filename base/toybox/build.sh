@@ -5,7 +5,7 @@ mkdeps="bad:gmake"
 deps="musl"
 desc="all-in-one Linux command line."
 
-fetch() {
+iifetch() {
 	curl -O "https://landley.net/toybox/downloads/toybox-$pkgver.tar.gz"
 	tar -xf $pkgname-$pkgver.tar.gz
 	cd $pkgname-$pkgver

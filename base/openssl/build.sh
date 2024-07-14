@@ -5,7 +5,7 @@ deps=
 ext="dev"
 auto_cross
 
-fetch() {
+iifetch() {
 	curl "https://www.openssl.org/source/openssl-$pkgver.tar.gz" -LJo $pkgname-$pkgver.tar.xz
 	tar -xf $pkgname-$pkgver.tar.xz
 }

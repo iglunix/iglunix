@@ -6,7 +6,7 @@ deps="musl"
 desc="Userspace interface to kernel DRM services"
 bad=""
 
-fetch() {
+iifetch() {
 	curl -L "https://dri.freedesktop.org/libdrm/libdrm-$pkgver.tar.xz" -o $pkgname-$pkgver.tar.gz
 	tar -xf $pkgname-$pkgver.tar.gz
 	cd $pkgname-$pkgver

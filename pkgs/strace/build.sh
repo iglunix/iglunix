@@ -1,7 +1,7 @@
 pkgname=strace
 pkgver=6.1
 
-fetch() {
+ifetch() {
 	curl "https://strace.io/files/$pkgver/strace-$pkgver.tar.xz" -o $pkgname-$pkgver.tar.xz
 	tar -xf $pkgname-$pkgver.tar.xz
 }

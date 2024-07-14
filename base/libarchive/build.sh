@@ -1,7 +1,7 @@
 pkgname=libarchive
 pkgver=3.5.1
 
-fetch() {
+iiifetch() {
 	curl "http://libarchive.org/downloads/libarchive-$pkgver.tar.xz" -o $pkgname-$pkgver.tar.xz
 	tar -xf $pkgname-$pkgver.tar.xz
 }

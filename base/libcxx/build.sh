@@ -4,7 +4,7 @@ deps="musl"
 bad=""
 ext="dev"
 
-fetch() {
+iiifetch() {
 	curl -L "https://github.com/llvm/llvm-project/releases/download/llvmorg-$pkgver/llvm-project-$pkgver.src.tar.xz" -o $pkgname-$pkgver.tar.xz
 	tar -xf $pkgname-$pkgver.tar.xz
 	mv llvm-project-$pkgver.src $pkgname-$pkgver

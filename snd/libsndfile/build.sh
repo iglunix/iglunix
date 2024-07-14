@@ -1,7 +1,7 @@
 pkgname=libsndfile
 pkgver=1.2.0
 
-fetch() {
+ifetch() {
 	curl -L "https://github.com/libsndfile/libsndfile/releases/download/$pkgver/libsndfile-$pkgver.tar.xz" -o $pkgname-$pkgver.tar.xz
 	tar -xf $pkgname-$pkgver.tar.xz
 	mkdir $pkgname-$pkgver/build

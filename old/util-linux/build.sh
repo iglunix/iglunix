@@ -2,7 +2,7 @@ pkgver=2.36.2
 pkgname=util-linux
 pkgrel=1
 
-fetch() {
+ifetch() {
 	curl "https://mirrors.edge.kernel.org/pub/linux/utils/$pkgname/v2.36/$pkgname-$pkgver.tar.xz" -o $pkgname-$pkgver.tar.xz
 	tar -xf $pkgname-$pkgver.tar.xz
 	cd $pkgname-$pkgver

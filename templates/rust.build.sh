@@ -5,7 +5,7 @@ _clear_vendor_checksums() {
 	sed -i 's/\("files":{\)[^}]*/\1/' vendor/$1/.cargo-checksum.json
 }
 
-fetch() {
+ifetch() {
 	curl "" -o $pkgname-$pkgver.tar.xz
 	tar -xf $pkgname-$pkgver.tar.xz
 	cd $pkgname-$pkgver

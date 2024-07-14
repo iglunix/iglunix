@@ -3,7 +3,7 @@ pkgver=2020.81
 bad=gmake
 ext=doc
 
-fetch() {
+ifetch() {
 	curl "https://matt.ucc.asn.au/dropbear/releases/dropbear-$pkgver.tar.bz2" -o $pkgname-$pkgver.tar.bz2
 	tar -xf $pkgname-$pkgver.tar.bz2
 }

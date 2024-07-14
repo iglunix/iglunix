@@ -2,7 +2,7 @@ pkgname=flex
 pkgver=2.6.4
 auto_cross
 
-fetch() {
+iiifetch() {
 	curl -L "https://github.com/westes/flex/releases/download/v2.6.4/flex-$pkgver.tar.gz" -o $pkgname-$pkgver.tar.gz
 	tar -xf $pkgname-$pkgver.tar.gz
 }

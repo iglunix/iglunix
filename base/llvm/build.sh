@@ -5,7 +5,7 @@ ext="dev"
 mkdeps="cmake:samurai:python"
 deps="musl:libcxx:libunwind"
 
-fetch() {
+iiifetch() {
 	curl -L "https://github.com/llvm/llvm-project/releases/download/llvmorg-$pkgver/llvm-project-$pkgver.src.tar.xz" -o $pkgname-$pkgver.tar.gz
 	tar -xf $pkgname-$pkgver.tar.gz
 	mv llvm-project-$pkgver.src $pkgname-$pkgver

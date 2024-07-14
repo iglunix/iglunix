@@ -1,7 +1,7 @@
 pkgname=installer
 pkgver=0.0.1
 
-fetch() {
+iiifetch() {
 	curl -L "https://github.com/iglunix/installer/archive/refs/tags/v$pkgver.tar.gz" -o $pkgname-$pkgver.tar.gz
 	tar -xf $pkgname-$pkgver.tar.gz
 }

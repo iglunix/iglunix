@@ -1,7 +1,7 @@
 pkgname=libexecinfo
 pkgver=20180201
 
-fetch() {
+iifetch() {
 	curl -L  "https://github.com/resslinux/libexecinfo/archive/refs/tags/v$pkgver.tar.gz" -o $pkgname-$pkgver.tar.xz
 	tar -xf $pkgname-$pkgver.tar.xz
 }

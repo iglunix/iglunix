@@ -7,7 +7,7 @@ bad=""
 ext="doc"
 auto_cross
 
-fetch() {
+iifetch() {
 	curl -L "https://github.com/iglunix/om4/archive/refs/tags/v$pkgver.tar.gz" -o $pkgname-$pkgver.tar.xz
 	tar -xf $pkgname-$pkgver.tar.xz
 	cd $pkgname-$pkgver

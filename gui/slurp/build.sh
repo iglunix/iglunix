@@ -2,7 +2,7 @@ pkgname=slurp
 pkgver=1.3.2
 deps="wayland:cairo:libxkbcommon"
 
-fetch() {
+iifetch() {
 	curl -L "https://github.com/emersion/slurp/releases/download/v$pkgver/slurp-$pkgver.tar.gz" -o $pkgname-$pkgver.tar.gz
 	tar -xf $pkgname-$pkgver.tar.gz
 	mkdir $pkgname-$pkgver/build

@@ -2,7 +2,7 @@ pkgname=zstd
 pkgver=1.5.2
 auto_cross
 
-fetch() {
+iifetch() {
 	curl -L "https://github.com/facebook/zstd/releases/download/v$pkgver/zstd-$pkgver.tar.gz" -o $pkgname-$pkgver.tar.xz
 	tar -xf $pkgname-$pkgver.tar.xz
 }

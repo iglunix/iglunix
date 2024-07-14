@@ -1,7 +1,7 @@
 pkgname=openjdk17
 pkgver=17.0.4.1
 
-fetch() {
+iifetch() {
 	curl -L "https://cdn.azul.com/zulu/bin/zulu17.36.17-ca-jdk$pkgver-linux_musl_x64.tar.gz" -o $pkgname-$pkgver.tar.xz
 	tar -xf $pkgname-$pkgver.tar.xz
 	mv zulu* $pkgname-$pkgver

@@ -1,7 +1,7 @@
 pkgname=linux-firmware
 pkgver=20210208
 
-fetch() {
+ifetch() {
 	curl "https://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-firmware.git/snapshot/linux-firmware-20210208.tar.gz" -o $pkgname-$pkgver.tar.gz
 	tar -xf $pkgname-$pkgver.tar.gz
 }

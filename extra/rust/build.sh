@@ -30,7 +30,7 @@ else
 	export RUSTROOT="/usr"
 fi
 
-fetch() {
+iifetch() {
 	curl "https://static.rust-lang.org/dist/rustc-$pkgver-src.tar.gz" -o $pkgname-$pkgver.tar.xz
 	tar -xf $pkgname-$pkgver.tar.xz
 

@@ -1,7 +1,7 @@
 pkgname=cava
 pkgver=0.7.4
 
-fetch() {
+ifetch() {
 	curl -L "https://github.com/karlstav/cava/archive/refs/tags/$pkgver.tar.gz" -o $pkgname-$pkgver.tar.xz
 	tar -xf $pkgname-$pkgver.tar.xz
 }

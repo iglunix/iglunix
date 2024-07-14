@@ -1,7 +1,7 @@
 pkgname=iosevka
 pkgver=17.1.0                                                                                                         
                                                                                                                      
-fetch() {                                                                                                            
+iifetch() {                                                                                                            
 	curl -L "https://github.com/be5invis/Iosevka/releases/download/v17.1.0/ttf-iosevka-17.1.0.zip" -o $pkgname-$pkgver.zip
 	unzip $pkgname-$pkgver.zip -d $pkgname-$pkgver                                                                          
                                                                                                                      

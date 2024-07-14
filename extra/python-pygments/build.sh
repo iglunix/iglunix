@@ -4,7 +4,7 @@ deps=python
 bad=""
 ext="doc"
 
-fetch() {
+iifetch() {
 	curl -L "https://github.com/pygments/pygments/archive/refs/tags/$pkgver.tar.gz" -o $pkgname-$pkgver.tar.gz
 	tar -xf $pkgname-$pkgver.tar.gz
 	mv pygments-$pkgver python-pygments-$pkgver

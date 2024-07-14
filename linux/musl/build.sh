@@ -5,7 +5,7 @@ mkdeps="bad:gmake"
 bad="gmake"
 ext="dev"
 
-fetch() {
+ifetch() {
 	curl "https://musl.libc.org/releases/$pkgname-$pkgver.tar.gz" -o $pkgname-$pkgver.tar.gz
 	tar -xf $pkgname-$pkgver.tar.gz
 	ln -s /usr/bin/cc $ARCH-linux-musl-cc

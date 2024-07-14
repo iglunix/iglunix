@@ -1,7 +1,7 @@
 pkgname=xkeyboard-config
 pkgver=2.33
 
-fetch() {
+ifetch() {
 	curl "https://xorg.freedesktop.org/archive/individual/data/$pkgname/$pkgname-$pkgver.tar.bz2" -o $pkgname-$pkgver.tar.xz
 	tar -xf $pkgname-$pkgver.tar.xz
 	mkdir $pkgname-$pkgver/build

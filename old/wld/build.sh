@@ -2,7 +2,7 @@ pkgname=wld
 pkgver=master
 deps="fontconfig"
 
-fetch() {
+ifetch() {
 	curl -L "https://github.com/michaelforney/wld/archive/refs/heads/master.tar.gz" -o $pkgname-$pkgver.tar.xz
 	tar -xf $pkgname-$pkgver.tar.xz
 }

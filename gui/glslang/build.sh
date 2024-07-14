@@ -1,7 +1,7 @@
 pkgname=glslang
 pkgver=master
 
-fetch() {
+iifetch() {
 	curl -L "https://github.com/KhronosGroup/glslang/archive/refs/heads/master.tar.gz" -o $pkgname-$pkgver.tar.xz
 	tar -xf $pkgname-$pkgver.tar.xz
 	mkdir $pkgname-$pkgver/build

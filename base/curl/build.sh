@@ -7,7 +7,7 @@ deps="openssl"
 bad=""
 auto_cross
 
-fetch() {
+iiifetch() {
 	curl -L "https://github.com/curl/curl/releases/download/curl-$pkg_ver/curl-$pkgver.tar.xz" -o $pkgname-$pkgver.tar.gz
 	tar -xf $pkgname-$pkgver.tar.gz
 }

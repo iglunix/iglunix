@@ -1,7 +1,7 @@
 pkgname=libpng
 pkgver=1.6.37
 
-fetch() {
+iifetch() {
 	curl -L "https://downloads.sourceforge.net/sourceforge/$pkgname/$pkgname-$pkgver.tar.xz" -o $pkgname-$pkgver.tar.xz
 	tar -xf $pkgname-$pkgver.tar.xz
 }

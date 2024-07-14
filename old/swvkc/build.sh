@@ -1,7 +1,7 @@
 pkgname=swvkc
 pkgver=master
 
-fetch() {
+ifetch() {
 	curl -L "https://github.com/st3r4g/swvkc/archive/master.tar.gz" -o $pkgname-$pkgver.tar.gz
 	tar -xf $pkgname-$pkgver.tar.gz
 	mkdir $pkgname-$pkgver/build

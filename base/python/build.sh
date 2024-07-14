@@ -7,7 +7,7 @@ bad=""
 ext="doc"
 auto_cross
 
-fetch() {
+iifetch() {
 	curl "https://www.python.org/ftp/python/$pkgver/Python-$pkgver.tar.xz" -o $pkgname-$pkgver.tar.xz
 	tar -xf $pkgname-$pkgver.tar.xz
 	mv Python-$pkgver $pkgname-$pkgver

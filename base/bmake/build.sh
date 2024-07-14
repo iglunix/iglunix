@@ -5,7 +5,7 @@ deps="musl"
 desc="Portable version of the NetBSD make build tool"
 auto_cross
 
-fetch() {
+iiifetch() {
 	curl http://www.crufty.net/ftp/pub/sjg/bmake-$pkgver.tar.gz -o $pkgname-$pkgver.tar.gz
 	tar -xf $pkgname-$pkgver.tar.gz
 	mv $pkgname $pkgname-$pkgver

@@ -1,7 +1,7 @@
 pkgname=libslirp
 pkgver=4.6.1
 
-fetch() {
+ifetch() {
 	curl "https://gitlab.freedesktop.org/slirp/libslirp/-/archive/v$pkgver/libslirp-v$pkgver.tar.bz2" -o $pkgname-$pkgver.tar.bz2
 	tar -xf $pkgname-$pkgver.tar.bz2
 	mv $pkgname-v$pkgver $pkgname-$pkgver

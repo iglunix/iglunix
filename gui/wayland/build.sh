@@ -3,7 +3,7 @@ pkgver=1.22.0
 mkdeps=muon:samurai:pkgconf:python
 deps=libffi:expat
 
-fetch() {
+ifetch() {
 	curl -L "https://gitlab.freedesktop.org/wayland/wayland/-/releases/$pkgver/downloads/wayland-$pkgver.tar.xz" -o $pkgname-$pkgver.tar.xz
 	tar -xf $pkgname-$pkgver.tar.xz
 	mkdir $pkgname-$pkgver/build

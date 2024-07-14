@@ -4,7 +4,7 @@ mkdeps=pkgconf:bad:gmake
 deps=musl:libarchive:openssl
 desc="fast, easy to use and portable package manager"
 
-fetch() {
+iifetch() {
 	curl -L "https://github.com/void-linux/xbps/archive/refs/tags/$pkgver.tar.gz" -o $pkgname-$pkgver.tar.gz
 	tar -xf $pkgname-$pkgver.tar.gz
 

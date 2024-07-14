@@ -7,7 +7,7 @@ desc="build system"
 bad=""
 ext=""
 
-fetch() {
+iiifetch() {
 	curl -LO "https://github.com/Kitware/CMake/releases/download/v$pkgver/cmake-$pkgver.tar.gz"
 	tar -xf $pkgname-$pkgver.tar.gz
 }

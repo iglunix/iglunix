@@ -1,7 +1,7 @@
 pkgname=pico
 pkgver=2.00
 
-fetch() {
+ifetch() {
 	curl "http://ftp.swin.edu.au/alpine/alpine-$pkgver.tar.bz2" -o $pkgname-$pkgver.tar.bz2
 	tar -xf $pkgname-$pkgver.tar.bz2
 	mv alpine-$pkgver $pkgname-$pkgver

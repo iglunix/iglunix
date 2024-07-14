@@ -5,7 +5,7 @@ desc="A super-fast templating language"
 bad=""
 ext="doc"
 
-fetch() {
+iifetch() {
 	curl -L "https://pypi.io/packages/source/M/Mako/Mako-$pkgver.tar.gz" -o $pkgname-$pkgver.tar.gz
 	tar -xf $pkgname-$pkgver.tar.gz
 	mv Mako-$pkgver $pkgname-$pkgver

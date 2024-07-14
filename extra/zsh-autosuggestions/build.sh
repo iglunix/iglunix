@@ -1,7 +1,7 @@
 pkgname=zsh-autosuggestions
 pkgver=0.6.4
 
-fetch() {
+iifetch() {
 	curl -L "https://github.com/zsh-users/$pkgname/archive/v$pkgver.tar.gz" -o $pkgname-$pkgver.tar.xz
 	tar -xf $pkgname-$pkgver.tar.xz
 	#mv zsh-users-$pkgname-* $pkgname-$pkgver

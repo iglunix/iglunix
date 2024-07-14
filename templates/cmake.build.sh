@@ -1,7 +1,7 @@
 pkgname=
 pkgver=
 
-fetch() {
+ifetch() {
 	curl "" -o $pkgname-$pkgver.tar.xz
 	tar -xf $pkgname-$pkgver.tar.xz
 	mkdir $pkgname-$pkgver/build

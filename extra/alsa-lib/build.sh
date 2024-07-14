@@ -1,7 +1,7 @@
 pkgname=alsa-lib
 pkgver=1.2.7.2
 
-fetch() {
+iifetch() {
 	curl -L "http://www.alsa-project.org/files/pub/lib/alsa-lib-$pkgver.tar.bz2" -o $pkgname-$pkgver.tar.xz
 	tar -xf $pkgname-$pkgver.tar.xz
 }

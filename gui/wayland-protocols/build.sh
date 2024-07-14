@@ -3,7 +3,7 @@ pkgver=1.36
 mkdeps="muon:samurai:pkgconf"
 deps="musl:wayland"
 
-fetch() {
+ifetch() {
 	curl -L "https://gitlab.freedesktop.org/wayland/wayland-protocols/-/releases/$pkgver/downloads/wayland-protocols-$pkgver.tar.xz" -o $pkgname-$pkgver.tar.xz
 	tar -xf $pkgname-$pkgver.tar.xz
 	mkdir $pkgname-$pkgver/build

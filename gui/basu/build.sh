@@ -1,7 +1,7 @@
 pkgname=basu
 pkgver=0.2.0
 
-fetch() {
+iifetch() {
 	curl "https://git.sr.ht/~emersion/basu/refs/download/v$pkgver/basu-$pkgver.tar.gz" -o $pkgname-$pkgver.tar.gz
 	tar -xf $pkgname-$pkgver.tar.gz
 	mkdir $pkgname-$pkgver/build

@@ -1,7 +1,7 @@
 pkgname=kak-lsp
 pkgver=14.0.0
 
-fetch() {
+iifetch() {
 	curl -L "https://github.com/kak-lsp/kak-lsp/archive/v$pkgver.tar.gz" -o $pkgname-$pkgver.tar.xz
 	tar -xf $pkgname-$pkgver.tar.xz
 }

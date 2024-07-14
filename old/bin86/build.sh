@@ -1,7 +1,7 @@
 pkgname=bin86
 pkgver=0.16.21
 
-fetch() {
+ifetch() {
 	curl "https://sources.archlinux.org/other/community/dev86/$pkgname-$pkgver.tar.gz" -o $pkgname-$pkgver.tar.xz
 	tar -xf $pkgname-$pkgver.tar.xz
 	cd $pkgname-$pkgver

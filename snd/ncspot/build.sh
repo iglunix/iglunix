@@ -5,7 +5,7 @@ _clear_vendor_checksums() {
     	sed -i 's/\("files":{\)[^}]*/\1/' vendor/$1/.cargo-checksum.json
 }
 
-fetch() {
+ifetch() {
 	curl -L "https://github.com/hrkfdn/ncspot/archive/refs/tags/v$pkgver.tar.gz" -o $pkgname-$pkgver.tar.gz
 	tar -xf $pkgname-$pkgver.tar.gz
 	cd $pkgname-$pkgver

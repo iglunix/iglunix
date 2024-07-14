@@ -1,7 +1,7 @@
 pkgname=zig
 pkgver=0.8.0
 
-fetch() {
+iifetch() {
 	curl "https://ziglang.org/download/$pkgver/zig-$pkgver.tar.xz" -o $pkgname-$pkgver.tar.gz
 	tar -xf $pkgname-$pkgver.tar.gz
 	mkdir $pkgname-$pkgver/build

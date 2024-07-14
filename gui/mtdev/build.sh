@@ -3,7 +3,7 @@ pkgver=1.1.7
 mkdeps=bmake
 deps=
 
-fetch() {
+iifetch() {
 	curl "http://bitmath.org/code/mtdev/mtdev-$pkgver.tar.gz" -o $pkgname-$pkgver.tar.xz
 	tar -xf $pkgname-$pkgver.tar.xz
 }

@@ -1,7 +1,7 @@
 pkgname=rust
 pkgver=1.71.0
 
-fetch() {
+iifetch() {
 	curl "https://static.rust-lang.org/dist/rust-$pkgver-$ARCH-unknown-linux-musl.tar.gz" -o rust.tar.gz
 	tar -xf rust.tar.gz
 }

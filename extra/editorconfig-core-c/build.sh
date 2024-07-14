@@ -1,7 +1,7 @@
 pkgname=editorconfig-core-c
 pkgver=0.12.5
 
-fetch() {
+iifetch() {
 	curl -L "https://github.com/editorconfig/editorconfig-core-c/archive/refs/tags/v$pkgver.tar.gz" -o $pkgname-$pkgver.tar.xz
 	tar -xf $pkgname-$pkgver.tar.xz
 	mkdir $pkgname-$pkgver/build

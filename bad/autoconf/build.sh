@@ -1,7 +1,7 @@
 pkgname=autoconf
 pkgver=2.13
 
-fetch() {
+iiifetch() {
 	curl "https://ftp.gnu.org/gnu/autoconf/autoconf-$pkgver.tar.gz" -o $pkgname-$pkgver.tar.gz
 	tar -xf $pkgname-$pkgver.tar.gz
 	cd $pkgname-$pkgver

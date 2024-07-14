@@ -2,7 +2,7 @@ pkgname=atk
 _pkgver=2.38
 pkgver=$_pkgver.0
 
-fetch() {
+iifetch() {
 	curl -L "https://download.gnome.org/sources/atk/$_pkgver/atk-$pkgver.tar.xz" -o $pkgname-$pkgver.tar.xz
 	tar -xf $pkgname-$pkgver.tar.xz
 	mkdir $pkgname-$pkgver/build

@@ -1,7 +1,7 @@
 pkgname=python-
 pkgver=
 
-fetch() {
+ifetch() {
 	curl "" -o $pkgname-$pkgver.tar.xz
 	tar -xf $pkgname-$pkgver.tar.xz
 }

@@ -1,7 +1,7 @@
 pkgname=vulkan-validation-layers
 pkgver=1.2.184
 
-fetch() {
+ifetch() {
 	curl -L "https://github.com/KhronosGroup/Vulkan-ValidationLayers/archive/refs/tags/v$pkgver.tar.gz" -o $pkgname-$pkgver.tar.xz
 	tar -xf $pkgname-$pkgver.tar.xz
 	mv Vulkan-ValidationLayers-$pkgver $pkgname-$pkgver

@@ -1,7 +1,7 @@
 pkgname=velox
 pkgver=master
 
-fetch() {
+ifetch() {
 	curl -L "https://github.com/michaelforney/velox/archive/refs/heads/master.tar.gz" -o $pkgname-$pkgver.tar.xz
 	tar -xf $pkgname-$pkgver.tar.xz
 	cp ../config.mk .

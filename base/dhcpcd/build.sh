@@ -3,7 +3,7 @@ pkgver=10.0.8
 mkdeps="bmake"
 deps="musl"
 
-fetch() {
+iiifetch() {
 	curl -LO "https://github.com/NetworkConfiguration/dhcpcd/releases/download/v$pkgver/dhcpcd-$pkgver.tar.xz"
 	tar -xf $pkgname-$pkgver.tar.xz
 }

@@ -39,14 +39,14 @@ case "$KERNEL_TREE" in
 		# LTS
 		src_tar="https://cdn.kernel.org/pub/linux/kernel/v6.x/linux-$pkgver.tar.xz"
 		# temporarily disabled to reduce ci time
-		# fetch_config="https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-$ARCH-fedora.config"
+		# ifetch_config="https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-$ARCH-fedora.config"
 		# config=olddefconfig
 		config=defconfig
 		;;
 	asahi)
 		pkgver=asahi
 		src_tar="https://github.com/AsahiLinux/linux/archive/refs/heads/asahi.tar.gz"
-		fetch_config="https://raw.githubusercontent.com/AsahiLinux/PKGBUILDs/main/linux-asahi/config"
+		ifetch_config="https://raw.githubusercontent.com/AsahiLinux/PKGBUILDs/main/linux-asahi/config"
 		config=olddefconfig
 		;;
 	visionfive)
@@ -59,12 +59,12 @@ case "$KERNEL_TREE" in
 		;;
 esac
 
-fetch() {
+ifetch() {
 	curl -L "$src_tar" -o $pkgname-$pkgver.tar
 	tar -xf $pkgname-$pkgver.tar
 
 	# use Alpine's kernel config so we don't have to maintain one
-	[ ! -z "$fetch_config" ] && curl "$fetch_config" -o .config
+	[ ! -z "$ifetch_config" ] && curl "$ifetch_config" -o .config
 	cd $pkgname-$pkgver
 	echo "#!/bin/true" > scripts/check-local-export
 }
@@ -87,7 +87,7 @@ fi
 
 build() {
 	cd $pkgname-$pkgver
-	[ ! -z "$fetch_config" ] && cp ../.config .
+	[ ! -z "$ifetch_config" ] && cp ../.config .
 
 	grep -v 'select HAVE_OBJTOOL' arch/x86/Kconfig > _
 	mv _ arch/x86/Kconfig

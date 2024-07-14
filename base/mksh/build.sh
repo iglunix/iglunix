@@ -6,7 +6,7 @@ ext="doc"
 desc="MirBSD Korn Shell"
 auto_cross
 
-fetch() {
+iifetch() {
 	curl http://www.mirbsd.org/MirOS/dist/mir/mksh/mksh-R59c.tgz -o $pkgname-$pkgver.tar.gz
 	curl http://www.mirbsd.org/TaC-mksh.txt -o license.txt
 	tar -xf $pkgname-$pkgver.tar.gz

@@ -1,7 +1,7 @@
 pkgname=glow
 pkgver=1.3.0
 
-fetch() {
+iifetch() {
 	curl -L "https://github.com/charmbracelet/glow/archive/v$pkgver.tar.gz" -o $pkgname-$pkgver.tar.xz
 	tar -xf $pkgname-$pkgver.tar.xz
 }

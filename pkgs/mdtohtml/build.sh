@@ -1,7 +1,7 @@
 pkgname=mdtohtml
 pkgver=master
 
-fetch() {
+ifetch() {
 	curl -L "https://github.com/gomarkdown/mdtohtml/archive/refs/heads/master.tar.gz" -o $pkgname-$pkgver.tar.xz
 	tar -xf $pkgname-$pkgver.tar.xz
 	cp ../go.mod .

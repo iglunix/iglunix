@@ -4,7 +4,7 @@ pkgname=libxml2
 bad=""
 ext="dev"
 
-fetch() {
+iifetch() {
 	curl -L "https://download.gnome.org/sources/libxml2/$_pkgver/libxml2-$pkgver.tar.xz" -o $pkgname-$pkgver.tar.gz
 	tar -xf $pkgname-$pkgver.tar.gz
 }

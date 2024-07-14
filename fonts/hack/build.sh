@@ -1,7 +1,7 @@
 pkgname=hack
 pkgver=3.003                                                                                                         
                                                                                                                      
-fetch() {                                                                                                            
+iifetch() {                                                                                                            
         mkdir $pkgname-$pkgver         
         cd $pkgname-$pkgver
 	curl -L "https://github.com/source-foundry/Hack/releases/download/v$pkgver/Hack-v$pkgver-ttf.tar.xz" -o $pkgname-$pkgver.tar.xz

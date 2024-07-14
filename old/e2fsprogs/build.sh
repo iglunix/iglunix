@@ -3,7 +3,7 @@ pkgver=1.45.6
 bad="gmake"
 
 
-fetch() {
+ifetch() {
 	curl -L "https://mirrors.edge.kernel.org/pub/linux/kernel/people/tytso/e2fsprogs/v$pkgver/$pkgname-$pkgver.tar.xz" -o $pkgname-$pkgver.tar.xz
 	tar -xf $pkgname-$pkgver.tar.xz
 }

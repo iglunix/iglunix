@@ -3,7 +3,7 @@ pkgver=main
 mkdeps="rust"
 deps=""
 
-fetch() {
+iifetch() {
 	curl -L "https://github.com/LightningCreations/lc-make/archive/refs/heads/main.tar.gz" -o $pkgname-$pkgver.tar.xz
 	tar -xf $pkgname-$pkgver.tar.xz
 	cd $pkgname-$pkgver

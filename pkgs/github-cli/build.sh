@@ -1,7 +1,7 @@
 pkgname=github-cli
 pkgver=1.6.2
 
-fetch() {
+ifetch() {
 	curl -L "https://github.com/cli/cli/archive/v1.6.2.tar.gz" -o $pkgname-$pkgver.tar.xz
 	tar -xf $pkgname-$pkgver.tar.xz
 	mv cli-$pkgver $pkgname-$pkgver

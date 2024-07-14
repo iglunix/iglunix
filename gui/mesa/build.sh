@@ -5,7 +5,7 @@ mkdeps="python:python-mako:samurai"
 deps="musl:wayland:wayland-protocols:llvm:zlib-ng:expat:libffi:libdrm:glslang"
 ext=dev
 
-fetch() {
+iifetch() {
 	curl "https://archive.mesa3d.org/$pkgname-$pkgver.tar.xz" -o $pkgname-$pkgver.tar.gz
 #	curl "https://gitlab.freedesktop.org/mesa/mesa/-/archive/main/mesa-main.tar.gz" -o $pkgname-$pkgver.tar.gz
 	tar -xf $pkgname-$pkgver.tar.gz

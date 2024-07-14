@@ -1,7 +1,7 @@
 pkgname=ImageMagick
 pkgver=7.1.0
 
-fetch() {
+ifetch() {
 	curl "https://download.imagemagick.org/ImageMagick/download/ImageMagick.tar.gz" -o $pkgname-$pkgver.tar.xz
 	tar -xf $pkgname-$pkgver.tar.xz
 }

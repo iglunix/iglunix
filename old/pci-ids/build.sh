@@ -4,7 +4,7 @@ pkgrel=1
 bad=""
 ext=""
 
-fetch() {
+ifetch() {
 	mkdir $pkgname-$pkgver
 	cd $pkgname-$pkgver
 	curl "https://pci-ids.ucw.cz/v2.2/pci.ids" -o pci.ids

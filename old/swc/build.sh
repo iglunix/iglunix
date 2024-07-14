@@ -2,7 +2,7 @@ pkgname=swc
 deps="wld:pixman"
 pkgver=intel-tiling
 
-fetch() {
+ifetch() {
 	curl -L "https://github.com/michaelforney/swc/archive/refs/heads/intel-tiling.tar.gz" -o $pkgname-$pkgver.tar.xz
 	tar -xf $pkgname-$pkgver.tar.xz
 	cp ../config.mk .

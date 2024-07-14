@@ -2,7 +2,7 @@ pkgname=dbus-glib
 pkgver=0.112
 deps="dbus"
 
-fetch() {
+iifetch() {
 	curl "https://dbus.freedesktop.org/releases/dbus-glib/dbus-glib-$pkgver.tar.gz" -o $pkgname-$pkgver.tar.gz
 	tar -xf $pkgname-$pkgver.tar.gz
 	mkdir $pkgname-$pkgver/build

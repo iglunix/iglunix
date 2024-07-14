@@ -1,7 +1,7 @@
 pkgname=mpv
 pkgver=0.34.1
 
-fetch() {
+ifetch() {
 	curl -L "https://github.com/mpv-player/mpv/archive/refs/tags/v$pkgver.tar.gz" -o $pkgname-$pkgver.tar.xz
 	tar -xf $pkgname-$pkgver.tar.xz
 }

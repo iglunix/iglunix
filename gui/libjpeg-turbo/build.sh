@@ -1,7 +1,7 @@
 pkgname=libjpeg-turbo
 pkgver=2.1.2
 
-fetch() {
+iifetch() {
 	curl -L "https://github.com/libjpeg-turbo/libjpeg-turbo/archive/refs/tags/$pkgver.tar.gz" -o $pkgname-$pkgver.tar.gz
 	tar -xf $pkgname-$pkgver.tar.gz
 	mkdir $pkgname-$pkgver/build

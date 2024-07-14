@@ -6,7 +6,7 @@ mkdeps="bmake"
 deps="musl"
 desc="Package compiler and linker metadata toolkit"
 
-fetch() {
+iifetch() {
 	curl https://distfiles.dereferenced.org/pkgconf/pkgconf-$pkgver.tar.xz -o $pkgname-$pkgver.tar.xz
 	tar -xf $pkgname-$pkgver.tar.xz
 }

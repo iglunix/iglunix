@@ -2,7 +2,7 @@ pkgname=grim
 pkgver=1.3.2
 deps="wayland:cairo"
 
-fetch() {
+iifetch() {
 	curl -L "https://github.com/emersion/grim/releases/download/v$pkgver/grim-$pkgver.tar.gz" -o $pkgname-$pkgver.tar.gz
 	tar -xf $pkgname-$pkgver.tar.gz
 	mkdir $pkgname-$pkgver/build

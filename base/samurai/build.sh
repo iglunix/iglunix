@@ -5,7 +5,7 @@ pkgrel=1
 deps="musl"
 auto_cross
 
-fetch() {
+iifetch() {
 	curl -L "http://github.com/michaelforney/samurai/releases/download/1.2/$pkgname-$pkgver.tar.gz" -o $pkgname-$pkgver.tar.gz
 	tar -xf $pkgname-$pkgver.tar.gz
 }

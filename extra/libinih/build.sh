@@ -1,7 +1,7 @@
 pkgname=inih
 pkgver=r56
 
-fetch() {
+iifetch() {
 	curl -L "https://github.com/benhoyt/inih/archive/refs/tags/$pkgver.tar.gz" -o $pkgname-$pkgver.tar.xz
 	tar -xf $pkgname-$pkgver.tar.xz
 	mkdir $pkgname-$pkgver/build

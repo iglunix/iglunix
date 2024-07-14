@@ -5,7 +5,7 @@ bad="gmake"
 ext="doc"
 auto_cross
 
-fetch() {
+iiifetch() {
 	curl -L "https://github.com/Duncaen/OpenDoas/releases/download/v$pkgver/opendoas-$pkgver.tar.xz" -o $pkgname-$pkgver.tar.xz
 	tar -xf $pkgname-$pkgver.tar.xz
 	mv opendoas-$pkgver $pkgname-$pkgver

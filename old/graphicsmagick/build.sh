@@ -1,7 +1,7 @@
 pkgname=graphicsmagick
 pkgver=1.3.36
 
-fetch() {
+ifetch() {
 	curl "http://ftp.icm.edu.pl/pub/unix/graphics/GraphicsMagick/GraphicsMagick-LATEST.tar.zst" -o $pkgname-$pkgver.tar.zst
 	tar -I zstd -xf $pkgname-$pkgver.tar.zst
 	mv GraphicsMagick-$pkgver $pkgname-$pkgver

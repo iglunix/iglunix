@@ -1,7 +1,7 @@
 pkgname=rsync
 pkgver=3.2.3
 
-fetch() {
+ifetch() {
 	curl "https://download.samba.org/pub/rsync/src/rsync-3.2.3.tar.gz" -o $pkgname-$pkgver.tar.xz
 	tar -xf $pkgname-$pkgver.tar.xz
 }

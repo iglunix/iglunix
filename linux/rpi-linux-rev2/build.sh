@@ -3,8 +3,8 @@ pkgname=linux
 pkgrel=1
 ext="dev"
 
-fetch() {
-    fetch_tar "$pkgname-$pkgver.tar.gz" f633fabf55892cf19fc9173d2b8df779 "https://github.com/raspberrypi/linux/archive/refs/heads/$pkgver.tar.gz"
+ifetch() {
+    ifetch_tar "$pkgname-$pkgver.tar.gz" f633fabf55892cf19fc9173d2b8df779 "https://github.com/raspberrypi/linux/archive/refs/heads/$pkgver.tar.gz"
 	cd $pkgname-$pkgver
 
 	patch -p1 < ../../kernel-byacc.patch

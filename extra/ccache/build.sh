@@ -1,7 +1,7 @@
 pkgname=ccache
 pkgver=4.2.1
 
-fetch() {
+iifetch() {
 	curl -L "https://github.com/ccache/ccache/releases/download/v4.2.1/ccache-4.2.1.tar.xz" -o $pkgname-$pkgver.tar.xz
 	tar -xf $pkgname-$pkgver.tar.xz
 	mkdir $pkgname-$pkgver/build

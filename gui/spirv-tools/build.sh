@@ -3,7 +3,7 @@ pkgver=1.3.261.1
 desc="spirv tools"
 deps="musl"
 
-fetch() {
+iifetch() {
 	curl -L "https://github.com/KhronosGroup/SPIRV-Tools/archive/refs/tags/sdk-$pkgver.tar.gz" -o $pkgname-$pkgver.tar.xz
 	tar -xf $pkgname-$pkgver.tar.xz
 	mv SPIRV-Tools-sdk-$pkgver spirv-tools-$pkgver

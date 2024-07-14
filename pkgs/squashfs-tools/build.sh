@@ -1,7 +1,7 @@
 pkgname=squashfs-tools
 pkgver=master
 
-fetch() {
+ifetch() {
 	curl -L "https://github.com/plougher/squashfs-tools/archive/refs/heads/master.tar.gz" -o $pkgname-$pkgver.tar.xz
 	tar -xf $pkgname-$pkgver.tar.xz
 }

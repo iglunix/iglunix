@@ -1,7 +1,7 @@
 pkgname=iwd
 pkgver=2.4
 
-fetch() {
+iiifetch() {
 	curl "https://mirrors.edge.kernel.org/pub/linux/network/wireless/iwd-$pkgver.tar.xz" -o $pkgname-$pkgver.tar.xz
 	tar -xf $pkgname-$pkgver.tar.xz
 }

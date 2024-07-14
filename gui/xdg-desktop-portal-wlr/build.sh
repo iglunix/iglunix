@@ -1,7 +1,7 @@
 pkgname=xdg-desktop-portal-wlr
 pkgver=0.5.0
 
-fetch() {
+ifetch() {
 	curl -L "https://github.com/emersion/xdg-desktop-portal-wlr/releases/download/v$pkgver/xdg-desktop-portal-wlr-$pkgver.tar.gz" -o $pkgname-$pkgver.tar.xz
 	tar -xf $pkgname-$pkgver.tar.xz
 	mkdir $pkgname-$pkgver/build

@@ -2,7 +2,7 @@ pkgname=gdk-pixbuf
 _pkgver=2.42
 pkgver=$_pkgver.6
 
-fetch() {
+iifetch() {
 	curl -L "https://download.gnome.org/sources/gdk-pixbuf/$_pkgver/gdk-pixbuf-$pkgver.tar.xz" -o $pkgname-$pkgver.tar.xz
 	tar -xf $pkgname-$pkgver.tar.xz
 	mkdir $pkgname-$pkgver/build

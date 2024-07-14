@@ -5,7 +5,7 @@ deps="musl:llvm"
 bad=""
 ext="doc"
 
-fetch() {
+iiifetch() {
 	curl -L "https://github.com/mawww/kakoune/archive/master.tar.gz" -o $pkgname-$pkgver.tar.xz
 	tar -xf $pkgname-$pkgver.tar.xz
 }

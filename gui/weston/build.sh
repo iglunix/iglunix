@@ -1,7 +1,7 @@
 pkgname=weston
 pkgver=9.0.0
 
-fetch() {
+ifetch() {
 	curl "https://wayland.freedesktop.org/releases/$pkgname-$pkgver.tar.xz" -o $pkgname-$pkgver.tar.xz
 	tar -xf $pkgname-$pkgver.tar.xz
 	mkdir $pkgname-$pkgver/build

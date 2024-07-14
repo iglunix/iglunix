@@ -5,7 +5,7 @@ deps="musl"
 ext="doc:dev"
 auto_cross
 
-fetch() {
+iifetch() {
 	curl -L "http://ftp.barfooze.de/pub/sabotage/tarballs/netbsd-curses-$pkgver.tar.xz" -o $pkgname-$pkgver.tar.xz
 	tar -xf $pkgname-$pkgver.tar.xz
 	cd $pkgname-$pkgver

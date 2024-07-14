@@ -5,7 +5,7 @@ deps="busybox:toybox"
 bad=""
 ext="dev:doc"
 
-fetch() {
+iiifetch() {
 	mkdir $pkgname-$pkgver
 	cp ../profile.sh .
 	cp ../motd .

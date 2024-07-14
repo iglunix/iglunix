@@ -1,7 +1,7 @@
 pkgname=lua
 pkgver=5.4.3
 
-fetch() {
+iifetch() {
 	curl "http://www.lua.org/ftp/lua-$pkgver.tar.gz" -o $pkgname-$pkgver.tar.gz
 	tar -xf $pkgname-$pkgver.tar.gz
 }

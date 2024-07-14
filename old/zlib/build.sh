@@ -3,7 +3,7 @@ pkgname=zlib
 bad=""
 ext="dev"
 
-fetch() {
+ifetch() {
 	curl https://zlib.net/zlib-1.2.11.tar.xz -o $pkgname-$pkgver.tar.gz
 	tar -xf $pkgname-$pkgver.tar.gz
 }

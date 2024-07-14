@@ -3,7 +3,7 @@ pkgver=0.0.3
 mkdeps="bmake"
 deps="busybox:toybox:mksh:xbps"
 
-fetch() {
+iiifetch() {
 	curl -L "https://github.com/iglunix/iglupkg/archive/refs/tags/v$pkgver.tar.gz" -o $pkgname-$pkgver.tar.xz
 	tar -xf $pkgname-$pkgver.tar.xz
 }

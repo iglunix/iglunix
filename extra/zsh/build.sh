@@ -2,7 +2,7 @@ pkgname=zsh
 pkgver=5.9
 ext=doc
 
-fetch() {
+iifetch() {
 	curl "https://www.zsh.org/pub/zsh-$pkgver.tar.xz" -o $pkgname-$pkgver.tar.xz
 	tar -xf $pkgname-$pkgver.tar.xz
 	cp ../zprofile.zsh .

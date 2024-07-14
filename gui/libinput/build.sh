@@ -3,7 +3,7 @@ pkgver=1.24.0
 mkdeps="samurai:muon:pkgconf"
 deps="mtdev:libevdev:libudev-zero"
 
-fetch() {
+iifetch() {
 	curl "https://gitlab.freedesktop.org/libinput/libinput/-/archive/$pkgver/libinput-$pkgver.tar.gz" -o $pkgname-$pkgver.tar.xz
 	tar -xf $pkgname-$pkgver.tar.xz
 	mkdir $pkgname-$pkgver/build

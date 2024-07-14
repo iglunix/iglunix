@@ -1,7 +1,7 @@
 pkgname=linux-pam
 pkgver=1.5.1
 
-fetch() {
+ifetch() {
 	curl -L "https://github.com/linux-pam/linux-pam/releases/download/v1.5.1/Linux-PAM-1.5.1.tar.xz" -o $pkgname-$pkgver.tar.xz
 	tar -xf $pkgname-$pkgver.tar.xz
 	mv Linux-PAM-$pkgver $pkgname-$pkgver

@@ -3,7 +3,7 @@ pkgver=1.3.261.1
 deps="musl"
 desc="Vulkan tools"
 
-fetch() {
+ifetch() {
 	curl -L "https://github.com/KhronosGroup/Vulkan-Tools/archive/refs/tags/sdk-$pkgver.tar.gz" -o $pkgname-$pkgver.tar.xz
 	tar -xf $pkgname-$pkgver.tar.xz
 	mv Vulkan-Tools-sdk-$pkgver $pkgname-$pkgver

@@ -1,7 +1,7 @@
 pkgname=kbd
 pkgver=2.4.0
 
-fetch() {
+ifetch() {
 	curl "https://mirrors.edge.kernel.org/pub/linux/utils/kbd/kbd-$pkgver.tar.xz" -o $pkgname-$pkgver.tar.xz
 	curl "https://raw.githubusercontent.com/workman-layout/Workman/master/linux_console/workman.iso15.kmap" -o workman.map
 	tar -xf $pkgname-$pkgver.tar.xz

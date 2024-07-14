@@ -1,7 +1,7 @@
 pkgname=json-glib
 pkgver=1.6.6
 
-fetch() {
+iifetch() {
 	curl -L "https://download.gnome.org/sources/json-glib/1.6/json-glib-$pkgver.tar.xz" -o $pkgname-$pkgver.tar.xz
 	tar -xf $pkgname-$pkgver.tar.xz
 	mkdir $pkgname-$pkgver/build

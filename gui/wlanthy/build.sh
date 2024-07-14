@@ -1,7 +1,7 @@
 pkgname=wlanthy
 pkgver=main
 
-fetch() {
+ifetch() {
 	curl -L "https://github.com/st3r4g/wlanthy/archive/refs/heads/main.tar.gz" -o $pkgname-$pkgver.tar.gz
 	tar -xf $pkgname-$pkgver.tar.gz
 	mkdir $pkgname-$pkgver/build

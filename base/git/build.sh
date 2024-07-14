@@ -6,7 +6,7 @@ deps="zlib-ng:curl:openssl"
 bad="gmake"
 ext="doc"
 
-fetch() {
+iiifetch() {
 	curl "https://mirrors.edge.kernel.org/pub/software/scm/git/git-$pkgver.tar.xz" -o $pkgname-$pkgver.tar.xz
 	tar -xf $pkgname-$pkgver.tar.xz
 }

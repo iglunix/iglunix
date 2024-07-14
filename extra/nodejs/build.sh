@@ -1,7 +1,7 @@
 pkgname=nodejs
 pkgver=20.15.0
 
-fetch() {
+iifetch() {
 	curl -L "https://nodejs.org/dist/v$pkgver/node-v$pkgver.tar.gz" -o $pkgname-$pkgver.tar.xz
 	tar -xf $pkgname-$pkgver.tar.xz
 	mv node-v$pkgver $pkgname-$pkgver

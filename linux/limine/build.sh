@@ -3,7 +3,7 @@ pkgver=4.0
 mkdeps="nasm:llvm"
 auto_cross
 
-fetch() {
+ifetch() {
 	curl -L "https://github.com/limine-bootloader/limine/releases/download/v$pkgver/limine-$pkgver.tar.xz" -o $pkgname-$pkgver.tar.xz
 	tar -xf $pkgname-$pkgver.tar.xz
 }

@@ -3,7 +3,7 @@ pkgname=meson
 deps=python
 bad=""
 
-fetch() {
+iifetch() {
 	curl -L "https://github.com/mesonbuild/meson/releases/download/$pkgver/meson-$pkgver.tar.gz" -o $pkgname-$pkgver.tar.gz
 	tar -xf $pkgname-$pkgver.tar.gz
 	cp ../not-darwin.patch .

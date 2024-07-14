@@ -1,7 +1,7 @@
 pkgname=kanshi
 pkgver=1.1.0
 
-fetch() {
+iifetch() {
 	curl -L "https://github.com/emersion/kanshi/releases/download/v$pkgver/kanshi-$pkgver.tar.gz" -o $pkgname-$pkgver.tar.xz
 	tar -xf $pkgname-$pkgver.tar.xz
 	mkdir $pkgname-$pkgver/build

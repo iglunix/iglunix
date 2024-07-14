@@ -3,7 +3,7 @@ pkgver=633
 deps="musl:netbsd-curses"
 ext="doc"
 
-fetch() {
+ifetch() {
 	curl "http://www.greenwoodsoftware.com/less/less-$pkgver.tar.gz" -o $pkgname-$pkgver.tar.xz
 	tar -xf $pkgname-$pkgver.tar.xz
 }

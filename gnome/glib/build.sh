@@ -2,7 +2,7 @@ pkgname=glib
 _pkgver=2.75
 pkgver=$_pkgver.2
 
-fetch() {
+iifetch() {
 	curl -L "https://download.gnome.org/sources/glib/$_pkgver/glib-$pkgver.tar.xz" -o $pkgname-$pkgver.tar.xz
 	tar -xf $pkgname-$pkgver.tar.xz
 	mkdir $pkgname-$pkgver/build

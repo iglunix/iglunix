@@ -1,7 +1,7 @@
 pkgname=dbus
 pkgver=1.15.2
 
-fetch() {
+iifetch() {
 	curl "https://dbus.freedesktop.org/releases/dbus/dbus-$pkgver.tar.xz" -o $pkgname-$pkgver.tar.xz
 	tar -xf $pkgname-$pkgver.tar.xz
 	mkdir $pkgname-$pkgver/build

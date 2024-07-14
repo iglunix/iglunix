@@ -1,7 +1,7 @@
 pkgname=fish
 pkgver=3.7.1
 
-fetch() {
+iifetch() {
 	curl -L "https://github.com/fish-shell/fish-shell/releases/download/3.7.1/fish-3.7.1.tar.xz" -o $pkgname-$pkgver.tar.xz
 	tar -xf $pkgname-$pkgver.tar.xz
 	mkdir $pkgname-$pkgver/build

@@ -6,7 +6,7 @@ _clear_vendor_checksums() {
 	sed -i 's/\("files":{\)[^}]*/\1/' third_party/rust/$1/.cargo-checksum.json
 }
 
-fetch() {
+iifetch() {
 	#curl "https://ftp.mozilla.org/pub/firefox/releases/${pkgver}esr/source/firefox-${pkgver}esr.source.tar.xz" -o $pkgname-$pkgver.tar.xz
 	#curl "https://hg.mozilla.org/mozilla-unified/archive/26726cd430955db041e5de33d9792bb816c57608.zip" -o $pkgname-$pkgver.zip
 	curl "https://archive.mozilla.org/pub/firefox/releases/${pkgver}/source/firefox-${pkgver}.source.tar.xz" -o $pkgname-$pkgver.tar.xz

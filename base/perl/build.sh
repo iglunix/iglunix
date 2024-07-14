@@ -3,7 +3,7 @@ pkgver=5.40.0
 mkdeps="bmake"
 deps="musl"
 
-fetch() {
+iifetch() {
 	curl "https://www.cpan.org/src/5.0/perl-$pkgver.tar.gz" -o $pkgname-$pkgver.tar.xz
 	tar -xf $pkgname-$pkgver.tar.xz
 }

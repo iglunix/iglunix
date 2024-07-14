@@ -2,7 +2,7 @@ pkgname=libevdev
 pkgver=1.13.2
 mkdeps="samurai:muon:pkgconf:python"
 
-fetch() {
+iifetch() {
 	curl "https://www.freedesktop.org/software/libevdev/libevdev-$pkgver.tar.xz" -o $pkgname-$pkgver.tar.xz
 	tar -xf $pkgname-$pkgver.tar.xz
 	mkdir $pkgname-$pkgver/build

@@ -5,7 +5,7 @@ _zig_xkbcommon_ver=master
 _zig_pixman_ver=master
 _zig_wlroots_ver=master
 
-fetch() {
+ifetch() {
 	curl -L "https://github.com/ifreund/river/archive/refs/heads/master.tar.gz" -o $pkgname-$pkgver.tar.gz
 	curl -L "https://github.com/ifreund/zig-wayland/archive/refs/heads/master.tar.gz" -o zig-wayland-$_zig_wayland_ver.tar.gz
 	curl -L "https://github.com/ifreund/zig-xkbcommon/archive/refs/heads/master.tar.gz" -o zig-xkbcommon-$_zig_xkbcommon_ver.tar.gz

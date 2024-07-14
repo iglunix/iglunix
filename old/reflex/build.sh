@@ -1,7 +1,7 @@
 pkgname=reflex
 pkgver=20210510
 
-fetch() {
+ifetch() {
 	curl "https://invisible-island.net/datafiles/release/reflex.tar.gz" -o $pkgname-$pkgver.tar.gz
 	tar -xf $pkgname-$pkgver.tar.gz
 }

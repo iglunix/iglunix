@@ -4,7 +4,7 @@ bad=gmake
 deps="musl"
 pkgrel=1
 
-fetch() {
+ifetch() {
 	curl "https://busybox.net/downloads/busybox-$pkgver.tar.bz2" -o $pkgname-$pkgver.tar.gz
 	tar -xf $pkgname-$pkgver.tar.gz
 	cd $pkgname-$pkgver

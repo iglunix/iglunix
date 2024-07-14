@@ -4,7 +4,7 @@ pkgver=1.3.270
 desc="Vulkan Headers"
 deps=musl
 
-fetch() {
+iifetch() {
 	curl -L "https://github.com/KhronosGroup/Vulkan-Headers/archive/v$pkgver.tar.gz" -o $pkgname-$pkgver.tar.xz
 	tar -xf $pkgname-$pkgver.tar.xz
 	mv Vulkan-Headers-$pkgver $pkgname-$pkgver

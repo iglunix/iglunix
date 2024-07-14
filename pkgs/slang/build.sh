@@ -1,7 +1,7 @@
 pkgname=slang
 pkgver=2.3.2
 
-fetch() {
+ifetch() {
 	curl "https://www.jedsoft.org/releases/slang/$pkgname-$pkgver.tar.bz2" -o $pkgname-$pkgver.tar.xz
 	tar -xf $pkgname-$pkgver.tar.xz
 }

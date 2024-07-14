@@ -4,7 +4,7 @@ mkdeps=samurai
 deps=pkgconf
 desc="meson implementation in C"
 
-fetch() {
+iifetch() {
 	curl -L "https://git.sr.ht/~lattis/muon/archive/$pkgver.tar.gz" -o $pkgname-$pkgver.tar.gz
 	tar -xf $pkgname-$pkgver.tar.gz
 }

@@ -1,7 +1,7 @@
 pkgname=hwdata
 pkgver=0.366
 
-fetch() {
+iifetch() {
     curl -L "https://github.com/vcrhonek/hwdata/archive/refs/tags/v$pkgver.tar.gz" -o $pkgname-$pkgver.tar.xz
     tar -xf $pkgname-$pkgver.tar.xz
 }

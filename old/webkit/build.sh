@@ -1,7 +1,7 @@
 pkgname=webkit
 pkgver=master
 
-fetch() {
+ifetch() {
 	curl -L "https://github.com/iglunix/WebKit/archive/refs/heads/$pkgver.tar.gz" -o $pkgname-$pkgver.tar.xz
 	tar -xf $pkgname-$pkgver.tar.xz
 	mkdir $pkgname-$pkgver/build

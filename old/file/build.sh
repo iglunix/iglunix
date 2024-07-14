@@ -2,7 +2,7 @@ pkgname=file
 pkgver=5.39
 ext="dev:doc"
 
-fetch() {
+ifetch() {
 	curl "ftp://ftp.astron.com/pub/file/file-$pkgver.tar.gz" -o $pkgname-$pkgver.tar.gz
 	tar -xf $pkgname-$pkgver.tar.gz
 }

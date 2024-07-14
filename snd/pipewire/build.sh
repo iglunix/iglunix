@@ -3,7 +3,7 @@ pkgver=0.3.64
 mver=0.4.2
 deps="dbus-glib"
 
-fetch() {
+ifetch() {
 	curl "https://gitlab.freedesktop.org/pipewire/pipewire/-/archive/$pkgver/pipewire-$pkgver.tar.bz2" -o $pkgname-$pkgver.tar.bz2
 	curl "https://gitlab.freedesktop.org/pipewire/media-session/-/archive/$mver/media-session-$mver.tar.bz2" -O
 	tar -xf $pkgname-$pkgver.tar.bz2

@@ -1,7 +1,7 @@
 pkgname=smu
 pkgver=master
 
-fetch() {
+ifetch() {
 	curl -L "https://github.com/Gottox/smu/archive/refs/heads/master.tar.gz" -o $pkgname-$pkgver.tar.xz
 	tar -xf $pkgname-$pkgver.tar.xz
 	cp ../config.mk .

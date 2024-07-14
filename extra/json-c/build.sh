@@ -1,7 +1,7 @@
 pkgname=json-c
-pkgver=0.16
+pkgver=0.17
 
-fetch() {
+iifetch() {
 	curl -L "https://s3.amazonaws.com/json-c_releases/releases/json-c-$pkgver.tar.gz" -o $pkgname-$pkgver.tar.xz
 	tar -xf $pkgname-$pkgver.tar.xz
 	mkdir $pkgname-$pkgver/build

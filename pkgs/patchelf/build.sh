@@ -1,7 +1,7 @@
 pkgname=patchelf
 pkgver=0.12
 
-fetch() {
+ifetch() {
 	curl -L "https://github.com/NixOS/patchelf/releases/download/0.12/patchelf-$pkgver.tar.bz2" -o $pkgname-$pkgver.tar.bz2
 	tar -xf $pkgname-$pkgver.tar.bz2
 	mv $pkgname-$pkgver*/ $pkgname-$pkgver

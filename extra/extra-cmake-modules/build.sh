@@ -2,7 +2,7 @@ pkgname=extra-cmake-modules
 _ver_maj_min=6.4
 pkgver=$_ver_maj_min.0
 
-fetch() {
+iifetch() {
 	curl -L "https://download.kde.org/stable/frameworks/$_ver_maj_min/extra-cmake-modules-$pkgver.tar.xz" -o $pkgname-$pkgver.tar.xz
 	tar -xf $pkgname-$pkgver.tar.xz
 	mkdir $pkgname-$pkgver/build

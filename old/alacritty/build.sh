@@ -1,7 +1,7 @@
 pkgname=alacritty
 pkgver=0.8.0
 
-fetch() {
+ifetch() {
 	curl -L "https://github.com/alacritty/alacritty/archive/refs/tags/v$pkgver.tar.gz" -o $pkgname-$pkgver.tar.xz
 	tar -xf $pkgname-$pkgver.tar.xz
 }

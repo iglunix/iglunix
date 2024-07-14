@@ -4,7 +4,7 @@ pkgver=1.16
 # TODO(Ella): should be loaded from `/etc/iglupkg.d/go.conf`
 GOROOT_BOOTSTRAP=/usr/lib/go
 
-fetch() {
+iifetch() {
 	curl -L "https://golang.org/dl/go${pkgver/_/}.src.tar.gz" -o $pkgname-$pkgver.tar.xz
 	tar -xf $pkgname-$pkgver.tar.xz
 	mv go go-$pkgver
