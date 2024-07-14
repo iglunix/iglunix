@@ -4,7 +4,7 @@ h_pkgver=3.0.0
 pkgname=freetype-harfbuzz
 pkgver=$f_pkgver+$h_pkgver
 
-iifetch() {
+ifetch() {
 	curl "https://download-mirror.savannah.gnu.org/releases/freetype/freetype-$f_pkgver.tar.xz" \
 	-o freetype-$f_pkgver.tar.xz
 

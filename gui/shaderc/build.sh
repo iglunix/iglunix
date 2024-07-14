@@ -1,7 +1,7 @@
 pkgname=shaderc
 pkgver=main
 
-iifetch() {
+ifetch() {
 	curl -L "https://github.com/google/shaderc/archive/refs/heads/main.tar.gz" -o $pkgname-$pkgver.tar.xz
 	tar -xf $pkgname-$pkgver.tar.xz
 	cp ../third-party.patch .

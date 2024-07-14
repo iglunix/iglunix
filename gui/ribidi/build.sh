@@ -1,7 +1,7 @@
 pkgname=ribidi
 pkgver=main
 
-iifetch() {
+ifetch() {
 	curl -L "https://github.com/iglunix/ribidi/archive/refs/heads/main.tar.gz" -o $pkgname-$pkgver.tar.xz
 	tar -xf $pkgname-$pkgver.tar.xz
 }

@@ -1,7 +1,7 @@
 pkgname=ffmpeg
 pkgver=4.4
 
-iifetch() {
+ifetch() {
 	curl "https://ffmpeg.org/releases/ffmpeg-$pkgver.tar.xz" -o $pkgname-$pkgver.tar.xz
 	tar -xf $pkgname-$pkgver.tar.xz
 }

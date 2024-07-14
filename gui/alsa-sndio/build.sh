@@ -1,7 +1,7 @@
 pkgname=alsa-sndio
 pkgver=0.2
 
-iifetch() {
+ifetch() {
 	curl -L "https://github.com/Duncaen/alsa-sndio/archive/refs/tags/$pkgver.tar.gz" -o $pkgname-$pkgver.tar.gz
 	tar -xf $pkgname-$pkgver.tar.gz
 }

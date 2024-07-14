@@ -2,7 +2,7 @@ pkgname=sndio
 pkgver=1.8.1
 ext="dev:doc"
 
-iifetch() {
+ifetch() {
 	curl -L "https://sndio.org/sndio-$pkgver.tar.gz" -o $pkgname-$pkgver.tar.gz
 	tar -xf $pkgname-$pkgver.tar.gz
 }

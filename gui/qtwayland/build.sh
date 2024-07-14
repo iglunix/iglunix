@@ -1,7 +1,7 @@
 pkgname=qtwayland
 pkgver=6.3.1
 
-iifetch() {
+ifetch() {
 	curl "https://invent.kde.org/qt/qt/$pkgname/-/archive/$pkgver/$pkgname-$pkgver.tar.gz" -o $pkgname-$pkgver.tar.xz
 	tar -xf $pkgname-$pkgver.tar.xz
 	mkdir $pkgname-$pkgver/.git

@@ -1,11 +1,11 @@
 pkgname=mesa
-pkgver=23.0.3
+pkgver=24.1.3
 #pkgver=main
 mkdeps="python:python-mako:samurai"
 deps="musl:wayland:wayland-protocols:llvm:zlib-ng:expat:libffi:libdrm:glslang"
 ext=dev
 
-iifetch() {
+ifetch() {
 	curl "https://archive.mesa3d.org/$pkgname-$pkgver.tar.xz" -o $pkgname-$pkgver.tar.gz
 #	curl "https://gitlab.freedesktop.org/mesa/mesa/-/archive/main/mesa-main.tar.gz" -o $pkgname-$pkgver.tar.gz
 	tar -xf $pkgname-$pkgver.tar.gz
@@ -14,8 +14,8 @@ iifetch() {
 	cp ../alpine-tls.patch .
 	cp ../LICENSE .
 	cd $pkgname-$pkgver
-	sed -i "s|, 'rust_std=2021'||" meson.build
-	sed -i 's|if not have_mtls_dialect|if false|' meson.build
+	busybox sed -i "s|, 'rust_std=2021'||" meson.build
+	busybox sed -i 's|if not have_mtls_dialect|if false|' meson.build
 #	patch -p1 < ../alpine-tls.patch
 }
 
@@ -41,14 +41,14 @@ build() {
 	echo "gallium drivers: "$_gallium_drivers
 	echo "vulkan drivers: "$_vulkan_drivers
 
-	muon setup \
+	meson setup \
 		-D warning_level=0 \
 		-D prefix=/usr \
 		-D libdir=lib \
 		-D platforms=wayland \
-		-D dri3=true \
+		-D dri3=enabled \
 		-D gallium-drivers=$_gallium_drivers \
-		-D gallium-vdpau=false \
+		-D gallium-vdpau=disabled \
 		-D gallium-omx=disabled \
 		-D gallium-va=false \
 		-D gallium-nine=false \
@@ -83,7 +83,7 @@ build() {
 
 package() {
 	cd $pkgname-$pkgver
-	DESTDIR=$pkgdir muon -C build install
+	DESTDIR=$pkgdir meson install -C build
 }
 
 package_dev() {

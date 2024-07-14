@@ -2,7 +2,7 @@ pkgname=harfbuzz
 pkgver=6.0.0
 deps="icu"
 
-iifetch() {
+ifetch() {
 	curl -L "https://github.com/harfbuzz/harfbuzz/releases/download/$pkgver/harfbuzz-$pkgver.tar.xz" -o $pkgname-$pkgver.tar.xz
 	tar -xf $pkgname-$pkgver.tar.xz
 	mkdir $pkgname-$pkgver/build

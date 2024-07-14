@@ -2,7 +2,7 @@ pkgname=sway
 pkgver=1.8
 deps="musl:pkgconf:wayland:json-c:pcre2:wlroots:pango:xkeyboard-config"
 
-iifetch() {
+ifetch() {
 	curl -L "https://github.com/swaywm/sway/releases/download/$pkgver/sway-$pkgver.tar.gz" -o $pkgname-$pkgver.tar.gz
 	# curl -L "https://github.com/swaywm/sway/archive/refs/heads/master.tar.gz" -o $pkgname-$pkgver.tar.gz
 	tar -xf $pkgname-$pkgver.tar.gz

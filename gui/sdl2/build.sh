@@ -1,7 +1,7 @@
 pkgname=sdl2
 pkgver=2.0.14
 
-iifetch() {
+ifetch() {
 	curl "https://www.libsdl.org/release/SDL2-2.0.14.tar.gz" -o $pkgname-$pkgver.tar.xz
 	tar -xf $pkgname-$pkgver.tar.xz
 	mv SDL2-$pkgver $pkgname-$pkgver

@@ -2,7 +2,7 @@ pkgname=libportal
 pkgver=0.6
 deps="gtk+"
 
-iifetch() {
+ifetch() {
 	curl -L "https://github.com/flatpak/libportal/releases/download/$pkgver/libportal-$pkgver.tar.xz" -o $pkgname-$pkgver.tar.xz
 	tar -xf $pkgname-$pkgver.tar.xz
 	mkdir $pkgname-$pkgver/build

@@ -3,7 +3,7 @@ _pkgver=1.50
 pkgver=$_pkgver.0
 deps="harfbuzz"
 
-iifetch() {
+ifetch() {
 	curl -L "https://download.gnome.org/sources/pango/$_pkgver/pango-$pkgver.tar.xz" -o $pkgname-$pkgver.tar.xz
 	tar -xf $pkgname-$pkgver.tar.xz
 	mkdir $pkgname-$pkgver/build

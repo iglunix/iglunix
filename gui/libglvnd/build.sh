@@ -2,7 +2,7 @@ pkgname=libglvnd
 pkgver=1.7.0
 mkdeps=samurai:muon:pkgconf:python
 
-iifetch() {
+ifetch() {
 	curl -L "https://gitlab.freedesktop.org/glvnd/libglvnd/-/archive/v$pkgver/libglvnd-v$pkgver.tar.gz" -o $pkgname-$pkgver.tar.gz
 	tar -xf $pkgname-$pkgver.tar.gz
 	mv $pkgname-v$pkgver $pkgname-$pkgver

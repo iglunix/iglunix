@@ -2,8 +2,8 @@ pkgname=libxkbcommon
 pkgver=1.5.0
 deps="libdrm:libxkbcommon"
 
-iifetch() {
-	curl -L "https://github.com/xkbcommon/libxkbcommon/archive/xkbcommon-1.0.3.tar.gz" -o $pkgname-$pkgver.tar.xz
+ifetch() {
+	curl -L "https://github.com/xkbcommon/libxkbcommon/archive/xkbcommon-$pkgver.tar.gz" -o $pkgname-$pkgver.tar.xz
 	tar -xf $pkgname-$pkgver.tar.xz
 	mv $pkgname-xkbcommon-$pkgver $pkgname-$pkgver
 	mkdir $pkgname-$pkgver/build

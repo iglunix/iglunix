@@ -1,7 +1,7 @@
 pkgname=libepoxy
 pkgver=1.5.10
 
-iifetch() {
+ifetch() {
 	#curl -L "https://github.com/anholt/libepoxy/releases/download/$pkgver/libepoxy-$pkgver.tar.xz" -o $pkgname-$pkgver.tar.xz
 	curl -L "https://github.com/anholt/libepoxy/archive/refs/tags/1.5.10.tar.gz" -o $pkgname-$pkgver.tar.gz
 	tar -xf $pkgname-$pkgver.tar.gz

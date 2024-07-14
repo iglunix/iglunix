@@ -1,5 +1,5 @@
 pkgname=wayland
-pkgver=1.22.0
+pkgver=1.23.0
 mkdeps=muon:samurai:pkgconf:python
 deps=libffi:expat
 
@@ -11,7 +11,7 @@ ifetch() {
 
 build() {
 	cd $pkgname-$pkgver
-	muon setup \
+	meson setup \
 		-Dbuildtype=release \
 		-Dprefix=/usr \
 		-Ddefault_library=shared \
@@ -26,7 +26,7 @@ build() {
 
 package() {
 	cd $pkgname-$pkgver
-	DESTDIR=$pkgdir muon -C build install
+	DESTDIR=$pkgdir meson install -C build
 }
 
 backup() {

@@ -1,7 +1,7 @@
 pkgname=pixman
 pkgver=master
 
-iifetch() {
+ifetch() {
 	curl "https://gitlab.freedesktop.org/pixman/pixman/-/archive/master/pixman-master.tar.gz" -o $pkgname-$pkgver.tar.xz
 	tar -xf $pkgname-$pkgver.tar.xz
 	mkdir $pkgname-$pkgver/build

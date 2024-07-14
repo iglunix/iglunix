@@ -1,7 +1,7 @@
 pkgname=fontconfig
 pkgver=2.13.94
 
-iifetch() {
+ifetch() {
 	curl "https://www.freedesktop.org/software/fontconfig/release/$pkgname-$pkgver.tar.gz" -o $pkgname-$pkgver.tar.xz
 	tar -xf $pkgname-$pkgver.tar.xz
 	cp ../fcobjshash.h $pkgname-$pkgver/src

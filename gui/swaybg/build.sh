@@ -1,7 +1,7 @@
 pkgname=swaybg
 pkgver=1.1
 
-iifetch() {
+ifetch() {
 	curl -L "https://github.com/swaywm/swaybg/releases/download/v$pkgver/swaybg-$pkgver.tar.gz" -o $pkgname-$pkgver.tar.gz
 	tar -xf $pkgname-$pkgver.tar.gz
 	mkdir $pkgname-$pkgver/build

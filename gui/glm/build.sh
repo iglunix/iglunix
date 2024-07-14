@@ -1,7 +1,7 @@
 pkgname=glm
 pkgver=0.9.9.8
 
-iifetch() {
+ifetch() {
 	curl -L "https://github.com/g-truc/glm/archive/refs/tags/$pkgver.tar.gz" -o $pkgname-$pkgver.tar.gz
 	tar -xf $pkgname-$pkgver.tar.gz
 	mkdir $pkgname-$pkgver/build

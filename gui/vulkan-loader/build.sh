@@ -3,7 +3,7 @@ pkgver=1.3.269
 desc="vulkan loader"
 deps="musl"
 
-iifetch() {
+ifetch() {
 	curl -L "https://github.com/KhronosGroup/Vulkan-Loader/archive/v$pkgver.tar.gz" -o $pkgname-$pkgver.tar.xz
 	tar -xf $pkgname-$pkgver.tar.xz
 	mv Vulkan-Loader-$pkgver $pkgname-$pkgver
