@@ -6,4 +6,5 @@ isoroot
 isoout
 fdiskscript
 diskroot
+frankensrc/
 *.img

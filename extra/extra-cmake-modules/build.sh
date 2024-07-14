@@ -1,5 +1,5 @@
 pkgname=extra-cmake-modules
-_ver_maj_min=5.82
+_ver_maj_min=6.4
 pkgver=$_ver_maj_min.0
 
 fetch() {
@@ -18,6 +18,10 @@ build() {
 	samu
 }
 
+backup() {
+	return
+}
+
 package() {
 	cd $pkgname-$pkgver
 	cd build
@@ -26,6 +30,5 @@ package() {
 
 license() {
 	cd $pkgname-$pkgver
-	cat LICENSE
-#	cat COPYING
+	cat COPYING-CMAKE-SCRIPTS
 }

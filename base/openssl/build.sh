@@ -1,12 +1,12 @@
 pkgname=openssl
-pkgver=3.2.1
+pkgver=3.3.1
 mkdeps=perl:bmake
 deps=
 ext="dev"
 auto_cross
 
 fetch() {
-	curl "https://www.openssl.org/source/openssl-$pkgver.tar.gz" -o $pkgname-$pkgver.tar.xz
+	curl "https://www.openssl.org/source/openssl-$pkgver.tar.gz" -LJo $pkgname-$pkgver.tar.xz
 	tar -xf $pkgname-$pkgver.tar.xz
 }
 

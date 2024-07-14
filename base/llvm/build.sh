@@ -1,4 +1,4 @@
-pkgver=16.0.1
+pkgver=18.1.8
 pkgname=llvm
 bad=""
 ext="dev"
