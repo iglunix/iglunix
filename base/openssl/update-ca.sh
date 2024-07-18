@@ -6,6 +6,11 @@ then
 	exit 1
 fi
 
+if [ ! -d /etc/ssl ]
+	printf 'ensuring directory for certs'
+	mkdir -p /etc/ssl
+fi
+
 extra_args=
 if [ ! -e /etc/ssl/cert.pem ]
 then
