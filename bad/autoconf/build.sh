@@ -6,7 +6,7 @@ fetch() {
 	tar -xf $pkgname-$pkgver.tar.gz
 	cd $pkgname-$pkgver
 	sed -i '/^M4FROZEN/d' Makefile.in
-	patch -p1 < ../../makefile.patch
+	# patch -p1 < ../../makefile.patch
 	# patch -p1 < ../../autoconf.sh.patch
 	# patch -p1 < ../../autoheader.sh.patch
 }

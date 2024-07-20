@@ -32,15 +32,15 @@ fi
 
 case "$KERNEL_TREE" in
 	mainline)
-		pkgver=6.1.21
+		pkgver=6.6.41
 		# Only for torvalds tree
 		# src_tar="https://git.kernel.org/torvalds/t/linux-$pkgver.tar.gz"
 
 		# LTS
 		src_tar="https://cdn.kernel.org/pub/linux/kernel/v6.x/linux-$pkgver.tar.xz"
 		# temporarily disabled to reduce ci time
-		# fetch_config="https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-$ARCH-fedora.config"
-		# config=olddefconfig
+		fetch_config="https://git.alpinelinux.org/aports/plain/community/linux-lts/config-lts.x86_64"
+		config=olddefconfig
 		config=defconfig
 		;;
 	asahi)
@@ -92,7 +92,7 @@ build() {
 	grep -v 'select HAVE_OBJTOOL' arch/x86/Kconfig > _
 	mv _ arch/x86/Kconfig
 
-	bad --gmake gmake CC=clang HOSTCC=clang YACC=yacc LLVM=1 LLVM_IAS=1 ARCH=$_arch "$config"
+	bad --gmake gmake CC=clang HOSTCC=clang YACC=yacc LLVM=1 LLVM_IAS=0 ASM=llvm-as ARCH=$_arch "$config"
 
 	# nicer install name
 	./scripts/config -d CONFIG_LOCALVERSION
@@ -135,7 +135,7 @@ build() {
 	./scripts/config -e CONFIG_NVME_CORE
 	./scripts/config -e CONFIG_EXT4_FS
 
-	bad --gmake gmake CC=clang HOSTCC=clang YACC=yacc LLVM=1 LLVM_IAS=1 ARCH=$_arch "olddefconfig"
+	bad --gmake gmake CC=clang HOSTCC=clang YACC=yacc LLVM=1 LLVM_IAS=0 ASM=llvm-as ARCH=$_arch "olddefconfig"
 
 	cat .config >&2
 
@@ -143,7 +143,7 @@ build() {
 	# sed -i 's/# CONFIG_UNWINDER_FRAME_POINTER is not set/CONFIG_UNWINDER_FRAME_POINTER=y/g' .config
 
 	if [ -z "$HEADS_ONLY" ]; then
-		bad --gmake gmake CC=clang HOSTCC=clang YACC=yacc LLVM=1 LLVM_IAS=1 ARCH=$_arch
+		bad --gmake gmake -j4 CC=clang HOSTCC=clang YACC=yacc LLVM=1 LLVM_IAS=0 ASM=llvm-as ARCH=$_arch
 	fi
 }
 
@@ -152,15 +152,15 @@ package() {
 
 	if [ -z "$HEADS_ONLY" ]; then
 		install -d $pkgdir/boot
-		bad --gmake gmake CC=cc HOSTCC=cc YACC=yacc LLVM=1 LLVM_IAS=1 ARCH=$_arch INSTALL_PATH=$pkgdir/boot install
+		bad --gmake gmake CC=cc HOSTCC=cc YACC=yacc LLVM=1 LLVM_IAS=0 ASM=llvm-as ARCH=$_arch INSTALL_PATH=$pkgdir/boot install
 
 		set +e # depmod causes errors and not all configs have dtbs
-		bad --gmake gmake CC=cc HOSTCC=cc YACC=yacc LLVM=1 LLVM_IAS=1 ARCH=$_arch INSTALL_DTBS_PATH=$pkgdir/boot/dtbs dtbs_install
-		bad --gmake gmake CC=cc HOSTCC=cc YACC=yacc LLVM=1 LLVM_IAS=1 ARCH=$_arch INSTALL_MOD_PATH=$pkgdir/ modules_install
+		bad --gmake gmake CC=cc HOSTCC=cc YACC=yacc LLVM=1 LLVM_IAS=0 ASM=llvm-as ARCH=$_arch INSTALL_DTBS_PATH=$pkgdir/boot/dtbs dtbs_install
+		bad --gmake gmake CC=cc HOSTCC=cc YACC=yacc LLVM=1 LLVM_IAS=0 ASM=llvm-as ARCH=$_arch INSTALL_MOD_PATH=$pkgdir/ modules_install
 		set -e
 	fi
 
-	bad --gmake gmake CC=cc HOSTCC=cc YACC=yacc LLVM=1 LLVM_IAS=1 ARCH=$_arch headers
+	bad --gmake gmake CC=cc HOSTCC=cc YACC=yacc LLVM=1 LLVM_IAS=0 ASM=llvm-as ARCH=$_arch headers
 
 	if [ -z "$FOR_CROSS" ]; then
 		install -d $pkgdir/usr/

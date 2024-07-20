@@ -1,5 +1,6 @@
 pkgname=ribidi
-pkgver=main
+pkgver=0.0.1
+pkver=main
 
 fetch() {
 	curl -L "https://github.com/iglunix/ribidi/archive/refs/heads/main.tar.gz" -o $pkgname-$pkgver.tar.xz
@@ -7,12 +8,13 @@ fetch() {
 }
 
 build() {
-	cd $pkgname-$pkgver
-	cargo build --release --all-features
+	cd $pkgname-$pkver
+	cargo build --release
 }
 
 package() {
-	cd $pkgname-$pkgver
+	cd $pkgname-$pkver
+	mkdir -p $pkgdir/usr/lib/pkgconfig $pkgdir/usr/include/ribidi
 	install -Dm755 target/release/lib$pkgname.so $pkgdir/usr/lib/
 	install -Dm644 include/ribidi.h $pkgdir/usr/include/ribidi/
 	install -d $pkgdir/usr/include/fribidi
@@ -24,7 +26,7 @@ package() {
 }
 
 license() {
-	cd $pkgname-$pkgver
+	cd $pkgname-$pkver
 	cat LICENSE
 #	cat COPYING
 }

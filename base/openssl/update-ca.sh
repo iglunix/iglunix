@@ -7,7 +7,8 @@ then
 fi
 
 if [ ! -d /etc/ssl ]
-	printf 'ensuring directory for certs'
+then
+	printf 'ensuring directory for certs\n'
 	mkdir -p /etc/ssl
 fi
 

@@ -1,5 +1,6 @@
 pkgname=dbus
-pkgver=1.15.2
+pkgver=1.14.10
+pkgrel=1
 
 fetch() {
 	curl "https://dbus.freedesktop.org/releases/dbus/dbus-$pkgver.tar.xz" -o $pkgname-$pkgver.tar.xz
@@ -13,8 +14,8 @@ build() {
 		--prefix=/usr \
 		--sysconfdir=/etc \
 		--build=$TRIPLE \
-		--host=$TRIPLE
-
+		--host=$TRIPLE \
+		--with-system-socket=/run/dbus/system_bus_socket
 	bad --gmake gmake
 }
 
@@ -25,7 +26,7 @@ package() {
 
 license() {
 	cd $pkgname-$pkgver
-	cat LICENSES/*
+	cat COPYING
 }
 
 backup() {

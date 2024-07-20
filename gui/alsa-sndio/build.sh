@@ -13,6 +13,7 @@ build() {
 
 package() {
 	cd $pkgname-$pkgver
+	mkdir -p $pkgdir/usr/lib/alsa-lib
 	bad --gmake gmake install DESTDIR=$pkgdir PREFIX=/usr
 }
 
@@ -20,4 +21,8 @@ license() {
 	cd $pkgname-$pkgver
 	cat LICENSE
 #	cat COPYING
+}
+
+backup() {
+	return
 }

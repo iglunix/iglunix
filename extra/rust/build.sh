@@ -15,7 +15,8 @@
 # OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
 pkgname=rust
-pkgver=1.74.1
+pkgver=1.79.0
+pkgrel=1
 mkdeps="rust:python:pkgconf"
 deps="llvm:musl:libcxx:libunwind:openssl:zlib-ng"
 
@@ -27,7 +28,7 @@ if [ -d /opt/rust/bin ]
 then
 	export RUSTROOT="/opt/rust"
 else
-	export RUSTROOT="/usr"
+	export RUSTROOT="/root/.cargo/"
 fi
 
 fetch() {
@@ -38,25 +39,25 @@ fetch() {
 
 	cp ../*.patch .
 	cd $pkgname-$pkgver
-	patch -p1 < ../no_git_repo.patch
+	# patch -p1 < ../no_git_repo.patch
 	patch -p1 < ../alpine-crt.patch
-	patch -p1 < ../fix-curl.patch
+	# patch -p1 < ../fix-curl.patch
 	# patch -p1 < ../libexec.patch
 	# patch -p1 < ../lfs64-rust.patch
 	# patch -p1 < ../offset.patch
 
 	# patch -p1 -d vendor/getrandom-0.2.8 < ../lfs64-getrandom.patch
 
-	# for dir in vendor/libc*
-	# do
-	# 	_clear_vendor_checksums ${dir##vendor/}
-	# 	patch -p1 -d $dir < ../lfs64-libc.patch
-	# done
+	#for dir in vendor/libc*
+	#do
+	#	_clear_vendor_checksums ${dir##vendor/}
+	#	patch -p1 -d $dir < ../lfs64-libc.patch
+	#done
 
 	# sed -i '/config.check_build_rustc_version();/d' src/bootstrap/lib.rs
-	sed -i /LD_LIBRARY_PATH/d src/bootstrap/bootstrap.py
-	_clear_vendor_checksums curl
-	_clear_vendor_checksums curl-sys
+	# sed -i /LD_LIBRARY_PATH/d src/bootstrap/bootstrap.py
+	# _clear_vendor_checksums curl
+	# _clear_vendor_checksums curl-sys
 }
 
 build() {

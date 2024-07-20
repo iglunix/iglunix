@@ -1,5 +1,6 @@
 pkgname=ffmpeg
-pkgver=4.4
+pkgver=7.0.1
+pkgrel=1
 
 fetch() {
 	curl "https://ffmpeg.org/releases/ffmpeg-$pkgver.tar.xz" -o $pkgname-$pkgver.tar.xz
@@ -8,6 +9,7 @@ fetch() {
 
 build() {
 	cd $pkgname-$pkgver
+	CFLAGS="$CFLAGS -Wno-incompatible-pointer-types -Wno-implicit-const-int-float-conversion -fPIC" \
 	./configure \
 		--prefix=/usr \
 		--enable-openssl \
@@ -23,6 +25,10 @@ package() {
 
 license() {
 	cd $pkgname-$pkgver
-	cat LICENSE
+	cat LICENSE.md
 #	cat COPYING
+}
+
+backup() {
+	return
 }

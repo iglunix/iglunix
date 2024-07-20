@@ -1,5 +1,5 @@
 pkgname=fontconfig
-pkgver=2.13.94
+pkgver=2.14.2
 
 fetch() {
 	curl "https://www.freedesktop.org/software/fontconfig/release/$pkgname-$pkgver.tar.gz" -o $pkgname-$pkgver.tar.xz
@@ -19,7 +19,6 @@ build() {
 		--buildtype=release \
 		--prefix=/usr \
 		--libexecdir=lib \
-		-Ddocs=disabled \
 		-Dnls=disabled \
 		-Dtests=disabled
 	samu
@@ -33,6 +32,9 @@ package() {
 
 license() {
 	cd $pkgname-$pkgver
-	cat LICENSE
-#	cat COPYING
+	cat COPYING
+}
+
+backup() {
+	return
 }

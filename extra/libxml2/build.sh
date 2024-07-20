@@ -1,11 +1,10 @@
-_pkgver=2.10
-pkgver=$_pkgver.3
+pkgver=2.13.2
 pkgname=libxml2
 bad=""
 ext="dev"
 
 fetch() {
-	curl -L "https://download.gnome.org/sources/libxml2/$_pkgver/libxml2-$pkgver.tar.xz" -o $pkgname-$pkgver.tar.gz
+	curl -L "https://download.gnome.org/sources/libxml2/2.13/libxml2-$pkgver.tar.xz" -o $pkgname-$pkgver.tar.gz
 	tar -xf $pkgname-$pkgver.tar.gz
 }
 
@@ -14,9 +13,9 @@ backup() {
 }
 
 build() {
-    cd $pkgname-$pkgver
-    ./configure --prefix=/usr --without-python
-    bad --gmake gmake
+	cd $pkgname-$pkgver
+	./configure --prefix=/usr --without-python
+	bad --gmake gmake
 }
 
 package() {

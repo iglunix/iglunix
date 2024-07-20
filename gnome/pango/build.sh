@@ -26,6 +26,10 @@ package() {
 
 license() {
 	cd $pkgname-$pkgver
-	cat LICENSE
-#	cat COPYING
+#	cat LICENSE
+	cat COPYING
+}
+
+backup() {
+	return
 }

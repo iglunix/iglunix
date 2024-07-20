@@ -1,8 +1,8 @@
 pkgname=linux-firmware
-pkgver=20210208
+pkgver=20240709
 
 fetch() {
-	curl "https://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-firmware.git/snapshot/linux-firmware-20210208.tar.gz" -o $pkgname-$pkgver.tar.gz
+	curl "https://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-firmware.git/snapshot/linux-firmware-$pkgver.tar.gz" -o $pkgname-$pkgver.tar.gz
 	tar -xf $pkgname-$pkgver.tar.gz
 }
 
@@ -18,4 +18,8 @@ package() {
 license() {
 	cd $pkgname-$pkgver
 	cat LICENCE.*
+}
+
+backup() {
+	return
 }
