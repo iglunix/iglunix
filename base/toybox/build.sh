@@ -1,4 +1,4 @@
-pkgver=0.8.10
+pkgver=0.8.11
 pkgname=toybox
 pkgrel=1
 mkdeps="bad:gmake"
@@ -11,7 +11,7 @@ fetch() {
 	cd $pkgname-$pkgver
 	patch -p1 < ../../ls-colour.patch
 	patch -p1 < ../../mksh.patch
-	patch -p1 < ../../mksh2.patch
+	busybox patch -p1 < ../../mksh2.patch
 	patch -p1 < ../../xxd-i.patch
 
 	sed -i 's|/usr/share/misc|/usr/share/hwdata|' toys/other/lsusb.c
