@@ -27,8 +27,6 @@ _clear_vendor_checksums() {
 if [ -d /opt/rust/bin ]
 then
 	export RUSTROOT="/opt/rust"
-elif { -f /root/.cargo }
-	export RUSTROOT="/root/.cargo"
 else
 	export RUSTROOT="/usr"
 fi

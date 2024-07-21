@@ -37,7 +37,7 @@ build() {
 		-Dspa-plugins=enabled \
 		-Dalsa=enabled \
 		-Daudiomixer=enabled \
-		-Dbluez5=enabled \
+		-Dbluez5=disabled \
 		-Dcontrol=enabled \
 		-Daudiotestsrc=enabled \
 		-Dffmpeg=disabled \
