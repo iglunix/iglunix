@@ -39,8 +39,8 @@ case "$KERNEL_TREE" in
 		# LTS
 		src_tar="https://cdn.kernel.org/pub/linux/kernel/v6.x/linux-$pkgver.tar.xz"
 		# temporarily disabled to reduce ci time
-		fetch_config="https://git.alpinelinux.org/aports/plain/community/linux-lts/config-lts.x86_64"
-		config=olddefconfig
+		# fetch_config="https://git.alpinelinux.org/aports/plain/community/linux-lts/config-lts.x86_64"
+		# config=olddefconfig
 		config=defconfig
 		;;
 	asahi)
@@ -62,7 +62,7 @@ esac
 fetch() {
 	curl -L "$src_tar" -o $pkgname-$pkgver.tar
 	tar -xf $pkgname-$pkgver.tar
-
+	
 	# use Alpine's kernel config so we don't have to maintain one
 	[ ! -z "$fetch_config" ] && curl "$fetch_config" -o .config
 	cd $pkgname-$pkgver
@@ -89,10 +89,11 @@ build() {
 	cd $pkgname-$pkgver
 	[ ! -z "$fetch_config" ] && cp ../.config .
 
-	grep -v 'select HAVE_OBJTOOL' arch/x86/Kconfig > _
-	mv _ arch/x86/Kconfig
+	#grep -v 'select HAVE_OBJTOOL' arch/x86/Kconfig > _
+	#mv _ arch/x86/Kconfig
+	patch -p1 < ../../0008-elfcrap.patch
 
-	bad --gmake gmake CC=clang HOSTCC=clang YACC=yacc LLVM=1 LLVM_IAS=0 ASM=llvm-as ARCH=$_arch "$config"
+	bad --gmake gmake CC=clang HOSTCC=clang YACC=yacc LLVM=1 LLVM_IAS=1 ARCH=$_arch "$config"
 
 	# nicer install name
 	./scripts/config -d CONFIG_LOCALVERSION
@@ -110,6 +111,10 @@ build() {
 
 	# Warnings exist ;~;
 	./scripts/config -d CONFIG_WERROR
+
+	# Who needs multilib anyway?
+	./scripts/config -d CONFIG_COMPAT_32
+	./scripts/config -d CONFIG_IA32_EMULATION
 
 	# Need for booting
 	./scripts/config -e CONFIG_EFI_STUB
@@ -135,7 +140,7 @@ build() {
 	./scripts/config -e CONFIG_NVME_CORE
 	./scripts/config -e CONFIG_EXT4_FS
 
-	bad --gmake gmake CC=clang HOSTCC=clang YACC=yacc LLVM=1 LLVM_IAS=0 ASM=llvm-as ARCH=$_arch "olddefconfig"
+	bad --gmake gmake CC=clang HOSTCC=clang YACC=yacc LLVM=1 LLVM_IAS=1 ARCH=$_arch "olddefconfig"
 
 	cat .config >&2
 
@@ -143,7 +148,7 @@ build() {
 	# sed -i 's/# CONFIG_UNWINDER_FRAME_POINTER is not set/CONFIG_UNWINDER_FRAME_POINTER=y/g' .config
 
 	if [ -z "$HEADS_ONLY" ]; then
-		bad --gmake gmake -j4 CC=clang HOSTCC=clang YACC=yacc LLVM=1 LLVM_IAS=0 ASM=llvm-as ARCH=$_arch
+		bad --gmake gmake -j4 CC=clang HOSTCC=clang YACC=yacc LLVM=1 LLVM_IAS=1 ARCH=$_arch
 	fi
 }
 
@@ -152,15 +157,15 @@ package() {
 
 	if [ -z "$HEADS_ONLY" ]; then
 		install -d $pkgdir/boot
-		bad --gmake gmake CC=cc HOSTCC=cc YACC=yacc LLVM=1 LLVM_IAS=0 ASM=llvm-as ARCH=$_arch INSTALL_PATH=$pkgdir/boot install
+		bad --gmake gmake CC=cc HOSTCC=cc YACC=yacc LLVM=1 LLVM_IAS=1 ARCH=$_arch INSTALL_PATH=$pkgdir/boot install
 
 		set +e # depmod causes errors and not all configs have dtbs
-		bad --gmake gmake CC=cc HOSTCC=cc YACC=yacc LLVM=1 LLVM_IAS=0 ASM=llvm-as ARCH=$_arch INSTALL_DTBS_PATH=$pkgdir/boot/dtbs dtbs_install
-		bad --gmake gmake CC=cc HOSTCC=cc YACC=yacc LLVM=1 LLVM_IAS=0 ASM=llvm-as ARCH=$_arch INSTALL_MOD_PATH=$pkgdir/ modules_install
+		bad --gmake gmake CC=cc HOSTCC=cc YACC=yacc LLVM=1 LLVM_IAS=1 ASM=llvm-as ARCH=$_arch INSTALL_DTBS_PATH=$pkgdir/boot/dtbs dtbs_install
+		bad --gmake gmake CC=cc HOSTCC=cc YACC=yacc LLVM=1 LLVM_IAS=1 ASM=llvm-as ARCH=$_arch INSTALL_MOD_PATH=$pkgdir/ modules_install
 		set -e
 	fi
 
-	bad --gmake gmake CC=cc HOSTCC=cc YACC=yacc LLVM=1 LLVM_IAS=0 ASM=llvm-as ARCH=$_arch headers
+	bad --gmake gmake CC=cc HOSTCC=cc YACC=yacc LLVM=1 LLVM_IAS=1 ARCH=$_arch headers
 
 	if [ -z "$FOR_CROSS" ]; then
 		install -d $pkgdir/usr/

@@ -1,5 +1,6 @@
 pkgname=mesa
-pkgver=23.0.3
+pkgver=24.1.4
+pkgrel=1
 #pkgver=main
 mkdeps="python:python-mako:samurai"
 deps="musl:wayland:wayland-protocols:llvm:zlib-ng:expat:libffi:libdrm:glslang"
@@ -24,7 +25,7 @@ _gallium_drivers=""
 _vulkan_drivers=""
 case $ARCH in
 	x86_64)
-		_gallium_drivers="nouveau,zink,crocus,i915,iris"
+		_gallium_drivers="swrast,nouveau,zink,crocus,i915,iris"
 		_vulkan_drivers="amd,intel,intel_hasvk"
 		;;
 
@@ -41,16 +42,16 @@ build() {
 	echo "gallium drivers: "$_gallium_drivers
 	echo "vulkan drivers: "$_vulkan_drivers
 
-	muon setup \
+	meson setup \
 		-D warning_level=0 \
 		-D prefix=/usr \
 		-D libdir=lib \
 		-D platforms=wayland \
-		-D dri3=true \
+		-D dri3=enabled \
 		-D gallium-drivers=$_gallium_drivers \
-		-D gallium-vdpau=false \
+		-D gallium-vdpau=disabled \
 		-D gallium-omx=disabled \
-		-D gallium-va=false \
+		-D gallium-va=disabled \
 		-D gallium-nine=false \
 		-D gallium-opencl=disabled \
 		-D vulkan-drivers=$_vulkan_drivers \
@@ -58,15 +59,15 @@ build() {
 		-D gles1=disabled \
 		-D gles2=enabled \
 		-D opengl=true \
-		-D gbm=true \
+		-D gbm=enabled \
 		-D glx=disabled \
-		-D glvnd=true \
-		-D egl=true \
-		-D llvm=disabled \
-		-D shared-llvm=true \
-		-D valgrind=false \
-		-D libunwind=false \
-		-D lmsensors=false \
+		-D glvnd=enabled \
+		-D egl=enabled \
+		-D llvm=enabled \
+		-D shared-llvm=disabled \
+		-D valgrind=disabled \
+		-D libunwind=disabled \
+		-D lmsensors=disabled \
 		-D build-tests=false \
 		-D b_ndebug=true \
 		-D cpp_rtti=false \
@@ -83,13 +84,13 @@ build() {
 
 package() {
 	cd $pkgname-$pkgver
-	DESTDIR=$pkgdir muon -C build install
+	DESTDIR=$pkgdir meson install -C build
 }
 
 package_dev() {
 	cd $pkgname-$pkgver
 	cd build
-	DESTDIR=$pkgdir samu install
+	DESTDIR=$pkgdir meson install
 	rm -r $pkgdir/usr/share
 	rm -r $pkgdir/usr/bin
 	rm $pkgdir/usr/lib/*.so

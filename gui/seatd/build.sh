@@ -1,5 +1,6 @@
 pkgname=seatd
 pkgver=0.8.0
+pkgrel=1
 mkdeps=samurai:muon:pkgconf
 deps=musl
 
@@ -11,12 +12,15 @@ fetch() {
 
 build() {
 	cd $pkgname-$pkgver
-	muon setup \
+	meson setup \
 		-Dbuildtype=release \
 		-Dprefix=/usr \
 		-Dlibexecdir=lib \
+		-Dlibseat-builtin=enabled \
+		-Dlibseat-seatd=enabled \
+		-Dlibseat-logind=disabled \
 		-Dexamples=disabled \
-		-Dc_args=-Wno-sign-compare \
+		-Dc_args="-Wno-sign-compare -fPIC" \
 		build
 	samu -C build
 }
@@ -27,7 +31,7 @@ backup() {
 
 package() {
 	cd $pkgname-$pkgver
-	DESTDIR=$pkgdir muon -C build install
+	DESTDIR=$pkgdir meson install -C build
 }
 
 backup() {

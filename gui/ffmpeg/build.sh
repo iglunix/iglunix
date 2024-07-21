@@ -11,8 +11,12 @@ build() {
 	cd $pkgname-$pkgver
 	CFLAGS="$CFLAGS -Wno-incompatible-pointer-types -Wno-implicit-const-int-float-conversion -fPIC" \
 	./configure \
-		--prefix=/usr \
-		--enable-openssl \
+		--prefix=/usr     \
+		--enable-shared   \
+		--enable-gpl      \
+		--enable-nonfree  \
+		--enable-version3 \
+		--enable-openssl  \
 		--cc=cc
 
 	bad --gmake gmake

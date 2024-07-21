@@ -1,5 +1,6 @@
 pkgname=sway
-pkgver=1.8
+pkgver=1.9
+pkgrel=2
 deps="musl:pkgconf:wayland:json-c:pcre2:wlroots:pango:xkeyboard-config"
 
 fetch() {
@@ -17,10 +18,13 @@ build() {
 		--buildtype=release \
 		--prefix=/usr \
 		--libexecdir=lib \
+		-Db_lto=true \
+		-Dsd-bus-provider=basu \
+		-Db_ndebug=false -Dwerror=false \
 		-Ddefault-wallpaper=true \
 		-Dzsh-completions=true \
 		-Dbash-completions=false \
-		-Dfish-completions=false \
+		-Dfish-completions=true \
 		-Dxwayland=disabled \
 		-Dtray=disabled \
 		-Dgdk-pixbuf=disabled \

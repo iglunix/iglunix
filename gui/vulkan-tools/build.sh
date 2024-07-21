@@ -1,18 +1,18 @@
 pkgname=vulkan-tools
-pkgver=1.3.261.1
+pkgver=1.3.290
 deps="musl"
 desc="Vulkan tools"
 
 fetch() {
-	curl -L "https://github.com/KhronosGroup/Vulkan-Tools/archive/refs/tags/sdk-$pkgver.tar.gz" -o $pkgname-$pkgver.tar.xz
+	curl -L "https://github.com/KhronosGroup/Vulkan-Tools/archive/refs/tags/v$pkgver.tar.gz" -o $pkgname-$pkgver.tar.xz
 	tar -xf $pkgname-$pkgver.tar.xz
-	mv Vulkan-Tools-sdk-$pkgver $pkgname-$pkgver
+	mv Vulkan-Tools-$pkgver $pkgname-$pkgver
 	mkdir $pkgname-$pkgver/build
 }
 
 build() {
 	cd $pkgname-$pkgver
-	cp /usr/bin/glslangValidator glslang/linux/bin/glslangValidator
+	#cp /usr/bin/glslangValidator glslang/linux/bin/glslangValidator
 	cd build
 	cmake -G Ninja ../ \
 		-DCMAKE_BUILD_TYPE=Release \
