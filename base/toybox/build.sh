@@ -1,4 +1,4 @@
-pkgver=0.8.10
+pkgver=0.8.11
 pkgname=toybox
 pkgrel=1
 mkdeps="bad:gmake"
