@@ -1,4 +1,4 @@
-pkgver=3.4.4
+pkgver=3.4.6
 pkgname=libffi
 desc="A portable foreign-function interface library."
 deps="musl"
