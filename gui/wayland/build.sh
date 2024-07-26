@@ -1,5 +1,5 @@
 pkgname=wayland
-pkgver=1.22.0
+pkgver=1.23.0
 mkdeps=muon:samurai:pkgconf:python
 deps=libffi:expat
 
