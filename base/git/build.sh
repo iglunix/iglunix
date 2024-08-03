@@ -1,4 +1,4 @@
-pkgver=2.45.2
+pkgver=2.46.0
 pkgname=git
 pkgrel=1
 mkdeps="zlib-ng:curl:bad:gmake"
