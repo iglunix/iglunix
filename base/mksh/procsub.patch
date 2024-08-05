@@ -1,0 +1,165 @@
+From e57041837e516866c6bd76fa64eea37fa7b009ac Mon Sep 17 00:00:00 2001
+From: Ella Stanforth <ella@iglunix.org>
+Date: Wed, 19 Oct 2022 19:33:47 +0000
+Subject: [PATCH] Add support for bash style process substitution
+
+Uses the <(...) syntax and exposes the file through procfs.
+
+TODO: this should probably be exposed through `/dev/fd` instead
+for better portability
+---
+ eval.c | 19 ++++++++++++++++++-
+ lex.c  | 26 +++++++++++++++++++++++++-
+ sh.h   |  1 +
+ syn.c  | 12 ++++++++----
+ 4 files changed, 52 insertions(+), 6 deletions(-)
+
+diff --git a/eval.c b/eval.c
+index da165d12..067b243d 100644
+--- a/eval.c
++++ b/eval.c
+@@ -60,6 +60,7 @@ typedef struct {
+ #define XSUBMID		6	/* middle of expanding ${}; must be XSUB+1 */
+ #define XSUBPAT		7	/* expanding [[ x = ${} ]] string */
+ #define XSUBPATMID	8	/* middle, must be XSUBPAT+1 */
++#define XPROC		9	/* expanding <() */
+ 
+ #define isXSUB(t)	((t) == XSUB || (t) == XSUBPAT)
+ 
+@@ -258,6 +259,9 @@ expand(
+ 	size_t len;
+ 	char *cp;
+ 
++	unsigned proc_sub_idx = 0;
++	char link_buf[128];
++
+ 	if (ccp == NULL)
+ 		kerrf(KWF_INTERNAL | KWF_ERR(0xFF) | KWF_ONEMSG | KWF_NOERRNO,
+ 		    "expand(NULL)");
+@@ -323,6 +327,7 @@ expand(
+ 			case FUNASUB:
+ 			case FUNSUB:
+ 			case VALSUB:
++			case PROCSUB:
+ 				tilde_ok = 0;
+ 				if (f & DONTRUNCOMMAND) {
+ 					word = IFS_WORD;
+@@ -330,6 +335,7 @@ expand(
+ 					switch (c) {
+ 					case COMASUB:
+ 					case COMSUB:
++					case PROCSUB:
+ 						*dp++ = '(';
+ 						c = ORD(')');
+ 						break;
+@@ -1015,6 +1021,17 @@ expand(
+ 			}
+ 			break;
+ 
++		case XPROC:
++			if (proc_sub_idx == 0) {
++				snprintf(link_buf, sizeof(link_buf), "/proc/self/fd/%d", dup(x.u.shf->fd));
++				x.u.shf = NULL;
++			}
++			c = link_buf[proc_sub_idx];
++			proc_sub_idx++;
++			if (c == '\0') {
++				type = XBASE;
++			}
++			break;
+ 		case XCOM:
+ 			if (x.u.shf == NULL) {
+ 				/* $(<...) failed */
+@@ -1655,7 +1672,7 @@ comsub(Expand *xp, const char *cp, int fn)
+ 	}
+ 
+ 	xp->u.shf = shf;
+-	return (XCOM);
++	return (fn == PROCSUB ? XPROC : XCOM);
+ }
+ 
+ /*
+diff --git a/lex.c b/lex.c
+index 74a33bf4..b0717eca 100644
+--- a/lex.c
++++ b/lex.c
+@@ -254,7 +254,19 @@ yylex(int cf)
+ 
+ 	/* collect non-special or quoted characters to form word */
+ 	while (!((c = getsc()) == 0 ||
+-	    ((state == SBASE || state == SHEREDELIM) && ctype(c, C_LEX1)))) {
++	    ((state == SBASE || state == SHEREDELIM) && ctype(c, C_LEX1) && c != ORD('<')))) {
++		if (state == SHEREDELIM && c == ORD('<'))
++			break;
++		if (state == SBASE && c == ORD('<')) {
++			c = getsc();
++			if (c != ORD('(')) {
++				ungetsc(c);
++				c = ORD('<');
++				break;
++			}
++			ungetsc(c);
++			c = ORD('<');
++		}
+ 		if (state == SBASE &&
+ 		    subshell_nesting_type == ORD(/*{*/ '}') &&
+ 		    (unsigned int)c == ORD(/*{*/ '}'))
+@@ -572,6 +584,18 @@ yylex(int cf)
+ 					base = s2-- - STATE_BSIZE;
+ 				}
+ 				break;
++			case ORD('<'):
++				if (state == SWORD)
++					goto store_char;
++				c = getsc();
++				if (c != ORD('(')) {
++					ungetsc(c);
++					c = ORD('<');
++					goto store_char;
++				}
++				c = PROCSUB;
++				goto subst_command2;
++				break;
+ 			case QCHAR:
+ 				if (cf & LQCHAR) {
+ 					*wp++ = QCHAR;
+diff --git a/sh.h b/sh.h
+index 45448d92..52f01675 100644
+--- a/sh.h
++++ b/sh.h
+@@ -2120,6 +2120,7 @@ struct op {
+ #define VALSUB	15	/* ${|foo;} substitution (NUL terminated) */
+ #define COMASUB	16	/* `…` substitution (COMSUB but expand aliases) */
+ #define FUNASUB	17	/* function substitution but expand aliases */
++#define PROCSUB 18	/* process substitution <() */
+ 
+ /*
+  * IO redirection
+diff --git a/syn.c b/syn.c
+index be56d4de..f95f6594 100644
+--- a/syn.c
++++ b/syn.c
+@@ -1124,12 +1124,16 @@ yyrecursive(int subtype)
+ 	struct yyrecursive_state *ys;
+ 	unsigned int stok, etok;
+ 
+-	if (subtype != COMSUB) {
+-		stok = ORD('{');
+-		etok = ORD('}');
+-	} else {
++	switch (subtype) {
++	case COMSUB:
++	case PROCSUB:
+ 		stok = ORD('(');
+ 		etok = ORD(')');
++		break;
++	default:
++		stok = ORD('{');
++		etok = ORD('}');
++		break;
+ 	}
+ 
+ 	ys = alloc(sizeof(struct yyrecursive_state), ATEMP);
+-- 
+2.32.0
+

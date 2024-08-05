@@ -1,0 +1,26 @@
+From 3be3494d81045abafa32c9d9615227a0c458120c Mon Sep 17 00:00:00 2001
+From: Ella Stanforth <ella@iglunix.org>
+Date: Sat, 15 Jul 2023 11:48:56 +0000
+Subject: [PATCH] libfetch: query default cert file
+
+---
+ lib/fetch/common.c | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+diff --git a/lib/fetch/common.c b/lib/fetch/common.c
+index b5d1a4e..fdf3354 100644
+--- a/lib/fetch/common.c
++++ b/lib/fetch/common.c
+@@ -1276,7 +1276,8 @@ fetch_ssl_setup_peer_verification(SSL_CTX *ctx, int verbose)
+ 	const char *ca_cert_file, *ca_cert_path, *crl_file;
+ 
+ 	if (getenv("SSL_NO_VERIFY_PEER") == NULL) {
+-		ca_cert_file = getenv("SSL_CA_CERT_FILE");
++		ca_cert_file = getenv("SSL_CA_CERT_FILE") != NULL ?
++		    getenv("SSL_CA_CERT_FILE") : X509_get_default_cert_file();
+ 		ca_cert_path = getenv("SSL_CA_CERT_PATH") != NULL ?
+ 		    getenv("SSL_CA_CERT_PATH") : X509_get_default_cert_dir();
+ 		if (verbose) {
+-- 
+2.40.1
+

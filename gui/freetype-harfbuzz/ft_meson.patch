@@ -1,0 +1,11 @@
+--- src/freetype-2.11.0/meson.build
++++ meson.build
+@@ -276,6 +276,8 @@
+ if libpng_dep.found()
+   ftoption_command += ['--enable=FT_CONFIG_OPTION_USE_PNG']
+   ft2_deps += [libpng_dep]
++else
++  ftoption_command += ['--disable=FT_CONFIG_OPTION_USE_PNG']
+ endif
+ 
+ # Harfbuzz support

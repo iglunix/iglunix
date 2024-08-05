@@ -1,0 +1,42 @@
+--- build/src/compiler/glsl/glsl_parser.h
++++ build/src/compiler/glsl/glsl_parser.h
+@@ -143,7 +143,7 @@
+ #endif
+ #ifndef YYSTYPE_IS_DECLARED
+ #define YYSTYPE_IS_DECLARED 1
+-typedef union {
++union YYSTYPE {
+    int n;
+    int64_t n64;
+    float real;
+@@ -182,7 +182,8 @@
+    } selection_rest_statement;
+ 
+    const glsl_type *type;
+-} YYSTYPE;
++};
++typedef union YYSTYPE YYSTYPE;
+ #endif /* !YYSTYPE_IS_DECLARED */
+ 
+ #if ! defined YYLTYPE && ! defined YYLTYPE_IS_DECLARED
+--- build/src/compiler/glsl/glsl_parser.cpp
++++ build/src/compiler/glsl/glsl_parser.cpp
+@@ -212,7 +212,7 @@
+ #ifndef YYSTYPE_IS_DECLARED
+ #define YYSTYPE_IS_DECLARED 1
+ #line 101 "../src/compiler/glsl/glsl_parser.yy"
+-typedef union {
++union YYSTYPE {
+    int n;
+    int64_t n64;
+    float real;
+@@ -251,7 +251,8 @@
+    } selection_rest_statement;
+ 
+    const glsl_type *type;
+-} YYSTYPE;
++};
++typedef union YYSTYPE YYSTYPE;
+ #endif /* !YYSTYPE_IS_DECLARED */
+ #line 257 "src/compiler/glsl/glsl_parser.cpp"
+ 

@@ -1,0 +1,47 @@
+--- a/GNUmakefile
++++ b/GNUmakefile
+@@ -477,7 +477,7 @@
+ 	$(RANLIB) $@
+
+ $(TI_LIBSO): $(TI_LOBJS)
+-	$(CC) -shared -o $@ $^ -Wl,-soname=$(notdir $@)
++	$(CC) $(LDFLAGS) -shared -o $@ $^ -Wl,-soname=$(notdir $@)
+
+ libterminfo/hash.c: libterminfo/genhash libterminfo/term.h
+ 		@echo "Generating terminfo hash"
+@@ -514,7 +514,7 @@
+
+ $(CU_LIBSO): $(TI_LIBSO)
+ $(CU_LIBSO): $(CU_LOBJS)
+-	$(CC) -shared -o $@ $^ -Wl,-soname=$(notdir $@)
++	$(CC) $(LDFLAGS) -shared -o $@ $^ -Wl,-soname=$(notdir $@)
+
+ libcurses/fileio.h: libcurses/shlib_version libcurses/genfileioh.awk
+ 	$(AWK) -f ./genfileioh.awk < ./shlib_version > ./fileio.h
+@@ -526,7 +526,7 @@
+
+ $(PA_LIBSO): $(CU_LIBSO)
+ $(PA_LIBSO): $(PA_LOBJS)
+-	$(CC) -shared -o $@ $^ -Wl,-soname=$(notdir $@)
++	$(CC) $(LDFLAGS) -shared -o $@ $^ -Wl,-soname=$(notdir $@)
+
+ $(ME_LIBA): $(ME_OBJS)
+ 	rm -f $@
+@@ -535,7 +535,7 @@
+
+ $(ME_LIBSO): $(CU_LIBSO)
+ $(ME_LIBSO): $(ME_LOBJS)
+-	$(CC) -shared -o $@ $^ -Wl,-soname=$(notdir $@)
++	$(CC) $(LDFLAGS) -shared -o $@ $^ -Wl,-soname=$(notdir $@)
+
+ $(FO_LIBA): $(FO_OBJS)
+ 	rm -f $@
+@@ -544,7 +544,7 @@
+
+ $(FO_LIBSO): $(CU_LIBSO)
+ $(FO_LIBSO): $(FO_LOBJS)
+-	$(CC) -shared -o $@ $^ -Wl,-soname=$(notdir $@)
++	$(CC) $(LDFLAGS) -shared -o $@ $^ -Wl,-soname=$(notdir $@)
+
+ # Allow terminfo descriptions to be compiled into libterminfo
+ ${TERMINFODIR}/terminfo.cdb: $(TOOL_TIC) ${TERMINFODIR}/terminfo

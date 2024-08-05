@@ -1,0 +1,32 @@
+alltypes_h = custom_target(
+  'alltypes.h',
+  output : 'alltypes.h',
+  input : [
+    meson.project_source_root() + '/tools/mkalltypes.sed',
+    meson.project_source_root() + '/arch/'+arch+'/bits/alltypes.h.in',
+    meson.project_source_root() + '/include/alltypes.h.in'
+  ],
+  command : ['sed', '-f', '@INPUT0@', '@INPUT1@', '@INPUT2@'],
+  capture : true,
+  install : true,
+  install_dir : 'include/bits/'
+)
+
+syscall_h_in = custom_target(
+  'syscall.in',
+  output : 'syscall.in',
+  input : meson.project_source_root() + '/arch/'+arch+'/bits/syscall.h.in',
+  command : ['sed', '-n', '-e', 's/__NR_/SYS_/p', '@INPUT@'],
+  capture : true
+)
+
+syscall_h = custom_target(
+  'syscall.h',
+  output : 'syscall.h',
+  input : [ meson.project_source_root() + '/arch/'+arch+'/bits/syscall.h.in', syscall_h_in ],
+  command : ['cat', '@INPUT0@', '@INPUT1@'],
+  capture : true,
+  install : true,
+  install_dir : 'include/bits/'
+)
+

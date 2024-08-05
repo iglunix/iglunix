@@ -1,0 +1,45 @@
+Scrt1 = custom_target('Scrt1.o',
+  output : 'Scrt1.o',
+  input : 'Scrt1.c',
+  command : [ cc.cmd_array(), inc_dir_flags, c_args, '-DCRT', '-c', '-o', '@OUTPUT@', '@INPUT@' ],
+  depends : [ alltypes_h, syscall_h, version_h ],
+  install : true,
+  install_dir: 'lib'
+)
+
+rcrt1 = custom_target('rcrt1.o',
+  output : 'rcrt1.o',
+  input : 'rcrt1.c',
+  command : [ cc.cmd_array(), inc_dir_flags, c_args, '-DCRT', '-c', '-o', '@OUTPUT@', '@INPUT@' ],
+  depends : [ alltypes_h, syscall_h, version_h ],
+  install : true,
+  install_dir: 'lib'
+)
+
+crt1 = custom_target('crt1.o',
+  output : 'crt1.o',
+  input : 'crt1.c',
+  command : [ cc.cmd_array(), inc_dir_flags, c_args, '-DCRT', '-c', '-o', '@OUTPUT@', '@INPUT@' ],
+  depends : [ alltypes_h, syscall_h, version_h ],
+  install : true,
+  install_dir: 'lib'
+)
+
+crti = custom_target('crti.o',
+  output : 'crti.o',
+  input : target_machine.cpu_family() + '/crti.s',
+  command : [ cc.cmd_array(), inc_dir_flags, c_args, '-DCRT', '-c', '-o', '@OUTPUT@', '@INPUT@' ],
+  depends : [ alltypes_h, syscall_h, version_h ],
+  install : true,
+  install_dir: 'lib'
+)
+
+crtn = custom_target('crtn.o',
+  output : 'crtn.o',
+  input : target_machine.cpu_family() + '/crtn.s',
+  command : [ cc.cmd_array(), inc_dir_flags, c_args, '-DCRT', '-c', '-o', '@OUTPUT@', '@INPUT@' ],
+  depends : [ alltypes_h, syscall_h, version_h ],
+  install : true,
+  install_dir: 'lib'
+)
+

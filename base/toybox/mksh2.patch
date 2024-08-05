@@ -1,0 +1,11 @@
+--- in/scripts/make.sh	2024-07-20 23:51:58.410881810 +0000
++++ out/scripts/make.sh	2024-07-20 23:52:06.321075111 +0000
+@@ -95,7 +95,7 @@
+ unset A B DOTPROG DIDNEWER
+ 
+ # Force full rebuild if our compiler/linker options changed
+-cmp -s <(compflags | grep '#d') <(grep '%d' "$GENDIR"/build.sh 2>/dev/null) ||
++cmp -s "$(compflags | grep '#d')" != "$(grep '%d' "$GENDIR"/build.sh 2>/dev/null)" ||
+   rm -rf "$GENDIR"/* # Keep symlink, delete contents
+ mkdir -p "$UNSTRIPPED"  "$(dirname $OUTNAME)" || exit 1
+ 

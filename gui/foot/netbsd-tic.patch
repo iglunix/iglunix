@@ -1,0 +1,23 @@
+--- a/meson.build
++++ b/meson.build
+@@ -43,7 +43,7 @@
+       join_paths(get_option('prefix'), terminfo_install_location))],
+     language: 'c')
+ else
+-  terminfo_install_location = join_paths(get_option('datadir'), 'terminfo')
++  terminfo_install_location = get_option('datadir')
+ endif
+
+ # Compute the relative path used by compiler invocations.
+@@ -262,9 +262,9 @@
+   )
+   custom_target(
+     'terminfo',
+-    output: get_option('default-terminfo')[0],
++    output: 'terminfo.cdb',
+     input: preprocessed,
+-    command: [tic, '-x', '-o', '@OUTDIR@', '-e', '@0@,@0@-direct'.format(get_option('default-terminfo')), '@INPUT@'],
++    command: [tic, '-x', '-o', '@OUTPUT@', '@INPUT@'],
+     install: true,
+     install_dir: terminfo_install_location
+   )

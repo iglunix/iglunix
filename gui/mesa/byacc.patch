@@ -1,0 +1,104 @@
+diff --git a/meson.build b/meson.build
+index 96571c9df2569ff77b1d04944883f49118570ee8..c0a2316a263bc2628d13103359539b692c9b56aa 100644
+--- a/meson.build
++++ b/meson.build
+@@ -1708,7 +1708,7 @@ if host_machine.system() == 'windows'
+     prog_bison = find_program('bison', 'yacc', required : with_any_opengl)
+   endif
+ else
+-  prog_bison = find_program('bison', required : with_any_opengl)
++  prog_bison = find_program('bison', 'byacc', required : with_any_opengl)
+ 
+   # Disable deprecated keyword warnings, since we have to use them for
+   # old-bison compat.  See discussion in
+diff --git a/src/compiler/glsl/glcpp/meson.build b/src/compiler/glsl/glcpp/meson.build
+index 9c40fd72c61a780ba77a245e13cced974011c7ab..6441bc6313f39e8ca93991f07b8658b9974913d9 100644
+--- a/src/compiler/glsl/glcpp/meson.build
++++ b/src/compiler/glsl/glcpp/meson.build
+@@ -18,14 +18,24 @@
+ # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ # SOFTWARE.
+ 
++bison_command=[]
++if prog_bison == 'bison'
++  bison_command = [
++    prog_bison, '-o', '@OUTPUT0@', '-p', 'glcpp_parser_',
++    '--defines=@OUTPUT1@', '@INPUT@',
++  ]
++else
++  bison_command = [
++    prog_bison, '-o', '@OUTPUT0@', '-p', 'glcpp_parser_',
++    '-H', '@OUTPUT1@', '@INPUT@',
++  ]
++endif
++
+ glcpp_parse = custom_target(
+   'glcpp-parse.[ch]',
+   input : 'glcpp-parse.y',
+   output : ['glcpp-parse.c', 'glcpp-parse.h'],
+-  command : [
+-    prog_bison, '-o', '@OUTPUT0@', '-p', 'glcpp_parser_',
+-    '--defines=@OUTPUT1@', '@INPUT@',
+-  ],
++  command : bison_command
+ )
+ 
+ glcpp_lex = custom_target(
+diff --git a/src/compiler/glsl/meson.build b/src/compiler/glsl/meson.build
+index 92635958adfe52d2a9a3726ad7de73195654dc9c..c44903d4f18fe6772d4906f0866c5e5a7e291935 100644
+--- a/src/compiler/glsl/meson.build
++++ b/src/compiler/glsl/meson.build
+@@ -20,14 +20,24 @@
+ 
+ subdir('glcpp')
+ 
++bison_command=[]
++if prog_bison == 'bison'
++  bison_command = [
++    prog_bison, '-o', '@OUTPUT0@', '-p', '_mesa_glsl_', '--defines=@OUTPUT1@',
++    '@INPUT@',
++  ]
++else
++  bison_command = [
++    prog_bison, '-o', '@OUTPUT0@', '-p', '_mesa_glsl_', '-H', '@OUTPUT1@',
++    '@INPUT@',
++  ]
++endif
++
+ glsl_parser = custom_target(
+   'glsl_parser',
+   input : 'glsl_parser.yy',
+   output : ['glsl_parser.cpp', 'glsl_parser.h'],
+-  command : [
+-    prog_bison, '-o', '@OUTPUT0@', '-p', '_mesa_glsl_', '--defines=@OUTPUT1@',
+-    '@INPUT@',
+-  ],
++  command : bison_command
+ )
+ 
+ glsl_lexer_cpp = custom_target(
+diff --git a/src/mesa/program/meson.build b/src/mesa/program/meson.build
+index 5f3325ff53c66fb34f4643dd6cea20aa3ee69104..a22d332d3594bae215158a140f1bf1bcb93b64b5 100644
+--- a/src/mesa/program/meson.build
++++ b/src/mesa/program/meson.build
+@@ -18,6 +18,13 @@
+ # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ # SOFTWARE.
+ 
++bison_command=[]
++if prog_bison == 'bison'
++  bison_command = [prog_bison, '-o', '@OUTPUT0@', '--defines=@OUTPUT1@', '@INPUT@']
++else
++  bison_command = [prog_bison, '-o', '@OUTPUT0@', '-H', '@OUTPUT1@', '@INPUT@']
++endif
++
+ mesa_lex = custom_target(
+   'mesa_lex',
+   input : 'program_lexer.l',
+@@ -29,5 +36,5 @@ program_parse_tab = custom_target(
+   'program_parse_tab.[ch]',
+   input : 'program_parse.y',
+   output : ['program_parse.tab.c', 'program_parse.tab.h'],
+-  command : [prog_bison, '-o', '@OUTPUT0@', '--defines=@OUTPUT1@', '@INPUT@'],
++  command : bison_command,
+ )

@@ -1,0 +1,29 @@
+on:
+  workflow_dispatch:
+jobs:
+  ood:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Out of date
+        run: |
+          mkdir -p ~/.ssh/
+          echo "$SSH_PRIVATE_KEY" > ~/.ssh/mirror.key
+          sudo chmod 600 ~/.ssh/mirror.key
+          echo "$XBPS_PRIVATE_KEY" > ~/.ssh/xbps.key
+          sudo chmod 600 ~/.ssh/xbps.key
+          echo "$SSH_KNOWN_HOST" > ~/.ssh/known_hosts
+          sudo apt install libarchive-tools
+          sudo rm -f /usr/bin/tar
+          sudo ln -s bsdtar /usr/bin/tar
+          tar --version
+          ./scripts/xbps-for-ci.sh
+          # ./scripts/fetch_autobuild.sh
+          ./scripts/setup_sysroot.sh linux/musl
+          XBPS_PASSPHRASE="$XBPS_PASSPHRASE" ./scripts/check_builds.sh linux/musl
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SSH_PRIVATE_KEY: ${{secrets.SSH_PRIVATE_KEY}}
+          SSH_KNOWN_HOST: ${{secrets.SSH_KNOWN_HOST}}
+          XBPS_PASSPHRASE: ${{secrets.XBPS_PASSPHRASE}}
+          XBPS_PRIVATE_KEY: ${{secrets.XBPS_PRIVATE_KEY}}

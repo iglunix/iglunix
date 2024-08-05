@@ -1,0 +1,14 @@
+--- a/scripts/kconfig/lexer.l
++++ b/scripts/kconfig/lexer.l
+@@ -3,9 +3,10 @@
+  * Copyright (C) 2002 Roman Zippel <zippel@linux-m68k.org>
+  */
+ %option nostdinit noyywrap never-interactive full ecs
+-%option 8bit nodefault yylineno
++%option 8bit nodefault
+ %x ASSIGN_VAL HELP STRING
+ %{
++int yylineno = 0;
+ 
+ #include <assert.h>
+ #include <limits.h>

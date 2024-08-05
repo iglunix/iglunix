@@ -1,0 +1,47 @@
+--- a/src/libsystemd/sd-bus/bus-error.c
++++ b/src/libsystemd/sd-bus/bus-error.c
+@@ -103,26 +103,26 @@
+                                         return m->code;
+                         }
+
+-        m = __start_BUS_ERROR_MAP;
+-#ifndef FUZZING_BUILD_MODE_UNSAFE_FOR_PRODUCTION
+-        while (m < __stop_BUS_ERROR_MAP) {
+-                /* For magic ELF error maps, the end marker might
+-                 * appear in the middle of things, since multiple maps
+-                 * might appear in the same section. Hence, let's skip
+-                 * over it, but realign the pointer to the next 8 byte
+-                 * boundary, which is the selected alignment for the
+-                 * arrays. */
+-                if (m->code == BUS_ERROR_MAP_END_MARKER) {
+-                        m = ALIGN8_PTR(m+1);
+-                        continue;
+-                }
++//         m = __start_BUS_ERROR_MAP;
++// #ifndef FUZZING_BUILD_MODE_UNSAFE_FOR_PRODUCTION
++//         while (m < __stop_BUS_ERROR_MAP) {
++//                 /* For magic ELF error maps, the end marker might
++//                  * appear in the middle of things, since multiple maps
++//                  * might appear in the same section. Hence, let's skip
++//                  * over it, but realign the pointer to the next 8 byte
++//                  * boundary, which is the selected alignment for the
++//                  * arrays. */
++//                 if (m->code == BUS_ERROR_MAP_END_MARKER) {
++//                         m = ALIGN8_PTR(m+1);
++//                         continue;
++//                 }
+
+-                if (streq(m->name, name))
+-                        return m->code;
++//                 if (streq(m->name, name))
++//                         return m->code;
+
+-                m++;
+-        }
+-#endif
++//                 m++;
++//         }
++// #endif
+
+         return EIO;
+ }

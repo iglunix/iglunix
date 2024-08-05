@@ -1,0 +1,13 @@
+diff --git a/scripts/Makefile.host b/scripts/Makefile.host
+index 4c51c95d40f4..64e98e1d4825 100644
+--- a/scripts/Makefile.host
++++ b/scripts/Makefile.host
+@@ -11,7 +11,7 @@  $(obj)/%.lex.c: $(src)/%.l FORCE
+ # YACC
+ # ---------------------------------------------------------------------------
+ quiet_cmd_bison = YACC    $(basename $@).[ch]
+-      cmd_bison = $(YACC) -o $(basename $@).c --defines=$(basename $@).h -t -l $<
++      cmd_bison = $(YACC) -b $(basename $(basename $@)) -d -t -l $<
+ 
+ $(obj)/%.tab.c $(obj)/%.tab.h: $(src)/%.y FORCE
+ 	$(call if_changed,bison)

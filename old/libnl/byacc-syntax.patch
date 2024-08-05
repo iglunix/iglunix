@@ -1,0 +1,64 @@
+--- a/lib/route/cls/ematch_syntax.y
++++ b/lib/route/cls/ematch_syntax.y
+@@ -30,8 +30,9 @@
+ %}
+ 
+ %error-verbose
+-%define api.pure
+-%name-prefix "ematch_"
++%pure-parser
++//%define api.pure
++//%name-prefix "ematch_"
+ 
+ %parse-param {void *scanner}
+ %parse-param {char **errp}
+--- a/lib/route/pktloc_syntax.y
++++ b/lib/route/pktloc_syntax.y
+@@ -6,10 +6,22 @@
+ #include <netlink/route/pktloc.h>
+ %}
+ 
++%{
++struct YYLTYPE;
++union YYSTYPE;
++extern int pktloc_lex(union YYSTYPE *, struct YYLTYPE *, void *);
++
++static void yyerror(struct YYLTYPE *locp, void *scanner, const char *msg)
++{
++	NL_DBG(1, "Error while parsing packet location file: %s\n", msg);
++}
++%}
++
+ %locations
+ %error-verbose
+-%define api.pure
+-%name-prefix "pktloc_"
++//%define api.pure
++%pure-parser
++//%name-prefix "pktloc_"
+ 
+ %parse-param {void *scanner}
+ %lex-param {void *scanner}
+@@ -21,15 +33,6 @@
+ 	char *s;
+ }
+ 
+-%{
+-extern int pktloc_lex(YYSTYPE *, YYLTYPE *, void *);
+-
+-static void yyerror(YYLTYPE *locp, void *scanner, const char *msg)
+-{
+-	NL_DBG(1, "Error while parsing packet location file: %s\n", msg);
+-}
+-%}
+-
+ %token <i> ERROR NUMBER LAYER ALIGN
+ %token <s> NAME
+ 
+@@ -101,3 +104,6 @@
+ 	| NUMBER
+ 		{ $$ = $1; }
+ 	;
++
++%%
++

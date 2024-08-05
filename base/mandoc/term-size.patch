@@ -1,0 +1,11 @@
+--- a/main.c
++++ b/main.c
+@@ -321,7 +321,7 @@
+ 	    (conf.output.width == 0 || conf.output.indent == 0) &&
+ 	    ioctl(STDOUT_FILENO, TIOCGWINSZ, &ws) != -1 &&
+ 	    ws.ws_col > 1) {
+-		if (conf.output.width == 0 && ws.ws_col < 79)
++		if (conf.output.width == 0)
+ 			conf.output.width = ws.ws_col - 1;
+ 		if (conf.output.indent == 0 && ws.ws_col < 66)
+ 			conf.output.indent = 3;

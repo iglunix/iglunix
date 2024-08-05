@@ -1,0 +1,26 @@
+--- a/security/sandbox/linux/SandboxFilter.cpp
++++ b/security/sandbox/linux/SandboxFilter.cpp
+@@ -1992,20 +1992,23 @@
+         Arg<uintptr_t> new_limit(2);
+         return If(AllOf(pid == 0, new_limit == 0), Allow())
+             .Else(InvalidSyscall());
+       }
+ #endif  // DESKTOP
+
+       // Bug 1640612
+       case __NR_uname:
+         return Allow();
+
++      CASES_FOR_select:
++        return Allow();
++
+       default:
+         return SandboxPolicyCommon::EvaluateSyscall(sysno);
+     }
+   }
+ };
+
+ UniquePtr<sandbox::bpf_dsl::Policy> GetSocketProcessSandboxPolicy(
+     SandboxBrokerClient* aMaybeBroker) {
+   return UniquePtr<sandbox::bpf_dsl::Policy>(
+       new SocketProcessSandboxPolicy(aMaybeBroker));

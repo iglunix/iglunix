@@ -1,0 +1,24 @@
+cflags=-I. -Ilibopenbsd -O2 -Wall -Wextra -D__linux__ -D_DEFAULT_SOURCE -D_GNU_SOURCE
+
+rule yy
+  command = yacc $in -o $out 
+
+rule cc
+  command = cc $cflags -c -o $out $in
+
+rule ld
+  command = cc $cflags $in -o $out -lcrypt
+
+build parse.c: yy parse.y
+build parse.o: cc parse.c
+build doas.o: cc doas.c
+build env.o: cc env.c
+build libopenbsd/strlcat.o: cc libopenbsd/strlcat.c
+build libopenbsd/errc.o: cc libopenbsd/errc.c
+build libopenbsd/verrc.o: cc libopenbsd/verrc.c
+build libopenbsd/progname.o: cc libopenbsd/progname.c
+build libopenbsd/readpassphrase.o: cc libopenbsd/readpassphrase.c
+build libopenbsd/strtonum.o: cc libopenbsd/strtonum.c
+build libopenbsd/closefrom.o: cc libopenbsd/closefrom.c
+build shadow.o: cc shadow.c
+build doas: ld parse.o doas.o env.o libopenbsd/strlcat.o libopenbsd/strlcpy.o libopenbsd/errc.o libopenbsd/verrc.o libopenbsd/progname.o libopenbsd/readpassphrase.o libopenbsd/strtonum.o libopenbsd/closefrom.o shadow.o

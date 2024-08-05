@@ -1,0 +1,10 @@
+PREFIX=/usr
+MANDIR=/usr/share/man
+LIBDIR=/usr/lib
+UTF8_LOCALE="en_US.UTF-8"
+MANPATH_DEFAULT="/usr/share/man"
+MANPATH_BASE="/usr/share/man"
+LN="ln -sf"
+HAVE_LESS_T=0
+LDFLAGS=-Wl,--allow-multiple-definition
+BUILD_TARGETS=

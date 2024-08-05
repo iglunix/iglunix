@@ -1,0 +1,63 @@
+From: Rob Landley <rob@landley.net>
+To: linux-kernel@vger.kernel.org
+Cc: Thomas Gleixner <tglx@linutronix.de>,Ingo Molnar <mingo@redhat.com>,Borislav Petkov <bp@alien8.de>,Dave Hansen <dave.hansen@linux.intel.com>,x86@kernel.org,H. Peter Anvin <hpa@zytor.com>
+Date: Mon, 4 Jul 2022 23:51:05 -0500
+Subject: [PATCH 2/5] X86-64 should not uniquely require a third ELF package to
+ build.
+
+x86-64 is the only architecture that can't compile without an extra
+ELF library installed on the host. (The kernel already has multiple ELF
+parse implementations built-in, so requiring another one is questionable
+at best.) You can switch it back on in menuconfig if you want to, this
+just stops it being mandatory.
+
+See https://lkml.iu.edu/hypermail/linux/kernel/2110.3/00402.html
+and https://lkml.iu.edu/hypermail/linux/kernel/2110.3/00278.html
+
+Signed-off-by: Rob Landley <rob@landley.net>
+---
+
+diff --git a/arch/x86/Kconfig b/arch/x86/Kconfig
+index 53bab123a8ee..5b2866ef30d2 100644
+--- a/arch/x86/Kconfig
++++ b/arch/x86/Kconfig
+@@ -245,7 +245,7 @@ config X86
+ 	select HAVE_NOINSTR_HACK		if HAVE_OBJTOOL
+ 	select HAVE_NMI
+ 	select HAVE_NOINSTR_VALIDATION		if HAVE_OBJTOOL
+-	select HAVE_OBJTOOL			if X86_64
++	select HAVE_OBJTOOL			if X86_64 && !UNWINDER_FRAME_POINTER
+ 	select HAVE_OPTPROBES
+ 	select HAVE_PCSPKR_PLATFORM
+ 	select HAVE_PERF_EVENTS
+diff --git a/arch/x86/entry/entry_64.S b/arch/x86/entry/entry_64.S
+index f31e286c2977..d9074767a5b5 100644
+--- a/arch/x86/entry/entry_64.S
++++ b/arch/x86/entry/entry_64.S
+@@ -84,6 +84,12 @@
+  * with them due to bugs in both AMD and Intel CPUs.
+  */
+ 
++#ifndef CONFIG_HAVE_RELIABLE_STACK_TRACE
++#define UNWIND_HINT_ENTRY
++#define UNWIND_HINT_IRET_ENTRY
++#define validate_unret_begin
++#endif
++
+ SYM_CODE_START(entry_SYSCALL_64)
+ 	UNWIND_HINT_ENTRY
+ 	ENDBR
+@@ -386,11 +392,10 @@ SYM_CODE_END(xen_error_entry)
+ .macro idtentry vector asmsym cfunc has_error_code:req
+ SYM_CODE_START(\asmsym)
+ 
++	UNWIND_HINT_IRET_ENTRY offset=\has_error_code*8
+ 	.if \vector == X86_TRAP_BP
+ 		/* #BP advances %rip to the next instruction */
+-		UNWIND_HINT_IRET_ENTRY offset=\has_error_code*8 signal=0
+-	.else
+-		UNWIND_HINT_IRET_ENTRY offset=\has_error_code*8
++		UNWIND_HINT_IRET_ENTRY signal=0
+ 	.endif
+ 
+ 	ENDBR

@@ -1,0 +1,19 @@
+--- a/mesonbuild/scripts/depfixer.py
++++ b/mesonbuild/scripts/depfixer.py
+@@ -16,6 +16,7 @@
+ import sys, struct
+ import shutil, subprocess
+ import typing as T
++import platform
+ 
+ from ..mesonlib import OrderedSet
+ 
+@@ -478,7 +479,7 @@
+     # https://github.com/mesonbuild/meson/pull/6612#discussion_r378581401
+     if INSTALL_NAME_TOOL is False:
+         INSTALL_NAME_TOOL = bool(shutil.which('install_name_tool'))
+-    if INSTALL_NAME_TOOL:
++    if INSTALL_NAME_TOOL and platform.system() == "Darwin":
+         if isinstance(new_rpath, bytes):
+             new_rpath = new_rpath.decode('utf8')
+         fix_darwin(fname, new_rpath, final_path, install_name_mappings)
