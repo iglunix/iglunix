@@ -1,5 +1,5 @@
 pkgname=extra-cmake-modules
-_ver_maj_min=5.82
+_ver_maj_min=6.4
 pkgver=$_ver_maj_min.0
 
 fetch() {
@@ -26,6 +26,14 @@ package() {
 
 license() {
 	cd $pkgname-$pkgver
+<<<<<<< HEAD
 	cat LICENSE
 #	cat COPYING
+=======
+	cat COPYING-CMAKE-SCRIPTS
+}
+
+backup() {
+	return
+>>>>>>> 9e054eb (fix rebase fail)
 }

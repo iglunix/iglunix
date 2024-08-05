@@ -1,5 +1,5 @@
 pkgname=libpulse
-pkgver=16.1
+pkgver=17.0
 deps="libsndfile"
 
 fetch() {
@@ -13,7 +13,9 @@ fetch() {
 build() {
 	cd $pkgname-$pkgver
 	cd build
-	meson .. \
+	CFLAGS="$CFLAGS -fPIC" \
+	LDFLAGS="$LDFLAGS -Wl,--undefined-version"\
+	meson setup .. \
 		--buildtype=release \
 		--prefix=/usr \
 		--libexecdir=lib \

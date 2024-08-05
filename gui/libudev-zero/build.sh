@@ -1,5 +1,6 @@
 pkgname=libudev-zero
 pkgver=1.0.3
+pkgrel=1
 mkdeps=bmake
 
 fetch() {
@@ -9,9 +10,9 @@ fetch() {
 
 build() {
 	cd $pkgname-$pkgver
-	make
+	CFLAGS="$CFLAGS -fPIC" make
 	cd contrib
-	cc helper.c -o libudev-zero-hotplug-helper
+	cc helper.c -fPIC -o libudev-zero-hotplug-helper
 }
 
 package() {

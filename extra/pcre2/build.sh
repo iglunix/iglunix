@@ -1,8 +1,8 @@
 pkgname=pcre2
-pkgver=10.39
+pkgver=10.44
 
 fetch() {
-    curl -L "https://github.com/PhilipHazel/pcre2/releases/download/pcre2-10.39/pcre2-$pkgver.tar.bz2" -o $pkgname-$pkgver.tar.gz
+	curl -L "https://github.com/PhilipHazel/pcre2/releases/download/pcre2-$pkgver/pcre2-$pkgver.tar.bz2" -o $pkgname-$pkgver.tar.gz
 	tar -xf $pkgname-$pkgver.tar.gz
 }
 

@@ -1,14 +1,15 @@
 pkgname=glslang
-pkgver=master
+pkgver=14.3.0
 
 fetch() {
-	curl -L "https://github.com/KhronosGroup/glslang/archive/refs/heads/master.tar.gz" -o $pkgname-$pkgver.tar.xz
+	curl -L "https://github.com/KhronosGroup/glslang/archive/refs/tags/14.3.0.tar.gz" -o $pkgname-$pkgver.tar.xz
 	tar -xf $pkgname-$pkgver.tar.xz
 	mkdir $pkgname-$pkgver/build
 }
 
 build() {
 	cd $pkgname-$pkgver
+	python3 update_glslang_sources.py
 	cd build
 	cmake -G Ninja ../ \
 		-DCMAKE_BUILD_TYPE=Release \

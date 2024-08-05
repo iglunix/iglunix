@@ -1,5 +1,5 @@
 pkgname=alsa-lib
-pkgver=1.2.7.2
+pkgver=1.2.12
 
 fetch() {
 	curl -L "http://www.alsa-project.org/files/pub/lib/alsa-lib-$pkgver.tar.bz2" -o $pkgname-$pkgver.tar.xz
@@ -13,7 +13,7 @@ build() {
 		--build=$TRIPLE \
 		--host=$TRIPLE
 
-	make
+	bad --gmake gmake
 }
 
 backup() {
@@ -21,7 +21,7 @@ backup() {
 
 package() {
 	cd $pkgname-$pkgver
-	make install DESTDIR=$pkgdir
+	bad --gmake gmake install DESTDIR=$pkgdir
 }
 
 license() {

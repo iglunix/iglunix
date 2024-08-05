@@ -1,6 +1,6 @@
-pkgver=16.0.1
+pkgver=18.1.8
 pkgname=libunwind
-mkdeps=openssl:cmake:samurai:python
+mkdeps="openssl:cmake:samurai:python:"
 deps=
 bad=""
 ext="dev"

@@ -1,4 +1,4 @@
-pkgver=2.5.0
+pkgver=2.6.2
 pkgname=expat
 bad=""
 mkdeps="bmake"

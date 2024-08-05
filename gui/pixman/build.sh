@@ -1,9 +1,10 @@
 pkgname=pixman
-pkgver=master
+pkgver=0.43.4
 
 fetch() {
-	curl "https://gitlab.freedesktop.org/pixman/pixman/-/archive/master/pixman-master.tar.gz" -o $pkgname-$pkgver.tar.xz
+	curl "https://gitlab.freedesktop.org/pixman/pixman/-/archive/$pkgname-$pkgver/$pkgname-$pkgver.tar.gz" -o $pkgname-$pkgver.tar.xz
 	tar -xf $pkgname-$pkgver.tar.xz
+	mv pixman-pixman-0.43.4-54cad71674ec485cbbbf49876feaa8a69b97c828 $pkgname-$pkgver 
 	mkdir $pkgname-$pkgver/build
 }
 

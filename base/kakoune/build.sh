@@ -1,4 +1,4 @@
-pkgver=master
+pkgver=2024.05.18
 pkgname=kakoune
 pkgrel=1
 deps="musl:llvm"
@@ -6,7 +6,7 @@ bad=""
 ext="doc"
 
 fetch() {
-	curl -L "https://github.com/mawww/kakoune/archive/master.tar.gz" -o $pkgname-$pkgver.tar.xz
+	curl -LJ "https://github.com/mawww/kakoune/releases/download/v$pkgver/kakoune-$pkgver.tar.bz2" -o $pkgname-$pkgver.tar.xz 
 	tar -xf $pkgname-$pkgver.tar.xz
 }
 

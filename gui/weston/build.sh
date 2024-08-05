@@ -1,5 +1,5 @@
 pkgname=weston
-pkgver=9.0.0
+pkgver=13.0.0
 
 fetch() {
 	curl "https://wayland.freedesktop.org/releases/$pkgname-$pkgver.tar.xz" -o $pkgname-$pkgver.tar.xz
@@ -12,14 +12,12 @@ fetch() {
 build() {
 	cd $pkgname-$pkgver
 	cd build
-	meson .. \
+	CFLAGS="-Wno-int-conversion -Wno-implicit-function-declaration" meson .. \
 		--buildtype=release \
 		--prefix=/usr \
 		--libexecdir=lib \
 		-Dimage-jpeg=false \
 		-Dimage-webp=false \
-		-Dlauncher-logind=false \
-		-Dweston-launch=true \
 		-Dbackend-drm-screencast-vaapi=false \
 		-Dbackend-rdp=false \
 		-Dbackend-x11=false \
@@ -31,7 +29,10 @@ build() {
 		-Dpipewire=false \
 		-Ddemo-clients=false \
 		-Dtests=false \
-		-Dtest-gl-renderer=false
+		-Dsystemd=false \
+		-Dremoting=false \
+		-Dpipewire=true \
+		-Ddemo-clients=false 
 	samu
 }
 
@@ -43,6 +44,10 @@ package() {
 
 license() {
 	cd $pkgname-$pkgver
-	cat LICENSE
-#	cat COPYING
+#	cat LICENSE
+	cat COPYING
+}
+
+backup() {
+	return
 }

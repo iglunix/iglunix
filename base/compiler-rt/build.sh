@@ -1,5 +1,6 @@
 pkgname=compiler-rt
-pkgver=16.0.1
+pkgver=18.1.8
+mver=18
 deps=linux
 
 fetch() {
@@ -7,19 +8,19 @@ fetch() {
 	# for c++ headers
 	# curl -L "https://github.com/llvm/llvm-project/releases/download/llvmorg-$pkgver/libcxx-$pkgver.src.tar.xz" -o libcxx-$pkgver.tar.xz
 	# musl required for C headers
-	curl -O "http://musl.libc.org/releases/musl-1.2.3.tar.gz"
+	curl -O "http://musl.libc.org/releases/musl-1.2.5.tar.gz"
 	tar -xf $pkgname-$pkgver.tar.xz
 	mv llvm-project-$pkgver.src $pkgname-$pkgver
 	# tar -xf libcxx-$pkgver.tar.xz
 	# mv libcxx-$pkgver.src libcxx-$pkgver
 	# cp ../__config_site libcxx-$pkgver/include
 	mkdir $pkgname-$pkgver/build
-	tar -xf musl-1.2.3.tar.gz
+	tar -xf musl-1.2.5.tar.gz
 }
 
 
 build() {
-	cd musl-1.2.3
+	cd musl-1.2.5
 	CFLAGS="--sysroot=/usr/$ARCH-linux-musl --target=$TRIPLE" ./configure --prefix=$(pwd)/../libc --target=$TRIPLE
 	bad --gmake gmake install-headers
 	cd ..
@@ -29,7 +30,7 @@ build() {
 		-DLLVM_ENABLE_RUNTIMES="compiler-rt" \
 		-DLLVM_RUNTIME_TARGETS= \
 		-DCMAKE_BUILD_TYPE=Release \
-		-DCMAKE_INSTALL_PREFIX=/usr/lib/clang/16/ \
+		-DCMAKE_INSTALL_PREFIX=/usr/lib/clang/$mver/ \
 		-DCMAKE_INSTALL_LIBDIR=lib \
 		-DCMAKE_C_COMPILER_TARGET=$TRIPLE \
 		-DCMAKE_CXX_COMPILER_TARGET=$TRIPLE \
@@ -41,16 +42,19 @@ build() {
 		-DCMAKE_C_FLAGS="-I $(pwd)/../../libc/include" \
 		-DCMAKE_CXX_FLAGS_INIT="-I $(pwd)/../../libc/include" \
 		-DCMAKE_CXX_FLAGS="-I $(pwd)/../../libc/include" \
-		-DCOMPILER_RT_USE_BUILTINS_LIBRARY=OFF \
+		-DCOMPILER_RT_USE_BUILTINS_LIBRARY=ON \
+  		-DCOMPILER_RT_EXCLUDE_ATOMIC_BUILTIN=OFF \
+		-DCOMPILER_RT_USE_LLVM_UNWINDER=ON \
+		-DCOMPILER_RT_CXX_LIBRARY=libcxx \
 		-DCOMPILER_RT_DEFAULT_TARGET_ONLY=OFF \
-		-DCOMPILER_RT_INCLUDE_TESTS=OFF \
+		-DCOMPILER_RT_INCLUDE_TESTS=ON \
 		-DCOMPILER_RT_BUILD_SANITIZERS=OFF \
 		-DCOMPILER_RT_BUILD_XRAY=OFF \
 		-DCOMPILER_RT_BUILD_MEMPROF=OFF \
 		-DCOMPILER_RT_BUILD_ORC=OFF \
 		-DCOMPILER_RT_INCLUDE_TESTS=OFF \
 		-DCOMPILER_RT_BUILD_LIBFUZZER=OFF \
-		-DCOMPILER_RT_DEFAULT_TARGET_ONLY=ON \
+		-DCOMPILER_RT_DEFAULT_TARGET_ONLY=OFF \
 		-DCOMPILER_RT_BUILD_PROFILE=OFF \
 		-DCAN_TARGET_$ARCH=ON \
 		-DCMAKE_SIZEOF_VOID_P=8

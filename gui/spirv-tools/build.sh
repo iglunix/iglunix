@@ -1,12 +1,12 @@
 pkgname=spirv-tools
-pkgver=1.3.261.1
+pkgver=2024.2
 desc="spirv tools"
 deps="musl"
 
 fetch() {
-	curl -L "https://github.com/KhronosGroup/SPIRV-Tools/archive/refs/tags/sdk-$pkgver.tar.gz" -o $pkgname-$pkgver.tar.xz
+	curl -L "https://github.com/KhronosGroup/SPIRV-Tools/archive/refs/tags/v$pkgver.tar.gz" -o $pkgname-$pkgver.tar.xz
 	tar -xf $pkgname-$pkgver.tar.xz
-	mv SPIRV-Tools-sdk-$pkgver spirv-tools-$pkgver
+	mv SPIRV-Tools-$pkgver spirv-tools-$pkgver
 	mkdir $pkgname-$pkgver/build
 }
 

@@ -1,5 +1,5 @@
 pkgname=go
-pkgver=1.16
+pkgver=1.22.5
 
 # TODO(Ella): should be loaded from `/etc/iglupkg.d/go.conf`
 GOROOT_BOOTSTRAP=/usr/lib/go
@@ -13,7 +13,11 @@ fetch() {
 build() {
 	cd $pkgname-$pkgver
 	cd src
-	GOROOT_BOOTSTRAP=/usr/lib/go ./make.bash
+	GOROOT_BOOTSTRAP=/opt/go ./make.bash
+}
+
+backup() {
+	return
 }
 
 package() {

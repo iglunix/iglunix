@@ -32,16 +32,16 @@ fi
 
 case "$KERNEL_TREE" in
 	mainline)
-		pkgver=6.1.21
+		pkgver=6.6.41
 		# Only for torvalds tree
 		# src_tar="https://git.kernel.org/torvalds/t/linux-$pkgver.tar.gz"
 
 		# LTS
 		src_tar="https://cdn.kernel.org/pub/linux/kernel/v6.x/linux-$pkgver.tar.xz"
 		# temporarily disabled to reduce ci time
-		# fetch_config="https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-$ARCH-fedora.config"
-		# config=olddefconfig
-		config=defconfig
+		fetch_config="https://git.alpinelinux.org/aports/plain/community/linux-lts/config-lts.x86_64"
+		config=olddefconfig
+		# config=defconfig
 		;;
 	asahi)
 		pkgver=asahi
@@ -62,7 +62,6 @@ esac
 fetch() {
 	curl -L "$src_tar" -o $pkgname-$pkgver.tar
 	tar -xf $pkgname-$pkgver.tar
-
 	# use Alpine's kernel config so we don't have to maintain one
 	[ ! -z "$fetch_config" ] && curl "$fetch_config" -o .config
 	cd $pkgname-$pkgver
@@ -89,8 +88,9 @@ build() {
 	cd $pkgname-$pkgver
 	[ ! -z "$fetch_config" ] && cp ../.config .
 
-	grep -v 'select HAVE_OBJTOOL' arch/x86/Kconfig > _
-	mv _ arch/x86/Kconfig
+	patch -p1 < ../../0008-elfcrap.patch
+	# grep -v 'select HAVE_OBJTOOL' arch/x86/Kconfig > _
+	# mv _ arch/x86/Kconfig
 
 	bad --gmake gmake CC=clang HOSTCC=clang YACC=yacc LLVM=1 LLVM_IAS=1 ARCH=$_arch "$config"
 
@@ -110,6 +110,10 @@ build() {
 
 	# Warnings exist ;~;
 	./scripts/config -d CONFIG_WERROR
+
+	# Who needs multilib anyway?
+	 ./scripts/config -d CONFIG_COMPAT_32
+	 ./scripts/config -d CONFIG_IA32_EMULATION
 
 	# Need for booting
 	./scripts/config -e CONFIG_EFI_STUB
@@ -136,7 +140,6 @@ build() {
 	./scripts/config -e CONFIG_EXT4_FS
 
 	bad --gmake gmake CC=clang HOSTCC=clang YACC=yacc LLVM=1 LLVM_IAS=1 ARCH=$_arch "olddefconfig"
-
 	cat .config >&2
 
 	# sed -i 's/CONFIG_UNWINDER_ORC=y/# CONFIG_UNWINDER_ORC is not set/g' .config
@@ -161,7 +164,6 @@ package() {
 	fi
 
 	bad --gmake gmake CC=cc HOSTCC=cc YACC=yacc LLVM=1 LLVM_IAS=1 ARCH=$_arch headers
-
 	if [ -z "$FOR_CROSS" ]; then
 		install -d $pkgdir/usr/
 		cp -r usr/include $pkgdir/usr/

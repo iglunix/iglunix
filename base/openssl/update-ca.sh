@@ -6,6 +6,15 @@ then
 	exit 1
 fi
 
+<<<<<<< HEAD
+=======
+if [ ! -d /etc/ssl ]
+then
+	printf 'ensuring directory for certs\n'
+	mkdir -p /etc/ssl
+fi
+
+>>>>>>> 9e054eb (fix rebase fail)
 extra_args=
 if [ ! -e /etc/ssl/cert.pem ]
 then

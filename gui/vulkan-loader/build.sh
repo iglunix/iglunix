@@ -1,5 +1,5 @@
 pkgname=vulkan-icd-loader
-pkgver=1.3.269
+pkgver=1.3.290
 desc="vulkan loader"
 deps="musl"
 

@@ -1,6 +1,6 @@
 pkgname=glib
-_pkgver=2.75
-pkgver=$_pkgver.2
+_pkgver=2.81
+pkgver=$_pkgver.4
 
 fetch() {
 	curl -L "https://download.gnome.org/sources/glib/$_pkgver/glib-$pkgver.tar.xz" -o $pkgname-$pkgver.tar.xz
@@ -10,8 +10,7 @@ fetch() {
 
 build() {
 	cd $pkgname-$pkgver
- 	patch meson.build ../../error_disable	
-
+ 	patch meson.build ../../error_disable # needs updating
 	cd build
 	meson .. \
 		--buildtype=release \

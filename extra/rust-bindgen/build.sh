@@ -1,5 +1,5 @@
 pkgname=rust-bindgen
-pkgver=0.63.0
+pkgver=0.69.4
 
 _clear_vendor_checksums() {
 	sed -i 's/\("files":{\)[^}]*/\1/' vendor/$1/.cargo-checksum.json
@@ -20,6 +20,7 @@ build() {
 
 package() {
 	cd $pkgname-$pkgver
+        mkdir -p $pkgdir/usr/bin/
 	install -Dm755 target/release/bindgen $pkgdir/usr/bin/bindgen
 }
 

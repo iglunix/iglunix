@@ -5,5 +5,9 @@ pkgs/*/out
 isoroot
 isoout
 fdiskscript
+<<<<<<< HEAD
 diskroot
+=======
+frankensrc/
+>>>>>>> 9e054eb (fix rebase fail)
 *.img

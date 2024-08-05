@@ -1,5 +1,5 @@
 pkgname=openssh
-pkgver=9.3p1
+pkgver=9.8p1
 
 fetch() {
 	curl "https://cdn.openbsd.org/pub/OpenBSD/OpenSSH/portable/openssh-$pkgver.tar.gz" -o $pkgname-$pkgver.tar.xz
