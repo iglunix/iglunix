@@ -1,15 +1,16 @@
 pkgname=pipewire
-pkgver=0.3.64
-mver=0.4.2
+pkgver=1.2.1
+pkgrel=1
+mver=0.5.5
 deps="dbus-glib"
 
 fetch() {
 	curl "https://gitlab.freedesktop.org/pipewire/pipewire/-/archive/$pkgver/pipewire-$pkgver.tar.bz2" -o $pkgname-$pkgver.tar.bz2
-	curl "https://gitlab.freedesktop.org/pipewire/media-session/-/archive/$mver/media-session-$mver.tar.bz2" -O
+	curl "https://gitlab.freedesktop.org/pipewire/wireplumber/-/archive/$mver/wireplumber-$mver.tar.bz2" -O
 	tar -xf $pkgname-$pkgver.tar.bz2
 	mkdir $pkgname-$pkgver/build
-	tar -xf media-session-$mver.tar.bz2 -C $pkgname-$pkgver/subprojects/
-	mv $pkgname-$pkgver/subprojects/media-session-$mver $pkgname-$pkgver/subprojects/media-session
+	tar -xf wireplumber-$mver.tar.bz2 -C $pkgname-$pkgver/subprojects/
+	mv $pkgname-$pkgver/subprojects/wireplumber-0.5.5 $pkgname-$pkgver/subprojects/wireplumber
 	cd $pkgname-$pkgver
 	patch -p1 < ../../libudev-zero.patch
 }
@@ -17,7 +18,9 @@ fetch() {
 build() {
 	cd $pkgname-$pkgver
 	cd build
-	meson .. \
+	CFLAGS="$CFLAGS -fPIC"\
+	LDFLAGS="$LDFLAGS -Wl,--undefined-version"
+	meson setup .. \
 		--buildtype=release \
 		--prefix=/usr \
 		--libexecdir=lib \
@@ -27,9 +30,10 @@ build() {
 		-Dinstalled_tests=disabled \
 		-Dgstreamer=disabled \
 		-Dsystemd=disabled \
-		-Dpipewire-jack=disabled \
+		-Dpipewire-jack=enabled \
 		-Dpipewire-alsa=enabled \
 		-Dpipewire-v4l2=disabled \
+		-Dudev=enable \
 		-Dspa-plugins=enabled \
 		-Dalsa=enabled \
 		-Daudiomixer=enabled \
@@ -57,7 +61,7 @@ build() {
 		-Dlibusb=disabled \
 		-Draop=disabled \
 		-Dlv2=disabled \
-		-Dsession-managers="['media-session']"
+		-Dsession-managers="['wireplumber']"
 
 	samu
 }
