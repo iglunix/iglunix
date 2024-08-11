@@ -1,4 +1,4 @@
-pkgver=1.2.4
+pkgver=1.3.5
 pkgname=python-mako
 deps=python
 desc="A super-fast templating language"
