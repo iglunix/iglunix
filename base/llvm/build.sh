@@ -1,4 +1,4 @@
-pkgver=16.0.1
+pkgver=18.1.8
 pkgname=llvm
 bad=""
 ext="dev"
@@ -57,7 +57,6 @@ build() {
 		-DLLVM_APPEND_VC_REV=OFF \
 		-DLLVM_ENABLE_PROJECTS="llvm;lld;clang" \
 		-DLLVM_ENABLE_LLD=ON \
-		-DLLVM_TARGETS_TO_BUILD="X86;AArch64;RISCV" \
 		-DLLVM_INSTALL_BINUTILS_SYMLINKS=ON \
 		-DLLVM_INSTALL_CCTOOLS_SYMLINKS=ON \
 		-DLLVM_INCLUDE_EXAMPLES=OFF \

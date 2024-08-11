@@ -1,12 +1,12 @@
 pkgname=openssl
-pkgver=3.2.1
+pkgver=3.3.1
 mkdeps=perl:bmake
 deps=
 ext="dev"
 auto_cross
 
 fetch() {
-	curl "https://www.openssl.org/source/openssl-$pkgver.tar.gz" -o $pkgname-$pkgver.tar.xz
+	curl "https://www.openssl.org/source/openssl-$pkgver.tar.gz" -LJo $pkgname-$pkgver.tar.xz
 	tar -xf $pkgname-$pkgver.tar.xz
 }
 
@@ -23,7 +23,7 @@ build() {
 		shared no-zlib no-async \
 		no-comp no-idea no-mdc2 \
 		no-rc5 no-ec2m no-sm2 \
-		no-sm4 -no-ssl2 no-ssl3 \
+		no-sm4 no-ssl2 no-ssl3 \
 		no-seed no-weak-ssl-ciphers \
 		-Wa,--noexecstack
 
