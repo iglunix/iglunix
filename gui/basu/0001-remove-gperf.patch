@@ -113,6 +113,7 @@ index 1f29690..906e192 100644
  conf.set_quoted('NOBODY_USER_NAME', nobody_user)
 
  system_bus_address = get_option('system-bus-address')
+<<<<<<< HEAD
 @@ -231,8 +231,8 @@
  librt = cc.find_library('rt')
  libm = cc.find_library('m')
@@ -120,6 +121,15 @@ index 1f29690..906e192 100644
 -libcap = dependency('libcap', required: false)
 -have_libcap = libcap.found()
 +# libcap = dependency('libcap', required: false)
+=======
+@@ -236,8 +236,8 @@
+ librt = cc.find_library('rt')
+ libm = cc.find_library('m')
+
+-libcap = dependency('libcap', required: get_option('libcap'))
+-have_libcap = libcap.found()
++# libcap = dependency('libcap', required: get_option('libcap'))
+>>>>>>> 9e054eb (fix rebase fail)
 +have_libcap = false
  conf.set10('HAVE_LIBCAP', have_libcap)
 

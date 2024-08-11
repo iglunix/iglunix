@@ -1,5 +1,5 @@
 pkgname=basu
-pkgver=0.2.0
+pkgver=0.2.1
 
 fetch() {
 	curl "https://git.sr.ht/~emersion/basu/refs/download/v$pkgver/basu-$pkgver.tar.gz" -o $pkgname-$pkgver.tar.gz
@@ -13,6 +13,8 @@ fetch() {
 build() {
 	cd $pkgname-$pkgver
 	cd build
+	CFLAGS="$CFLAGS -fPIC" \
+	LDFLAGS="$LDFLAGS -Wl,--undefined-version" \
 	meson .. \
 		--buildtype=release \
 		--prefix=/usr \

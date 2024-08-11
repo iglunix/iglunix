@@ -1,5 +1,5 @@
 pkgname=wayland
-pkgver=1.22.0
+pkgver=1.23.0
 mkdeps=muon:samurai:pkgconf:python
 deps=libffi:expat
 
@@ -13,6 +13,8 @@ build() {
 	cd $pkgname-$pkgver
 	muon setup \
 		-Dbuildtype=release \
+		-Db_lto=true \
+		-Db_ndebug=true \
 		-Dprefix=/usr \
 		-Ddefault_library=shared \
 		-Dlibraries=true \

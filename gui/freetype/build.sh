@@ -1,5 +1,6 @@
 pkgname=freetype
-pkgver=2.12.0
+pkgver=2.13.2
+pkgrel=1
 
 fetch() {
 	curl "https://download-mirror.savannah.gnu.org/releases/freetype/freetype-$pkgver.tar.xz" -o $pkgname-$pkgver.tar.xz

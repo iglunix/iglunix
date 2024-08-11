@@ -1,5 +1,5 @@
 pkgname=libass
-pkgver=0.16.0
+pkgver=0.17.3
 
 fetch() {
 	curl -L "https://github.com/libass/libass/releases/download/$pkgver/libass-$pkgver.tar.xz" -o $pkgname-$pkgver.tar.xz
