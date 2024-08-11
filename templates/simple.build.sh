@@ -1,9 +1,10 @@
 pkgname=
 pkgver=
+comp=
 
 fetch() {
-	curl "" -o $pkgname-$pkgver.tar.xz
-	tar -xf $pkgname-$pkgver.tar.xz
+	curl "" -o $pkgname-$pkgver.tar.$comp
+	tar -xf $pkgname-$pkgver.tar.$comp
 }
 
 build() {
@@ -17,6 +18,10 @@ build() {
 	make
 }
 
+backup() {
+	return
+}
+
 package() {
 	cd $pkgname-$pkgver
 	make install DESTDIR=$pkgdir
@@ -24,6 +29,5 @@ package() {
 
 license() {
 	cd $pkgname-$pkgver
-	cat LICENSE
-#	cat COPYING
+	cat doc/COPYING
 }
