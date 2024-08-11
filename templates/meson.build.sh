@@ -1,9 +1,10 @@
 pkgname=
 pkgver=
+comp=
 
 fetch() {
-	curl "" -o $pkgname-$pkgver.tar.xz
-	tar -xf $pkgname-$pkgver.tar.xz
+	curl "" -LJo $pkgname-$pkgver.tar.$comp
+	tar -xf $pkgname-$pkgver.tar.$comp
 	mkdir $pkgname-$pkgver/build
 }
 
@@ -28,5 +29,5 @@ license() {
 }
 
 backup() {
-
+	return
 }

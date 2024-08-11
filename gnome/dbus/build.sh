@@ -1,5 +1,5 @@
 pkgname=dbus
-pkgver=1.15.2
+pkgver=1.15.8
 
 fetch() {
 	curl "https://dbus.freedesktop.org/releases/dbus/dbus-$pkgver.tar.xz" -o $pkgname-$pkgver.tar.xz
@@ -14,7 +14,6 @@ build() {
 		--sysconfdir=/etc \
 		--build=$TRIPLE \
 		--host=$TRIPLE
-
 	bad --gmake gmake
 }
 

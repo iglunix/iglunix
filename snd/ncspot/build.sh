@@ -20,7 +20,8 @@ build() {
 
 package() {
 	cd $pkgname-$pkgver
-	install -Dm 755 target/release/$pkgname $pkgdir/usr/bin/
+	mkdir -p $pkgdir/usr/bin/
+	install -Dm755 target/release/$pkgname $pkgdir/usr/bin/
 }
 
 backup() {

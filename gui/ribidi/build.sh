@@ -1,9 +1,11 @@
 pkgname=ribidi
-pkgver=main
+_pkgver=main
+pkgver=0 #no release. this is just for packaging.
 
 fetch() {
 	curl -L "https://github.com/iglunix/ribidi/archive/refs/heads/main.tar.gz" -o $pkgname-$pkgver.tar.xz
 	tar -xf $pkgname-$pkgver.tar.xz
+	mv $pkgname-$_pkgver $pkgname-$pkgver
 }
 
 build() {
@@ -13,6 +15,7 @@ build() {
 
 package() {
 	cd $pkgname-$pkgver
+	mkdir -p $pkgdir/usr/lib/pkgconfig $pkgdir/usr/include/ribidi
 	install -Dm755 target/release/lib$pkgname.so $pkgdir/usr/lib/
 	install -Dm644 include/ribidi.h $pkgdir/usr/include/ribidi/
 	install -d $pkgdir/usr/include/fribidi

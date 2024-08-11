@@ -1,19 +1,14 @@
 pkgname=lua
-pkgver=5.4.3
+pkgver=5.4.7
 
 fetch() {
-	curl "http://www.lua.org/ftp/lua-$pkgver.tar.gz" -o $pkgname-$pkgver.tar.gz
+	curl "http://www.lua.org/ftp/lua-$pkgver.tar.gz" -LJo $pkgname-$pkgver.tar.gz
 	tar -xf $pkgname-$pkgver.tar.gz
 }
 
 build() {
 	cd $pkgname-$pkgver
-	./configure \
-		--prefix=/usr \
-		--build=$TRIPLE \
-		--host=$TRIPLE
-
-	make CC=cc
+	make all CC=cc
 }
 
 package() {
@@ -21,8 +16,12 @@ package() {
 	make install INSTALL_TOP=$pkgdir/usr
 }
 
+backup() {
+	return
+}
+
 license() {
 	cd $pkgname-$pkgver
-	cat LICENSE
+	cat ../../LICENSE
 #	cat COPYING
 }

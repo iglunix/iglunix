@@ -1,4 +1,4 @@
-pkgver=8.5.0
+pkgver=8.8.0
 pkg_ver=$(echo $pkgver | tr '.' '_')
 pkgname=curl
 pkgrel=1
@@ -17,6 +17,7 @@ build() {
 	./configure --prefix=/usr \
 		--build=$HOST_TRIPLE \
 		--host=$TRIPLE \
+		--disable-symvers \
 		--with-openssl \
 		--with-ca-bundle=/etc/ssl/cert.pem
 	make

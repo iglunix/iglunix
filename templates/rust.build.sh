@@ -1,13 +1,13 @@
 pkgname=
 pkgver=
-
+comp=
 _clear_vendor_checksums() {
 	sed -i 's/\("files":{\)[^}]*/\1/' vendor/$1/.cargo-checksum.json
 }
 
 fetch() {
-	curl "" -o $pkgname-$pkgver.tar.xz
-	tar -xf $pkgname-$pkgver.tar.xz
+	curl "" -LJo $pkgname-$pkgver.tar.$comp
+	tar -xf $pkgname-$pkgver.tar.$comp
 	cd $pkgname-$pkgver
 	mkdir -p .cargo
 	cargo vendor > .cargo/config
@@ -16,6 +16,10 @@ fetch() {
 build() {
 	cd $pkgname-$pkgver
 	cargo build --release --locked --all-features
+}
+
+backup() {
+	return
 }
 
 package() {

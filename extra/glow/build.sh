@@ -1,5 +1,5 @@
 pkgname=glow
-pkgver=1.3.0
+pkgver=1.5.1
 
 fetch() {
 	curl -L "https://github.com/charmbracelet/glow/archive/v$pkgver.tar.gz" -o $pkgname-$pkgver.tar.xz
@@ -9,6 +9,10 @@ fetch() {
 build() {
 	cd $pkgname-$pkgver
 	go build -o build/
+}
+
+backup() {
+	return
 }
 
 package() {

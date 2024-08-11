@@ -1,5 +1,5 @@
-_pkgver=2.10
-pkgver=$_pkgver.3
+_pkgver=2.13
+pkgver=$_pkgver.2
 pkgname=libxml2
 bad=""
 ext="dev"
@@ -14,9 +14,9 @@ backup() {
 }
 
 build() {
-    cd $pkgname-$pkgver
-    ./configure --prefix=/usr --without-python
-    bad --gmake gmake
+	cd $pkgname-$pkgver
+	./configure --prefix=/usr --without-python
+	bad --gmake gmake
 }
 
 package() {

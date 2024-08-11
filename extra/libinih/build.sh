@@ -1,5 +1,5 @@
 pkgname=inih
-pkgver=r56
+pkgver=r58
 
 fetch() {
 	curl -L "https://github.com/benhoyt/inih/archive/refs/tags/$pkgver.tar.gz" -o $pkgname-$pkgver.tar.xz

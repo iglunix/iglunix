@@ -1,5 +1,5 @@
 pkgname=cbindgen
-pkgver=0.24.3
+pkgver=0.26.0
 
 _clear_vendor_checksums() {
 	sed -i 's/\("files":{\)[^}]*/\1/' vendor/$1/.cargo-checksum.json
