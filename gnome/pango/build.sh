@@ -29,3 +29,10 @@ license() {
 	cat LICENSE
 #	cat COPYING
 }
+<<<<<<< HEAD
+=======
+
+backup() {
+	return
+}
+>>>>>>> 9e054eb (fix rebase fail)
