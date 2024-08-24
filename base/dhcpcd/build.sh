@@ -1,5 +1,5 @@
 pkgname=dhcpcd
-pkgver=10.0.8
+pkgver=10.0.10
 mkdeps="bmake"
 deps="musl"
 
