@@ -1,5 +1,5 @@
 pkgname=wayland-protocols
-pkgver=1.36
+pkgver=1.37
 mkdeps="muon:samurai:pkgconf"
 deps="musl:wayland"
 
