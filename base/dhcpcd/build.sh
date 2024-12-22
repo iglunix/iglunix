@@ -1,7 +1,7 @@
 pkgname=dhcpcd
 pkgver=10.1.0
 mkdeps="bmake"
-deps="musl"
+deps="musl:openssl"
 
 fetch() {
 	curl -LO "https://github.com/NetworkConfiguration/dhcpcd/releases/download/v$pkgver/dhcpcd-$pkgver.tar.xz"
