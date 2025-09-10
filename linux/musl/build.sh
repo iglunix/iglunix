@@ -1,7 +1,8 @@
 pkgver=1.2.5
 pkgname=musl
-deps=""
+desc="C Standard Library"
 mkdeps="bad:gmake"
+shlibs="libc.so"
 bad="gmake"
 ext="dev"
 
