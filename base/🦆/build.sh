@@ -1,8 +1,10 @@
 pkgname=🦆
-pkgver=main
+pkgver=1.0.0
+desc="Quack!"
+deps="musl"
 
 fetch() {
-	curl -L "https://github.com/iglunix/duck/archive/refs/heads/$pkgver.tar.gz" -o $pkgname-$pkgver.tar.xz
+	curl -L "https://github.com/iglunix/duck/archive/refs/tags/v$pkgver.tar.gz" -o $pkgname-$pkgver.tar.xz
 	tar -xf $pkgname-$pkgver.tar.xz
 	mv duck-$pkgver $pkgname-$pkgver
 }
