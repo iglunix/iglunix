@@ -1,7 +1,7 @@
 pkgname=🦆
+subpkgs=🦆
 pkgver=1.0.0
 desc="Quack!"
-deps="musl"
 
 fetch() {
 	curl -L "https://github.com/iglunix/duck/archive/refs/tags/v$pkgver.tar.gz" -o $pkgname-$pkgver.tar.xz
@@ -18,6 +18,10 @@ build() {
 package() {
 	cd $pkgname-$pkgver
 	make install DESTDIR=$pkgdir
+}
+
+🦆() {
+	find usr/bin/🦆
 }
 
 license() {
