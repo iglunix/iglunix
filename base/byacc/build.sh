@@ -3,7 +3,6 @@ pkgname=byacc
 deps="musl"
 mkdeps="bmake"
 bad=""
-auto_cross
 
 fetch() {
 	curl -O "https://invisible-island.net/archives/byacc/byacc-$pkgver.tgz"
