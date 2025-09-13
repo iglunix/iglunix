@@ -8,8 +8,6 @@ auto_cross
 fetch() {
 	curl -O "https://invisible-island.net/archives/byacc/byacc-$pkgver.tgz"
 	tar -xf $pkgname-$pkgver.tgz
-	# Merged upstream; Don't need
-#	cp ../reader-mesa.patch .
 }
 
 build() {
@@ -20,7 +18,6 @@ build() {
 		--enable-btyacc \
 		--build=$HOST_TRIPLE \
 		--host=$TRIPLE
-#	patch -p1 < ../reader-mesa.patch
 	make
 }
 
