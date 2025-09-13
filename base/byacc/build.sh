@@ -1,5 +1,6 @@
-pkgver=20240109
+pkgver=20241231
 pkgname=byacc
+subpkgs=byacc
 deps="musl"
 mkdeps="bmake"
 bad=""
@@ -22,8 +23,13 @@ build() {
 
 package() {
 	cd $pkgname-$pkgver
-	make install DESTDIR=$pkgdir
+	mkdir -p $pkgdir/usr/bin
+	cp yacc $pkgdir/usr/bin/byacc
 	ln -s byacc $pkgdir/usr/bin/yacc
+}
+
+byacc() {
+	find usr/bin
 }
 
 backup() {
