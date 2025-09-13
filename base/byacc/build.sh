@@ -1,8 +1,7 @@
 pkgver=20241231
 pkgname=byacc
 subpkgs=byacc
-deps="musl"
-mkdeps="bmake"
+mkdeps=""
 bad=""
 
 fetch() {
@@ -18,7 +17,7 @@ build() {
 		--enable-btyacc \
 		--build=$HOST_TRIPLE \
 		--host=$TRIPLE
-	make
+	bad --gmake gmake
 }
 
 package() {
