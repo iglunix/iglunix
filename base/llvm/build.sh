@@ -1,52 +1,25 @@
-pkgver=16.0.1
+pkgver=20.1.6
 pkgname=llvm
+runtime_subpkgs="libunwind libunwind-dev libcxx libcxx-dev libclang-rt-dev"
+library_subpkgs="liblld-dev libclang libclang-dev libllvm libllvm-dev"
+toolchain_subpkgs="clang llvm-binutils lld"
+subpkgs="$runtime_subpkgs $library_subpkgs $toolchain_subpkgs llvm"
+desc="LLVM Toolchain"
 bad=""
 ext="dev"
 mkdeps="cmake:samurai:python"
-deps="musl:libcxx:libunwind"
 
 fetch() {
 	curl -L "https://github.com/llvm/llvm-project/releases/download/llvmorg-$pkgver/llvm-project-$pkgver.src.tar.xz" -o $pkgname-$pkgver.tar.gz
 	tar -xf $pkgname-$pkgver.tar.gz
 	mv llvm-project-$pkgver.src $pkgname-$pkgver
-
-	cd $pkgname-$pkgver
-	# patch -p1 < ../../riscv-relax.patch
 }
 
 build() {
 	cd $pkgname-$pkgver
 
-	if [ ! -z "$WITH_CROSS" ]; then
-		mkdir -p host-build
-		cd host-build
-		cmake -G Ninja -Wno-dev \
-			-DLLVM_ENABLE_PROJECTS='clang' \
-			-DCMAKE_C_COMPILER=cc \
-			-DCMAKE_CXX_COMPILER=c++ \
-			-DCMAKE_BUILD_TYPE=Release \
-			../llvm
-
-		samu llvm-tblgen clang-tblgen
-
-		cd ..
-
-		EXTRA_ARGS="-DCMAKE_SYSROOT=$WITH_CROSS_DIR \
-            -DCMAKE_C_COMPILER_WORKS=ON \
-            -DCMAKE_CXX_COMPILER_WORKS=ON \
-            -DCMAKE_SYSTEM_NAME=Linux \
-            -DLLVM_TABLEGEN=$(pwd)/host-build/bin/llvm-tblgen \
-            -DCLANG_TABLEGEN=$(pwd)/host-build/bin/clang-tblgen \
-            -DLLVM_CONFIG_PATH=/usr/bin/llvm-config \
-            -DCMAKE_FIND_ROOT_PATH_MODE_PROGRAM=NEVER \
-            -DCMAKE_FIND_ROOT_PATH_MODE_LIBRARY=ONLY \
-            -DCMAKE_FIND_ROOT_PATH_MODE_INCLUDE=ONLY"
-	fi
-
 	mkdir -p build
 	cd build
-		# -DCMAKE_C_COMPILER_TARGET=$TRIPLE \
-		# -DCMAKE_CXX_COMPILER_TARGET=$TRIPLE \
 	cmake -G Ninja -Wno-dev \
 		-DCMAKE_C_COMPILER=$CC \
 		-DCMAKE_CXX_COMPILER=$CXX \
@@ -56,6 +29,7 @@ build() {
 		-DLLVM_VERSION_SUFFIX="" \
 		-DLLVM_APPEND_VC_REV=OFF \
 		-DLLVM_ENABLE_PROJECTS="llvm;lld;clang" \
+		-DLLVM_ENABLE_RUNTIMES="compiler-rt;libcxx;libcxxabi;libunwind" \
 		-DLLVM_ENABLE_LLD=ON \
 		-DLLVM_TARGETS_TO_BUILD="X86;AArch64;RISCV" \
 		-DLLVM_INSTALL_BINUTILS_SYMLINKS=ON \
@@ -68,7 +42,8 @@ build() {
 		-DLLVM_HOST_TRIPLE=$TRIPLE \
 		-DLLVM_DEFAULT_TARGET_TRIPLE=$TRIPLE \
 		-DLLVM_ENABLE_LIBXML2=OFF \
-		-DLLVM_ENABLE_ZLIB=OFF\
+		-DLLVM_ENABLE_ZLIB=OFF \
+		-DLLVM_ENABLE_PER_TARGET_RUNTIME_DIR=OFF \
 		-DLLVM_ENABLE_BACKTRACES=OFF \
 		-DLLVM_BUILD_LLVM_DYLIB=ON \
 		-DLLVM_LINK_LLVM_DYLIB=ON \
@@ -84,6 +59,7 @@ build() {
 		-DLLVM_INSTALL_UTILS=ON \
 		-DLLVM_ENABLE_LIBCXX=ON \
 		-DLLVM_STATIC_LINK_CXX_STDLIB=ON \
+		-DLLVM_ENABLE_ZSTD=OFF \
 		-DLLVM_ENABLE_LIBEDIT=OFF \
 		-DLLVM_ENABLE_TERMINFO=OFF \
 		-DLLVM_INSTALL_TOOLCHAIN_ONLY=OFF \
@@ -124,7 +100,6 @@ build() {
 		-DCOMPILER_RT_INCLUDE_TESTS=OFF \
 		-DCOMPILER_RT_BUILD_LIBFUZZER=OFF \
 		-DENABLE_EXPERIMENTAL_NEW_PASS_MANAGER=TRUE \
-		$EXTRA_ARGS \
 		-DHAVE_CXX_ATOMICS_WITHOUT_LIB=ON \
 		-DHAVE_CXX_ATOMICS64_WITHOUT_LIB=ON \
 		-DHAVE_BACKTRACE=OFF \
@@ -140,8 +115,122 @@ package() {
 	ln -s clang $pkgdir/usr/bin/cc
 	ln -s clang $pkgdir/usr/bin/c89
 	ln -s clang $pkgdir/usr/bin/c99
+	ln -s clang $pkgdir/usr/bin/c17
 	ln -s clang++ $pkgdir/usr/bin/c++
 	ln -s ld.lld $pkgdir/usr/bin/ld
+}
+
+libunwind() {
+	shlibs="libunwind.so.1"
+	find usr/lib/libunwind.so.*
+}
+
+libunwind-dev() {
+	deps=libunwind
+	find usr/lib/libunwind.so
+	find usr/include/*unwind* usr/include/mach-o/compact_unwind_encoding.h
+}
+
+libcxx() {
+	shlibs="libc++.so.1"
+	find usr/lib/libc++.so.*
+	set -x
+}
+
+libcxx-dev() {
+	deps="libcxx musl-dev"
+	find usr/lib/libc++.so usr/lib/libc++experimental.a
+	find usr/lib/libc++.modules.json
+	find usr/include/c++
+	find usr/share/libc++
+}
+
+libclang-rt-dev() {
+	find usr/lib/clang
+}
+
+libllvm() {
+	find usr/lib/libLLVM.so.*
+}
+
+libllvm-dev() {
+	find usr/include/llvm usr/include/llvm-c
+	find usr/lib/libLLVM*.a
+	find usr/lib/libLLVM.so usr/lib/libLLVM-*
+	find usr/lib/cmake/llvm
+}
+
+lld() {
+	find usr/bin/lld usr/bin/ld.lld usr/bin/ld
+}
+
+liblld-dev() {
+	find usr/lib/liblld*
+	find usr/include/lld
+	find usr/lib/cmake/lld
+}
+
+clang() {
+	deps=libclang-rt-dev
+	find usr/bin/clang-*
+	find usr/bin/clang usr/bin/cc usr/bin/c89 usr/bin/c99 usr/bin/c17
+	find usr/bin/clang++ usr/bin/c++
+}
+
+libclang() {
+	find usr/lib/libclang.so.* usr/lib/libclang-cpp.so.*
+}
+
+libclang-dev() {
+	find usr/include/clang usr/include/clang-c
+	find usr/lib/cmake/clang
+	find usr/lib/libclang*.a
+	find usr/lib/libclang.so usr/lib/libclang-cpp.so
+}
+
+llvm-binutils() {
+	find usr/bin/llvm-addr2line
+	find usr/bin/llvm-ar
+	find usr/bin/llvm-bitcode-strip
+	find usr/bin/llvm-cxxfilt
+	find usr/bin/llvm-dlltool
+	find usr/bin/llvm-dwp
+	find usr/bin/llvm-install-name-tool
+	find usr/bin/llvm-lib
+	find usr/bin/llvm-nm
+	find usr/bin/llvm-objcopy
+	find usr/bin/llvm-objdump
+	find usr/bin/llvm-otool
+	find usr/bin/llvm-ranlib
+	find usr/bin/llvm-rc
+	find usr/bin/llvm-readelf
+	find usr/bin/llvm-readobj
+	find usr/bin/llvm-size
+	find usr/bin/llvm-strings
+	find usr/bin/llvm-strip
+	find usr/bin/llvm-symbolizer
+	find usr/bin/llvm-windres
+	find usr/bin/addr2line
+	find usr/bin/ar
+	find usr/bin/bitcode_strip
+	find usr/bin/c++filt
+	find usr/bin/dlltool
+	find usr/bin/dwp
+	find usr/bin/install_name_tool
+	find usr/bin/nm
+	find usr/bin/objcopy
+	find usr/bin/objdump
+	find usr/bin/otool
+	find usr/bin/ranlib
+	find usr/bin/readelf
+	find usr/bin/size
+	find usr/bin/strings
+	find usr/bin/strip
+	find usr/bin/windres
+}
+
+llvm() {
+	find usr/bin/llc
 }
 
 backup() {
