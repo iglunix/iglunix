@@ -1,3 +1,3 @@
 # Base Packages
-These packages make up the base Iglunix system and are
-included in all kernels
+These are the minimal sets of packages required for self hosting. This does not
+include any kernel specific packages such as Musl libc.
