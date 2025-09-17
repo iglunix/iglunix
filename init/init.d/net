@@ -1,4 +1,0 @@
-#!/bin/sh
-ip link set lo up
-ip link set eth0 up
-udhcpc -i eth0 -x hostname:$(cat /etc/hostname)

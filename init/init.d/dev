@@ -1,6 +1,0 @@
-#!/bin/sh
-
-for id in $(find /sys -name modalias -print0 | xargs -0 cat | sort -u); do
-    echo $id
-    modprobe $id
-done
