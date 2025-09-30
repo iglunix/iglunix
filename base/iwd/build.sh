@@ -1,5 +1,6 @@
 pkgname=iwd
-pkgver=2.4
+subpkgs=iwd
+pkgver=3.10
 
 fetch() {
 	curl "https://mirrors.edge.kernel.org/pub/linux/network/wireless/iwd-$pkgver.tar.xz" -o $pkgname-$pkgver.tar.xz
@@ -12,11 +13,13 @@ build() {
 		--prefix=/usr \
 		--sysconfdir=/etc \
 		--libexecdir=/usr/lib \
+		--localstatedir=/var \
 		--build=$TRIPLE \
 		--host=$TRIPLE \
-		--disable-client \
 		--disable-systemd-service \
-		--disable-dbus-policy
+		--enable-dbus-policy \
+		--enable-client \
+		--enable-libedit
 
 	bad --gmake gmake
 }
@@ -24,6 +27,16 @@ build() {
 package() {
 	cd $pkgname-$pkgver
 	bad --gmake gmake install DESTDIR=$pkgdir
+
+	mkdir -p $pkgdir/etc/iwd
+	cat > $pkgdir/etc/iwd/main.conf <<EOF
+[General]
+EnableNetworkConfiguration=true
+EOF
+}
+
+iwd() {
+	find .
 }
 
 license() {
